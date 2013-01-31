@@ -10,8 +10,9 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Hello World!!");
-		WindowRunner.showWindow(context);
+		System.out.println("Hello World from SimulationCore!!");
+		WindowRunner windowRunner = new WindowRunner(context);
+		windowRunner.showWindow();
 	}
 	
 	/*
@@ -19,7 +20,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Goodbye World!!");
+		System.out.println("Goodbye World from SimulationCore!!");
 	}
 
 }

@@ -1,16 +1,4 @@
 package simulationcore;
-/*******************************************************************************
- * Copyright (c) 2006 Tom Schindl and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Tom Schindl - initial API and implementation
- *******************************************************************************/
-
-
 
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -18,16 +6,21 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-/**
- * A simple TreeViewer to demonstrate usage
- * 
- * @author Tom Schindl <tom.schindl@bestsolution.at>
- *
- */
+import org.osgi.framework.BundleException;
+
 public class WindowRunner {
 	
-	public static void showWindow(BundleContext context) {
+	private BundleContext context;
+	
+	public WindowRunner(BundleContext context) {
+		// TODO Auto-generated constructor stub
+		this.context = context; 
+	}
+	
+	public void showWindow( ) {
+		
 		Display display = new Display ();
 		Shell shell = new Shell(display);
 //		shell.setLayout(new FillLayout());
@@ -54,7 +47,12 @@ public class WindowRunner {
 			
 			@Override
 			public void widgetDisposed(DisposeEvent e) {
-				System.out.println("disposed");
+				try {
+					Bundle systemBundle = context.getBundle(0);
+					systemBundle.stop();
+				} catch (BundleException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		

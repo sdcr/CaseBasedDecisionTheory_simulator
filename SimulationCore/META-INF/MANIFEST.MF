@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SimulationCore
-Bundle-SymbolicName: SimulationCore
+Bundle-SymbolicName: SimulationCore;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: simulationcore.Activator
 Bundle-ActivationPolicy: lazy
