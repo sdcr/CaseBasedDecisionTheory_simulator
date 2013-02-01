@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
+import org.eclipse.core.runtime.dynamichelpers.ExtensionTracker;
+import org.eclipse.core.runtime.dynamichelpers.IFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
@@ -23,15 +26,15 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
-import simulation.extensionpoint.simulationunit.ISimulationUnit;
-import simulation.extensionpoint.simulationunit.handlers.SimulationUnitHandler;
+import simulation.extensionpoint.ExtensionHandler;
+import simulation.extensionpoint.simulationunit.handlers.SimulationUnitIntegrator;
 
 public class WindowRunner {
 
 	private BundleContext context;
+	private ExtensionHandler extensionHandler;
 
 	public WindowRunner(BundleContext context) {
-		// TODO Auto-generated constructor stub
 		this.context = context;
 	}
 
@@ -39,12 +42,54 @@ public class WindowRunner {
 
 		Display display = new Display();
 		Shell shell = new Shell(display);
+		buildGUI(display, shell);
 
+		extensionHandler = new ExtensionHandler();
+
+		//set up handling of simulation unit extensions, included by the user.
+		IExtensionRegistry reg = RegistryFactory.getRegistry();
+		IExtensionPoint ep = reg
+				.getExtensionPoint(SimulationUnitIntegrator.EXTENSION_POINT_ID);
+		IFilter filter = ExtensionTracker.createExtensionPointFilter(ep);
+		ExtensionTracker tracker = new ExtensionTracker(reg);
+		tracker.registerHandler(extensionHandler, filter);
+		
+		//add extensions already "installed"
+		IExtension[] extensions = ep.getExtensions();
+		for (IExtension extension : extensions)
+			extensionHandler.addExtension(tracker, extension);
+
+		//handle closeing of window
+		shell.addDisposeListener(new DisposeListener() {
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+				try {
+					Bundle systemBundle = context.getBundle(0);
+					systemBundle.stop();
+					System.out.println("stopped system bundle");
+				} catch (BundleException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		shell.open();
+
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch())
+				display.sleep();
+		}
+
+		display.dispose();
+	}
+
+	private void buildGUI(Display display, Shell shell) {
 		GridLayout windowLayout = new GridLayout(2, false);
 		shell.setLayout(windowLayout);
 
-		// create
-		final ScrolledComposite pluginsBar = new ScrolledComposite(shell, SWT.PUSH);
+		// create pluginsBar
+		final ScrolledComposite pluginsBar = new ScrolledComposite(shell,
+				SWT.PUSH);
 		Color simulationPluginsBackgroundColor = new Color(display, 0, 0, 255);
 		pluginsBar.setBackground(simulationPluginsBackgroundColor);
 		pluginsBar.setExpandVertical(true);
@@ -63,23 +108,6 @@ public class WindowRunner {
 		mainPaneGridData.grabExcessHorizontalSpace = true;
 		mainPane.setLayoutData(mainPaneGridData);
 
-		RegistryFactory.getRegistry().addListener(new SimulationUnitHandler());
-
-		IConfigurationElement[] config = RegistryFactory.getRegistry()
-				.getConfigurationElementsFor(
-						SimulationUnitHandler.extensionPointID);
-		try {
-			for (IConfigurationElement e : config) {
-				System.out.println("Evaluating extension");
-				final Object o = e.createExecutableExtension("class");
-				if (o instanceof ISimulationUnit) {
-					System.out.println("Found an ISimulationUnit");
-				}
-			}
-		} catch (CoreException ex) {
-			System.out.println(ex.getMessage());
-		}
-
 		shell.addMouseListener(new MouseListener() {
 
 			@Override
@@ -92,7 +120,7 @@ public class WindowRunner {
 				System.out.println("mouse down");
 				File f = new File(
 						"C:/Users/S-lenovo/Documents/Uni/IDP/plugins/CBDT_1.0.0.201302010935.jar");
-				
+
 				FileInputStream fileStream;
 				Bundle cbdt;
 				try {
@@ -116,29 +144,5 @@ public class WindowRunner {
 				}
 			}
 		});
-
-		shell.addDisposeListener(new DisposeListener() {
-
-			@Override
-			public void widgetDisposed(DisposeEvent e) {
-				try {
-					Bundle systemBundle = context.getBundle(0);
-					systemBundle.stop();
-					System.out.println("stopped system bundle");
-				} catch (BundleException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		shell.open();
-
-		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch())
-				display.sleep();
-		}
-
-		System.out.println("before dispose display");
-		display.dispose();
 	}
 }
