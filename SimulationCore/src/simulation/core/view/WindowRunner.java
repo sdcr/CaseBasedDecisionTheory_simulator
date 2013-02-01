@@ -1,4 +1,4 @@
-package simulation.core;
+package simulation.core.view;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
 import simulation.extensionpoint.ExtensionHandler;
-import simulation.extensionpoint.simulationunit.handlers.SimulationUnitIntegrator;
+import simulation.extensionpoint.simulationplugin.handlers.SimulationPluginViewIntegrator;
 
 public class WindowRunner {
 
@@ -49,7 +49,7 @@ public class WindowRunner {
 		//set up handling of simulation unit extensions, included by the user.
 		IExtensionRegistry reg = RegistryFactory.getRegistry();
 		IExtensionPoint ep = reg
-				.getExtensionPoint(SimulationUnitIntegrator.EXTENSION_POINT_ID);
+				.getExtensionPoint(SimulationPluginViewIntegrator.EXTENSION_POINT_ID);
 		IFilter filter = ExtensionTracker.createExtensionPointFilter(ep);
 		ExtensionTracker tracker = new ExtensionTracker(reg);
 		tracker.registerHandler(extensionHandler, filter);

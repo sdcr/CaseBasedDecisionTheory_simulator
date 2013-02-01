@@ -6,16 +6,16 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
 
-import simulation.extensionpoint.simulationunit.ISimulationUnit;
-import simulation.extensionpoint.simulationunit.handlers.SimulationUnitIntegrator;
+import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
+import simulation.extensionpoint.simulationplugin.handlers.SimulationPluginViewIntegrator;
 
 public class ExtensionHandler implements IExtensionChangeHandler{//IRegistryEventListener {
 
 
-	private SimulationUnitIntegrator simulationUnitIntegrator;
+	private SimulationPluginViewIntegrator simulationUnitIntegrator;
 
 	public ExtensionHandler() {
-		this.simulationUnitIntegrator = new SimulationUnitIntegrator();
+		this.simulationUnitIntegrator = new SimulationPluginViewIntegrator();
 	}
 
 	@Override
@@ -24,8 +24,8 @@ public class ExtensionHandler implements IExtensionChangeHandler{//IRegistryEven
 		for(IConfigurationElement config : configurationElements){
 			try {
 				Object o = config.createExecutableExtension("class");
-				if(o instanceof ISimulationUnit){
-					simulationUnitIntegrator.integrateSimulationUnit((ISimulationUnit) o);
+				if(o instanceof ISimulationPlugin){
+					simulationUnitIntegrator.integrateSimulationUnit((ISimulationPlugin) o);
 				}
 			} catch (CoreException e) {
 				e.printStackTrace();

@@ -3,6 +3,8 @@ package simulation.core;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import simulation.core.view.WindowRunner;
+
 public class Activator implements BundleActivator {
 
 	/*
