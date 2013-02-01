@@ -1,8 +1,8 @@
 package simulation.simulationunit.cbdt;
 
-import simulation.extensionpoint.simulationunit.ISimulationUnit;
+import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
 
-public class Greeter implements ISimulationUnit {
+public class Greeter implements ISimulationPlugin {
 
 	public Greeter() {
 		// TODO Auto-generated constructor stub
