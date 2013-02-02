@@ -55,11 +55,8 @@ public class MainView {
 	}
 
 	public void updateFromModel() {
-		System.out.println("updating view");
-		// pluginsBar.insertExampleContent();
 		List<ISimulationPlugin> plugins = simPluginStore.getSimulationPlugins();
 		pluginsBar.update(plugins);
-		// pluginPane.update(plugins);
 	}
 
 	// private void addPluginAdd(Shell shell, final BundleContext context){
