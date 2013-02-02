@@ -11,10 +11,10 @@ public class SimulationPluginExtensionHandler implements IExtensionChangeHandler
 
 	public static final String EXTENSION_POINT_ID = "simulation.extensionpoint.simulationplugin";
 	
-	private SimulationPluginViewIntegrator simulationUnitIntegrator;
+	private SimulationPluginViewIntegrator simulationPluginIntegrator;
 
 	public SimulationPluginExtensionHandler() {
-		this.simulationUnitIntegrator = new SimulationPluginViewIntegrator();
+		this.simulationPluginIntegrator = new SimulationPluginViewIntegrator();
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class SimulationPluginExtensionHandler implements IExtensionChangeHandler
 			try {
 				Object o = config.createExecutableExtension("class");
 				if(o instanceof ISimulationPlugin){
-					simulationUnitIntegrator.integrateSimulationUnit((ISimulationPlugin) o);
+					simulationPluginIntegrator.integrateSimulationUnit((ISimulationPlugin) o);
 				}
 			} catch (CoreException e) {
 				e.printStackTrace();

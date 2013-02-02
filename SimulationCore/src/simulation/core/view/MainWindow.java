@@ -29,12 +29,12 @@ import org.osgi.framework.BundleException;
 import simulation.extensionpoint.simulationplugin.SimulationPluginExtensionHandler;
 import simulation.extensionpoint.simulationplugin.SimulationPluginViewIntegrator;
 
-public class WindowRunner {
+public class MainWindow {
 
 	private BundleContext context;
 	
 
-	public WindowRunner(BundleContext context) {
+	public MainWindow(BundleContext context) {
 		this.context = context;
 	}
 

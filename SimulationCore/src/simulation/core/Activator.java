@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.dynamichelpers.IFilter;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import simulation.core.view.WindowRunner;
+import simulation.core.view.MainWindow;
 import simulation.extensionpoint.simulationplugin.SimulationPluginExtensionHandler;
 import simulation.extensionpoint.simulationplugin.SimulationPluginViewIntegrator;
 
@@ -24,7 +24,7 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		System.out.println("Hello World from SimulationCore!!");
 		initSimulationPluginExtensionPoint();
-		WindowRunner windowRunner = new WindowRunner(context);
+		MainWindow windowRunner = new MainWindow(context);
 		windowRunner.showWindow();
 	}
 	
