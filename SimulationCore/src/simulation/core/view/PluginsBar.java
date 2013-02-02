@@ -132,7 +132,7 @@ public class PluginsBar extends Composite {
 			public List<ISimulationPluginPaneContent> getPaneContents() {
 				List<ISimulationPluginPaneContent> retVal = new ArrayList<ISimulationPluginPaneContent>();
 				retVal.add(exampleContent);
-				return null;
+				return retVal;
 			}
 
 			@Override
