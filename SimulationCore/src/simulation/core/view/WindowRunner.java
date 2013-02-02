@@ -26,13 +26,13 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
-import simulation.extensionpoint.ExtensionHandler;
+import simulation.extensionpoint.simulationplugin.SimulationPluginExtensionHandler;
 import simulation.extensionpoint.simulationplugin.handlers.SimulationPluginViewIntegrator;
 
 public class WindowRunner {
 
 	private BundleContext context;
-	private ExtensionHandler extensionHandler;
+	
 
 	public WindowRunner(BundleContext context) {
 		this.context = context;
@@ -43,21 +43,6 @@ public class WindowRunner {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		buildGUI(display, shell);
-
-		extensionHandler = new ExtensionHandler();
-
-		//set up handling of simulation unit extensions, included by the user.
-		IExtensionRegistry reg = RegistryFactory.getRegistry();
-		IExtensionPoint ep = reg
-				.getExtensionPoint(SimulationPluginViewIntegrator.EXTENSION_POINT_ID);
-		IFilter filter = ExtensionTracker.createExtensionPointFilter(ep);
-		ExtensionTracker tracker = new ExtensionTracker(reg);
-		tracker.registerHandler(extensionHandler, filter);
-		
-		//add extensions already "installed"
-		IExtension[] extensions = ep.getExtensions();
-		for (IExtension extension : extensions)
-			extensionHandler.addExtension(tracker, extension);
 
 		//handle closeing of window
 		shell.addDisposeListener(new DisposeListener() {

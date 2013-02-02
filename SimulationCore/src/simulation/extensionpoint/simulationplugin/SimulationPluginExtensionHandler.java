@@ -1,4 +1,4 @@
-package simulation.extensionpoint;
+package simulation.extensionpoint.simulationplugin;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -6,15 +6,15 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
 
-import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.handlers.SimulationPluginViewIntegrator;
 
-public class ExtensionHandler implements IExtensionChangeHandler{//IRegistryEventListener {
+public class SimulationPluginExtensionHandler implements IExtensionChangeHandler{//IRegistryEventListener {
 
-
+	public static final String EXTENSION_POINT_ID = "simulation.extensionpoint.simulationplugin";
+	
 	private SimulationPluginViewIntegrator simulationUnitIntegrator;
 
-	public ExtensionHandler() {
+	public SimulationPluginExtensionHandler() {
 		this.simulationUnitIntegrator = new SimulationPluginViewIntegrator();
 	}
 

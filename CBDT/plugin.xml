@@ -2,10 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="simulation.extensionpoint.simulationunit">
-      <client
-            class="simulation.extension.simulationplugin.cbdt.CBDTplugin">
-      </client>
+         point="simulation.extensionpoint.simulationplugin">
    </extension>
 
 </plugin>
