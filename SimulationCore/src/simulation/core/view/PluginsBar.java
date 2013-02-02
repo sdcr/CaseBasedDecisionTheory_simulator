@@ -25,6 +25,8 @@ public class PluginsBar extends Composite {
 
 	private Controller controller;
 	private PluginPane pluginPane;
+	private Composite scrollContent;
+	private ScrolledComposite scrolledComposite;
 
 	public PluginsBar(Composite parent, int style, final Controller controller) {
 		super(parent, style);
@@ -43,11 +45,10 @@ public class PluginsBar extends Composite {
 		pluginsBarGridData.widthHint = 200;
 		setLayoutData(pluginsBarGridData);
 
-
 		// init layout of objects in this object
 		this.setLayout(new FillLayout());
-		ScrolledComposite scrolledComposite = new ScrolledComposite(this, SWT.V_SCROLL);
-		Composite scrollContent = new Composite(scrolledComposite, SWT.NONE);
+		scrolledComposite = new ScrolledComposite(this, SWT.V_SCROLL);
+		scrollContent = new Composite(scrolledComposite, SWT.NONE);
 		
 		//layout and coloring of scrollContent
 		RowLayout rowLayout = new RowLayout();
@@ -61,6 +62,7 @@ public class PluginsBar extends Composite {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setContent(scrollContent);
 
+		insertExampleContent();
 		
 		for (int i = 0; i < 50; i++) {
 			Label l = new Label(scrollContent, SWT.NONE);
@@ -146,10 +148,11 @@ public class PluginsBar extends Composite {
 	}
 
 	public void update(List<ISimulationPlugin> plugins) {
-		// TODO Auto-generated method stub
 		System.out.println("update pluginsbar");
 		for (ISimulationPlugin plugin : plugins) {
-			PluginsBarItem barItem = new PluginsBarItem(plugin, this, SWT.PUSH);
+			System.out.println("add plugin to bar");
+			PluginsBarItem barItem = new PluginsBarItem(plugin, scrollContent, SWT.PUSH);
+			scrolledComposite.setMinSize(scrollContent.computeSize(scrolledComposite.getSize().x, SWT.DEFAULT));
 		}
 	}
 
