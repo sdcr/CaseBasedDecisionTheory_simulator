@@ -28,13 +28,6 @@ public class SimPluginStore {
 			mainView.updateFromModel();
 	}
 	
-	public void changeSth(){
-		if(mainView != null){
-			System.out.println("store tells view to update");
-			mainView.updateFromModel();
-		}
-	}
-	
 	public List<ISimulationPlugin> getSimulationPlugins(){
 		return activeSimPlugins;
 	}

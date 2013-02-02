@@ -1,6 +1,5 @@
 package simulation.core.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -8,15 +7,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 
 import simulation.core.control.Controller;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
@@ -24,16 +20,12 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPa
 
 public class PluginsBar extends Composite {
 
-	private Controller controller;
 	private PluginPane pluginPane;
-	private Composite scrollContent;
-	private ScrolledComposite scrolledComposite;
 	private TreeViewer viewer;
 
-	public PluginsBar(Composite parent, int style, final Controller controller) {
+	public PluginsBar(Composite parent, int style) {
 		super(parent, style);
 		System.out.println("create the pluginsbar");
-		this.controller = controller;
 
 		// init coloring
 		Color simulationPluginsBackgroundColor = new Color(parent.getDisplay(),
@@ -67,27 +59,6 @@ public class PluginsBar extends Composite {
 						pluginPane.setToForeGround(newForegroundPaneContent);
 					}
 				}
-			}
-		});
-
-
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseUp(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseDown(MouseEvent e) {
-				controller.doSth();
-			}
-
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}

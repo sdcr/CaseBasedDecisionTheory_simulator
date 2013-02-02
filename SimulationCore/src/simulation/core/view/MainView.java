@@ -49,7 +49,7 @@ public class MainView {
 
 	private void initializeContent(Shell shell) {
 		shell.setLayout(new GridLayout(2, false));
-		pluginsBar = new PluginsBar(shell, SWT.PUSH, controller);
+		pluginsBar = new PluginsBar(shell, SWT.PUSH);
 		pluginPane = new PluginPane(shell, SWT.NONE);
 		pluginsBar.setPluginPane(pluginPane);
 	}
