@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
 
-public class PluginsBarItemLabelProvider extends LabelProvider{
+public class PluginsBarTreeLabelProvider extends LabelProvider{
 
 	@Override
 	public String getText(Object element) {
