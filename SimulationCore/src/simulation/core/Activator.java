@@ -11,7 +11,7 @@ import org.osgi.framework.BundleContext;
 
 import simulation.core.view.WindowRunner;
 import simulation.extensionpoint.simulationplugin.SimulationPluginExtensionHandler;
-import simulation.extensionpoint.simulationplugin.handlers.SimulationPluginViewIntegrator;
+import simulation.extensionpoint.simulationplugin.SimulationPluginViewIntegrator;
 
 public class Activator implements BundleActivator {
 

@@ -6,7 +6,6 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
 
-import simulation.extensionpoint.simulationplugin.handlers.SimulationPluginViewIntegrator;
 
 public class SimulationPluginExtensionHandler implements IExtensionChangeHandler{//IRegistryEventListener {
 
