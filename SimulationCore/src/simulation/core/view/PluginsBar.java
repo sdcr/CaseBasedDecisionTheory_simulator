@@ -10,7 +10,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
@@ -36,13 +39,25 @@ public class PluginsBar extends Composite {
 		pluginsBarGridData.widthHint = 200;
 		setLayoutData(pluginsBarGridData);
 
-		// // init layout of objects in this object
-		this.setLayout(new FillLayout());
+		// init layout of objects in this object
+		GridLayout gridLayout = new GridLayout(1, false);
+		this.setLayout(gridLayout);
+		
+		Label pluginsBarTitle = new Label(this, SWT.PUSH);
+		pluginsBarTitle.setText("Simulatios-Modul Explorer");
 
-		viewer = new TreeViewer(this, SWT.MULTI);
+		Composite viewerComposite = new Composite(this, SWT.PUSH);
+		GridData gridData = new GridData();
+		gridData.verticalAlignment = GridData.FILL;
+		gridData.grabExcessVerticalSpace = true;
+		gridData.widthHint = 190;
+		viewerComposite.setLayoutData(gridData);
+		viewerComposite.setLayout(new FillLayout());
+		
+		viewer = new TreeViewer(viewerComposite, SWT.MULTI);
 		viewer.setContentProvider(new PluginsBarTreeContentProvider());
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
-
+		
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
