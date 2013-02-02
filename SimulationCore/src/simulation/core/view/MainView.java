@@ -52,61 +52,10 @@ public class MainView {
 	}
 
 	private void initializeContent(Shell shell) {
-//		shell.setLayout(new FillLayout());
-//		Composite main = new Composite(shell, SWT.NONE);
-//		main.setLayout(new GridLayout(2, false));
-//
-//		// pluginsBar = new PluginsBar(main, SWT.NONE, controller);
-//		ScrolledComposite pluginsBar = new ScrolledComposite(shell,
-//				SWT.PUSH | SWT.V_SCROLL);
-//		// c1.setBackground(c1.getDisplay().getSystemColor(SWT.COLOR_CYAN));
-//
-//		final Composite scrollContent = new Composite(pluginsBar, SWT.NONE);
-//		for (int i = 0; i <= 50; i++) {
-//			Label label = new Label(scrollContent, SWT.NONE);
-//			label.setText("jo");
-//		}
-//
-//		RowLayout layout = new RowLayout(SWT.VERTICAL);
-//		layout.wrap = false;
-//		scrollContent.setLayout(layout);
-//		
-//		pluginsBar.setContent(scrollContent);
-//		pluginsBar.setExpandVertical(true);
-//		pluginsBar.setExpandHorizontal(true);
-//		scrollContent.setBackground(pluginsBar.getDisplay().getSystemColor(SWT.COLOR_CYAN));
-//		
-		
-		
-//		Composite scrollContent = new Composite(scrollComposite, SWT.NONE);
-//
-//		RowLayout rowLayout = new RowLayout();
-//		rowLayout.wrap = true;
-//		scrollContent.setLayout(rowLayout);
-//
-//		Label l = new Label(scrollContent, SWT.NONE);
-//		l.setLayoutData(new RowData());
-//		l.setText("label");
-//
-//		scrollComposite.setContent(scrollContent);
-//		scrollComposite.setExpandVertical(true);
-//
-//		Composite c2 = new Composite(main, SWT.NONE);
-//		c2.setBackground(c2.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-//		c2.setLayout(new GridLayout(2, false));
-//
-//
-//		// pluginsBar.pack();
-//		// pluginPane.pack();
-		shell.setLayout(new GridLayout(2,false));
-		
+		shell.setLayout(new GridLayout(2,false));	
 		pluginsBar = new PluginsBar(shell, SWT.PUSH, controller);
 		pluginPane = new PluginPane(shell, SWT.NONE);
 		pluginsBar.setPluginPane(pluginPane);
-		
-//		main.pack();
-//		main.setBounds(0, 0, 800, 500);
-//		shell.pack();
 	}
 
 	public void updateFromModel() {

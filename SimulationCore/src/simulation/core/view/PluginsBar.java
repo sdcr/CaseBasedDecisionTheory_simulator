@@ -8,6 +8,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -32,30 +33,43 @@ public class PluginsBar extends Composite {
 
 		// init coloring
 		Color simulationPluginsBackgroundColor = new Color(parent.getDisplay(),
-				0, 0, 255);
-		// setBackground(simulationPluginsBackgroundColor);
-		// setSize(300, 100);
+				150, 150, 255);
+		setBackground(simulationPluginsBackgroundColor);
 
 		// initialize this objects behaviour within the parent
-		// setExpandVertical(true);
 		GridData pluginsBarGridData = new GridData();
 		pluginsBarGridData.verticalAlignment = GridData.FILL;
 		pluginsBarGridData.grabExcessVerticalSpace = true;
 		pluginsBarGridData.widthHint = 200;
 		setLayoutData(pluginsBarGridData);
 
+
 		// init layout of objects in this object
+		this.setLayout(new FillLayout());
+		ScrolledComposite scrolledComposite = new ScrolledComposite(this, SWT.V_SCROLL);
+		Composite scrollContent = new Composite(scrolledComposite, SWT.NONE);
+		
+		//layout and coloring of scrollContent
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.wrap = false;
 		rowLayout.type = SWT.VERTICAL;
-		this.setLayout(rowLayout);
+		scrollContent.setLayout(rowLayout);
+		scrollContent.setBackground(simulationPluginsBackgroundColor);
 
+		//init of scrolledComposite
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setContent(scrollContent);
+
+		
 		for (int i = 0; i < 50; i++) {
-			Label l = new Label(this, SWT.PUSH);
+			Label l = new Label(scrollContent, SWT.NONE);
 			l.setText("label");
-			l.setBackground(simulationPluginsBackgroundColor);
+			l.setBackground(new Color(parent.getDisplay(),
+					100, 0, 255));
+			scrolledComposite.setMinSize(scrollContent.computeSize(scrolledComposite.getSize().x, SWT.DEFAULT));
 		}
-		// this.setContent(l);
+	
 
 		this.addMouseListener(new MouseListener() {
 
