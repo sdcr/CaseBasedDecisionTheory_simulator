@@ -8,18 +8,21 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
+import simulation.core.model.SimPluginStore;
 
 public class MainView {
 
 	private PluginsBar pluginsBar;
 	private MainPane mainPane;
 	private Controller controller;
+	private SimPluginStore simPluginStore;
+	private Shell shell;
 	
-	public MainView(final Controller controller) {
+	public MainView(final Controller controller, SimPluginStore simPluginStore) {
 		this.controller = controller;
+		this.simPluginStore = simPluginStore;
 
-		Display display = new Display();
-		Shell shell = new Shell(display);
+		shell = new Shell(new Display());
 		initializeContent(shell);
 
 		shell.addDisposeListener(new DisposeListener() {
@@ -29,7 +32,11 @@ public class MainView {
 			}
 		});
 
+	}
+
+	public void startView() {
 		shell.open();
+		Display display = shell.getDisplay();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())
 				display.sleep();
@@ -40,8 +47,12 @@ public class MainView {
 	private void initializeContent(Shell shell) {
 		GridLayout windowLayout = new GridLayout(2, false);
 		shell.setLayout(windowLayout);
-		pluginsBar = new PluginsBar(shell, SWT.PUSH);
+		pluginsBar = new PluginsBar(shell, SWT.PUSH, controller);
 		mainPane = new MainPane(shell, SWT.PUSH);
+	}
+	
+	public void updateFromModel(){
+		System.out.println("updating view");
 	}
 	
 //	private void addPluginAdd(Shell shell, final BundleContext context){

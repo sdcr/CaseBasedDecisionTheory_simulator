@@ -11,19 +11,23 @@ import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
 public class Controller {
 
 	private BundleContext context;
+	private SimPluginStore pluginStore;
 
 	public Controller(BundleContext context) {
 		this.context = context;
 		
-		SimulationPluginExtensionHandler extensionHandler = new SimulationPluginExtensionHandler();
-		SimPluginStore pluginStore = new SimPluginStore();
+		pluginStore = new SimPluginStore();
 
+		SimulationPluginExtensionHandler extensionHandler = new SimulationPluginExtensionHandler();
 		// add extensions to model which are already "installed"
 		for(ISimulationPlugin iSimPlugin : extensionHandler.getActiveISimulationPlugins()){
 			pluginStore.addSimPlugin(iSimPlugin);	
 		}
 		
-		new MainView(this);
+		MainView mainView = new MainView(this, pluginStore);
+		pluginStore.setMainView(mainView);		
+		mainView.updateFromModel();
+		mainView.startView();
 		
 //		IExtension[] extensions = ep.getExtensions();
 //		for (IExtension extension : extensions)
@@ -41,6 +45,12 @@ public class Controller {
 			e.printStackTrace();
 		}
 		System.out.println("stopped system bundle");
+	}
+
+	public void doSth() {
+		// TODO Auto-generated method stub
+		System.out.println("doSth");
+		pluginStore.changeSth();
 	}
 
 }
