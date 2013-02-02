@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import simulation.core.view.MainView;
-import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
 
 public class SimPluginStore {
 
-	List<SimPluginModel> activeSimPlugins;
+	List<ISimulationPlugin> activeSimPlugins;
 	private MainView mainView;
 	
+	private ISimulationPluginPaneContent foregroundPaneContent;
+	
 	public SimPluginStore() {
-		activeSimPlugins = new ArrayList<SimPluginModel>();
+		activeSimPlugins = new ArrayList<ISimulationPlugin>();
 	}
 	
 	public void setMainView(MainView mainView) {
@@ -20,7 +23,7 @@ public class SimPluginStore {
 	}
 
 	public void addSimPlugin(ISimulationPlugin newISimulationPlugin){
-		activeSimPlugins.add(new SimPluginModel(newISimulationPlugin));
+		activeSimPlugins.add(newISimulationPlugin);
 		if(mainView != null)
 			mainView.updateFromModel();
 	}
@@ -30,6 +33,18 @@ public class SimPluginStore {
 			System.out.println("store tells view to update");
 			mainView.updateFromModel();
 		}
+	}
+	
+	public List<ISimulationPlugin> getSimulationPlugins(){
+		return activeSimPlugins;
+	}
+
+	public ISimulationPluginPaneContent getForegroundPaneContent() {
+		return foregroundPaneContent;
+	}
+
+	public void setForegroundPaneContent(ISimulationPluginPaneContent foregroundPaneContent) {
+		this.foregroundPaneContent = foregroundPaneContent;
 	}
 
 }

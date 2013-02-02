@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
 import org.eclipse.core.runtime.dynamichelpers.IFilter;
 
-import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class SimulationPluginExtensionHandler implements
 		IExtensionChangeHandler {// IRegistryEventListener {

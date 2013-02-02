@@ -6,7 +6,7 @@ import org.osgi.framework.BundleException;
 
 import simulation.core.model.SimPluginStore;
 import simulation.core.view.MainView;
-import simulation.extensionpoint.simulationplugin.ISimulationPlugin;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class Controller {
 

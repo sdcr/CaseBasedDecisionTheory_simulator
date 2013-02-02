@@ -1,9 +1,7 @@
-package simulation.extensionpoint.simulationplugin;
+package simulation.extensionpoint.simulationplugin.definition;
 
-import java.util.Map;
+import java.util.List;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Widget;
 
 public interface ISimulationPlugin {
 
@@ -20,6 +18,8 @@ public interface ISimulationPlugin {
 	 *         key is the title of the referenced Widget object (e.g. a
 	 *         Composite) to be displayed in the main pane.
 	 */
-	Map<String, Widget> getMainPaneContent(Composite parent);
+//	Map<String, Widget> getMainPaneContent(Composite parent);
 
+	
+	List<ISimulationPluginPaneContent> getPaneContents();
 }
