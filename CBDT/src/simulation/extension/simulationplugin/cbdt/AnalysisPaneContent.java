@@ -9,22 +9,22 @@ import org.eclipse.swt.widgets.Label;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
 
-public class ParameterPaneContent implements ISimulationPluginPaneContent{
+public class AnalysisPaneContent implements ISimulationPluginPaneContent{
 
 	private ISimulationPlugin plugin;
 	
 	@Override
 	public String getName() {
-		return "Parameter-Eingabe";
+		return "Ergebnis-Analyse";
 	}
 
 	@Override
 	public Composite getComposite(Composite parent) {
 		Composite c = new Composite(parent, SWT.NONE);
-		c.setBackground(new Color(parent.getDisplay(),255,0,0));
+		c.setBackground(new Color(parent.getDisplay(),255,255,0));
 		c.setLayout(new RowLayout());
 		Label l = new Label(c, SWT.NONE);
-		l.setText("Parameter");
+		l.setText("Analyse");
 		return c;
 	}
 

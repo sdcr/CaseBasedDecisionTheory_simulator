@@ -28,9 +28,9 @@ public class PluginsBar extends Composite {
 		System.out.println("create the pluginsbar");
 
 		// init coloring
-		Color simulationPluginsBackgroundColor = new Color(parent.getDisplay(),
-				150, 150, 255);
-		setBackground(simulationPluginsBackgroundColor);
+//		Color simulationPluginsBackgroundColor = new Color(parent.getDisplay(),
+//				150, 150, 255);
+//		setBackground(simulationPluginsBackgroundColor);
 
 		// initialize this objects behaviour within the parent
 		GridData pluginsBarGridData = new GridData();
@@ -43,10 +43,10 @@ public class PluginsBar extends Composite {
 		GridLayout gridLayout = new GridLayout(1, false);
 		this.setLayout(gridLayout);
 		
-		Label pluginsBarTitle = new Label(this, SWT.PUSH);
+		Label pluginsBarTitle = new Label(this, SWT.NONE);
 		pluginsBarTitle.setText("Simulatios-Modul Explorer");
 
-		Composite viewerComposite = new Composite(this, SWT.PUSH);
+		Composite viewerComposite = new Composite(this, SWT.NONE);
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.grabExcessVerticalSpace = true;
@@ -54,7 +54,7 @@ public class PluginsBar extends Composite {
 		viewerComposite.setLayoutData(gridData);
 		viewerComposite.setLayout(new FillLayout());
 		
-		viewer = new TreeViewer(viewerComposite, SWT.MULTI);
+		viewer = new TreeViewer(viewerComposite, SWT.BORDER_SOLID);
 		viewer.setContentProvider(new PluginsBarTreeContentProvider());
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
 		

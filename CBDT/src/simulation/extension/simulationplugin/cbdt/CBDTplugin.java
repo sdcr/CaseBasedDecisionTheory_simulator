@@ -21,6 +21,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	public List<ISimulationPluginPaneContent> getPaneContents() {
 		List<ISimulationPluginPaneContent> retVal = new ArrayList<ISimulationPluginPaneContent>();
 		retVal.add(new ParameterPaneContent());
+		retVal.add(new AnalysisPaneContent());
 		return retVal;
 	}
 
