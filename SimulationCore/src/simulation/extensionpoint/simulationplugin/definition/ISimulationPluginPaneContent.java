@@ -7,7 +7,7 @@ public interface ISimulationPluginPaneContent {
 
 	public String getName();
 	
-	public Widget getWidget(Composite parent);
+	public Composite getComposite(Composite parent);
 	
 	public ISimulationPlugin getSimulationPlugin();
 	
