@@ -44,6 +44,7 @@ public class PluginsBarTreeContentProvider implements ITreeContentProvider {
 	@Override
 	public boolean hasChildren(Object element) {
 		if (element instanceof ISimulationPlugin 
+				&& ((ISimulationPlugin) element).getPaneContents() != null
 				&& !((ISimulationPlugin) element).getPaneContents().isEmpty())
 			return true;
 		return false;

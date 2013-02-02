@@ -1,5 +1,6 @@
 package simulation.extension.simulationplugin.cbdt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +24,11 @@ public class CBDTplugin implements ISimulationPlugin {
 		return "CBDT";
 	}
 
-	
-	public Map<String, Widget> getMainPaneContent(Composite parent) {
-		Map<String, Widget> retVal = new HashMap<String, Widget>();
-		
-		retVal.put("test1", new Button(parent, SWT.PUSH));
-		return retVal;
-	}
-
 	@Override
 	public List<ISimulationPluginPaneContent> getPaneContents() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ISimulationPluginPaneContent> retVal = new ArrayList<ISimulationPluginPaneContent>();
+		retVal.add(new ParameterPaneContent());
+		return retVal;
 	}
 
 }

@@ -175,7 +175,6 @@ public class PluginsBar extends Composite {
 
 	public void update(List<ISimulationPlugin> plugins) {
 		System.out.println("update pluginsbar");
-
 		viewer.setInput(plugins);
 
 		// for (ISimulationPlugin plugin : plugins) {

@@ -1,21 +1,17 @@
 package simulation.core.view;
 
+import java.util.List;
+
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
 import simulation.core.model.SimPluginStore;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainView {
 
@@ -52,7 +48,7 @@ public class MainView {
 	}
 
 	private void initializeContent(Shell shell) {
-		shell.setLayout(new GridLayout(2,false));	
+		shell.setLayout(new GridLayout(2, false));
 		pluginsBar = new PluginsBar(shell, SWT.PUSH, controller);
 		pluginPane = new PluginPane(shell, SWT.NONE);
 		pluginsBar.setPluginPane(pluginPane);
@@ -61,9 +57,8 @@ public class MainView {
 	public void updateFromModel() {
 		System.out.println("updating view");
 		// pluginsBar.insertExampleContent();
-		// List<ISimulationPlugin> plugins =
-		// simPluginStore.getSimulationPlugins();
-		// pluginsBar.update(plugins);
+		List<ISimulationPlugin> plugins = simPluginStore.getSimulationPlugins();
+		pluginsBar.update(plugins);
 		// pluginPane.update(plugins);
 	}
 
