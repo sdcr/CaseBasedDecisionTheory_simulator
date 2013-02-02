@@ -3,13 +3,8 @@ package simulation.core.view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.RegistryFactory;
-import org.eclipse.core.runtime.dynamichelpers.ExtensionTracker;
-import org.eclipse.core.runtime.dynamichelpers.IFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
@@ -21,17 +16,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Widget;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
-import simulation.extensionpoint.simulationplugin.SimulationPluginExtensionHandler;
-import simulation.extensionpoint.simulationplugin.SimulationPluginViewIntegrator;
-
 public class MainWindow {
 
 	private BundleContext context;
+	private ScrolledComposite pluginsBar;
 	
 
 	public MainWindow(BundleContext context) {
@@ -44,7 +39,7 @@ public class MainWindow {
 		Shell shell = new Shell(display);
 		buildGUI(display, shell);
 
-		//handle closeing of window
+		//handle closing of window
 		shell.addDisposeListener(new DisposeListener() {
 			@Override
 			public void widgetDisposed(DisposeEvent e) {
@@ -72,8 +67,7 @@ public class MainWindow {
 		GridLayout windowLayout = new GridLayout(2, false);
 		shell.setLayout(windowLayout);
 
-		// create pluginsBar
-		final ScrolledComposite pluginsBar = new ScrolledComposite(shell,
+		pluginsBar = new ScrolledComposite(shell,
 				SWT.PUSH);
 		Color simulationPluginsBackgroundColor = new Color(display, 0, 0, 255);
 		pluginsBar.setBackground(simulationPluginsBackgroundColor);
@@ -84,7 +78,7 @@ public class MainWindow {
 		pluginsBar.setLayoutData(pluginsBarGridData);
 
 		// create the mainPane Composite
-		final Composite mainPane = new Composite(shell, SWT.PUSH);
+		Composite mainPane = new Composite(shell, SWT.PUSH);
 		Color mainPaneColor = new Color(display, 200, 200, 200);
 		mainPane.setBackground(mainPaneColor);
 		GridData mainPaneGridData = new GridData();
@@ -130,4 +124,12 @@ public class MainWindow {
 			}
 		});
 	}
+	
+	public void addSimulationPluginView(String simulationPluginName, Map<String, Widget> viewContent){
+		Composite pluginsBarObject = new Composite(pluginsBar, SWT.PUSH);
+		
+		Label pluginNameLabel = new Label(pluginsBarObject, SWT.SHADOW_IN);
+		pluginNameLabel.setText(simulationPluginName);
+	}
+	
 }

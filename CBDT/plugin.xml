@@ -3,6 +3,9 @@
 <plugin>
    <extension
          point="simulation.extensionpoint.simulationplugin">
+      <client
+            class="simulation.extension.simulationplugin.cbdt.CBDTplugin">
+      </client>
    </extension>
 
 </plugin>

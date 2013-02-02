@@ -13,8 +13,8 @@ public class SimulationPluginExtensionHandler implements IExtensionChangeHandler
 	
 	private SimulationPluginViewIntegrator simulationPluginIntegrator;
 
-	public SimulationPluginExtensionHandler() {
-		this.simulationPluginIntegrator = new SimulationPluginViewIntegrator();
+	public SimulationPluginExtensionHandler(SimulationPluginViewIntegrator viewIntegrator) {
+		this.simulationPluginIntegrator = viewIntegrator;
 	}
 
 	@Override
