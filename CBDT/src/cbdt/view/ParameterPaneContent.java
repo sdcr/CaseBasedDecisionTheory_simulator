@@ -53,11 +53,7 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 		Composite actorActionComposite = new Composite(parameterComposite, SWT.NONE);
 		actorActionComposite.setLayout(new GridLayout(2,false));
 		
-		Label actorActionsLabel = new Label(actorActionComposite, SWT.NONE);
-		actorActionsLabel.setText("Actor actions:");		
-		GridData actorActionsLabelGridData = new GridData();
-		actorActionsLabelGridData.verticalAlignment = SWT.BEGINNING;
-		actorActionsLabel.setLayoutData(actorActionsLabelGridData);
+		createActorActionsLabel(actorActionComposite);
 
 		Composite actorActionItemsComposite = new Composite(actorActionComposite, SWT.NONE);		
 		RowLayout rowLayout = new RowLayout();
@@ -66,6 +62,19 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 
 		createActorActionItem(actorActionItemsComposite);
 		
+		createAddActorActionButton(actorActionComposite, actorActionItemsComposite);
+	}
+
+	private void createActorActionsLabel(Composite actorActionComposite) {
+		Label actorActionsLabel = new Label(actorActionComposite, SWT.NONE);
+		actorActionsLabel.setText("Actor actions:");		
+		GridData actorActionsLabelGridData = new GridData();
+		actorActionsLabelGridData.verticalAlignment = SWT.BEGINNING;
+		actorActionsLabel.setLayoutData(actorActionsLabelGridData);
+	}
+
+	private void createAddActorActionButton(Composite actorActionComposite,
+			Composite actorActionItemsComposite) {
 		Button addActorActionItemButton = new Button(actorActionComposite, SWT.NONE);
 		addActorActionItemButton.setText("Add additional actor action");
 		addActorActionItemButton.addMouseListener(new AddActorActionMouseListener(this, actorActionItemsComposite));
