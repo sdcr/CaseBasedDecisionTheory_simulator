@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cbdt.view.AnalysisPaneContent;
-import cbdt.view.ParameterPaneContent;
+import cbdt.view.parameters.ParameterPaneContent;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;

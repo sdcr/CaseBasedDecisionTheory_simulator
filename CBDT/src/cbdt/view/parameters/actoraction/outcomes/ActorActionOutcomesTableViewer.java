@@ -1,4 +1,4 @@
-package cbdt.view;
+package cbdt.view.parameters.actoraction.outcomes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		
 		
 	public ActorActionOutcomesTableViewer(Composite parent, int style) {
-		super(parent, style | SWT.FULL_SELECTION);
+		super(parent, style | SWT.FULL_SELECTION | SWT.NO_SCROLL);
 		
 		this.setContentProvider(new ArrayContentProvider());
 		
@@ -67,7 +67,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 						emptyTableItem, this);
 		this.addSelectionChangedListener(emptyTableItemSelectionChangedListener);
 		
-		resizeActorActionOutcomesTable(table);
+		this.resizeTable();
 	}
 
 	@Override
@@ -75,12 +75,14 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		removeEmptyTableItem();
 		super.add(element);
 		reAddEmptyTableItem();
+		this.resizeTable();
 	}
 	
 	public void setActorActionOutcomesInput(Object input){
 		removeEmptyTableItem();
 		setInput(input);
 		reAddEmptyTableItem();
+		this.resizeTable();
 	}
 
 	private void reAddEmptyTableItem() {
@@ -93,11 +95,13 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		table.remove(table.indexOf(emptyTableItem));
 	}
 	
-	private void resizeActorActionOutcomesTable(Table table) {
+	private void resizeTable() {
+		Table table = this.getTable();
 		Point computedSize = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 		GridData tableGridData = new GridData();
 		tableGridData.heightHint = computedSize.y - TABLE_HEIGHT_HINT_REDUCTION;
 		table.setLayoutData(tableGridData);
+		
 	}
 	
 	private TableViewerColumn createTableViewerColumn(TableViewer viewer,

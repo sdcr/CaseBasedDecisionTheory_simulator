@@ -1,4 +1,4 @@
-package cbdt.view;
+package cbdt.view.parameters.actoraction.outcomes;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
