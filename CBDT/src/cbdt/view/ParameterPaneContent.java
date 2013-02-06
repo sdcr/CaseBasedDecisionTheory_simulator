@@ -2,29 +2,17 @@ package cbdt.view;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
@@ -117,67 +105,15 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 		Label actionOutcomesLabel = new Label(actorActionItemComposite, SWT.NONE);
 		actionOutcomesLabel.setText("Action outcomes:");
 		
-		TableViewer tableViewer = createActionOutcomesTable(actorActionItemComposite);
-		Table table = tableViewer.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		
-		//just for fun now
-		ArrayList<ActorActionOutcome> list = new ArrayList<ActorActionOutcome>();
+		ActorActionOutcomesTableViewer tableViewer = new ActorActionOutcomesTableViewer(actorActionItemComposite, SWT.NONE);
+
+		// just for fun
+		List<ActorActionOutcome> list = new ArrayList<ActorActionOutcome>();
 		list.add(new ActorActionOutcome(0, 1));
-		list.add(new ActorActionOutcome(0, 1));	
-
-		tableViewer.setInput(list);
-		
-		TableItem emptyTableItem = new TableItem(table, SWT.NONE);
-
-		tableViewer.addSelectionChangedListener(new EmptyTableItemSelectionChangedListener(
-						emptyTableItem, tableViewer));
-
-		Point computedSize = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-		GridData tableGridData = new GridData();
-		tableGridData.heightHint = computedSize.y - TABLE_HEIGHT_HINT_REDUCTION;
-		table.setLayoutData(tableGridData);
+		list.add(new ActorActionOutcome(0, 1));		
+		tableViewer.setActorActionOutcomesInput(list);
 		
 		actorActionItemsComposite.getParent().getParent().pack();
-	}
-
-	private TableViewer createActionOutcomesTable(Composite actorActionItemComposite) {
-		TableViewer tableViewer = new TableViewer(actorActionItemComposite,SWT.FULL_SELECTION);
-		tableViewer.setContentProvider(new ArrayContentProvider());
-		String[] tableTitles = {"probability", "utility"};
-		int[] widths = {100, 100};
-		
-		TableViewerColumn probabilityColumn = createTableViewerColumn(tableViewer, tableTitles[0], widths[0], 0);
-		probabilityColumn.setLabelProvider(new ColumnLabelProvider(){
-			@Override
-			public String getText(Object element) {
-				ActorActionOutcome outcome = (ActorActionOutcome) element;
-				return Double.toString(outcome.getProbability());
-			}
-		});
-		probabilityColumn.setEditingSupport(new ProbabilityEditingSupport(tableViewer));
-		
-		TableViewerColumn utilityColumn = createTableViewerColumn(tableViewer, tableTitles[1], widths[1], 1);
-		utilityColumn.setLabelProvider(new ColumnLabelProvider(){
-			@Override
-			public String getText(Object element) {
-				ActorActionOutcome outcome = (ActorActionOutcome) element;
-				return Double.toString(outcome.getUtility());
-			}
-		});
-		utilityColumn.setEditingSupport(new UtilityEditingSupport(tableViewer));
-		
-		return tableViewer;
-	}
-	
-	private TableViewerColumn createTableViewerColumn(TableViewer viewer,
-			String title, int bound, final int colNumber) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE, colNumber);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(title);
-		column.setWidth(bound);
-		return viewerColumn;
 	}
 
 	@Override
