@@ -1,4 +1,4 @@
-package cbdt.plugin;
+package cbdt.view;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;

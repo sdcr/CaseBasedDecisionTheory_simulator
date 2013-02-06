@@ -1,7 +1,10 @@
-package cbdt.plugin;
+package cbdt;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cbdt.view.AnalysisPaneContent;
+import cbdt.view.ParameterPaneContent;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
