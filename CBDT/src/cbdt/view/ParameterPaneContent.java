@@ -1,23 +1,40 @@
 package cbdt.view;
 
 
+import java.util.ArrayList;
+
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import cbdt.model.ActorActionOutcome;
 import cbdt.model.CBDTSimulationParameters;
 
 public class ParameterPaneContent implements ISimulationPluginPaneContent{
 
+	private static final int TABLE_HEIGHT_HINT_REDUCTION = 14;
 	private ISimulationPlugin plugin;
 	
 	@Override
@@ -91,17 +108,77 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 		Composite actorActionItemComposite = new Composite(actorActionItemsComposite, SWT.BORDER);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginTop = 0;
-		gridLayout.verticalSpacing = 0;
 		actorActionItemComposite.setLayout(gridLayout);
 
 		Label actionNameLabel = new Label(actorActionItemComposite, SWT.NONE);
 		actionNameLabel.setText("Action name:");
 		Text actionNameText = new Text(actorActionItemComposite, SWT.SINGLE);
 		
+		Label actionOutcomesLabel = new Label(actorActionItemComposite, SWT.NONE);
+		actionOutcomesLabel.setText("Action outcomes:");
+		
+		TableViewer tableViewer = createActionOutcomesTable(actorActionItemComposite);
+		Table table = tableViewer.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		//just for fun now
+		ArrayList<ActorActionOutcome> list = new ArrayList<ActorActionOutcome>();
+		list.add(new ActorActionOutcome(0, 1));
+		list.add(new ActorActionOutcome(0, 1));	
+
+		tableViewer.setInput(list);
+		
+		TableItem emptyTableItem = new TableItem(table, SWT.NONE);
+
+		tableViewer.addSelectionChangedListener(new EmptyTableItemSelectionChangedListener(
+						emptyTableItem, tableViewer));
+
+		Point computedSize = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+		GridData tableGridData = new GridData();
+		tableGridData.heightHint = computedSize.y - TABLE_HEIGHT_HINT_REDUCTION;
+		table.setLayoutData(tableGridData);
+		
 		actorActionItemsComposite.getParent().getParent().pack();
 	}
+
+	private TableViewer createActionOutcomesTable(Composite actorActionItemComposite) {
+		TableViewer tableViewer = new TableViewer(actorActionItemComposite,SWT.FULL_SELECTION);
+		tableViewer.setContentProvider(new ArrayContentProvider());
+		String[] tableTitles = {"probability", "utility"};
+		int[] widths = {100, 100};
+		
+		TableViewerColumn probabilityColumn = createTableViewerColumn(tableViewer, tableTitles[0], widths[0], 0);
+		probabilityColumn.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				ActorActionOutcome outcome = (ActorActionOutcome) element;
+				return Double.toString(outcome.getProbability());
+			}
+		});
+		probabilityColumn.setEditingSupport(new ProbabilityEditingSupport(tableViewer));
+		
+		TableViewerColumn utilityColumn = createTableViewerColumn(tableViewer, tableTitles[1], widths[1], 1);
+		utilityColumn.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				ActorActionOutcome outcome = (ActorActionOutcome) element;
+				return Double.toString(outcome.getUtility());
+			}
+		});
+		utilityColumn.setEditingSupport(new UtilityEditingSupport(tableViewer));
+		
+		return tableViewer;
+	}
 	
-	
+	private TableViewerColumn createTableViewerColumn(TableViewer viewer,
+			String title, int bound, final int colNumber) {
+		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE, colNumber);
+		final TableColumn column = viewerColumn.getColumn();
+		column.setText(title);
+		column.setWidth(bound);
+		return viewerColumn;
+	}
 
 	@Override
 	public ISimulationPlugin getSimulationPlugin() {
