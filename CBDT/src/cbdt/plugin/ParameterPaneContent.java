@@ -1,4 +1,4 @@
-package simulation.extension.simulationplugin.cbdt;
+package cbdt.plugin;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;

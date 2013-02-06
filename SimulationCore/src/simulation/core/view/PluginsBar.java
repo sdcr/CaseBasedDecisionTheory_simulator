@@ -24,7 +24,7 @@ public class PluginsBar extends Composite {
 	private TreeViewer viewer;
 
 	public PluginsBar(Composite parent, int style) {
-		super(parent, style);
+		super(parent, style | SWT.BORDER);
 		System.out.println("create the pluginsbar");
 
 		// init coloring

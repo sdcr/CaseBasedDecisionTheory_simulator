@@ -1,4 +1,4 @@
-package simulation.extension.simulationplugin.cbdt;
+package cbdt.plugin;
 
 import java.util.ArrayList;
 import java.util.List;
