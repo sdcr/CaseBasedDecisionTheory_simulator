@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import cbdt.CBDTplugin;
 import cbdt.model.ActorActionOutcome;
 
 public class ActorActionOutcomesTableViewer extends TableViewer {
@@ -27,10 +28,13 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 	private TableItem emptyTableItem;
 
 	private EmptyTableItemSelectionChangedListener emptyTableItemSelectionChangedListener;
+
+	private Composite parent;
 		
 		
 	public ActorActionOutcomesTableViewer(Composite parent, int style) {
 		super(parent, style | SWT.FULL_SELECTION | SWT.NO_SCROLL);
+		this.parent = parent;
 		
 		this.setContentProvider(new ArrayContentProvider());
 		
@@ -99,9 +103,11 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		Table table = this.getTable();
 		Point computedSize = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 		GridData tableGridData = new GridData();
-		tableGridData.heightHint = computedSize.y - TABLE_HEIGHT_HINT_REDUCTION;
+		tableGridData.heightHint = computedSize.y;
 		table.setLayoutData(tableGridData);
 		
+		//cbdtFrameComposite repack
+		parent.getParent().getParent().getParent().pack();
 	}
 	
 	private TableViewerColumn createTableViewerColumn(TableViewer viewer,
