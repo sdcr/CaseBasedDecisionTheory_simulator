@@ -16,20 +16,16 @@ public class AddActorActionMouseListener implements MouseListener {
 	
 	@Override
 	public void mouseDoubleClick(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseDown(MouseEvent e) {
-		parameterPaneContent.createActorActionItem(actorActionItemsComposite);
-		actorActionItemsComposite.getParent().getParent().pack();
 	}
 
 	@Override
 	public void mouseUp(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		parameterPaneContent.createActorActionItem(actorActionItemsComposite);
+		actorActionItemsComposite.getParent().getParent().pack();
 	}
 
 }

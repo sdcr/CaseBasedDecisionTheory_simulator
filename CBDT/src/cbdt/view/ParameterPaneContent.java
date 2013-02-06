@@ -10,6 +10,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
@@ -36,13 +37,13 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 		
 		CBDTSimulationParameters parameters = new CBDTSimulationParameters();
 
-		createTitleLabel(parameterComposite);		
+		createParameterTitleLabel(parameterComposite);		
 		createActorActionUI(parameterComposite);
 		
 		return cbdtFrameComposite;
 	}
 
-	private void createTitleLabel(Composite parameterComposite) {
+	private void createParameterTitleLabel(Composite parameterComposite) {
 		Label parameterLabel = new Label(parameterComposite, SWT.NONE);
 		parameterLabel.setText("Parameter-Eingabe");
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
@@ -67,7 +68,8 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 
 	private void createActorActionsLabel(Composite actorActionComposite) {
 		Label actorActionsLabel = new Label(actorActionComposite, SWT.NONE);
-		actorActionsLabel.setText("Actor actions:");		
+		actorActionsLabel.setText("Actor actions:");	
+		
 		GridData actorActionsLabelGridData = new GridData();
 		actorActionsLabelGridData.verticalAlignment = SWT.BEGINNING;
 		actorActionsLabel.setLayoutData(actorActionsLabelGridData);
@@ -78,6 +80,7 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 		Button addActorActionItemButton = new Button(actorActionComposite, SWT.NONE);
 		addActorActionItemButton.setText("Add additional actor action");
 		addActorActionItemButton.addMouseListener(new AddActorActionMouseListener(this, actorActionItemsComposite));
+		
 		GridData buttonGridData = new GridData();
 		buttonGridData.horizontalAlignment = SWT.END;
 		buttonGridData.horizontalSpan = 2;
@@ -85,8 +88,16 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 	}
 
 	void createActorActionItem(Composite actorActionItemsComposite) {
-		Label parameterLabel = new Label(actorActionItemsComposite, SWT.NONE);
-		parameterLabel.setText("ActorActionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+		Composite actorActionItemComposite = new Composite(actorActionItemsComposite, SWT.BORDER);
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginTop = 0;
+		gridLayout.verticalSpacing = 0;
+		actorActionItemComposite.setLayout(gridLayout);
+
+		Label actionNameLabel = new Label(actorActionItemComposite, SWT.NONE);
+		actionNameLabel.setText("Action name:");
+		Text actionNameText = new Text(actorActionItemComposite, SWT.SINGLE);
+		
 		actorActionItemsComposite.getParent().getParent().pack();
 	}
 	
