@@ -15,13 +15,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import cbdt.CBDTplugin;
 import cbdt.model.ActorActionOutcome;
 
 public class ActorActionOutcomesTableViewer extends TableViewer {
 
-	private static final int TABLE_HEIGHT_HINT_REDUCTION = 14;
-	
 	private String[] tableTitles = {"probability", "utility"};
 	private int[] widths = {100, 100};
 
