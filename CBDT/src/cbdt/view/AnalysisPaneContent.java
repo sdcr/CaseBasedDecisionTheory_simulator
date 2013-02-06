@@ -1,7 +1,6 @@
 package cbdt.view;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -20,12 +19,14 @@ public class AnalysisPaneContent implements ISimulationPluginPaneContent{
 
 	@Override
 	public Composite getComposite(Composite parent) {
-		Composite c = new Composite(parent, SWT.NONE);
-		c.setBackground(new Color(parent.getDisplay(),255,255,0));
-		c.setLayout(new RowLayout());
-		Label l = new Label(c, SWT.NONE);
+		Composite parameterComposite = new Composite(parent, SWT.NONE);
+		
+		RowLayout rowLayout = new RowLayout();
+		rowLayout.type=SWT.VERTICAL;
+		parameterComposite.setLayout(rowLayout);
+		Label l = new Label(parameterComposite, SWT.NONE);
 		l.setText("Analyse");
-		return c;
+		return parameterComposite;
 	}
 
 	@Override
