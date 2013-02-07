@@ -23,7 +23,7 @@ public class HoverLabelWrapper {
 				noHoverImage));
 	}
 	
-	public Label getHoverLabel() {
+	public Label getLabel() {
 		return hoverLabel;
 	}
 	

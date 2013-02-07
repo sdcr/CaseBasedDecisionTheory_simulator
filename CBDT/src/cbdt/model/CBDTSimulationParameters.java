@@ -3,8 +3,6 @@ package cbdt.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cbdt.model.engine.InvalidActorActionException;
-
 
 
 public class CBDTSimulationParameters {
@@ -86,9 +84,4 @@ public class CBDTSimulationParameters {
 		this.actorActions = actorActions;
 	}
 
-	public void addActorAction(ActorAction actorAction) {
-		if (!actorAction.hasValidProbabilityDistribution())
-			throw new InvalidActorActionException(actorAction);
-		this.actorActions.add(actorAction);
-	}
 }

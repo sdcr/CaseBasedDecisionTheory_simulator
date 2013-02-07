@@ -7,12 +7,16 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.view.parameters.actoraction.ActorActionParametersComposite;
+import cbdt.controller.Controller;
+import cbdt.model.CBDTSimulationParameters;
+import cbdt.view.parameters.actoraction.ActorActionsComposite;
 
-public class ParameterComposite extends Composite {
+public class ParameterComposite extends AbstractControllerAccessComposite {
 
-	public ParameterComposite(Composite parent, int style) {
-		super(parent, style);
+	private ActorActionsComposite actorActionsComposite;
+
+	public ParameterComposite(Composite parent, int style, Controller controller) {
+		super(parent, style, controller);
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type=SWT.VERTICAL;
@@ -20,7 +24,7 @@ public class ParameterComposite extends Composite {
 		this.setLayout(rowLayout);	
 		
 		createParametersTitleLabel(this);		
-		ActorActionParametersComposite actorActionsComposite = new ActorActionParametersComposite(this, SWT.NONE);
+		actorActionsComposite = new ActorActionsComposite(this, SWT.NONE, controller);
 	}
 
 	private void createParametersTitleLabel(Composite parameterComposite) {
@@ -28,6 +32,10 @@ public class ParameterComposite extends Composite {
 		parameterLabel.setText("Parameter-Eingabe");
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
 		parameterLabel.setFont(new Font(parameterComposite.getDisplay(), labelFontData));
+	}
+
+	public void initialize(CBDTSimulationParameters parameters) {
+		actorActionsComposite.initialize(parameters.getActorActions());
 	}
 	
 }

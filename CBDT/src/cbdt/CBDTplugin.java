@@ -1,13 +1,10 @@
 package cbdt;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import cbdt.view.AnalysisPaneContent;
-import cbdt.view.parameters.ParameterPaneContent;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import cbdt.controller.Controller;
 
 public class CBDTplugin implements ISimulationPlugin {
 
@@ -22,10 +19,8 @@ public class CBDTplugin implements ISimulationPlugin {
 
 	@Override
 	public List<ISimulationPluginPaneContent> getPaneContents() {
-		List<ISimulationPluginPaneContent> retVal = new ArrayList<ISimulationPluginPaneContent>();
-		retVal.add(new ParameterPaneContent());
-		retVal.add(new AnalysisPaneContent());
-		return retVal;
+		Controller controller = new Controller();
+		return controller.getPaneContents();
 	}
 
 }

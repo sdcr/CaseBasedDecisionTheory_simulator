@@ -30,11 +30,11 @@ public class CBDTEngineTest {
 		cbdtParameters.setWeightingFactorAlpha(0.5);
 		ActorAction actionA = new ActorAction("a");
 		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
-		cbdtParameters.addActorAction(actionA);
+		cbdtParameters.getActorActions().add(actionA);
 		ActorAction actionB = new ActorAction("b");
 		actionB.addActionOutcome(new ActorActionOutcome(0.5, 0));
 		actionB.addActionOutcome(new ActorActionOutcome(0.5, 4));
-		cbdtParameters.addActorAction(actionB);
+		cbdtParameters.getActorActions().add(actionB);
 		
 		cbdtEngine.setMaxSimulationSteps(20);
 		System.out.println("Start computation");
