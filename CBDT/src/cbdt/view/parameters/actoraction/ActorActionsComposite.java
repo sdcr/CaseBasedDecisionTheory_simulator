@@ -22,7 +22,6 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 		super(parent, style, controller);
 
 		this.setLayout(new GridLayout(2,false));
-		
 		createActorActionsLabel(this);
 
 		actorActionsWrapper = new Composite(this, SWT.NONE);		
