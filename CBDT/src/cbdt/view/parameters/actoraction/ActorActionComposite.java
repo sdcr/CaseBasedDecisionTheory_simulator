@@ -5,11 +5,9 @@ import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseTrackListener;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.internal.Platform;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -19,10 +17,9 @@ import cbdt.model.ActorActionOutcome;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
 public class ActorActionComposite extends Composite {
-
-
-	private static final String CLOSE_ICON_MEDIUM_12_LOCATION = "/resources/close-icon-medium-12.png";
-	private static final String CLOSE_ICON_SMALL_12_LOCATION = "/resources/close-icon-small-12.png";
+	
+	private static final String CLOSE_ICON_LARGE_18_LOCATION = "/resources/close-icon-large-18.png";
+	private static final String CLOSE_ICON_MEDIUM_18_LOCATION = "/resources/close-icon-medium-18.png";
 
 	public ActorActionComposite(final Composite parent, int style) {
 		super(parent, style | SWT.BORDER);
@@ -35,7 +32,9 @@ public class ActorActionComposite extends Composite {
 		actionNameLabel.setText("Action name:");
 		Text actionNameText = new Text(this, SWT.SINGLE);
 
-		CloseActorActionCompositeLabelWrapper closeLabel = new CloseActorActionCompositeLabelWrapper(this, SWT.NONE);
+		HoverLabelWrapper closeLabel = new HoverLabelWrapper(this, SWT.NONE,
+				CLOSE_ICON_LARGE_18_LOCATION, CLOSE_ICON_MEDIUM_18_LOCATION);
+		closeLabel.getHoverLabel().addMouseListener(new CloseActorActionMouseListener(this));
 		
 		Label actionOutcomesLabel = new Label(this, SWT.NONE);
 		actionOutcomesLabel.setText("Action outcomes:");
@@ -51,9 +50,28 @@ public class ActorActionComposite extends Composite {
 		this.getParent().getParent().pack();
 	}
 
-	public Image getImageFromLocation(String location) {
-		ImageData imageData = new ImageData(getClass().getResourceAsStream(location));
-		return new Image(getDisplay(),imageData);
-	}
+	private class CloseActorActionMouseListener implements MouseListener {
 
+		private Composite toDispose;
+
+		public CloseActorActionMouseListener(Composite toDispose) {
+			this.toDispose = toDispose;
+		}
+		
+		@Override
+		public void mouseDoubleClick(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseDown(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseUp(MouseEvent e) {
+			Composite actorActionCompositesFrame = toDispose.getParent();
+			toDispose.dispose();
+			actorActionCompositesFrame.getParent().getParent().pack();
+		}
+	}
+	
 }
