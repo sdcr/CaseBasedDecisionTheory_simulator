@@ -7,7 +7,6 @@ import org.eclipse.swt.widgets.Composite;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
 import cbdt.controller.Controller;
-import cbdt.model.CBDTSimulationParameters;
 import cbdt.view.CBDTcomposite;
 
 public class ParameterPaneContent implements ISimulationPluginPaneContent{
@@ -27,7 +26,7 @@ public class ParameterPaneContent implements ISimulationPluginPaneContent{
 
 	@Override
 	public Composite getComposite(Composite parent) {
-		Composite cbdtFrameComposite = new CBDTcomposite(parent, SWT.NONE);		
+		Composite cbdtFrameComposite = new CBDTcomposite(parent, SWT.NONE| SWT.BORDER);		
 		parameterComposite = new ParameterComposite(cbdtFrameComposite, SWT.NONE, controller);
 		
 		parameterComposite.initialize(controller.getParametersModel());

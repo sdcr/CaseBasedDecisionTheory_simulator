@@ -6,8 +6,9 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.TableItem;
 
 import cbdt.model.ActorActionOutcome;
+import cbdt.view.parameters.actoraction.ActorActionComposite;
 
-public class EmptyTableItemSelectionChangedListener implements
+public class AddOutcomeSelectionChangedListener implements
 		ISelectionChangedListener {
 
 	private TableItem emptyTableItem;
@@ -15,7 +16,7 @@ public class EmptyTableItemSelectionChangedListener implements
 
 
 	
-	public EmptyTableItemSelectionChangedListener(TableItem emptyTableItem,
+	public AddOutcomeSelectionChangedListener(TableItem emptyTableItem,
 			ActorActionOutcomesTableViewer tableViewer) {
 		super();
 		this.emptyTableItem = emptyTableItem;
@@ -26,7 +27,11 @@ public class EmptyTableItemSelectionChangedListener implements
 	public void selectionChanged(SelectionChangedEvent event) {
 		StructuredSelection selection = (StructuredSelection) event.getSelection();
 		if(selection.isEmpty()){
-			tableViewer.add(new ActorActionOutcome(0, 0));
+			ActorActionComposite actorActionComposite = tableViewer.getParent();
+			ActorActionOutcome defaultOutcome = actorActionComposite
+					.getController().addDefaultActorActionOutcomeToModel(
+							actorActionComposite.getRepresentedActorAction());
+			tableViewer.add(defaultOutcome);
 		}
 
 	}

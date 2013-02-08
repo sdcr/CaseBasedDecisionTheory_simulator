@@ -1,25 +1,18 @@
 package cbdt.view.parameters.actoraction.outcomes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import cbdt.model.ActorActionOutcome;
-import cbdt.view.parameters.actoraction.HoverLabelWrapper;
+import cbdt.view.parameters.actoraction.ActorActionComposite;
 
 public class ActorActionOutcomesTableViewer extends TableViewer {
 
@@ -28,12 +21,11 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 
 	private TableItem emptyTableItem;
 
-	private EmptyTableItemSelectionChangedListener emptyTableItemSelectionChangedListener;
+	private AddOutcomeSelectionChangedListener emptyTableItemSelectionChangedListener;
 
-	private Composite parent;
+	private ActorActionComposite parent;
 		
-		
-	public ActorActionOutcomesTableViewer(Composite parent, int style) {
+	public ActorActionOutcomesTableViewer(ActorActionComposite parent, int style) {
 		super(parent, style | SWT.FULL_SELECTION | SWT.NO_SCROLL);
 		this.parent = parent;
 		
@@ -58,16 +50,16 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 			}
 		});
 		utilityColumn.setEditingSupport(new UtilityEditingSupport(this));
-		TableViewerColumn removeIconColumn = createTableViewerColumn(this, tableTitles[2], widths[2], 2);
 		
+		TableViewerColumn removeIconColumn = createTableViewerColumn(this, tableTitles[2], widths[2], 2);
 		removeIconColumn.setLabelProvider(new RemoveColumnLabelProvider(this));
 		
-		Table table = this.getTable();
+		final Table table = this.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-				
+		
 		emptyTableItem = new TableItem(table, SWT.NONE);
-		emptyTableItemSelectionChangedListener = new EmptyTableItemSelectionChangedListener(
+		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionChangedListener(
 						emptyTableItem, this);
 		this.addSelectionChangedListener(emptyTableItemSelectionChangedListener);
 		
@@ -85,10 +77,6 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 	@Override
 	public void remove(Object element) {
 		removeEmptyTableItem();
-		List o = (List)this.getInput();
-		int l = o.size();
-		System.out.println("items: "+l);
-		
 		super.remove(element);
 		reAddEmptyTableItem();
 		this.resizeTable();
@@ -108,7 +96,9 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 
 	private void removeEmptyTableItem() {
 		Table table = this.getTable();
-		table.remove(table.indexOf(emptyTableItem));
+		int emptyTableIndex = table.indexOf(emptyTableItem);
+		if(emptyTableIndex >= 0)
+			table.remove(table.indexOf(emptyTableItem));
 	}
 	
 	private void resizeTable() {
@@ -119,7 +109,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		table.setLayoutData(tableGridData);
 		
 		//cbdtFrameComposite repack
-		parent.getParent().getParent().getParent().pack();
+		parent.getParent().getParent().getParent().getParent().getParent().pack();
 	}
 	
 	private TableViewerColumn createTableViewerColumn(TableViewer viewer,
@@ -129,5 +119,9 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		column.setText(title);
 		column.setWidth(bound);
 		return viewerColumn;
+	}
+	
+	public ActorActionComposite getParent() {
+		return parent;
 	}
 }

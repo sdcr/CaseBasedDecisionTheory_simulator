@@ -1,13 +1,9 @@
 package cbdt.view.parameters.actoraction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -15,7 +11,6 @@ import org.eclipse.swt.widgets.Text;
 
 import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
@@ -38,12 +33,10 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		createActorActionNameWidgets();
 		createActorActionDisposeWidget();
 		createActorActionOutcomesWidgets();
-
-		// just for fun
-		List<ActorActionOutcome> list = new ArrayList<ActorActionOutcome>();
-		list.add(new ActorActionOutcome(0, 1));
-		list.add(new ActorActionOutcome(0, 1));		
-		actorActionOutcomesTableViewer.setActorActionOutcomesInput(list);
+	
+		actorActionOutcomesTableViewer
+				.setActorActionOutcomesInput(representedActorAction
+						.getActionOutcomes());
 		
 		this.getParent().getParent().pack();
 	}
@@ -51,6 +44,9 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 	private void createActorActionOutcomesWidgets() {
 		Label actionOutcomesLabel = new Label(this, SWT.NONE);
 		actionOutcomesLabel.setText("Action outcomes:");
+		GridData outcomesLabelGridData = new GridData();
+		outcomesLabelGridData.verticalAlignment = SWT.BEGINNING;
+		actionOutcomesLabel.setLayoutData(outcomesLabelGridData);
 		
 		actorActionOutcomesTableViewer = new ActorActionOutcomesTableViewer(this, SWT.NONE);
 	}
@@ -77,12 +73,6 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 						newActorActionName);
 			}
 		});
-	}
-
-	public void updateFromActorAction(ActorAction actorAction){
-		actionNameText.setText(actorAction.getActionName());
-		actorActionOutcomesTableViewer.setActorActionOutcomesInput(actorAction
-				.getActionOutcomes());
 	}
 
 	public ActorAction getRepresentedActorAction() {

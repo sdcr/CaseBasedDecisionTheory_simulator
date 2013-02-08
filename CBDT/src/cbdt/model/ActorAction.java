@@ -1,7 +1,7 @@
 package cbdt.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ActorAction models one action alternative, the actor has under the CBDT
@@ -17,7 +17,7 @@ public class ActorAction {
 	 * The set of ActorActionOutcomes which can occur when this ActorAction is
 	 * chosen by the actor.
 	 */
-	private Set<ActorActionOutcome> actionOutcomes;
+	private List<ActorActionOutcome> actionOutcomes;
 
 	/**
 	 * Constructor which initializes the set of ActorActionOutcomes which can
@@ -27,7 +27,7 @@ public class ActorAction {
 	 */
 	public ActorAction(String actionName) {
 		this.actionName = actionName;
-		this.actionOutcomes = new HashSet<ActorActionOutcome>();
+		this.actionOutcomes = new ArrayList<ActorActionOutcome>();
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ActorAction {
 	 * @return The set of ActorActionOutcomes which can occur if this action is
 	 *         chosen by the actor.
 	 */
-	public Set<ActorActionOutcome> getActionOutcomes() {
+	public List<ActorActionOutcome> getActionOutcomes() {
 		return actionOutcomes;
 	}
 
@@ -54,7 +54,7 @@ public class ActorAction {
 	 *            The set of ActorActionOutcomes which can occur if this action
 	 *            is chosen by the actor.
 	 */
-	public void setActionOutcomes(Set<ActorActionOutcome> actionOutcomes) {
+	public void setActionOutcomes(List<ActorActionOutcome> actionOutcomes) {
 		this.actionOutcomes = actionOutcomes;
 	}
 
@@ -83,5 +83,11 @@ public class ActorAction {
 		}
 
 		return totalProbability == 1;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return "[actionName: "+actionName+", outcomes: "+actionOutcomes+"]";
 	}
 }

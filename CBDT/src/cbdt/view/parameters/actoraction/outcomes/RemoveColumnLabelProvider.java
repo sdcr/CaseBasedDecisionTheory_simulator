@@ -30,6 +30,7 @@ public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 	
 	@Override
 	public void update(ViewerCell cell) {
+		actorActionOutcomesTableViewer.getParent().getController().printModel();
 		TableItem item = (TableItem) cell.getItem();
 		
 		HoverLabelWrapper removeRowLabel = new HoverLabelWrapper(
@@ -37,14 +38,18 @@ public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 				CLOSE_ICON_MEDIUM_12_LOCATION,
 				CLOSE_ICON_SMALL_12_LOCATION);
 		ActorActionOutcome toRemove = (ActorActionOutcome) cell.getElement();
-		removeRowLabel.getLabel().addMouseListener(
-				new RemoveOutcomeMouseListener(actorActionOutcomesTableViewer, toRemove));
 		
 		TableEditor editor = new TableEditor(item.getParent());
-        editor.grabHorizontal  = true;
-        editor.grabVertical = true;
-        editor.setEditor(removeRowLabel.getLabel() , item, cell.getColumnIndex());
-        editor.layout();
+		editor.grabHorizontal  = true;
+		editor.grabVertical = true;
+		removeRowLabel.getLabel().addMouseListener(
+				new RemoveOutcomeMouseListener(actorActionOutcomesTableViewer, toRemove, editor));
+		
+//		if(actorActionOutcomesTableViewer.getTableEditor().getEditor() != null)
+//			actorActionOutcomesTableViewer.getTableEditor().getEditor().dispose();
+		editor.setEditor(removeRowLabel.getLabel(), item, cell.getColumnIndex());
+//		actorActionOutcomesTableViewer.getTableEditor().layout();
+		System.out.println("update cell");
 	}
 
 }

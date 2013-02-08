@@ -16,7 +16,7 @@ public class ParameterComposite extends AbstractControllerAccessComposite {
 	private ActorActionsComposite actorActionsComposite;
 
 	public ParameterComposite(Composite parent, int style, Controller controller) {
-		super(parent, style, controller);
+		super(parent, style| SWT.BORDER, controller);
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type=SWT.VERTICAL;

@@ -19,7 +19,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 	private Composite actorActionsWrapper;
 
 	public ActorActionsComposite(Composite parent, int style, Controller controller) {
-		super(parent, style, controller);
+		super(parent, style | SWT.BORDER, controller);
 
 		this.setLayout(new GridLayout(2,false));
 		createActorActionsLabel(this);

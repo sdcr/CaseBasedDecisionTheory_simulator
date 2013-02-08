@@ -25,6 +25,6 @@ class RemoveActorActionMouseListener implements MouseListener {
 			toDispose.getController().removeActorActionFromModel(toDispose.getRepresentedActorAction());
 			Composite actorActionCompositesFrame = toDispose.getParent();
 			toDispose.dispose();
-			actorActionCompositesFrame.getParent().getParent().pack();
+			actorActionCompositesFrame.getParent().getParent().getParent().getParent().pack();
 		}
 	}
