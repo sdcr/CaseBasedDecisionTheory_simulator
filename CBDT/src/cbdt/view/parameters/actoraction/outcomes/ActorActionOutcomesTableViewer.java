@@ -58,12 +58,18 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
-		emptyTableItem = new TableItem(table, SWT.NONE);
+		emptyTableItem = createEmptyTableItem(table);
 		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionChangedListener(
 						emptyTableItem, this);
 		this.addSelectionChangedListener(emptyTableItemSelectionChangedListener);
 		
 		this.resizeTable();
+	}
+
+	private TableItem createEmptyTableItem(final Table table) {
+		TableItem tableItem = new TableItem(table, SWT.NONE);
+		tableItem.setText(0, "add outcome...");
+		return tableItem;
 	}
 
 	@Override
@@ -90,7 +96,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 	}
 
 	private void reAddEmptyTableItem() {
-		emptyTableItem = new TableItem(this.getTable(), SWT.NONE);
+		emptyTableItem = createEmptyTableItem(this.getTable());
 		emptyTableItemSelectionChangedListener.setEmptyTableItem(emptyTableItem);
 	}
 

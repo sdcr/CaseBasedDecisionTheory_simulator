@@ -59,8 +59,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 	}
 
 	public void addActorActionComposite(ActorAction representedActorAction){
-		ActorActionComposite actorActionComposite = new ActorActionComposite(
-				actorActionsWrapper, SWT.NONE, representedActorAction,
-				getController());
+		new ActorActionComposite(actorActionsWrapper, SWT.NONE,
+				representedActorAction, getController());
 	}
 }
