@@ -5,8 +5,14 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -34,7 +40,24 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		this.parent = parent;
 		
 		this.setContentProvider(new ArrayContentProvider());
+		createColumns();
 		
+		final Table table = this.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		emptyTableItem = createEmptyTableItem(table);
+		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionChangedListener(
+						emptyTableItem, this);
+		this.getTable().addSelectionListener(emptyTableItemSelectionChangedListener);
+		
+		this.resizeTable();
+	}
+	
+	/**
+	 * Creates the probability, utility and "remove" columns of this table viewer.
+	 */
+	private void createColumns() {
 		TableViewerColumn probabilityColumn = createTableViewerColumn(this, tableTitles[0], widths[0], 0);
 		probabilityColumn.setLabelProvider(new ColumnLabelProvider(){
 			@Override
@@ -57,17 +80,6 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		
 		TableViewerColumn removeIconColumn = createTableViewerColumn(this, tableTitles[2], widths[2], 2);
 		removeIconColumn.setLabelProvider(new RemoveColumnLabelProvider(this));
-		
-		final Table table = this.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		
-		emptyTableItem = createEmptyTableItem(table);
-		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionChangedListener(
-						emptyTableItem, this);
-		this.addSelectionChangedListener(emptyTableItemSelectionChangedListener);
-		
-		this.resizeTable();
 	}
 
 	private TableItem createEmptyTableItem(final Table table) {
@@ -76,7 +88,6 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		return tableItem;
 	}
 
-	@Override
 	public void add(Object element) {
 		removeEmptyTableItem();
 		super.add(element);
@@ -84,7 +95,6 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		this.resizeTable();
 	}
 	
-	@Override
 	public void remove(Object element) {
 		removeEmptyTableItem();
 		super.remove(element);
