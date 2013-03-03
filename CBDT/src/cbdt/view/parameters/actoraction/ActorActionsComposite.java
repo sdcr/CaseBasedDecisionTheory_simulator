@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
-import cbdt.view.parameters.AbstractControllerAccessComposite;
+import cbdt.view.AbstractControllerAccessComposite;
 
 public class ActorActionsComposite extends AbstractControllerAccessComposite {
 

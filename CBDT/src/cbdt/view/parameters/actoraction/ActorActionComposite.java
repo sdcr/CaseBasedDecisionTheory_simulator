@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Text;
 
 import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
-import cbdt.view.parameters.AbstractControllerAccessComposite;
+import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
 public class ActorActionComposite extends AbstractControllerAccessComposite {

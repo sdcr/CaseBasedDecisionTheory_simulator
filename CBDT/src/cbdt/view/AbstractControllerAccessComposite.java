@@ -1,4 +1,4 @@
-package cbdt.view.parameters;
+package cbdt.view;
 
 import org.eclipse.swt.widgets.Composite;
 

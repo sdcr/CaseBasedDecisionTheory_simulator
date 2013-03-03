@@ -7,7 +7,7 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPa
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.model.Parameters;
-import cbdt.view.AnalysisPaneContent;
+import cbdt.view.analysis.AnalysisPaneContent;
 import cbdt.view.parameters.ParameterPaneContent;
 
 public class Controller {

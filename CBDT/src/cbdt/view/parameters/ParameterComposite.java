@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.controller.Controller;
 import cbdt.model.Parameters;
+import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 
 public class ParameterComposite extends AbstractControllerAccessComposite {
