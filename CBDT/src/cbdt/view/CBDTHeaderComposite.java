@@ -7,11 +7,11 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-public class HeaderComposite extends Composite{
+public class CBDTHeaderComposite extends Composite{
 
 	private final FontData CBDT_TITLE_FONT_DATA = new FontData("Arial", 14, SWT.NORMAL);
 	
-	public HeaderComposite(Composite parent, int style) {
+	public CBDTHeaderComposite(Composite parent, int style) {
 		super(parent, style);
 		
 		RowLayout rowLayout = new RowLayout();

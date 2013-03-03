@@ -14,6 +14,11 @@ import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
 import cbdt.view.AbstractControllerAccessComposite;
 
+/**
+ * This composite contains all view elements that deal with the display of actor actions.
+ * In particular, it allows the creation and removal of actor actions.
+ * @author S-lenovo
+ */
 public class ActorActionsComposite extends AbstractControllerAccessComposite {
 
 	private Composite actorActionsWrapper;
@@ -22,7 +27,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 		super(parent, style | SWT.BORDER, controller);
 
 		this.setLayout(new GridLayout(2,false));
-		createActorActionsLabel(this);
+		createLabel();
 
 		actorActionsWrapper = new Composite(this, SWT.NONE);		
 		RowLayout rowLayout = new RowLayout();
@@ -32,8 +37,11 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 		createAddActorActionButton();
 	}
 
-	private void createActorActionsLabel(Composite actorActionComposite) {
-		Label actorActionsLabel = new Label(actorActionComposite, SWT.NONE);
+	/**
+	 * Set the label of this composite.
+	 */
+	private void createLabel() {
+		Label actorActionsLabel = new Label(this, SWT.NONE);
 		actorActionsLabel.setText("Actor actions:");	
 		
 		GridData actorActionsLabelGridData = new GridData();
@@ -41,6 +49,9 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 		actorActionsLabel.setLayoutData(actorActionsLabelGridData);
 	}
 	
+	/**
+	 * Set a button that allows the adding of another actor action.
+	 */
 	private void createAddActorActionButton() {
 		Button addActorActionItemButton = new Button(this, SWT.NONE);
 		addActorActionItemButton.setText("Add additional actor action");
@@ -52,12 +63,20 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 		addActorActionItemButton.setLayoutData(buttonGridData);
 	}
 
+	/**
+	 * Initializes the actor action view elements with an existing list of ActorAction objects.
+	 * @param actorActions The ActorAction parameters from which to initialize.
+	 */
 	public void initialize(List<ActorAction> actorActions) {
 		for(ActorAction representedActorAction : actorActions){
 			addActorActionComposite(representedActorAction);
 		}
 	}
 
+	/**
+	 * Adds another actor action view element for an ActorAction model object.
+	 * @param representedActorAction
+	 */
 	public void addActorActionComposite(ActorAction representedActorAction){
 		new ActorActionComposite(actorActionsWrapper, SWT.NONE,
 				representedActorAction, getController());

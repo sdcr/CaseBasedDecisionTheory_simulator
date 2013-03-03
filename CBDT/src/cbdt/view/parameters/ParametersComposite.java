@@ -12,11 +12,15 @@ import cbdt.model.Parameters;
 import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 
-public class ParameterComposite extends AbstractControllerAccessComposite {
+/**
+ * This composite contains all view elements that deal with the user's parameter input.
+ * @author S-lenovo
+ */
+public class ParametersComposite extends AbstractControllerAccessComposite {
 
 	private ActorActionsComposite actorActionsComposite;
 
-	public ParameterComposite(Composite parent, int style, Controller controller) {
+	public ParametersComposite(Composite parent, int style, Controller controller) {
 		super(parent, style| SWT.BORDER, controller);
 
 		RowLayout rowLayout = new RowLayout();
@@ -24,17 +28,24 @@ public class ParameterComposite extends AbstractControllerAccessComposite {
 		rowLayout.marginTop = 20;
 		this.setLayout(rowLayout);	
 		
-		createParametersTitleLabel(this);		
+		createParametersTitleLabel();		
 		actorActionsComposite = new ActorActionsComposite(this, SWT.NONE, controller);
 	}
 
-	private void createParametersTitleLabel(Composite parameterComposite) {
-		Label parameterLabel = new Label(parameterComposite, SWT.NONE);
+	/**
+	 * Creates the title label for this composite.
+	 */
+	private void createParametersTitleLabel() {
+		Label parameterLabel = new Label(this, SWT.NONE);
 		parameterLabel.setText("Parameter-Eingabe");
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
-		parameterLabel.setFont(new Font(parameterComposite.getDisplay(), labelFontData));
+		parameterLabel.setFont(new Font(this.getDisplay(), labelFontData));
 	}
 
+	/**
+	 * Initializes the parameter view elements with an existing parameters model. 
+	 * @param parameters The parameters model from which to initialize this view.
+	 */
 	public void initialize(Parameters parameters) {
 		actorActionsComposite.initialize(parameters.getActorActions());
 	}

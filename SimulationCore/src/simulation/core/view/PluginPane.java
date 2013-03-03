@@ -12,11 +12,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
 
 public class PluginPane extends Composite {
 
-	Map<ISimulationPluginPaneContent, Composite> previouslyInForeground;
+	Map<ISimulationPluginPageContentWrapper, Composite> previouslyInForeground;
 	Composite currentlyInForeground;
 	Composite backgroundParent;
 
@@ -24,7 +24,7 @@ public class PluginPane extends Composite {
 		super(parent, style);
 
 		// initialize
-		previouslyInForeground = new HashMap<ISimulationPluginPaneContent, Composite>();
+		previouslyInForeground = new HashMap<ISimulationPluginPageContentWrapper, Composite>();
 		backgroundParent = new Composite(new Shell(), SWT.NONE);
 
 		Color mainPaneColor = new Color(parent.getDisplay(), 200, 200, 200);
@@ -43,7 +43,7 @@ public class PluginPane extends Composite {
 
 	}
 
-	public void setToForeGround(ISimulationPluginPaneContent toForeground) {
+	public void setToForeGround(ISimulationPluginPageContentWrapper toForeground) {
 		System.out.println("set to foreground");
 		if (previouslyInForeground.keySet().contains(toForeground)) {
 			beforeForegroundChangeHelper();
@@ -51,7 +51,7 @@ public class PluginPane extends Composite {
 			afterForegroundChangeHelper();
 		} else {			
 			beforeForegroundChangeHelper();
-			currentlyInForeground = toForeground.getComposite(this);
+			currentlyInForeground = toForeground.getPageContent(this);
 			afterForegroundChangeHelper();
 			if (currentlyInForeground != null) {
 				previouslyInForeground.put(toForeground, currentlyInForeground);

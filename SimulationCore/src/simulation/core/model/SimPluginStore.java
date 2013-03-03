@@ -5,14 +5,14 @@ import java.util.List;
 
 import simulation.core.view.MainView;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
 
 public class SimPluginStore {
 
 	List<ISimulationPlugin> activeSimPlugins;
 	private MainView mainView;
 	
-	private ISimulationPluginPaneContent foregroundPaneContent;
+	private ISimulationPluginPageContentWrapper foregroundPaneContent;
 	
 	public SimPluginStore() {
 		activeSimPlugins = new ArrayList<ISimulationPlugin>();
@@ -32,11 +32,11 @@ public class SimPluginStore {
 		return activeSimPlugins;
 	}
 
-	public ISimulationPluginPaneContent getForegroundPaneContent() {
+	public ISimulationPluginPageContentWrapper getForegroundPaneContent() {
 		return foregroundPaneContent;
 	}
 
-	public void setForegroundPaneContent(ISimulationPluginPaneContent foregroundPaneContent) {
+	public void setForegroundPaneContent(ISimulationPluginPageContentWrapper foregroundPaneContent) {
 		this.foregroundPaneContent = foregroundPaneContent;
 	}
 

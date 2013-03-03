@@ -31,7 +31,7 @@ public class PluginsBarTreeContentProvider implements ITreeContentProvider {
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ISimulationPlugin){
-			return ((ISimulationPlugin) parentElement).getPaneContents().toArray();
+			return ((ISimulationPlugin) parentElement).getPageContents().toArray();
 		}
 		return null;
 	}
@@ -44,8 +44,8 @@ public class PluginsBarTreeContentProvider implements ITreeContentProvider {
 	@Override
 	public boolean hasChildren(Object element) {
 		if (element instanceof ISimulationPlugin 
-				&& ((ISimulationPlugin) element).getPaneContents() != null
-				&& !((ISimulationPlugin) element).getPaneContents().isEmpty())
+				&& ((ISimulationPlugin) element).getPageContents() != null
+				&& !((ISimulationPlugin) element).getPageContents().isEmpty())
 			return true;
 		return false;
 	}

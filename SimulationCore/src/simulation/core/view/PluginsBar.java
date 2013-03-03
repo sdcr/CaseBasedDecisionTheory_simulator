@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
 
 public class PluginsBar extends Composite {
 
@@ -65,8 +65,8 @@ public class PluginsBar extends Composite {
 				if (event.getSelection() instanceof IStructuredSelection) {
 					IStructuredSelection selection = (IStructuredSelection) event
 							.getSelection();
-					if (selection.getFirstElement() instanceof ISimulationPluginPaneContent) {
-						ISimulationPluginPaneContent newForegroundPaneContent = ((ISimulationPluginPaneContent) selection
+					if (selection.getFirstElement() instanceof ISimulationPluginPageContentWrapper) {
+						ISimulationPluginPageContentWrapper newForegroundPaneContent = ((ISimulationPluginPageContentWrapper) selection
 								.getFirstElement());
 						pluginPane.setToForeGround(newForegroundPaneContent);
 					}

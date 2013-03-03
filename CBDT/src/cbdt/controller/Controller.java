@@ -3,22 +3,22 @@ package cbdt.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.model.Parameters;
 import cbdt.view.analysis.AnalysisPaneContent;
-import cbdt.view.parameters.ParameterPaneContent;
+import cbdt.view.parameters.ParameterPageContentWrapper;
 
 public class Controller {
 
-	private ParameterPaneContent parameterPaneContent;
+	private ParameterPageContentWrapper parameterPaneContent;
 	private AnalysisPaneContent analysisPaneContent;
 	private Parameters parametersModel;
 
 	public Controller(){
 		//create the view pane
-		parameterPaneContent = new ParameterPaneContent(this);
+		parameterPaneContent = new ParameterPageContentWrapper(this);
 		analysisPaneContent = new AnalysisPaneContent();
 		
 		//create the model
@@ -26,8 +26,8 @@ public class Controller {
 		addDefaultActorActionToModel();
 	}
 	
-	public List<ISimulationPluginPaneContent> getPaneContents() {
-		List<ISimulationPluginPaneContent> retVal = new ArrayList<ISimulationPluginPaneContent>();
+	public List<ISimulationPluginPageContentWrapper> getPaneContents() {
+		List<ISimulationPluginPageContentWrapper> retVal = new ArrayList<ISimulationPluginPageContentWrapper>();
 		retVal.add(parameterPaneContent);
 		retVal.add(analysisPaneContent);
 		return retVal;

@@ -14,10 +14,16 @@ import cbdt.model.ActorAction;
 import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
+/**
+ * This composite contains all view elements that represent one ActorAction.
+ * In specific, it contains a table with which the user can modify a set of ActorActionOutcomes.
+ * @author S-lenovo
+ */
 public class ActorActionComposite extends AbstractControllerAccessComposite {
 	
 	private static final String CLOSE_ICON_LARGE_18_LOCATION = "/resources/close-icon-large-18.png";
 	private static final String CLOSE_ICON_MEDIUM_18_LOCATION = "/resources/close-icon-medium-18.png";
+
 	private Text actionNameText;
 	private ActorActionOutcomesTableViewer actorActionOutcomesTableViewer;
 	private ActorAction representedActorAction;
@@ -31,7 +37,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		setLayout(gridLayout);
 
 		createActorActionNameWidgets();
-		createActorActionDisposeWidget();
+		createActorActionRemoveWidget();
 		createActorActionOutcomesWidgets();
 	
 		actorActionOutcomesTableViewer
@@ -41,6 +47,10 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		this.getParent().getParent().pack();
 	}
 
+	/**
+	 * Creates the widgets that allow the user to set the list of ActorActionOutcomes which 
+	 * belong to the represented ActorAction.
+	 */
 	private void createActorActionOutcomesWidgets() {
 		Label actionOutcomesLabel = new Label(this, SWT.NONE);
 		actionOutcomesLabel.setText("Action outcomes:");
@@ -51,12 +61,18 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		actorActionOutcomesTableViewer = new ActorActionOutcomesTableViewer(this, SWT.NONE);
 	}
 
-	private void createActorActionDisposeWidget() {
+	/**
+	 * Creates the widgets that allow the removal of the represented ActorAction.
+	 */
+	private void createActorActionRemoveWidget() {
 		HoverLabelWrapper closeLabel = new HoverLabelWrapper(this, SWT.NONE,
 				CLOSE_ICON_LARGE_18_LOCATION, CLOSE_ICON_MEDIUM_18_LOCATION);
 		closeLabel.getLabel().addMouseListener(new RemoveActorActionMouseListener(this));
 	}
 
+	/**
+	 * Creates the widgets that allow the setting of the name of the represented ActorAction.
+	 */
 	private void createActorActionNameWidgets() {
 		Label actionNameLabel = new Label(this, SWT.NONE);
 		actionNameLabel.setText("Action name:");
@@ -75,6 +91,9 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		});
 	}
 
+	/**
+	 * @return The ActorAction which is represented by this ActorActionComposite.
+	 */
 	public ActorAction getRepresentedActorAction() {
 		return representedActorAction;
 	}

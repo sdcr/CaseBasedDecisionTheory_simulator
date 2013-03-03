@@ -14,6 +14,10 @@ import org.eclipse.swt.widgets.TableItem;
 import cbdt.model.ActorActionOutcome;
 import cbdt.view.parameters.actoraction.ActorActionComposite;
 
+/**
+ * The table viewer that allows the display and modification of ActorActionOutcomes.
+ * @author S-lenovo
+ */
 public class ActorActionOutcomesTableViewer extends TableViewer {
 
 	private String[] tableTitles = {"probability", "utility", ""};

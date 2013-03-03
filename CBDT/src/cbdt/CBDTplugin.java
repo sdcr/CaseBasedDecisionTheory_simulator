@@ -3,7 +3,7 @@ package cbdt;
 import java.util.List;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
 import cbdt.controller.Controller;
 
 public class CBDTplugin implements ISimulationPlugin {
@@ -18,7 +18,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
-	public List<ISimulationPluginPaneContent> getPaneContents() {
+	public List<ISimulationPluginPageContentWrapper> getPageContents() {
 		Controller controller = new Controller();
 		return controller.getPaneContents();
 	}
