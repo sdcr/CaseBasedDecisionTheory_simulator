@@ -7,25 +7,25 @@ import org.junit.Test;
 
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
-import cbdt.model.CBDTSimulationParameters;
-import cbdt.model.CBDTSimulationResult;
-import cbdt.model.CBDTSimulationResultAnalyser;
-import cbdt.model.engine.ConcreteCBDTSimulationEngine;
+import cbdt.model.Parameters;
+import cbdt.model.Result;
+import cbdt.model.ResultAnalyser;
+import cbdt.model.engine.TreeStyleSimulationEngine;
 
 public class CBDTEngineTest {
 
-	ConcreteCBDTSimulationEngine cbdtEngine;
-	CBDTSimulationParameters cbdtParameters;
-	CBDTSimulationResultAnalyser cbdtAnalyser;
+	TreeStyleSimulationEngine cbdtEngine;
+	Parameters cbdtParameters;
+	ResultAnalyser cbdtAnalyser;
 	
 	@Before
 	public void engineSetUp(){
-		cbdtEngine = new ConcreteCBDTSimulationEngine();
+		cbdtEngine = new TreeStyleSimulationEngine();
 	}
 	
 	@Test
 	public void testCBDTsimulation(){
-		cbdtParameters = new CBDTSimulationParameters();
+		cbdtParameters = new Parameters();
 		cbdtParameters.setInitialAspirationLevel(100);
 		cbdtParameters.setWeightingFactorAlpha(0.5);
 		ActorAction actionA = new ActorAction("a");
@@ -38,11 +38,11 @@ public class CBDTEngineTest {
 		
 		cbdtEngine.setMaxSimulationSteps(20);
 		System.out.println("Start computation");
-		CBDTSimulationResult result = cbdtEngine.computeSimulation(cbdtParameters);
+		Result result = cbdtEngine.computeSimulation(cbdtParameters);
 		
 		System.out.println("Start analysation");
 		
-		cbdtAnalyser = new CBDTSimulationResultAnalyser();
+		cbdtAnalyser = new ResultAnalyser();
 		List<Double> cbuList = cbdtAnalyser.calculateCbu(result);
 		
 //		System.out.println(result);

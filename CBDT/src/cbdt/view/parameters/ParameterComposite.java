@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import cbdt.controller.Controller;
-import cbdt.model.CBDTSimulationParameters;
+import cbdt.model.Parameters;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 
 public class ParameterComposite extends AbstractControllerAccessComposite {
@@ -34,7 +34,7 @@ public class ParameterComposite extends AbstractControllerAccessComposite {
 		parameterLabel.setFont(new Font(parameterComposite.getDisplay(), labelFontData));
 	}
 
-	public void initialize(CBDTSimulationParameters parameters) {
+	public void initialize(Parameters parameters) {
 		actorActionsComposite.initialize(parameters.getActorActions());
 	}
 	

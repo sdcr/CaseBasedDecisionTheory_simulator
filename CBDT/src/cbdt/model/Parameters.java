@@ -5,7 +5,7 @@ import java.util.List;
 
 
 
-public class CBDTSimulationParameters {
+public class Parameters {
 
 	/**
 	 * The weighting factor with which the old aspiration level is calculated
@@ -27,7 +27,7 @@ public class CBDTSimulationParameters {
 	 */
 	private List<ActorAction> actorActions;
 
-	public CBDTSimulationParameters() {
+	public Parameters() {
 		actorActions = new ArrayList<ActorAction>();
 	}
 

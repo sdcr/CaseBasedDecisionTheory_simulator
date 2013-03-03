@@ -6,7 +6,7 @@ import java.util.List;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPaneContent;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
-import cbdt.model.CBDTSimulationParameters;
+import cbdt.model.Parameters;
 import cbdt.view.AnalysisPaneContent;
 import cbdt.view.parameters.ParameterPaneContent;
 
@@ -14,7 +14,7 @@ public class Controller {
 
 	private ParameterPaneContent parameterPaneContent;
 	private AnalysisPaneContent analysisPaneContent;
-	private CBDTSimulationParameters parametersModel;
+	private Parameters parametersModel;
 
 	public Controller(){
 		//create the view pane
@@ -22,7 +22,7 @@ public class Controller {
 		analysisPaneContent = new AnalysisPaneContent();
 		
 		//create the model
-		parametersModel = new CBDTSimulationParameters();
+		parametersModel = new Parameters();
 		addDefaultActorActionToModel();
 	}
 	
@@ -45,7 +45,7 @@ public class Controller {
 		parametersModel.getActorActions().remove(actorAction);
 	}
 	
-	public CBDTSimulationParameters getParametersModel(){
+	public Parameters getParametersModel(){
 		return parametersModel;
 	}
 

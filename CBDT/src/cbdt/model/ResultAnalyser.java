@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 
 
-public class CBDTSimulationResultAnalyser {
+public class ResultAnalyser {
 
-	public ArrayList<Double> calculateCbu(CBDTSimulationResult result){
-		TreeNode root = ((CBDTSimulationResult)result).getRootNode();
+	public ArrayList<Double> calculateCbu(Result result){
+		TreeNode root = ((Result)result).getRootNode();
 		ArrayList<Double> cbuList = new ArrayList<Double>();
 		calculateCbuRecursively(cbuList, root, 0, 1.0);
 		return cbuList;

@@ -10,14 +10,13 @@ import java.util.Set;
 
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
-import cbdt.model.CBDTSimulationParameters;
-import cbdt.model.CBDTSimulationResult;
-import cbdt.model.ICBDTSimulationEngine;
+import cbdt.model.Parameters;
+import cbdt.model.Result;
 import cbdt.model.TreeNode;
 
 
 
-public class ConcreteCBDTSimulationEngine implements ICBDTSimulationEngine {
+public class TreeStyleSimulationEngine implements ISimulationEngine {
 
 	/**
 	 * By default limit the simulation to a maximum number of steps.
@@ -27,12 +26,12 @@ public class ConcreteCBDTSimulationEngine implements ICBDTSimulationEngine {
 	/**
 	 * The parameters 
 	 */
-	private CBDTSimulationParameters parameters;
+	private Parameters parameters;
 	
 	@Override
-	public CBDTSimulationResult computeSimulation(CBDTSimulationParameters parameters) {
+	public Result computeSimulation(Parameters parameters) {
 		//test this before casting
-		this.parameters = (CBDTSimulationParameters) parameters;
+		this.parameters = (Parameters) parameters;
 		
 		//initialize the rootNode
 		TreeNode simulationRootNode = new TreeNode();		
@@ -50,7 +49,7 @@ public class ConcreteCBDTSimulationEngine implements ICBDTSimulationEngine {
 		for(ActorAction action : this.parameters.getActorActions())
 			pastUtilities.put(action, new ArrayList<Double>());
 		computeTree(0, simulationRootNode, pastUtilities);
-		CBDTSimulationResult result = new CBDTSimulationResult();
+		Result result = new Result();
 		result.setRootNode(simulationRootNode);
 		return result;
 	}

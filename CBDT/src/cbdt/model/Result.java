@@ -1,7 +1,7 @@
 package cbdt.model;
 
 
-public class CBDTSimulationResult {
+public class Result {
 	
 	private TreeNode rootNode;
 
