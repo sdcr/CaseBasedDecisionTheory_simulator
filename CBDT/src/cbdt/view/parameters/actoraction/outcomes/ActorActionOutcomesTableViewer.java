@@ -44,7 +44,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		
 		emptyTableItem = createEmptyTableItem(table);
 		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionListener(
-				parent.getController(), parent.getRepresentedActorAction(), emptyTableItem);
+				parent.getController(), parent.getActorAction(), emptyTableItem);
 		this.getTable().addSelectionListener(emptyTableItemSelectionChangedListener);
 		
 		this.resizeTable();

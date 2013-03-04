@@ -35,7 +35,6 @@ public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 	
 	@Override
 	public void update(ViewerCell cell) {
-		actorActionOutcomesTableViewer.getParent().getController().printModel();
 		TableItem item = (TableItem) cell.getItem();
 		
 		Composite labelsParent = (Composite) cell.getViewerRow().getControl();

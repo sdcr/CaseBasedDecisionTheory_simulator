@@ -2,7 +2,6 @@ package cbdt.view.parameters.actoraction;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.widgets.Composite;
 
 class RemoveActorActionMouseListener implements MouseListener {
 
@@ -22,9 +21,6 @@ class RemoveActorActionMouseListener implements MouseListener {
 
 		@Override
 		public void mouseUp(MouseEvent e) {
-			toDispose.getController().removeActorActionFromModel(toDispose.getRepresentedActorAction());
-			Composite actorActionCompositesFrame = toDispose.getParent();
-			toDispose.dispose();
-			actorActionCompositesFrame.getParent().getParent().getParent().getParent().pack();
+			toDispose.getController().removeActorActionFromModel(toDispose.getActorAction());
 		}
 	}

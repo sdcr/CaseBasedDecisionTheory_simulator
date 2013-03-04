@@ -34,7 +34,7 @@ public class ParameterPageContentWrapper implements ISimulationPluginPageContent
 	public Composite getPageContent(Composite parent) {
 		Composite cbdtFrameComposite = new CBDTHeaderComposite(parent, SWT.NONE| SWT.BORDER);		
 		parameterComposite = new ParametersComposite(cbdtFrameComposite, SWT.NONE, controller);
-		parameterComposite.initialize(controller.getParametersModel());
+		parameterComposite.setParametersModel(controller.getParametersModel());
 		
 		return cbdtFrameComposite;
 	}

@@ -37,12 +37,12 @@ public class Controller {
 		ActorAction defaultActorAction = new ActorAction("");
 		ActorActionOutcome defaultActorActionOutcome = createDefaultActorActionOutcome();
 		defaultActorAction.addActionOutcome(defaultActorActionOutcome);
-		parametersModel.getActorActions().add(defaultActorAction);
+		parametersModel.addActorAction(defaultActorAction);//getActorActions().add(defaultActorAction);
 		return defaultActorAction;
 	}
 	
 	public void removeActorActionFromModel(ActorAction actorAction){
-		parametersModel.getActorActions().remove(actorAction);
+		parametersModel.removeActorAction(actorAction);//getActorActions().remove(actorAction);
 	}
 	
 	public Parameters getParametersModel(){

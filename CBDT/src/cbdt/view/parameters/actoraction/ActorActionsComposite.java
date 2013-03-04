@@ -1,6 +1,12 @@
 package cbdt.view.parameters.actoraction;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -12,6 +18,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
+import cbdt.model.Parameters;
 import cbdt.view.AbstractControllerAccessComposite;
 
 /**
@@ -19,12 +26,14 @@ import cbdt.view.AbstractControllerAccessComposite;
  * In particular, it allows the creation and removal of actor actions.
  * @author S-lenovo
  */
-public class ActorActionsComposite extends AbstractControllerAccessComposite {
+public class ActorActionsComposite extends AbstractControllerAccessComposite implements Observer {
 
 	private Composite actorActionsWrapper;
+	private Map<ActorAction,ActorActionComposite> shownCompositesMap;
 
 	public ActorActionsComposite(Composite parent, int style, Controller controller) {
 		super(parent, style | SWT.BORDER, controller);
+		shownCompositesMap = new HashMap<ActorAction, ActorActionComposite>();
 
 		this.setLayout(new GridLayout(2,false));
 		createLabel();
@@ -67,18 +76,45 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite {
 	 * Initializes the actor action view elements with an existing list of ActorAction objects.
 	 * @param actorActions The ActorAction parameters from which to initialize.
 	 */
-	public void initialize(List<ActorAction> actorActions) {
-		for(ActorAction representedActorAction : actorActions){
-			addActorActionComposite(representedActorAction);
+	public void setParametersModel(Parameters params) {
+		params.addObserver(this);
+		update(params, null);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg0 instanceof Parameters){
+			Parameters params = (Parameters)arg0;
+			List<ActorAction> newActionsList = params.getActorActions();
+			Set<ActorAction> shownActions = shownCompositesMap.keySet();
+
+			addNewActorActionComposites(newActionsList, shownActions);
+			removeSuperfluosActorActionComposites(newActionsList, shownActions);
+			this.getParent().getParent().getParent().pack();
 		}
 	}
 
-	/**
-	 * Adds another actor action view element for an ActorAction model object.
-	 * @param representedActorAction
-	 */
-	public void addActorActionComposite(ActorAction representedActorAction){
-		new ActorActionComposite(actorActionsWrapper, SWT.NONE,
-				representedActorAction, getController());
+	private void removeSuperfluosActorActionComposites(List<ActorAction> newActionsList,
+			Set<ActorAction> shownActions) {
+		Set<ActorAction> toRemoveFromMap = new HashSet<ActorAction>();
+		for(ActorAction shownAction : shownActions){
+			if(!newActionsList.contains(shownAction)){
+				shownCompositesMap.get(shownAction).dispose();
+				toRemoveFromMap.add(shownAction);
+			}
+		}
+		for(ActorAction actionToRemove : toRemoveFromMap)
+			shownCompositesMap.remove(actionToRemove);
+	}
+
+	private void addNewActorActionComposites(List<ActorAction> newActionsList,
+			Set<ActorAction> shownActions) {
+		for(ActorAction newAction : newActionsList){
+			if(!shownActions.contains(newAction)){
+				ActorActionComposite newComposite = new ActorActionComposite(actorActionsWrapper, SWT.NONE,
+						newAction, getController());
+				shownCompositesMap.put(newAction, newComposite);
+			}
+		}
 	}
 }

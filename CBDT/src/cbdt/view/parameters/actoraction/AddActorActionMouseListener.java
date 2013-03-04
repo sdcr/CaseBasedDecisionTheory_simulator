@@ -3,15 +3,13 @@ package cbdt.view.parameters.actoraction;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 
-import cbdt.model.ActorAction;
-
 
 public class AddActorActionMouseListener implements MouseListener {
 
-	private ActorActionsComposite actorActionsParent;
+	private ActorActionsComposite actorActionsComposite;
 
 	public AddActorActionMouseListener(ActorActionsComposite actorActionCompositeParent) {
-		this.actorActionsParent = actorActionCompositeParent;
+		this.actorActionsComposite = actorActionCompositeParent;
 	}
 	
 	@Override
@@ -24,11 +22,7 @@ public class AddActorActionMouseListener implements MouseListener {
 
 	@Override
 	public void mouseUp(MouseEvent e) {
-		ActorAction newDefaultActorAction = actorActionsParent.getController().addDefaultActorActionToModel();
-		actorActionsParent.addActorActionComposite(newDefaultActorAction);
-		
-		//TODO: rethink packing
-		actorActionsParent.getParent().getParent().getParent().pack();
+		actorActionsComposite.getController().addDefaultActorActionToModel();
 	}
 
 }

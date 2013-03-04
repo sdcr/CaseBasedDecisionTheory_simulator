@@ -86,7 +86,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 				Text text =  (Text)e.widget;
 				String newActorActionName = text.getText();
 				ActorActionComposite actorActionComposite = (ActorActionComposite) text.getParent();
-				actorActionComposite.getRepresentedActorAction().setActionName(
+				actorActionComposite.getActorAction().setActionName(
 						newActorActionName);
 			}
 		});
@@ -95,7 +95,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	/**
 	 * @return The ActorAction which is represented by this ActorActionComposite.
 	 */
-	public ActorAction getRepresentedActorAction() {
+	public ActorAction getActorAction() {
 		return representedActorAction;
 	}
 

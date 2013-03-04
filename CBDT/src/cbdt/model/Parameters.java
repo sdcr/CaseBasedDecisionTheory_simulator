@@ -2,10 +2,11 @@ package cbdt.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 
 
-public class Parameters {
+public class Parameters extends Observable {
 
 	/**
 	 * The weighting factor with which the old aspiration level is calculated
@@ -84,4 +85,24 @@ public class Parameters {
 		this.actorActions = actorActions;
 	}
 
+	/**
+	 * Adds an ActorAcion object to the model.
+	 * @param actorAction
+	 */
+	public void addActorAction(ActorAction actorAction){
+		this.actorActions.add(actorAction);
+		setChanged();
+		notifyObservers(actorActions);
+	}
+
+	/**
+	 * Removes an ActorAction object from the model.
+	 * @param actorAction
+	 */
+	public void removeActorAction(ActorAction actorAction){
+		this.actorActions.remove(actorAction);
+		setChanged();
+		notifyObservers();
+	}
+	
 }

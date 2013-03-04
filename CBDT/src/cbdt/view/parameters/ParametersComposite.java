@@ -1,5 +1,8 @@
 package cbdt.view.parameters;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -16,7 +19,7 @@ import cbdt.view.parameters.actoraction.ActorActionsComposite;
  * This composite contains all view elements that deal with the user's parameter input.
  * @author S-lenovo
  */
-public class ParametersComposite extends AbstractControllerAccessComposite {
+public class ParametersComposite extends AbstractControllerAccessComposite implements Observer{
 
 	private ActorActionsComposite actorActionsComposite;
 
@@ -46,8 +49,14 @@ public class ParametersComposite extends AbstractControllerAccessComposite {
 	 * Initializes the parameter view elements with an existing parameters model. 
 	 * @param parameters The parameters model from which to initialize this view.
 	 */
-	public void initialize(Parameters parameters) {
-		actorActionsComposite.initialize(parameters.getActorActions());
+	public void setParametersModel(Parameters parameters) {
+		parameters.addObserver(this);
+		actorActionsComposite.setParametersModel(parameters);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//TODO implement
 	}
 	
 }
