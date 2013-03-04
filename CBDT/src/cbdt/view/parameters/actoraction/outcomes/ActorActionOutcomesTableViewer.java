@@ -5,14 +5,8 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -31,15 +25,17 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 
 	private TableItem emptyTableItem;
 
-	private AddOutcomeSelectionChangedListener emptyTableItemSelectionChangedListener;
+	private AddOutcomeSelectionListener emptyTableItemSelectionChangedListener;
 
 	private ActorActionComposite parent;
+	private RemoveColumnLabelProvider removeColumnLabelProvider;
 		
 	public ActorActionOutcomesTableViewer(ActorActionComposite parent, int style) {
 		super(parent, style | SWT.FULL_SELECTION | SWT.NO_SCROLL);
 		this.parent = parent;
 		
 		this.setContentProvider(new ArrayContentProvider());
+		removeColumnLabelProvider = new RemoveColumnLabelProvider(this);
 		createColumns();
 		
 		final Table table = this.getTable();
@@ -47,8 +43,8 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		table.setLinesVisible(true);
 		
 		emptyTableItem = createEmptyTableItem(table);
-		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionChangedListener(
-						emptyTableItem, this);
+		emptyTableItemSelectionChangedListener = new AddOutcomeSelectionListener(
+				parent.getController(), parent.getRepresentedActorAction(), emptyTableItem);
 		this.getTable().addSelectionListener(emptyTableItemSelectionChangedListener);
 		
 		this.resizeTable();
@@ -79,7 +75,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		utilityColumn.setEditingSupport(new UtilityEditingSupport(this));
 		
 		TableViewerColumn removeIconColumn = createTableViewerColumn(this, tableTitles[2], widths[2], 2);
-		removeIconColumn.setLabelProvider(new RemoveColumnLabelProvider(this));
+		removeIconColumn.setLabelProvider(removeColumnLabelProvider);
 	}
 
 	private TableItem createEmptyTableItem(final Table table) {
@@ -104,6 +100,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 	
 	public void setActorActionOutcomesInput(Object input){
 		removeEmptyTableItem();
+		removeColumnLabelProvider.removeAllLabels();
 		setInput(input);
 		reAddEmptyTableItem();
 		this.resizeTable();

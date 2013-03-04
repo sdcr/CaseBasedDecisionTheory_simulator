@@ -57,7 +57,7 @@ public class Controller {
 	
 	public void removeActorActionOutcomeFromModel(ActorActionOutcome outcome){
 		ActorAction actorAction = outcome.getAction();
-		actorAction.getActionOutcomes().remove(outcome);
+		actorAction.removeActionOutcome(outcome);
 	}
 	
 	private ActorActionOutcome createDefaultActorActionOutcome(){

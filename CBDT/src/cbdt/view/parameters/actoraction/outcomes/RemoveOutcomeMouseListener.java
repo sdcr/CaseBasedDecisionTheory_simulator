@@ -28,9 +28,6 @@ public class RemoveOutcomeMouseListener implements MouseListener{
 	public void mouseDown(MouseEvent e) {
 		AbstractControllerAccessComposite actorActionComposite = tableViewer.getParent();
 		actorActionComposite.getController().removeActorActionOutcomeFromModel(toRemove);
-		
-		tableEditor.getEditor().dispose();
-		tableViewer.remove(toRemove);
 	}
 
 	@Override

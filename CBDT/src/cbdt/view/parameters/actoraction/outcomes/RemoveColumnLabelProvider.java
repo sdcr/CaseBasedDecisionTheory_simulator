@@ -1,5 +1,8 @@
 package cbdt.view.parameters.actoraction.outcomes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
@@ -16,11 +19,12 @@ public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 	private static final String CLOSE_ICON_SMALL_12_LOCATION = "/resources/close-icon-small-12.png";
 	private ActorActionOutcomesTableViewer actorActionOutcomesTableViewer;
 
+	private List<TableEditor> tableEditors;
 	
 	public RemoveColumnLabelProvider(
 			ActorActionOutcomesTableViewer actorActionOutcomesTableViewer) {
-				this.actorActionOutcomesTableViewer = actorActionOutcomesTableViewer;
-		
+		this.actorActionOutcomesTableViewer = actorActionOutcomesTableViewer;
+		this.tableEditors = new ArrayList<TableEditor>();		
 	}
 
 	@Override
@@ -28,13 +32,15 @@ public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 		return "";
 	}
 	
+	
 	@Override
 	public void update(ViewerCell cell) {
 		actorActionOutcomesTableViewer.getParent().getController().printModel();
 		TableItem item = (TableItem) cell.getItem();
 		
+		Composite labelsParent = (Composite) cell.getViewerRow().getControl();
 		HoverLabelWrapper removeRowLabel = new HoverLabelWrapper(
-				(Composite) cell.getViewerRow().getControl(), SWT.NONE,
+				labelsParent, SWT.NONE,
 				CLOSE_ICON_MEDIUM_12_LOCATION,
 				CLOSE_ICON_SMALL_12_LOCATION);
 		ActorActionOutcome toRemove = (ActorActionOutcome) cell.getElement();
@@ -45,11 +51,20 @@ public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 		removeRowLabel.getLabel().addMouseListener(
 				new RemoveOutcomeMouseListener(actorActionOutcomesTableViewer, toRemove, editor));
 		
-//		if(actorActionOutcomesTableViewer.getTableEditor().getEditor() != null)
-//			actorActionOutcomesTableViewer.getTableEditor().getEditor().dispose();
 		editor.setEditor(removeRowLabel.getLabel(), item, cell.getColumnIndex());
-//		actorActionOutcomesTableViewer.getTableEditor().layout();
-		System.out.println("update cell");
+		
+		tableEditors.add(editor);
+	}
+
+	/**
+	 * Removes all labels in the table.
+	 */
+	public void removeAllLabels() {
+		for(TableEditor tableEditor : tableEditors){
+			tableEditor.getEditor().dispose();
+			tableEditor.dispose();
+		}
+		tableEditors.clear();
 	}
 
 }

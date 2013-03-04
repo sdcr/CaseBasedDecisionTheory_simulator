@@ -16,7 +16,6 @@ public class HoverLabelWrapper {
 		
 		Image hoverImage = this.getImageFromLocation(hoverImageLocation);
 		Image noHoverImage = this.getImageFromLocation(noHoverImageLocation);
-		
 		hoverLabel.setImage(noHoverImage);
 		hoverLabel.addMouseTrackListener(new HoverLabelMouseTrackListener(hoverLabel,
 				hoverImage,

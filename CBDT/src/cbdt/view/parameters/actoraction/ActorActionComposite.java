@@ -1,5 +1,8 @@
 package cbdt.view.parameters.actoraction;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -19,7 +22,7 @@ import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
  * In specific, it contains a table with which the user can modify a set of ActorActionOutcomes.
  * @author S-lenovo
  */
-public class ActorActionComposite extends AbstractControllerAccessComposite {
+public class ActorActionComposite extends AbstractControllerAccessComposite implements Observer{
 	
 	private static final String CLOSE_ICON_LARGE_18_LOCATION = "/resources/close-icon-large-18.png";
 	private static final String CLOSE_ICON_MEDIUM_18_LOCATION = "/resources/close-icon-medium-18.png";
@@ -31,6 +34,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 	public ActorActionComposite(final Composite parent, int style, ActorAction representedActorAction, Controller controller) {
 		super(parent, style | SWT.BORDER , controller);
 		this.representedActorAction = representedActorAction;
+		representedActorAction.addObserver(this);
 
 		GridLayout gridLayout = new GridLayout(3, false);
 		gridLayout.marginTop = 0;
@@ -40,9 +44,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		createActorActionRemoveWidget();
 		createActorActionOutcomesWidgets();
 	
-		actorActionOutcomesTableViewer
-				.setActorActionOutcomesInput(representedActorAction
-						.getActionOutcomes());
+		update(representedActorAction, null);
 		
 		this.getParent().getParent().pack();
 	}
@@ -77,7 +79,6 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 		Label actionNameLabel = new Label(this, SWT.NONE);
 		actionNameLabel.setText("Action name:");
 		actionNameText = new Text(this, SWT.SINGLE);
-		actionNameText.setText(representedActorAction.getActionName());
 		actionNameText.addModifyListener(new ModifyListener() {
 			
 			@Override
@@ -96,6 +97,14 @@ public class ActorActionComposite extends AbstractControllerAccessComposite {
 	 */
 	public ActorAction getRepresentedActorAction() {
 		return representedActorAction;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg0 instanceof ActorAction && ((ActorAction)arg0).equals(representedActorAction)){
+			actionNameText.setText(representedActorAction.getActionName());
+			actorActionOutcomesTableViewer.setActorActionOutcomesInput(representedActorAction.getActionOutcomes());
+		}
 	}
 	
 }

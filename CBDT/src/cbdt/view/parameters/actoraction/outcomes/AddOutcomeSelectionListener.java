@@ -4,21 +4,21 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.TableItem;
 
-import cbdt.model.ActorActionOutcome;
-import cbdt.view.parameters.actoraction.ActorActionComposite;
+import cbdt.controller.Controller;
+import cbdt.model.ActorAction;
 
-public class AddOutcomeSelectionChangedListener implements
+public class AddOutcomeSelectionListener implements
 		SelectionListener {
 
 	private TableItem emptyTableItem;
-	private ActorActionOutcomesTableViewer tableViewer;
+	private Controller controller;
+	private ActorAction actorAction;
 	
-	
-	public AddOutcomeSelectionChangedListener(TableItem emptyTableItem,
-			ActorActionOutcomesTableViewer tableViewer) {
+	public AddOutcomeSelectionListener(Controller controller, ActorAction actorAction, TableItem emptyTableItem) {
 		super();
+		this.controller = controller;
+		this.actorAction = actorAction;
 		this.emptyTableItem = emptyTableItem;
-		this.tableViewer = tableViewer;
 	}
 
 	public TableItem getEmptyTableItem() {
@@ -33,11 +33,7 @@ public class AddOutcomeSelectionChangedListener implements
 	public void widgetSelected(SelectionEvent e) {
 		TableItem selectedItem = (TableItem)e.item;
 		if(selectedItem.equals(emptyTableItem)){
-			ActorActionComposite actorActionComposite = tableViewer.getParent();
-			ActorActionOutcome defaultOutcome = actorActionComposite
-					.getController().addDefaultActorActionOutcomeToModel(
-							actorActionComposite.getRepresentedActorAction());
-			tableViewer.add(defaultOutcome);
+			controller.addDefaultActorActionOutcomeToModel(actorAction);
 		}
 	}
 

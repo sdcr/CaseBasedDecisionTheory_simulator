@@ -2,6 +2,7 @@ package cbdt.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * ActorAction models one action alternative, the actor has under the CBDT
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  * @author S
  */
-public class ActorAction {
+public class ActorAction extends Observable{
 
 	private String actionName;
 
@@ -56,6 +57,8 @@ public class ActorAction {
 	 */
 	public void setActionOutcomes(List<ActorActionOutcome> actionOutcomes) {
 		this.actionOutcomes = actionOutcomes;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -66,8 +69,20 @@ public class ActorAction {
 	public void addActionOutcome(ActorActionOutcome actionOutcome) {
 		actionOutcome.setAction(this);
 		this.actionOutcomes.add(actionOutcome);
+		setChanged();
+		notifyObservers();
 	}
 
+	/**
+	 * @param actionOutcome
+	 * 			The ActorActionOutcome which is to be removed from this ActorAction.
+	 */
+	public void removeActionOutcome(ActorActionOutcome actionOutcome){
+		this.actionOutcomes.remove(actionOutcome);
+		setChanged();
+		notifyObservers();
+	}
+	
 	/**
 	 * @return Returns whether the probabilities of the ActorActionOutcomes
 	 *         associated with this ActorAction form a valid probability
