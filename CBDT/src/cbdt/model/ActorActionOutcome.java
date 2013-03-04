@@ -1,12 +1,14 @@
 package cbdt.model;
 
+import java.util.Observable;
+
 /**
  * An ActorActionOutcome belongs to an ActorAction. The ActorActionOutcome 
  * models one outcome that is possible, when the actor chooses the respective 
  * action.
  * @author S
  */
-public class ActorActionOutcome {
+public class ActorActionOutcome extends Observable {
 
 	/** The ActorAction this ActorActionOutcome belongs to. */
 	private ActorAction action;
@@ -32,6 +34,8 @@ public class ActorActionOutcome {
 
 	public void setUtility(double utility) {
 		this.utility = utility;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -44,6 +48,8 @@ public class ActorActionOutcome {
 
 	public void setProbability(double probability) {
 		this.probability = probability;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -55,6 +61,8 @@ public class ActorActionOutcome {
 
 	public void setAction(ActorAction action) {
 		this.action = action;
+		setChanged();
+		notifyObservers();
 	}
 	
 	@Override

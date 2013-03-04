@@ -1,11 +1,15 @@
 package cbdt.view.parameters.actoraction;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -14,6 +18,7 @@ import org.eclipse.swt.widgets.Text;
 
 import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
+import cbdt.model.ActorActionOutcome;
 import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
@@ -31,6 +36,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private Text actionNameText;
 	private ActorActionOutcomesTableViewer actorActionOutcomesTableViewer;
 	private ActorAction representedActorAction;
+	private Label probabilityHintLabel;
 
 	public ActorActionComposite(final Composite parent, int style, ActorAction representedActorAction, Controller controller) {
 		super(parent, style | SWT.BORDER , controller);
@@ -44,10 +50,29 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 		createActorActionNameWidgets();
 		createActorActionRemoveWidget();
 		createActorActionOutcomesWidgets();
+		
+		createHintLabel();
 	
 		update(representedActorAction, null);
 		
 		this.getParent().getParent().pack();
+	}
+
+	private void createHintLabel() {
+		probabilityHintLabel = new Label(this, SWT.NONE);
+		probabilityHintLabel.setText("*");
+		probabilityHintLabel.setToolTipText("The sum of the probabilities should to be one.");
+		
+		GridData gridData = new GridData();
+		gridData.verticalAlignment = SWT.BEGINNING;
+		probabilityHintLabel.setLayoutData(gridData);
+		
+		FontData hintFontData = new FontData("Arial", 13, SWT.BOLD);
+		probabilityHintLabel.setFont(new Font(this.getDisplay(), hintFontData));
+		
+		Color fontColor = new Color(this.getDisplay(), 255, 150, 150);
+		probabilityHintLabel.setForeground(fontColor);
+		probabilityHintLabel.setVisible(false);
 	}
 
 	/**
@@ -106,8 +131,22 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof ActorAction && ((ActorAction)arg0).equals(representedActorAction)){
 			actionNameText.setText(representedActorAction.getActionName());
-			actorActionOutcomesTableViewer.setActorActionOutcomesInput(representedActorAction.getActionOutcomes());
+			List<ActorActionOutcome> actionOutcomes = representedActorAction.getActionOutcomes();
+			for(ActorActionOutcome outcome : actionOutcomes){
+				outcome.addObserver(this);
+			}
+			actorActionOutcomesTableViewer.setActorActionOutcomesInput(actionOutcomes);
+			updateProbabilityHintVisibility();
 		}
+		if(arg0 instanceof ActorActionOutcome)
+			updateProbabilityHintVisibility();
+	}
+
+	private void updateProbabilityHintVisibility() {
+		if(representedActorAction.hasValidProbabilityDistribution())
+			probabilityHintLabel.setVisible(false);
+		else
+			probabilityHintLabel.setVisible(true);
 	}
 	
 }
