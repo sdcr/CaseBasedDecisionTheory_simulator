@@ -60,6 +60,10 @@ public class Controller {
 		actorAction.removeActionOutcome(outcome);
 	}
 	
+	public void setActorActionName(ActorAction actorAction, String newName){
+		actorAction.setActionName(newName);
+	}
+	
 	private ActorActionOutcome createDefaultActorActionOutcome(){
 		return new ActorActionOutcome(0, 0);
 	}
