@@ -6,7 +6,8 @@ import java.util.Observer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
@@ -26,15 +27,34 @@ public class ParametersComposite extends AbstractControllerAccessComposite imple
 	public ParametersComposite(Composite parent, int style, Controller controller) {
 		super(parent, style| SWT.BORDER, controller);
 
-		RowLayout rowLayout = new RowLayout();
-		rowLayout.type=SWT.VERTICAL;
-		rowLayout.marginTop = 20;
-		this.setLayout(rowLayout);	
+//		RowLayout rowLayout = new RowLayout();
+//		rowLayout.type=SWT.VERTICAL;
+//		rowLayout.marginTop = 20;
+//		this.setLayout(rowLayout);	
+		
+		GridLayout gridLayout = new GridLayout(2, false);
+		this.setLayout(gridLayout);
 		
 		createParametersTitleLabel();		
+		
+		createParameterLabel("Actor actions:");
 		actorActionsComposite = new ActorActionsComposite(this, SWT.NONE, controller);
+		createParameterLabel("Initial aspiration level:");
 	}
 
+	/**
+	 * Set the label of this composite.
+	 */
+	private void createParameterLabel(String labelText) {
+		Label actorActionsLabel = new Label(this, SWT.NONE);
+		actorActionsLabel.setText(labelText);	
+		
+		GridData actorActionsLabelGridData = new GridData();
+		actorActionsLabelGridData.verticalAlignment = SWT.BEGINNING;
+		actorActionsLabel.setLayoutData(actorActionsLabelGridData);
+	}
+
+	
 	/**
 	 * Creates the title label for this composite.
 	 */
@@ -43,6 +63,10 @@ public class ParametersComposite extends AbstractControllerAccessComposite imple
 		parameterLabel.setText("Parameter-Eingabe");
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
 		parameterLabel.setFont(new Font(this.getDisplay(), labelFontData));
+		
+		GridData parameterLabelGridData = new GridData();
+		parameterLabelGridData.horizontalSpan = 2;
+		parameterLabel.setLayoutData(parameterLabelGridData);
 	}
 
 	/**

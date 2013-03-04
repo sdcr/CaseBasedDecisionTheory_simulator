@@ -35,13 +35,17 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite imp
 		super(parent, style | SWT.BORDER, controller);
 		shownCompositesMap = new HashMap<ActorAction, ActorActionComposite>();
 
-		this.setLayout(new GridLayout(2,false));
-		createLabel();
+//		this.setLayout(new GridLayout(2,false));
+//		createLabel();
 
+		RowLayout thisLayout = new RowLayout();
+		thisLayout.type = SWT.VERTICAL;
+		this.setLayout(thisLayout);
+		
 		actorActionsWrapper = new Composite(this, SWT.NONE);		
-		RowLayout rowLayout = new RowLayout();
-		rowLayout.type = SWT.VERTICAL;
-		actorActionsWrapper.setLayout(rowLayout);
+		RowLayout wrapperLayout = new RowLayout();
+		wrapperLayout.type = SWT.VERTICAL;
+		actorActionsWrapper.setLayout(wrapperLayout);
 
 		createAddActorActionButton();
 	}
@@ -66,10 +70,10 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite imp
 		addActorActionItemButton.setText("Add additional actor action");
 		addActorActionItemButton.addMouseListener(new AddActorActionMouseListener(this));
 		
-		GridData buttonGridData = new GridData();
-		buttonGridData.horizontalAlignment = SWT.END;
-		buttonGridData.horizontalSpan = 2;
-		addActorActionItemButton.setLayoutData(buttonGridData);
+//		GridData buttonGridData = new GridData();
+//		buttonGridData.horizontalAlignment = SWT.END;
+//		buttonGridData.horizontalSpan = 2;
+//		addActorActionItemButton.setLayoutData(buttonGridData);
 	}
 
 	/**
