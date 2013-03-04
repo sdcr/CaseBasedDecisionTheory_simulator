@@ -26,11 +26,6 @@ public class ParametersComposite extends AbstractControllerAccessComposite imple
 
 	public ParametersComposite(Composite parent, int style, Controller controller) {
 		super(parent, style| SWT.BORDER, controller);
-
-//		RowLayout rowLayout = new RowLayout();
-//		rowLayout.type=SWT.VERTICAL;
-//		rowLayout.marginTop = 20;
-//		this.setLayout(rowLayout);	
 		
 		GridLayout gridLayout = new GridLayout(2, false);
 		this.setLayout(gridLayout);
