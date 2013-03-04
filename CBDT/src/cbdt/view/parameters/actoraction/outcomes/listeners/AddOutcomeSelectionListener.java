@@ -1,4 +1,4 @@
-package cbdt.view.parameters.actoraction.outcomes;
+package cbdt.view.parameters.actoraction.outcomes.listeners;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;

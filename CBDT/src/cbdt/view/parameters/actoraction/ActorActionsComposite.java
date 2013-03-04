@@ -17,6 +17,7 @@ import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
 import cbdt.model.Parameters;
 import cbdt.view.AbstractControllerAccessComposite;
+import cbdt.view.parameters.actoraction.listeners.AddActorActionMouseListener;
 
 /**
  * This composite contains all view elements that deal with the display of actor actions.

@@ -1,9 +1,11 @@
-package cbdt.view.parameters.actoraction;
+package cbdt.view.parameters.actoraction.listeners;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 
-class RemoveActorActionMouseListener implements MouseListener {
+import cbdt.view.parameters.actoraction.ActorActionComposite;
+
+public class RemoveActorActionMouseListener implements MouseListener {
 
 		private ActorActionComposite toDispose;
 

@@ -20,6 +20,7 @@ import cbdt.controller.Controller;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.view.AbstractControllerAccessComposite;
+import cbdt.view.parameters.actoraction.listeners.RemoveActorActionMouseListener;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
 /**
@@ -51,28 +52,11 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 		createActorActionRemoveWidget();
 		createActorActionOutcomesWidgets();
 		
-		createHintLabel();
+		probabilityHintLabel = new ProbabilityHintLabel(this, SWT.NONE);
 	
 		update(representedActorAction, null);
 		
 		this.getParent().getParent().pack();
-	}
-
-	private void createHintLabel() {
-		probabilityHintLabel = new Label(this, SWT.NONE);
-		probabilityHintLabel.setText("*");
-		probabilityHintLabel.setToolTipText("The sum of the probabilities should to be one.");
-		
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = SWT.BEGINNING;
-		probabilityHintLabel.setLayoutData(gridData);
-		
-		FontData hintFontData = new FontData("Arial", 13, SWT.BOLD);
-		probabilityHintLabel.setFont(new Font(this.getDisplay(), hintFontData));
-		
-		Color fontColor = new Color(this.getDisplay(), 255, 150, 150);
-		probabilityHintLabel.setForeground(fontColor);
-		probabilityHintLabel.setVisible(false);
 	}
 
 	/**

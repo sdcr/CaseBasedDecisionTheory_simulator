@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.TableItem;
 
 import cbdt.model.ActorActionOutcome;
 import cbdt.view.parameters.actoraction.HoverLabelWrapper;
+import cbdt.view.parameters.actoraction.outcomes.listeners.RemoveOutcomeMouseListener;
 
 public class RemoveColumnLabelProvider extends ColumnLabelProvider {
 

@@ -1,11 +1,11 @@
-package cbdt.view.parameters.actoraction;
+package cbdt.view.parameters.actoraction.listeners;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
 
-class HoverLabelMouseTrackListener implements MouseTrackListener {
+public class HoverLabelMouseTrackListener implements MouseTrackListener {
 
 	private Label closeLabel;
 	private Image hoverImage;

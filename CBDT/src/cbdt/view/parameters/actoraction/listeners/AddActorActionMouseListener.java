@@ -1,7 +1,9 @@
-package cbdt.view.parameters.actoraction;
+package cbdt.view.parameters.actoraction.listeners;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+
+import cbdt.view.parameters.actoraction.ActorActionsComposite;
 
 
 public class AddActorActionMouseListener implements MouseListener {
