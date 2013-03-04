@@ -68,7 +68,13 @@ public class Controller {
 		return new ActorActionOutcome(0, 0);
 	}
 	
+	public void setInitialAspirationLevel(Double newInitAspirationLevel) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void printModel(){
 		System.out.println(parametersModel.getActorActions());
 	}
+
 }

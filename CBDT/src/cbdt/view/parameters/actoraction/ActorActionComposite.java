@@ -24,6 +24,7 @@ import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
  */
 public class ActorActionComposite extends AbstractControllerAccessComposite implements Observer{
 	
+	private static final int actionNameTextWidth = 190;
 	private static final String CLOSE_ICON_LARGE_18_LOCATION = "/resources/close-icon-large-18.png";
 	private static final String CLOSE_ICON_MEDIUM_18_LOCATION = "/resources/close-icon-medium-18.png";
 
@@ -60,7 +61,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 		outcomesLabelGridData.verticalAlignment = SWT.BEGINNING;
 		actionOutcomesLabel.setLayoutData(outcomesLabelGridData);
 		
-		actorActionOutcomesTableViewer = new ActorActionOutcomesTableViewer(this, SWT.NONE);
+		actorActionOutcomesTableViewer = new ActorActionOutcomesTableViewer(this, SWT.BORDER);
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private void createActorActionNameWidgets() {
 		Label actionNameLabel = new Label(this, SWT.NONE);
 		actionNameLabel.setText("Action name:");
-		actionNameText = new Text(this, SWT.SINGLE);
+		actionNameText = new Text(this, SWT.SINGLE | SWT.BORDER);
 		actionNameText.addModifyListener(new ModifyListener() {
 			
 			@Override
@@ -88,6 +89,10 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 				getController().setActorActionName(representedActorAction, newActorActionName);
 			}
 		});
+		
+		GridData gridData = new GridData();
+		gridData.widthHint = actionNameTextWidth;
+		actionNameText.setLayoutData(gridData);
 	}
 
 	/**

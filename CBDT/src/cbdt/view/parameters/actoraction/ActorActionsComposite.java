@@ -29,7 +29,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite imp
 	private Map<ActorAction,ActorActionComposite> shownCompositesMap;
 
 	public ActorActionsComposite(Composite parent, int style, Controller controller) {
-		super(parent, style | SWT.BORDER, controller);
+		super(parent, style, controller);
 		shownCompositesMap = new HashMap<ActorAction, ActorActionComposite>();
 
 		RowLayout thisLayout = new RowLayout();
