@@ -52,10 +52,10 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 		createActorActionRemoveWidget();
 		createActorActionOutcomesWidgets();
 		
-		probabilityHintLabel = new ProbabilityHintLabel(this, SWT.NONE);
+		ProbabilityHintLabelFactory probabilityHintLabelFactory = new ProbabilityHintLabelFactory();
+		probabilityHintLabel = probabilityHintLabelFactory.createHintLabel(this, SWT.NONE);
 	
 		update(representedActorAction, null);
-		
 		this.getParent().getParent().pack();
 	}
 
