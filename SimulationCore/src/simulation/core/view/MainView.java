@@ -7,6 +7,8 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
@@ -52,6 +54,18 @@ public class MainView {
 		pluginsBar = new PluginsBar(shell, SWT.PUSH);
 		pluginPane = new PluginPane(shell, SWT.NONE);
 		pluginsBar.setPluginPane(pluginPane);
+		
+		Menu menuBar = new Menu(shell, SWT.BAR);
+		MenuItem helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+	    helpMenuHeader.setText("&Help");
+
+	    Menu helpMenu = new Menu(shell, SWT.DROP_DOWN);
+	    helpMenuHeader.setMenu(helpMenu);
+
+	    MenuItem helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
+	    helpGetHelpItem.setText("&Get Help");
+	    
+	    shell.setMenuBar(menuBar);
 	}
 
 	public void updateFromModel() {

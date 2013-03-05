@@ -2,6 +2,9 @@ package simulation.extensionpoint.simulationplugin.definition;
 
 import java.util.List;
 
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
+
 
 public interface ISimulationPlugin {
 
@@ -11,6 +14,11 @@ public interface ISimulationPlugin {
 	 */
 	String getName();
 
+	/**
+	 * @param shell
+	 * @return The menu which is displayed for this plugin.
+	 */
+	Menu getMenu(Shell shell, Menu menuBar);
 	
 	List<ISimulationPluginPageContentWrapper> getPageContents();
 }
