@@ -6,9 +6,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
 
-public class AnalysisPaneContent implements ISimulationPluginPageContentWrapper{
+public class AnalysisPaneContent implements ISimulationPluginPageWrapper{
 
 	private ISimulationPlugin plugin;
 	
@@ -18,7 +18,7 @@ public class AnalysisPaneContent implements ISimulationPluginPageContentWrapper{
 	}
 
 	@Override
-	public Composite getPageContent(Composite parent) {
+	public Composite getPageComposite(Composite parent) {
 		Composite parameterComposite = new Composite(parent, SWT.NONE);
 		
 		RowLayout rowLayout = new RowLayout();

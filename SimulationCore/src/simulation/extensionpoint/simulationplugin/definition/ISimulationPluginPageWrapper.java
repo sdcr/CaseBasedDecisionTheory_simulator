@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Composite;
  * It is to be implemented once for every page that is to be displayed in the simulation frame. 
  * @author S-lenovo
  */
-public interface ISimulationPluginPageContentWrapper {
+public interface ISimulationPluginPageWrapper {
 
 	/**
 	 * @return The name of this page. It will be displayed in the menu of the simulation frame.
@@ -18,7 +18,7 @@ public interface ISimulationPluginPageContentWrapper {
 	 * @param parent The parent composite of the page content. 
 	 * @return The content that is to be displayed in the page of the simulation frame.
 	 */
-	public Composite getPageContent(Composite parent);
+	public Composite getPageComposite(Composite parent);
 	
 	/**
 	 * @return The ISimulationPlugin class this page belongs to.

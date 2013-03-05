@@ -5,7 +5,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
 import cbdt.controller.Controller;
 import cbdt.view.CBDTHeaderComposite;
 
@@ -15,7 +15,7 @@ import cbdt.view.CBDTHeaderComposite;
  * 
  * @author S-lenovo
  */
-public class ParameterPageContentWrapper implements ISimulationPluginPageContentWrapper{
+public class ParameterPageContentWrapper implements ISimulationPluginPageWrapper{
 
 	private ISimulationPlugin plugin;
 	private ParametersComposite parameterComposite;
@@ -31,7 +31,7 @@ public class ParameterPageContentWrapper implements ISimulationPluginPageContent
 	}
 
 	@Override
-	public Composite getPageContent(Composite parent) {
+	public Composite getPageComposite(Composite parent) {
 		Composite cbdtFrameComposite = new CBDTHeaderComposite(parent, SWT.NONE| SWT.BORDER);		
 		parameterComposite = new ParametersComposite(cbdtFrameComposite, SWT.NONE, controller);
 		parameterComposite.setParametersModel(controller.getParametersModel());

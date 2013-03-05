@@ -3,7 +3,7 @@ package cbdt.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.model.Parameters;
@@ -26,8 +26,8 @@ public class Controller {
 		addDefaultActorActionToModel();
 	}
 	
-	public List<ISimulationPluginPageContentWrapper> getPaneContents() {
-		List<ISimulationPluginPageContentWrapper> retVal = new ArrayList<ISimulationPluginPageContentWrapper>();
+	public List<ISimulationPluginPageWrapper> getPaneContents() {
+		List<ISimulationPluginPageWrapper> retVal = new ArrayList<ISimulationPluginPageWrapper>();
 		retVal.add(parameterPaneContent);
 		retVal.add(analysisPaneContent);
 		return retVal;

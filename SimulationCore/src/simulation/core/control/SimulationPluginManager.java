@@ -2,6 +2,7 @@ package simulation.core.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -16,7 +17,7 @@ import org.eclipse.core.runtime.dynamichelpers.IFilter;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class SimulationPluginExtensionHandler implements
+public class SimulationPluginManager extends Observable implements
 		IExtensionChangeHandler {// IRegistryEventListener {
 
 	public static final String EXTENSION_POINT_ID = "simulation.extensionpoint.simulationplugin";
@@ -25,10 +26,10 @@ public class SimulationPluginExtensionHandler implements
 	/**
 	 * Sets up itself as the listener for new simulation plugin extensions.
 	 */
-	public SimulationPluginExtensionHandler() {
+	public SimulationPluginManager() {
 		extensionRegistry = RegistryFactory.getRegistry();
 		IExtensionPoint ep = extensionRegistry
-				.getExtensionPoint(SimulationPluginExtensionHandler.EXTENSION_POINT_ID);
+				.getExtensionPoint(SimulationPluginManager.EXTENSION_POINT_ID);
 		IFilter filter = ExtensionTracker.createExtensionPointFilter(ep);
 		ExtensionTracker tracker = new ExtensionTracker(extensionRegistry);
 		tracker.registerHandler(this, filter);
@@ -38,7 +39,7 @@ public class SimulationPluginExtensionHandler implements
 		List<ISimulationPlugin> retVal = new ArrayList<ISimulationPlugin>();
 		
 		IConfigurationElement[] config = extensionRegistry
-				.getConfigurationElementsFor(SimulationPluginExtensionHandler.EXTENSION_POINT_ID);
+				.getConfigurationElementsFor(SimulationPluginManager.EXTENSION_POINT_ID);
 		try {
 			for (IConfigurationElement e : config) {
 				System.out.println("Evaluating extension");

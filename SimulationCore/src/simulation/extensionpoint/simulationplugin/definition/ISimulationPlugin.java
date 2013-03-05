@@ -20,5 +20,5 @@ public interface ISimulationPlugin {
 	 */
 	Menu getMenu(Shell shell, Menu menuBar);
 	
-	List<ISimulationPluginPageContentWrapper> getPageContents();
+	List<ISimulationPluginPageWrapper> getPageContents();
 }

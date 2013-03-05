@@ -1,6 +1,8 @@
 package simulation.core.view;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
@@ -12,23 +14,22 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
+import simulation.core.control.SimulationPluginManager;
 import simulation.core.model.SimPluginStore;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class MainView {
+public class MainView implements Observer{
 
 	private PluginsBar pluginsBar;
-	private PluginPane pluginPane;
+	private PluginPageManager pluginPane;
 	private Controller controller;
-	private SimPluginStore simPluginStore;
 	private Shell shell;
 
-	public MainView(final Controller controller, SimPluginStore simPluginStore) {
+	public MainView(final Controller controller) {
 		this.controller = controller;
-		this.simPluginStore = simPluginStore;
 
 		shell = new Shell(new Display());
-		initializeContent(shell);
+		initializeView(shell);
 
 		shell.addDisposeListener(new DisposeListener() {
 			@Override
@@ -49,12 +50,16 @@ public class MainView {
 		display.dispose();
 	}
 
-	private void initializeContent(Shell shell) {
+	private void initializeView(Shell shell) {
 		shell.setLayout(new GridLayout(2, false));
 		pluginsBar = new PluginsBar(shell, SWT.PUSH);
-		pluginPane = new PluginPane(shell, SWT.NONE);
+		pluginPane = new PluginPageManager(shell, SWT.NONE);
 		pluginsBar.setPluginPane(pluginPane);
 		
+		createMenuBar(shell);
+	}
+
+	private void createMenuBar(Shell shell) {
 		Menu menuBar = new Menu(shell, SWT.BAR);
 		MenuItem helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 	    helpMenuHeader.setText("&Help");
@@ -67,10 +72,17 @@ public class MainView {
 	    
 	    shell.setMenuBar(menuBar);
 	}
+	
+	public void setPluginManager(SimulationPluginManager pluginManager){
+		pluginManager.addObserver(this);
+		update(pluginManager, null);
+		pluginsBar.setPluginManager(pluginManager);
+	}
 
-	public void updateFromModel() {
-		List<ISimulationPlugin> plugins = simPluginStore.getSimulationPlugins();
-		pluginsBar.update(plugins);
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO update the shown menu
+		
 	}
 
 	// private void addPluginAdd(Shell shell, final BundleContext context){

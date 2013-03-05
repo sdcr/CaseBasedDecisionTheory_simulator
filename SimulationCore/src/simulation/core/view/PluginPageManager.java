@@ -1,7 +1,6 @@
 package simulation.core.view;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.swt.SWT;
@@ -11,66 +10,63 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
 
-public class PluginPane extends Composite {
+public class PluginPageManager {
 
-	Map<ISimulationPluginPageContentWrapper, Composite> previouslyInForeground;
+	Map<ISimulationPluginPageWrapper, Composite> previouslyInForeground;
 	Composite currentlyInForeground;
-	Composite backgroundParent;
+	private Composite currentlyInBackgroundsParent;
+	
+	private Composite pluginPage;
 
-	public PluginPane(Composite parent, int style) {
-		super(parent, style);
+	public PluginPageManager(Composite parent, int style) {
+		pluginPage = new Composite(parent, style);
 
 		// initialize
-		previouslyInForeground = new HashMap<ISimulationPluginPageContentWrapper, Composite>();
-		backgroundParent = new Composite(new Shell(), SWT.NONE);
+		previouslyInForeground = new HashMap<ISimulationPluginPageWrapper, Composite>();
+		currentlyInBackgroundsParent = new Composite(new Shell(), SWT.NONE);
 
 		Color mainPaneColor = new Color(parent.getDisplay(), 200, 200, 200);
-		setBackground(mainPaneColor);
+		pluginPage.setBackground(mainPaneColor);
+
 		GridData mainPaneGridData = new GridData();
 		mainPaneGridData.verticalAlignment = GridData.FILL;
 		mainPaneGridData.horizontalAlignment = GridData.FILL;
 		mainPaneGridData.grabExcessHorizontalSpace = true;
-		setLayoutData(mainPaneGridData);
+		pluginPage.setLayoutData(mainPaneGridData);
 		
-		setLayout(new FillLayout());
+		pluginPage.setLayout(new FillLayout());
 	}
 
-	public void installPaneContents(List<ISimulationPlugin> plugins) {
-		// TODO Auto-generated method stub
 
-	}
-
-	public void setToForeGround(ISimulationPluginPageContentWrapper toForeground) {
-		System.out.println("set to foreground");
+	public void setToForeGround(ISimulationPluginPageWrapper toForeground) {
 		if (previouslyInForeground.keySet().contains(toForeground)) {
 			beforeForegroundChangeHelper();
 			currentlyInForeground = previouslyInForeground.get(toForeground);
 			afterForegroundChangeHelper();
 		} else {			
 			beforeForegroundChangeHelper();
-			currentlyInForeground = toForeground.getPageContent(this);
+			currentlyInForeground = toForeground.getPageComposite(pluginPage);
 			afterForegroundChangeHelper();
 			if (currentlyInForeground != null) {
 				previouslyInForeground.put(toForeground, currentlyInForeground);
 			}
 		}
-		this.layout();
+		pluginPage.layout();
 	}
 	
 	private void beforeForegroundChangeHelper(){
 		if (currentlyInForeground != null){
 			currentlyInForeground.setVisible(false);
-			currentlyInForeground.setParent(backgroundParent);
+			currentlyInForeground.setParent(currentlyInBackgroundsParent);
 		}
 	}
 	
 	private void afterForegroundChangeHelper(){
 		if (currentlyInForeground != null){
 			currentlyInForeground.setVisible(true);
-			currentlyInForeground.setParent(this);
+			currentlyInForeground.setParent(pluginPage);
 		}
 	}
 	

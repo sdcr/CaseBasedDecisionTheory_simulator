@@ -16,17 +16,17 @@ public class Controller {
 	public Controller(BundleContext context) {
 		this.context = context;
 		
-		pluginStore = new SimPluginStore();
+//		pluginStore = new SimPluginStore();
 
-		SimulationPluginExtensionHandler extensionHandler = new SimulationPluginExtensionHandler();
+		SimulationPluginManager extensionHandler = new SimulationPluginManager();
 		// add extensions to model which are already "installed"
 		for(ISimulationPlugin iSimPlugin : extensionHandler.getActiveISimulationPlugins()){
-			pluginStore.addSimPlugin(iSimPlugin);	
+//			pluginStore.addSimPlugin(iSimPlugin);	
 		}
 		
-		MainView mainView = new MainView(this, pluginStore);
-		pluginStore.setMainView(mainView);		
-		mainView.updateFromModel();
+		MainView mainView = new MainView(this);
+//		pluginStore.setMainView(mainView);		
+//		mainView.updateFromModel();
 		mainView.startView();
 
 	}

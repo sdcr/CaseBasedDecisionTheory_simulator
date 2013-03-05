@@ -1,37 +1,28 @@
 package simulation.core.view;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import simulation.core.control.SimulationPluginManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageContentWrapper;
 
-public class PluginsBar extends Composite {
+public class PluginsBar extends Composite implements Observer{
 
-	private PluginPane pluginPane;
 	private TreeViewer viewer;
 
 	public PluginsBar(Composite parent, int style) {
 		super(parent, style | SWT.BORDER);
 		System.out.println("create the pluginsbar");
-
-		// init coloring
-//		Color simulationPluginsBackgroundColor = new Color(parent.getDisplay(),
-//				150, 150, 255);
-//		setBackground(simulationPluginsBackgroundColor);
-
+		
 		// initialize this objects behaviour within the parent
 		GridData pluginsBarGridData = new GridData();
 		pluginsBarGridData.verticalAlignment = GridData.FILL;
@@ -46,6 +37,10 @@ public class PluginsBar extends Composite {
 		Label pluginsBarTitle = new Label(this, SWT.NONE);
 		pluginsBarTitle.setText("Simulatios-Modul Explorer");
 
+		createTreeViewer();
+	}
+
+	private void createTreeViewer() {
 		Composite viewerComposite = new Composite(this, SWT.NONE);
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
@@ -57,30 +52,25 @@ public class PluginsBar extends Composite {
 		viewer = new TreeViewer(viewerComposite, SWT.BORDER_SOLID);
 		viewer.setContentProvider(new PluginsBarTreeContentProvider());
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
-		
-		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
-
-			@Override
-			public void selectionChanged(SelectionChangedEvent event) {
-				if (event.getSelection() instanceof IStructuredSelection) {
-					IStructuredSelection selection = (IStructuredSelection) event
-							.getSelection();
-					if (selection.getFirstElement() instanceof ISimulationPluginPageContentWrapper) {
-						ISimulationPluginPageContentWrapper newForegroundPaneContent = ((ISimulationPluginPageContentWrapper) selection
-								.getFirstElement());
-						pluginPane.setToForeGround(newForegroundPaneContent);
-					}
-				}
-			}
-		});
 	}
 
-	public void setPluginPane(PluginPane pluginPane) {
-		this.pluginPane = pluginPane;
+	public void setPluginPane(PluginPageManager pluginPane) {
+		viewer.addSelectionChangedListener(
+				new PluginsBarSelectionChangeListener(pluginPane));
 	}
 
 	public void update(List<ISimulationPlugin> plugins) {
 		viewer.setInput(plugins);
+	}
+
+	public void setPluginManager(SimulationPluginManager pluginManager) {
+		pluginManager.addObserver(this);
+		update(pluginManager, null);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//TODO update shown plugins in the bar
 	}
 
 }
