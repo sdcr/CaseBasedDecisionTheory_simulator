@@ -1,6 +1,8 @@
 package simulation.core.view;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,13 +20,14 @@ import simulation.core.control.Controller;
 import simulation.core.control.SimulationPluginManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class MainView implements Observer{
+public class MainView {
 
 	private PluginsBar pluginsBar;
 	private PluginPageManager pluginPane;
 	private Controller controller;
 	private Shell shell;
-	private Menu menuBar;
+
+	private MenuManager menuManager;
 
 	public MainView(final Controller controller) {
 		this.controller = controller;
@@ -57,53 +60,14 @@ public class MainView implements Observer{
 		pluginPane = new PluginPageManager(shell, SWT.NONE);
 		pluginsBar.setPluginPane(pluginPane);
 		
-		createMenuBar(shell);
-	}
-
-	private void createMenuBar(Shell shell) {
-		menuBar = new Menu(shell, SWT.BAR);
-		
-		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-		fileMenuHeader.setText("&File");
-	    Menu fileMenu = new Menu(shell, SWT.DROP_DOWN);
-	    fileMenuHeader.setMenu(fileMenu);
-	    MenuItem fileAddPluginItem = new MenuItem(fileMenu, SWT.PUSH);
-	    fileAddPluginItem.setText("&Add a plugin");
-	    fileAddPluginItem.addSelectionListener(new AddPluginMenuItemSelectionListener(shell, controller));
-		
-		MenuItem helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-	    helpMenuHeader.setText("&Help");
-	    Menu helpMenu = new Menu(shell, SWT.DROP_DOWN);
-	    helpMenuHeader.setMenu(helpMenu);
-	    MenuItem helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
-	    helpGetHelpItem.setText("&Get Help");
-	    
-	    shell.setMenuBar(menuBar);
-	    
-	    
+		menuManager = new MenuManager();
+		menuManager.createMenuBar(shell);
 	}
 	
 	public void setPluginManager(SimulationPluginManager pluginManager){
-		pluginManager.addObserver(this);
-		update(pluginManager, null);
+		pluginManager.addObserver(menuManager);
+		menuManager.update(pluginManager, null);
 		pluginsBar.setPluginManager(pluginManager);
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO update the shown menu
-		if(arg0 instanceof SimulationPluginManager){
-			MenuItem[] currentMenuHeaders = menuBar.getItems();
-			SimulationPluginManager pluginManager = (SimulationPluginManager)arg0;
-	
-			@SuppressWarnings("unused")
-			List<ISimulationPlugin> list = pluginManager.getActiveISimulationPlugins();
-			
-			@SuppressWarnings("unused")
-			int i=0;
-//			if(currentMenuHeaders)
-//			viewer.setInput(((SimulationPluginManager)arg0).getActiveISimulationPlugins());
-		}
 	}
 
 	public void showMessage(String message) {
