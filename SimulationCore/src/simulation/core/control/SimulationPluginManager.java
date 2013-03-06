@@ -76,6 +76,8 @@ public class SimulationPluginManager extends Observable implements
 				Object o = config.createExecutableExtension("class");
 				if (o instanceof ISimulationPlugin) {
 					// TODO add plugin to model
+					setChanged();
+					notifyObservers();
 				}
 			} catch (CoreException e) {
 				e.printStackTrace();

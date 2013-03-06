@@ -11,11 +11,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
 import simulation.core.control.SimulationPluginManager;
-import simulation.core.model.SimPluginStore;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainView implements Observer{
@@ -24,6 +24,7 @@ public class MainView implements Observer{
 	private PluginPageManager pluginPane;
 	private Controller controller;
 	private Shell shell;
+	private Menu menuBar;
 
 	public MainView(final Controller controller) {
 		this.controller = controller;
@@ -60,17 +61,26 @@ public class MainView implements Observer{
 	}
 
 	private void createMenuBar(Shell shell) {
-		Menu menuBar = new Menu(shell, SWT.BAR);
+		menuBar = new Menu(shell, SWT.BAR);
+		
+		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+		fileMenuHeader.setText("&File");
+	    Menu fileMenu = new Menu(shell, SWT.DROP_DOWN);
+	    fileMenuHeader.setMenu(fileMenu);
+	    MenuItem fileAddPluginItem = new MenuItem(fileMenu, SWT.PUSH);
+	    fileAddPluginItem.setText("&Add a plugin");
+	    fileAddPluginItem.addSelectionListener(new AddPluginMenuItemSelectionListener(shell, controller));
+		
 		MenuItem helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 	    helpMenuHeader.setText("&Help");
-
 	    Menu helpMenu = new Menu(shell, SWT.DROP_DOWN);
 	    helpMenuHeader.setMenu(helpMenu);
-
 	    MenuItem helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
 	    helpGetHelpItem.setText("&Get Help");
 	    
 	    shell.setMenuBar(menuBar);
+	    
+	    
 	}
 	
 	public void setPluginManager(SimulationPluginManager pluginManager){
@@ -82,7 +92,24 @@ public class MainView implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO update the shown menu
-		
+		if(arg0 instanceof SimulationPluginManager){
+			MenuItem[] currentMenuHeaders = menuBar.getItems();
+			SimulationPluginManager pluginManager = (SimulationPluginManager)arg0;
+	
+			@SuppressWarnings("unused")
+			List<ISimulationPlugin> list = pluginManager.getActiveISimulationPlugins();
+			
+			@SuppressWarnings("unused")
+			int i=0;
+//			if(currentMenuHeaders)
+//			viewer.setInput(((SimulationPluginManager)arg0).getActiveISimulationPlugins());
+		}
+	}
+
+	public void showMessage(String message) {
+		MessageBox messageBox = new MessageBox(shell);
+		messageBox.setMessage(message);
+		messageBox.open();
 	}
 
 	// private void addPluginAdd(Shell shell, final BundleContext context){
