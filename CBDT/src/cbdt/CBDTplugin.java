@@ -29,18 +29,19 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
-	public Menu getMenu(Shell shell, Menu menuBar) {
+	public Menu getMenu(Shell shell, Menu menuBar, int index) {
+		System.out.println("create the menu");
 		Menu cbdtMenu = new Menu(shell, SWT.DROP_DOWN);
-	    MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-	    fileMenuHeader.setText("&File");
+	    MenuItem cbdtMenuHeader = new MenuItem(menuBar, SWT.CASCADE, index);
+	    cbdtMenuHeader.setText("&CBDT");
 
-	    fileMenuHeader.setMenu(cbdtMenu);
+	    cbdtMenuHeader.setMenu(cbdtMenu);
 
 	    MenuItem fileSaveItem = new MenuItem(cbdtMenu, SWT.PUSH);
-	    fileSaveItem.setText("&Save");
+	    fileSaveItem.setText("&Bla1");
 
 	    MenuItem fileExitItem = new MenuItem(cbdtMenu, SWT.PUSH);
-	    fileExitItem.setText("E&xit");
+	    fileExitItem.setText("Bla2");
 	    
 		return cbdtMenu;
 	}
