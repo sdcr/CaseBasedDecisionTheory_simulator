@@ -60,7 +60,7 @@ public class MainView {
 	}
 	
 	public void setPluginManager(SimulationPluginManager pluginManager){
-		pluginManager.addObserver(menuManager);
+//		pluginManager.addObserver(menuManager);
 		menuManager.update(pluginManager, null);
 		pluginsBar.setPluginManager(pluginManager);
 	}

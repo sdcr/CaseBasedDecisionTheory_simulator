@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -27,7 +26,7 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
  * This class should only be instantiated once on application startup.
  * @author S-lenovo
  */
-public class SimulationPluginManager extends Observable {
+public class SimulationPluginManager {
 
 	public static final String EXTENSION_POINT_ID = "simulation.extensionpoint.simulationplugin";
 

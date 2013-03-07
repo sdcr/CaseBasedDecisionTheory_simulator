@@ -25,7 +25,7 @@ public class Controller {
 	}
 
 	/**
-	 * Stops the SimulationCore application.
+	 * Stops the SimulationCore application, by stopping the system bundle.
 	 */
 	public void stopApplication() {
 		try {

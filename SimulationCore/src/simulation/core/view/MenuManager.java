@@ -3,8 +3,6 @@ package simulation.core.view;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
@@ -15,7 +13,7 @@ import simulation.core.control.Controller;
 import simulation.core.control.SimulationPluginManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class MenuManager implements Observer {
+public class MenuManager {
 
 	private static final int PLUGINS_MENU_POSITION_INDEX = 1;
 	private Menu menuBar;
@@ -72,8 +70,7 @@ public class MenuManager implements Observer {
 	    removePluginMenuHeader.setMenu(removePluginMenu);
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(SimulationPluginManager arg0, Object arg1) {
 		// update the shown menu
 		if(arg0 instanceof SimulationPluginManager){
 			SimulationPluginManager pluginManager = (SimulationPluginManager)arg0;			

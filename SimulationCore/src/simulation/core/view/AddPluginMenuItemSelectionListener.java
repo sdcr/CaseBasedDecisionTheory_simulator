@@ -8,6 +8,11 @@ import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
 
+/**
+ * Shows a file dialog to select a filepath to a bundle, which in turn defines 
+ * an ISimulationPlugin which should be added.
+ * @author S-lenovo
+ */
 public class AddPluginMenuItemSelectionListener implements SelectionListener{
 
 	private Shell shell;
@@ -20,15 +25,15 @@ public class AddPluginMenuItemSelectionListener implements SelectionListener{
 	
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-        FileDialog fd = new FileDialog(shell, SWT.OPEN);
-        fd.setText("Add a plugin");
-        fd.setFilterPath("C:/");
+        FileDialog fileDialog = new FileDialog(shell, SWT.OPEN);
+        fileDialog.setText("Add a plugin");
+        fileDialog.setFilterPath("C:/");
         String[] filterExt = { "*.jar", "*.*" };
-        fd.setFilterExtensions(filterExt);
-        String selected = fd.open();
+        fileDialog.setFilterExtensions(filterExt);
+        String filepath = fileDialog.open();
         
-        if(selected!=null){
-        	controller.addISimulationPlugin(selected);
+        if(filepath!=null){
+        	controller.addISimulationPlugin(filepath);
         }
 	}
 

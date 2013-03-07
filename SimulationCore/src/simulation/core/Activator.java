@@ -15,7 +15,6 @@ public class Activator implements BundleActivator {
 	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Hello World from SimulationCore!!");
 		new Controller(context);
 	}
 
@@ -26,7 +25,6 @@ public class Activator implements BundleActivator {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Goodbye World from SimulationCore!!");
 	}
 
 }

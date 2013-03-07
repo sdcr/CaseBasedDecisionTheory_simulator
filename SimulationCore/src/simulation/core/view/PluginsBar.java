@@ -1,8 +1,6 @@
 package simulation.core.view;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -15,7 +13,7 @@ import org.eclipse.swt.widgets.Label;
 import simulation.core.control.SimulationPluginManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class PluginsBar extends Composite implements Observer{
+public class PluginsBar extends Composite {
 
 	private TreeViewer viewer;
 
@@ -64,12 +62,11 @@ public class PluginsBar extends Composite implements Observer{
 	}
 
 	public void setPluginManager(SimulationPluginManager pluginManager) {
-		pluginManager.addObserver(this);
+//		pluginManager.addObserver(this);
 		update(pluginManager, null);
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	public void update(SimulationPluginManager o, Object arg) {
 		//TODO update shown plugins in the bar
 		if(o instanceof SimulationPluginManager){
 			viewer.setInput(((SimulationPluginManager)o).getISimulationPlugins());
