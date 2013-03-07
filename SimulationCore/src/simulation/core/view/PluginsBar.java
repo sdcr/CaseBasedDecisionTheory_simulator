@@ -72,7 +72,7 @@ public class PluginsBar extends Composite implements Observer{
 	public void update(Observable o, Object arg) {
 		//TODO update shown plugins in the bar
 		if(o instanceof SimulationPluginManager){
-			viewer.setInput(((SimulationPluginManager)o).getActiveISimulationPlugins());
+			viewer.setInput(((SimulationPluginManager)o).getISimulationPlugins());
 		}
 	}
 

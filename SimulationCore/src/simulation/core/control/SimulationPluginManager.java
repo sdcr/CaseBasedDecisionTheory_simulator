@@ -11,7 +11,6 @@ import java.util.Observable;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
 import org.eclipse.core.runtime.spi.RegistryContributor;
 import org.osgi.framework.Bundle;
@@ -20,77 +19,115 @@ import org.osgi.framework.BundleException;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
+/**
+ * Instantiates the ISimulationPlugins defined by all active bundles. Plugin 
+ * instantiation is only done on object creation of this class. Furthermore,  
+ * this class allows the installing and uninstalling of new bundles. 
+ * 
+ * This class should only be instantiated once on application startup.
+ * @author S-lenovo
+ */
 public class SimulationPluginManager extends Observable {
 
 	public static final String EXTENSION_POINT_ID = "simulation.extensionpoint.simulationplugin";
-	private IExtensionRegistry extensionRegistry;
 
 	private BundleContext context;
-	private Map<ISimulationPlugin,String> pluginToContributorID;
+	
+	/** 
+	 * Maps from an ISimulationPlugin object to the ID of 
+	 * the bundle in which the plugin was defined. 
+	 * */ 
+	private Map<ISimulationPlugin,Long> pluginToContributorID;
 	
 	/**
-	 * Sets up itself as the listener for new simulation plugin extensions.
+	 * Instantiates the ISimulationPlugin objects which are defined by active bundles.
+	 * @param context
 	 */
 	public SimulationPluginManager(BundleContext context) {
 		this.context = context;
-		extensionRegistry = RegistryFactory.getRegistry();
-		pluginToContributorID = new HashMap<ISimulationPlugin, String>();
+		pluginToContributorID = new HashMap<ISimulationPlugin, Long>();
+		instantiateISimulationPlugins();
 	}
 
-	
-	public List<ISimulationPlugin> getActiveISimulationPlugins() {
-		List<ISimulationPlugin> activeISimulationPlugins = new ArrayList<ISimulationPlugin>();
-		
-		IConfigurationElement[] configurations = extensionRegistry
+	/**
+	 * Instantiates the ISimulationPlugin objects of defined by active bundles.
+	 */
+	private void instantiateISimulationPlugins(){
+		IConfigurationElement[] configurations = RegistryFactory.getRegistry()
 				.getConfigurationElementsFor(EXTENSION_POINT_ID);
-		try {
-			for (IConfigurationElement e : configurations) {
-				final Object o = e.createExecutableExtension("class");
-				if (o instanceof ISimulationPlugin) {
-					ISimulationPlugin plugin = (ISimulationPlugin)o;
-					activeISimulationPlugins.add(plugin);
-					
-					RegistryContributor contributor = null;
-					String contributorID = null;
-					if(e.getContributor() instanceof RegistryContributor){
-						contributor = (RegistryContributor)e.getContributor();
-						contributorID = contributor.getId();
-					}
-					if(contributorID!=null){
-						pluginToContributorID.put(plugin, contributorID);
-					}
-				}
-			}
-		} catch (CoreException ex) {
-			System.out.println(ex.getMessage());
-		}
-		return activeISimulationPlugins;
-	}
 
-	public void installBundle(String filePath) throws FileNotFoundException, BundleException{
-    	File f = new File(filePath);
-    	FileInputStream fileStream;
-    	
-    	Bundle newBundle = null;
-    	try {
-    		fileStream = new FileInputStream(f);
-    		//filePath here may become a problem
-    		newBundle = context.installBundle(filePath, fileStream);
-    		newBundle.start();
-    	} catch (BundleException e1) {
-    		try {
-				newBundle.uninstall();
-			} catch (BundleException e) {
-				System.out.println("Could not uninstall the bundle which failed to start or install.");
+		for (IConfigurationElement configElement : configurations) {
+			Object instantiatedExtension = null;
+			try {
+				instantiatedExtension = configElement.createExecutableExtension("class");
+			} catch (CoreException e) {
 				e.printStackTrace();
 			}
-    		throw e1;
+			if (instantiatedExtension instanceof ISimulationPlugin) {
+				storePluginAndContributorID((ISimulationPlugin)instantiatedExtension, configElement);
+			}
+		}
+	}
+
+	/**
+	 * Puts the plugin object and the ID of the bundle, i.e. the contributor, which defines this plugin in a
+	 * hashmap.
+	 * @param plugin The ISimulationPlugin object to be stored.
+	 * @param configElement The IConfigurationElement which contains the information about the plugins contributor.
+	 */
+	private void storePluginAndContributorID(ISimulationPlugin plugin, IConfigurationElement configElement) {
+		if (configElement.getContributor() instanceof RegistryContributor) {
+			RegistryContributor contributor = (RegistryContributor) configElement.getContributor();
+			pluginToContributorID.put(plugin, Long.parseLong(contributor.getId()));
+		}
+	}
+	
+	/**
+	 * @return A list of the ISimulationPlugin objects, defined by bundles 
+	 * which were active when this class was instantiated.
+	 */
+	public List<ISimulationPlugin> getISimulationPlugins() {
+		List<ISimulationPlugin> ISimulationPlugins = new ArrayList<ISimulationPlugin>();
+		for(ISimulationPlugin plugin : pluginToContributorID.keySet())
+			ISimulationPlugins.add(plugin);
+		return ISimulationPlugins;
+	}
+
+	/**
+	 * Installs and starts a new bundle. To access a ISimulationPlugin object defined by the new bundle,
+	 * the application must be restarted and this object reinstantiated.
+	 * @param filePath The path to the bundle which should be installed. E.g. the path to a *.jar file.
+	 * @throws FileNotFoundException
+	 * @throws BundleException
+	 */
+	public void installBundle(String filePath) throws FileNotFoundException, BundleException{
+    	File file = new File(filePath);
+    	
+    	Bundle installedBundle = null;
+    	try {
+    		FileInputStream fileStream = new FileInputStream(file);
+    		installedBundle = context.installBundle(filePath, fileStream);
+    		installedBundle.start();
+    	} catch (BundleException e) {
+    		try {
+				installedBundle.uninstall();
+			} catch (BundleException e2) {
+				System.out.println("Could not uninstall the bundle which failed to start or install.");
+				e2.printStackTrace();
+			}
+    		//throwing the exception again, so that the calling class also reacts on the error.
+    		throw e;
     	}
 	}
 	
+	/**
+	 * Uninstalls the bundle which defines the passed ISimulationPlugin. Subsequently, the application
+	 * should be restarted and this class reinstantiated.
+	 * @param plugin The plugin, of which the defining bundle should be uninstalled.
+	 * @throws BundleException
+	 */
 	public void uninstallBundle(ISimulationPlugin plugin) throws BundleException{
-		String contributorID = pluginToContributorID.get(plugin);
-		Bundle bundle = context.getBundle(Long.parseLong(contributorID));
-		bundle.uninstall();
+		Long contributorID = pluginToContributorID.get(plugin);
+		context.getBundle(contributorID).uninstall();
 	}
 }

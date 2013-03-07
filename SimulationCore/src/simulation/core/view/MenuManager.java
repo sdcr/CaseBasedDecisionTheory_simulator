@@ -77,7 +77,7 @@ public class MenuManager implements Observer {
 		// update the shown menu
 		if(arg0 instanceof SimulationPluginManager){
 			SimulationPluginManager pluginManager = (SimulationPluginManager)arg0;			
-			List<ISimulationPlugin> activeSimPlugins = pluginManager.getActiveISimulationPlugins();
+			List<ISimulationPlugin> activeSimPlugins = pluginManager.getISimulationPlugins();
 			
 			for(ISimulationPlugin activePlugin : activeSimPlugins){
 				if(!pluginToRemoveMenuItem.keySet().contains(activePlugin)){
