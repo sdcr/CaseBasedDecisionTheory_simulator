@@ -6,21 +6,21 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
-import simulation.core.view.MainView;
+import simulation.core.view.MainViewManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class Controller {
 
 	private BundleContext context;
-	private MainView mainView;
+	private MainViewManager mainView;
 	private SimulationPluginManager pluginManager;
 
 	public Controller(BundleContext context) {
 		this.context = context;
 		pluginManager = new SimulationPluginManager(context);
 
-		mainView = new MainView(this);
-		mainView.setPluginManager(pluginManager);
+		mainView = new MainViewManager(this);
+		mainView.updateView(pluginManager);
 		mainView.startView();
 	}
 
@@ -78,7 +78,7 @@ public class Controller {
 	private void restartApplication(){
 		try {
 			getSystemBundle().update();
-			mainView.disposeShell();
+			mainView.disposeView();
 		} catch (BundleException e) {
 			mainView.showMessage("The application restart failed.");
 			e.printStackTrace();

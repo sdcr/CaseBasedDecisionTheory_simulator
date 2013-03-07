@@ -1,4 +1,4 @@
-package simulation.core.view;
+package simulation.core.view.menu;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,25 +70,22 @@ public class MenuManager {
 	    removePluginMenuHeader.setMenu(removePluginMenu);
 	}
 
-	public void update(SimulationPluginManager arg0, Object arg1) {
-		// update the shown menu
-		if(arg0 instanceof SimulationPluginManager){
-			SimulationPluginManager pluginManager = (SimulationPluginManager)arg0;			
-			List<ISimulationPlugin> activeSimPlugins = pluginManager.getISimulationPlugins();
+	public void update(SimulationPluginManager pluginManager) {
+		List<ISimulationPlugin> activeSimPlugins = pluginManager.getISimulationPlugins();
 			
-			for(ISimulationPlugin activePlugin : activeSimPlugins){
-				if(!pluginToRemoveMenuItem.keySet().contains(activePlugin)){
-					//create the plugins menu item and remove menu item 
-					addMenuItems(activePlugin);
-				}
+		for (ISimulationPlugin activePlugin : activeSimPlugins) {
+			if (!pluginToRemoveMenuItem.keySet().contains(activePlugin)) {
+				// create the plugins menu item and remove menu item
+				addMenuItems(activePlugin);
 			}
-			for(ISimulationPlugin shownPlugin : pluginToRemoveMenuItem.keySet()){
-				if(!activeSimPlugins.contains(shownPlugin)){
-					//remove the remove menu item and the menu for the shownplugin from 
-				}
-			}
-			
 		}
+		for (ISimulationPlugin shownPlugin : pluginToRemoveMenuItem.keySet()) {
+			if (!activeSimPlugins.contains(shownPlugin)) {
+				// remove the remove menu item and the menu for the shownplugin
+				// from
+			}
+		}
+	
 	}
 
 	private void addMenuItems(ISimulationPlugin activePlugin) {

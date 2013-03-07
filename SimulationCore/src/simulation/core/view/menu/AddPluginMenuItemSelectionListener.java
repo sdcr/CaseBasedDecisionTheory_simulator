@@ -1,4 +1,4 @@
-package simulation.core.view;
+package simulation.core.view.menu;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;

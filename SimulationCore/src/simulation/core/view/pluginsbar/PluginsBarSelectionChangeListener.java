@@ -1,16 +1,17 @@
-package simulation.core.view;
+package simulation.core.view.pluginsbar;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 
+import simulation.core.view.ForegroundManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
 
 public class PluginsBarSelectionChangeListener implements ISelectionChangedListener{
 
-	private PluginPageManager pluginPane;
+	private ForegroundManager pluginPane;
 
-	public PluginsBarSelectionChangeListener(PluginPageManager pluginPane) {
+	public PluginsBarSelectionChangeListener(ForegroundManager pluginPane) {
 		this.pluginPane = pluginPane;
 	}
 	

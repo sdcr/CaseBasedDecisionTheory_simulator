@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
 
-public class PluginPageManager {
+public class ForegroundManager {
 
 	Map<ISimulationPluginPageWrapper, Composite> previouslyInForeground;
 	Composite currentlyInForeground;
@@ -20,7 +20,7 @@ public class PluginPageManager {
 	
 	private Composite pluginPage;
 
-	public PluginPageManager(Composite parent, int style) {
+	public ForegroundManager(Composite parent, int style) {
 		pluginPage = new Composite(parent, style);
 
 		// initialize

@@ -1,4 +1,4 @@
-package simulation.core.view;
+package simulation.core.view.pluginsbar;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import simulation.core.control.SimulationPluginManager;
+import simulation.core.view.ForegroundManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class PluginsBar extends Composite {
@@ -52,25 +53,13 @@ public class PluginsBar extends Composite {
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
 	}
 
-	public void setPluginPane(PluginPageManager pluginPane) {
+	public void setPluginPane(ForegroundManager pluginPane) {
 		viewer.addSelectionChangedListener(
 				new PluginsBarSelectionChangeListener(pluginPane));
 	}
 
-	public void update(List<ISimulationPlugin> plugins) {
-		viewer.setInput(plugins);
-	}
-
-	public void setPluginManager(SimulationPluginManager pluginManager) {
-//		pluginManager.addObserver(this);
-		update(pluginManager, null);
-	}
-
-	public void update(SimulationPluginManager o, Object arg) {
-		//TODO update shown plugins in the bar
-		if(o instanceof SimulationPluginManager){
-			viewer.setInput(((SimulationPluginManager)o).getISimulationPlugins());
-		}
+	public void update(SimulationPluginManager o) {
+		viewer.setInput(((SimulationPluginManager)o).getISimulationPlugins());
 	}
 
 }

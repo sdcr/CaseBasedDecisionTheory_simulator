@@ -1,4 +1,4 @@
-package simulation.core.view;
+package simulation.core.view.pluginsbar;
 
 import java.util.List;
 
