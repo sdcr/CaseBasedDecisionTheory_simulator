@@ -13,11 +13,10 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 public class FileMenuWrapper {
 
 	private Menu fileMenu;
+	private Controller controller;
 	
 	private MenuItem addPluginItem;
 	private Menu removePluginMenu;
-	private Controller controller;
-
 	private MenuItem removePluginMenuHeader;
 	
 	/**
