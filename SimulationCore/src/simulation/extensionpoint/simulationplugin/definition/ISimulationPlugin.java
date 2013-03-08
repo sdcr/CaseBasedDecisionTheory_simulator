@@ -2,8 +2,8 @@ package simulation.extensionpoint.simulationplugin.definition;
 
 import java.util.List;
 
+import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Shell;
 
 
 public interface ISimulationPlugin {
@@ -21,7 +21,7 @@ public interface ISimulationPlugin {
 	 * @param index The index of the position on the menubar at which the menu should be created.  
 	 * @return The menu which is displayed for this plugin.
 	 */
-	Menu getMenu(Shell shell, Menu menuBar, int index);
+	Menu getMenu(Decorations shell, Menu menuBar, int index);
 	
 	/**
 	 * @return A list of ISimulationPluginPageWrapper, whose contents will be displayed on the 

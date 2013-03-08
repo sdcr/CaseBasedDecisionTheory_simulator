@@ -52,6 +52,11 @@ public class PluginsBar extends Composite {
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
 	}
 
+	/**
+	 * Set the ForegroundManager which should be used when a plugin page should be put 
+	 * in foreground.
+	 * @param foregroundManager
+	 */
 	public void setForegroundManager(ForegroundManager foregroundManager){
 		if(pluginsBarSelectionChangeListener!=null)
 			viewer.removeSelectionChangedListener(pluginsBarSelectionChangeListener);

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
 import simulation.core.control.SimulationPluginManager;
-import simulation.core.view.menu.MenuManager;
+import simulation.core.view.menu.MenuBar;
 import simulation.core.view.pluginsbar.PluginsBar;
 
 public class MainViewManager {
@@ -20,7 +20,7 @@ public class MainViewManager {
 	private Controller controller;
 	private Shell shell;
 
-	private MenuManager menuManager;
+	private MenuBar menuBar;
 
 	public MainViewManager(final Controller controller) {
 		this.controller = controller;
@@ -68,8 +68,7 @@ public class MainViewManager {
 		foregroundManager = new ForegroundManager(pluginPane);
 		pluginsBar.setForegroundManager(foregroundManager);
 		
-		menuManager = new MenuManager(controller);
-		menuManager.createMenuBar(shell);
+		menuBar = new MenuBar(shell, controller);
 	}
 	
 	/**
@@ -77,7 +76,7 @@ public class MainViewManager {
 	 * @param pluginManager
 	 */
 	public void updateView(SimulationPluginManager pluginManager){
-		menuManager.update(pluginManager);
+		menuBar.addMenuElements(pluginManager.getISimulationPlugins());
 		pluginsBar.update(pluginManager);
 	}
 

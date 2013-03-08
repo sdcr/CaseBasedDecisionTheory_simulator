@@ -37,8 +37,8 @@ public class Controller {
 
 	/**
 	 * Adds a ISimulationplugin instance defined in a bundle. A plugin is defined as added, once its 
-	 * bundle is installed, and the application has been restarted. 
-	 * @param filePath The path to the bundle, which contains the plugin which is to be added.
+	 * bundle is installed and the application has been restarted. 
+	 * @param filePath The path to the bundle, which defines the plugin which is to be added.
 	 */
 	public void addISimulationPlugin(String filePath) {
 		//TODO query user with a message box if the application can be restarted
@@ -56,8 +56,8 @@ public class Controller {
 	
 
 	/**
-	 * Removes a plugin. A plugin is defined as removed once its bundle has been uninstalled 
-	 * and the application restarted.
+	 * Removes an ISimulationPlugin. An ISimulationPlugin is defined as removed once its defining bundle 
+	 * has been uninstalled and the application was restarted.
 	 * @param plugin
 	 */
 	public void removeISimulationPlugin(ISimulationPlugin plugin){
