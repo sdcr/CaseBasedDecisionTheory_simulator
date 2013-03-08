@@ -1,7 +1,5 @@
 package simulation.core.view.pluginsbar;
 
-import java.util.List;
-
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -12,30 +10,31 @@ import org.eclipse.swt.widgets.Label;
 
 import simulation.core.control.SimulationPluginManager;
 import simulation.core.view.ForegroundManager;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
+/**
+ * This class is a Composite which shows the available ISimulationPlugins and their showable
+ * page contents in a tree viewer.
+ * @author S-lenovo
+ */
 public class PluginsBar extends Composite {
 
 	private TreeViewer viewer;
+	private PluginsBarSelectionChangeListener pluginsBarSelectionChangeListener;
 
 	public PluginsBar(Composite parent, int style) {
 		super(parent, style | SWT.BORDER);
-		System.out.println("create the pluginsbar");
 		
-		// initialize this objects behaviour within the parent
 		GridData pluginsBarGridData = new GridData();
 		pluginsBarGridData.verticalAlignment = GridData.FILL;
 		pluginsBarGridData.grabExcessVerticalSpace = true;
 		pluginsBarGridData.widthHint = 200;
-		setLayoutData(pluginsBarGridData);
+		this.setLayoutData(pluginsBarGridData);
 
-		// init layout of objects in this object
 		GridLayout gridLayout = new GridLayout(1, false);
 		this.setLayout(gridLayout);
 		
 		Label pluginsBarTitle = new Label(this, SWT.NONE);
 		pluginsBarTitle.setText("Simulatios-Modul Explorer");
-
 		createTreeViewer();
 	}
 
@@ -53,13 +52,20 @@ public class PluginsBar extends Composite {
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
 	}
 
-	public void setPluginPane(ForegroundManager pluginPane) {
-		viewer.addSelectionChangedListener(
-				new PluginsBarSelectionChangeListener(pluginPane));
+	public void setForegroundManager(ForegroundManager foregroundManager){
+		if(pluginsBarSelectionChangeListener!=null)
+			viewer.removeSelectionChangedListener(pluginsBarSelectionChangeListener);
+		pluginsBarSelectionChangeListener = new PluginsBarSelectionChangeListener(foregroundManager);
+		viewer.addSelectionChangedListener(pluginsBarSelectionChangeListener);
 	}
-
-	public void update(SimulationPluginManager o) {
-		viewer.setInput(((SimulationPluginManager)o).getISimulationPlugins());
+	
+	/**
+	 * Update the treeviewer with the available ISimulationPlugins from the passed
+	 * pluginManager.
+	 * @param pluginManager
+	 */
+	public void update(SimulationPluginManager pluginManager) {
+		viewer.setInput(pluginManager.getISimulationPlugins());
 	}
 
 }

@@ -23,8 +23,6 @@ public class PluginsBarTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-//		List<ISimulationPlugin> list = new ArrayList<ISimulationPlugin>();
-//		list.add(plugin);
 		return plugins.toArray();
 	}
 

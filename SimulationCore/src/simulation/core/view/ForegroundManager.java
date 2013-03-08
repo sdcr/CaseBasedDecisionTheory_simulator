@@ -4,69 +4,60 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
 
+/**
+ * Manages which pluginPage Composite is shown on the application in foreground. 
+ * @author S-lenovo
+ */
 public class ForegroundManager {
 
-	Map<ISimulationPluginPageWrapper, Composite> previouslyInForeground;
-	Composite currentlyInForeground;
+	private Map<ISimulationPluginPageFactory, Composite> pluginPagesPreviouslyInForeground;
+	private Composite currentlyInForeground;
 	private Composite currentlyInBackgroundsParent;
-	
-	private Composite pluginPage;
+	private Composite pluginPane;
 
-	public ForegroundManager(Composite parent, int style) {
-		pluginPage = new Composite(parent, style);
-
-		// initialize
-		previouslyInForeground = new HashMap<ISimulationPluginPageWrapper, Composite>();
+	public ForegroundManager(Composite foregroundParent) {
+		pluginPane = foregroundParent;
+		pluginPagesPreviouslyInForeground = new HashMap<ISimulationPluginPageFactory, Composite>();
 		currentlyInBackgroundsParent = new Composite(new Shell(), SWT.NONE);
-
-		Color mainPaneColor = new Color(parent.getDisplay(), 200, 200, 200);
-		pluginPage.setBackground(mainPaneColor);
-
-		GridData mainPaneGridData = new GridData();
-		mainPaneGridData.verticalAlignment = GridData.FILL;
-		mainPaneGridData.horizontalAlignment = GridData.FILL;
-		mainPaneGridData.grabExcessHorizontalSpace = true;
-		pluginPage.setLayoutData(mainPaneGridData);
-		
-		pluginPage.setLayout(new FillLayout());
 	}
 
-
-	public void setToForeGround(ISimulationPluginPageWrapper toForeground) {
-		if (previouslyInForeground.keySet().contains(toForeground)) {
-			beforeForegroundChangeHelper();
-			currentlyInForeground = previouslyInForeground.get(toForeground);
-			afterForegroundChangeHelper();
+	/**
+	 * Sets the composite which the pageWrapper wraps to the foreground. It the composite
+	 * has already been initialized, the existing composite is put to foreground.
+	 * It it does not yet exist, the composite is initialized with the pluginPane as parent.
+	 * @param pageWrapper The wrapper of the Composite which will be put in foreground.
+	 */
+	public void setToForeground(ISimulationPluginPageFactory pageWrapper) {
+		if (pluginPagesPreviouslyInForeground.keySet().contains(pageWrapper)) {
+			setParentToBackground(currentlyInForeground);
+			currentlyInForeground = pluginPagesPreviouslyInForeground.get(pageWrapper);
+			setParentToPluginPane(currentlyInForeground);
 		} else {			
-			beforeForegroundChangeHelper();
-			currentlyInForeground = toForeground.getPageComposite(pluginPage);
-			afterForegroundChangeHelper();
+			setParentToBackground(currentlyInForeground);
+			currentlyInForeground = pageWrapper.getPageComposite(pluginPane);
 			if (currentlyInForeground != null) {
-				previouslyInForeground.put(toForeground, currentlyInForeground);
+				pluginPagesPreviouslyInForeground.put(pageWrapper, currentlyInForeground);
 			}
 		}
-		pluginPage.layout();
+		pluginPane.layout();
 	}
 	
-	private void beforeForegroundChangeHelper(){
-		if (currentlyInForeground != null){
-			currentlyInForeground.setVisible(false);
-			currentlyInForeground.setParent(currentlyInBackgroundsParent);
+	private void setParentToBackground(Composite pluginPage){
+		if(pluginPage!=null){
+			pluginPage.setVisible(false);
+			pluginPage.setParent(currentlyInBackgroundsParent);	
 		}
 	}
 	
-	private void afterForegroundChangeHelper(){
-		if (currentlyInForeground != null){
-			currentlyInForeground.setVisible(true);
-			currentlyInForeground.setParent(pluginPage);
+	private void setParentToPluginPane(Composite pluginPage){
+		if(pluginPage!=null){
+			pluginPage.setVisible(true);
+			pluginPage.setParent(pluginPane);
 		}
 	}
 	

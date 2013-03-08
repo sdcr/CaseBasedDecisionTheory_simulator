@@ -5,12 +5,10 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
 
-public class AnalysisPaneContent implements ISimulationPluginPageWrapper{
+public class AnalysisPaneContent implements ISimulationPluginPageFactory{
 
-	private ISimulationPlugin plugin;
 	
 	@Override
 	public String getName() {
@@ -27,16 +25,6 @@ public class AnalysisPaneContent implements ISimulationPluginPageWrapper{
 		Label l = new Label(parameterComposite, SWT.NONE);
 		l.setText("Analyse");
 		return parameterComposite;
-	}
-
-	@Override
-	public ISimulationPlugin getSimulationPlugin() {
-		return plugin;
-	}
-
-	@Override
-	public void setSimulationPlugin(ISimulationPlugin plugin) {
-		this.plugin = plugin;
 	}
 
 }

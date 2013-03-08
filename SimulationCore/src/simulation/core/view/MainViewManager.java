@@ -62,9 +62,11 @@ public class MainViewManager {
 	 */
 	private void instantiateViewElements() {
 		shell.setLayout(new GridLayout(2, false));
+		
 		pluginsBar = new PluginsBar(shell, SWT.PUSH);
-		foregroundManager = new ForegroundManager(shell, SWT.NONE);
-		pluginsBar.setPluginPane(foregroundManager);
+		PluginPane pluginPane = new PluginPane(shell, SWT.NONE);
+		foregroundManager = new ForegroundManager(pluginPane);
+		pluginsBar.setForegroundManager(foregroundManager);
 		
 		menuManager = new MenuManager(controller);
 		menuManager.createMenuBar(shell);

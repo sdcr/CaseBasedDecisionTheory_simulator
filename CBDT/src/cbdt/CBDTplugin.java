@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
 import cbdt.controller.Controller;
 
 public class CBDTplugin implements ISimulationPlugin {
@@ -23,7 +23,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
-	public List<ISimulationPluginPageWrapper> getPageContents() {
+	public List<ISimulationPluginPageFactory> getPageContents() {
 		Controller controller = new Controller();
 		return controller.getPaneContents();
 	}

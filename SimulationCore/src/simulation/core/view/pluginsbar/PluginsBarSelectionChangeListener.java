@@ -5,25 +5,24 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 import simulation.core.view.ForegroundManager;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageWrapper;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
 
 public class PluginsBarSelectionChangeListener implements ISelectionChangedListener{
 
-	private ForegroundManager pluginPane;
+	private ForegroundManager foregroundManager;
 
-	public PluginsBarSelectionChangeListener(ForegroundManager pluginPane) {
-		this.pluginPane = pluginPane;
+	public PluginsBarSelectionChangeListener(ForegroundManager foregroundManager) {
+		this.foregroundManager = foregroundManager;
 	}
 	
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			IStructuredSelection selection = (IStructuredSelection) event
-					.getSelection();
-			if (selection.getFirstElement() instanceof ISimulationPluginPageWrapper) {
-				ISimulationPluginPageWrapper newForegroundPaneContent = ((ISimulationPluginPageWrapper) selection
+			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+			if (selection.getFirstElement() instanceof ISimulationPluginPageFactory) {
+				ISimulationPluginPageFactory newForegroundPaneContent = ((ISimulationPluginPageFactory) selection
 						.getFirstElement());
-				pluginPane.setToForeGround(newForegroundPaneContent);
+				foregroundManager.setToForeground(newForegroundPaneContent);
 			}
 		}		
 	}
