@@ -93,4 +93,15 @@ public class MainViewManager {
 		messageBox.setMessage(message);
 		messageBox.open();
 	}
+	
+	public boolean askUser(String question){
+	    MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION |SWT.YES | SWT.NO);
+	    messageBox.setMessage(question);
+	    int selectedButtonID = messageBox.open();
+	    
+	    if(selectedButtonID == SWT.YES)
+	    	return true;
+	    else
+	    	return false;
+	}
 }

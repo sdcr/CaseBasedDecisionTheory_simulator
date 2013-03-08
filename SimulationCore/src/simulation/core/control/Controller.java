@@ -41,10 +41,11 @@ public class Controller {
 	 * @param filePath The path to the bundle, which defines the plugin which is to be added.
 	 */
 	public void addISimulationPlugin(String filePath) {
-		//TODO query user with a message box if the application can be restarted
 		try {
-			pluginManager.installBundle(filePath);
-			this.restartApplication();
+			if(mainView.askUser("After the installation, the application has to restart. Proceed?")){
+				pluginManager.installBundle(filePath);
+				this.restartApplication();
+			}
 		} catch (FileNotFoundException e) {
     		mainView.showMessage("Could not find the selected file.");
 			e.printStackTrace();
@@ -61,10 +62,11 @@ public class Controller {
 	 * @param plugin
 	 */
 	public void removeISimulationPlugin(ISimulationPlugin plugin){
-		//TODO query user with a message box if the application can be restarted
 		try {
-			pluginManager.uninstallBundle(plugin);
-			this.restartApplication();
+			if(mainView.askUser("After the uninstallation, the application has to restart. Proceed?")){			
+				pluginManager.uninstallBundle(plugin);
+				this.restartApplication();
+			}
 		} catch (BundleException e) {
 			mainView.showMessage("Could not uninstall the selected bundle.");
 			e.printStackTrace();
