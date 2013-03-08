@@ -11,23 +11,24 @@ import simulation.core.control.Controller;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 /**
- * The menu bar hich is to be displayed in the applications shell.
+ * Wraps around the menu bar which is to be displayed in the applications shell.
  * @author S-lenovo
- *
  */
-public class MenuBar extends Menu{
+public class MenuBarWrapper {
 
 	private static final int PLUGINS_MENU_POSITION_INDEX_START = 1;
 	
 	private Decorations shell;
 	private FileMenu fileMenu;
+	
+	private Menu menuBar;
 
-	public MenuBar(Decorations shell, Controller controller) {
-		super(shell, SWT.BAR);
+	public MenuBarWrapper(Decorations shell, Controller controller) {
+		menuBar = new Menu(shell, SWT.BAR);
 		this.shell = shell;
 		
-		shell.setMenuBar(this);
-		fileMenu = new FileMenu(shell, SWT.DROP_DOWN, this, controller);
+		shell.setMenuBar(menuBar);
+		fileMenu = new FileMenu(shell, SWT.DROP_DOWN, menuBar, controller);
 		createHelpMenu();
 	}
 	
@@ -35,7 +36,7 @@ public class MenuBar extends Menu{
 	 * Creates the help menu and its content.
 	 */
 	private void createHelpMenu() {
-		MenuItem helpMenuHeader = new MenuItem(this, SWT.CASCADE);
+		MenuItem helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 	    helpMenuHeader.setText("&Help");
 	    Menu helpMenu = new Menu(shell, SWT.DROP_DOWN);
 	    helpMenuHeader.setMenu(helpMenu);
@@ -52,7 +53,7 @@ public class MenuBar extends Menu{
 		
 		int positionIndex = PLUGINS_MENU_POSITION_INDEX_START;
 		for(ISimulationPlugin plugin : simulaionPlugins){
-			plugin.getMenu(shell, this, positionIndex);
+			plugin.getMenu(shell, menuBar, positionIndex);
 			positionIndex++;
 		}
 	}	

@@ -10,35 +10,37 @@ import org.eclipse.swt.widgets.MenuItem;
 import simulation.core.control.Controller;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class FileMenu extends Menu {
+public class FileMenu  {
 
+	private Menu fileMenu;
+	
 	private MenuItem addPluginItem;
 	private Menu removePluginMenu;
 	private Controller controller;
-
+	
 	/**
-	 * The file menu which is to be displayed in the menu bar of the application. It contains MenuItems for
-	 * adding and removing ISimulation plugins.
+	 * Wraps around the Menu object which is to be displayed in the menu bar of the application as the file menu. 
+	 * The file menu contains MenuItems for adding and removing ISimulation plugins.
 	 * @param parent
 	 * @param style
 	 * @param menuBar
 	 * @param controller The controller which should be called upon user interaction with the file menu.
 	 */
 	public FileMenu(Decorations parent, int style, Menu menuBar, Controller controller) {
-		super(parent, style);
+		fileMenu = new Menu(parent, style);
 		this.controller = controller;
 		
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("&File");
-	    fileMenuHeader.setMenu(this);
+	    fileMenuHeader.setMenu(fileMenu);
 	    
-	    addPluginItem = new MenuItem(this, SWT.PUSH);
+	    addPluginItem = new MenuItem(fileMenu, SWT.PUSH);
 	    addPluginItem.setText("&Add a simulation plugin");
-	    addPluginItem.addSelectionListener(new AddPluginMenuItemSelectionListener(this.getShell(), controller));
+	    addPluginItem.addSelectionListener(new AddPluginMenuItemSelectionListener(fileMenu.getShell(), controller));
 	    
-	    MenuItem removePluginMenuHeader = new MenuItem(this, SWT.CASCADE);
+	    MenuItem removePluginMenuHeader = new MenuItem(fileMenu, SWT.CASCADE);
 	    removePluginMenuHeader.setText("&Remove plugin...");
-	    removePluginMenu = new Menu(this.getShell(), SWT.DROP_DOWN);
+	    removePluginMenu = new Menu(fileMenu.getShell(), SWT.DROP_DOWN);
 	    removePluginMenuHeader.setMenu(removePluginMenu);		
 	    removePluginMenu.setEnabled(false);
 	}
