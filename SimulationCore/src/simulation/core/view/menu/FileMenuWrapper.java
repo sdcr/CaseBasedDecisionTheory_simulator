@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import simulation.core.control.Controller;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
-public class FileMenu  {
+public class FileMenuWrapper {
 
 	private Menu fileMenu;
 	
@@ -26,7 +26,7 @@ public class FileMenu  {
 	 * @param menuBar
 	 * @param controller The controller which should be called upon user interaction with the file menu.
 	 */
-	public FileMenu(Decorations parent, int style, Menu menuBar, Controller controller) {
+	public FileMenuWrapper(Decorations parent, int style, Menu menuBar, Controller controller) {
 		fileMenu = new Menu(parent, style);
 		this.controller = controller;
 		

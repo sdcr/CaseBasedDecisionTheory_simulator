@@ -19,7 +19,7 @@ public class MenuBarWrapper {
 	private static final int PLUGINS_MENU_POSITION_INDEX_START = 1;
 	
 	private Decorations shell;
-	private FileMenu fileMenu;
+	private FileMenuWrapper fileMenu;
 	
 	private Menu menuBar;
 
@@ -28,7 +28,7 @@ public class MenuBarWrapper {
 		this.shell = shell;
 		
 		shell.setMenuBar(menuBar);
-		fileMenu = new FileMenu(shell, SWT.DROP_DOWN, menuBar, controller);
+		fileMenu = new FileMenuWrapper(shell, SWT.DROP_DOWN, menuBar, controller);
 		createHelpMenu();
 	}
 	
