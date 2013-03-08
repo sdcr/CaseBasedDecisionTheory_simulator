@@ -1,5 +1,7 @@
 package simulation.core.view.pluginsbar;
 
+import java.util.List;
+
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -8,8 +10,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import simulation.core.control.SimulationPluginManager;
 import simulation.core.view.ForegroundManager;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 /**
  * This class is a Composite which shows the available ISimulationPlugins and their showable
@@ -65,12 +67,11 @@ public class PluginsBar extends Composite {
 	}
 	
 	/**
-	 * Update the treeviewer with the available ISimulationPlugins from the passed
-	 * pluginManager.
+	 * Update the treeviewer with the available ISimulationPlugins.
 	 * @param pluginManager
 	 */
-	public void update(SimulationPluginManager pluginManager) {
-		viewer.setInput(pluginManager.getISimulationPlugins());
+	public void update(List<ISimulationPlugin> plugins) {
+		viewer.setInput(plugins);
 	}
 
 }

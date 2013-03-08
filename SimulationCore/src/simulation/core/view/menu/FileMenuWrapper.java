@@ -17,6 +17,8 @@ public class FileMenuWrapper {
 	private MenuItem addPluginItem;
 	private Menu removePluginMenu;
 	private Controller controller;
+
+	private MenuItem removePluginMenuHeader;
 	
 	/**
 	 * Wraps around the Menu object which is to be displayed in the menu bar of the application as the file menu. 
@@ -38,11 +40,11 @@ public class FileMenuWrapper {
 	    addPluginItem.setText("&Add a simulation plugin");
 	    addPluginItem.addSelectionListener(new AddPluginMenuItemSelectionListener(fileMenu.getShell(), controller));
 	    
-	    MenuItem removePluginMenuHeader = new MenuItem(fileMenu, SWT.CASCADE);
+	    removePluginMenuHeader = new MenuItem(fileMenu, SWT.CASCADE);
 	    removePluginMenuHeader.setText("&Remove plugin...");
 	    removePluginMenu = new Menu(fileMenu.getShell(), SWT.DROP_DOWN);
 	    removePluginMenuHeader.setMenu(removePluginMenu);		
-	    removePluginMenu.setEnabled(false);
+	    removePluginMenuHeader.setEnabled(false);
 	}
 
 	/**
@@ -50,6 +52,9 @@ public class FileMenuWrapper {
 	 * @param plugins
 	 */
 	public void addRemoveMenuItems(List<ISimulationPlugin> plugins){
+		if(plugins!=null && !plugins.isEmpty()){
+			removePluginMenuHeader.setEnabled(true);
+		}
 		for (ISimulationPlugin plugin : plugins) {
 			MenuItem removeMenuItem = new MenuItem(removePluginMenu, SWT.PUSH);
 			removeMenuItem.setText(plugin.getName());

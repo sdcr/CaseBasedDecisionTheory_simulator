@@ -1,5 +1,7 @@
 package simulation.core.view;
 
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -12,6 +14,7 @@ import simulation.core.control.Controller;
 import simulation.core.control.SimulationPluginManager;
 import simulation.core.view.menu.MenuBarWrapper;
 import simulation.core.view.pluginsbar.PluginsBar;
+import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainViewManager {
 
@@ -76,8 +79,9 @@ public class MainViewManager {
 	 * @param pluginManager
 	 */
 	public void updateView(SimulationPluginManager pluginManager){
-		menuBar.addMenuElements(pluginManager.getISimulationPlugins());
-		pluginsBar.update(pluginManager);
+		List<ISimulationPlugin> simulationPlugins = pluginManager.getISimulationPlugins();
+		menuBar.addMenuElements(simulationPlugins);
+		pluginsBar.update(simulationPlugins);
 	}
 
 	/**
