@@ -23,7 +23,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
-	public List<ISimulationPluginPageFactory> getPageContents() {
+	public List<ISimulationPluginPageFactory> getPageFactories() {
 		Controller controller = new Controller();
 		return controller.getPaneContents();
 	}
