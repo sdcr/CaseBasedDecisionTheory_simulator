@@ -80,6 +80,9 @@ public class MainViewManager {
 	 */
 	public void updateView(SimulationPluginManager pluginManager){
 		List<ISimulationPlugin> simulationPlugins = pluginManager.getISimulationPlugins();
+		for(ISimulationPlugin plugin : simulationPlugins){
+			plugin.setForegroundManager(foregroundManager);
+		}
 		menuBar.addMenuElements(simulationPlugins);
 		pluginsBar.update(simulationPlugins);
 	}

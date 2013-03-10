@@ -5,9 +5,9 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 
-public class AnalysisPageFactory implements ISimulationPluginPageFactory{
+public class AnalysisPageFactory extends AbstractPluginPageCompositeWrapper{
 
 	
 	@Override

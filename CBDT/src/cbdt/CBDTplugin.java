@@ -6,17 +6,28 @@ import java.util.List;
 import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Menu;
 
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
+import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.control.AnalysisController;
-import cbdt.control.IPageController;
 import cbdt.control.ParametersController;
 import cbdt.view.MenuFactory;
 
 public class CBDTplugin implements ISimulationPlugin {
 
-	public CBDTplugin() {
-		System.out.println("CBDTplugin created");
+	private ParametersController paramsController;
+	private AnalysisController analysisController;
+
+	/**
+	 * Obligatory nullary constructor.
+	 */
+	public CBDTplugin(){
+	}
+	
+	@Override
+	public void setForegroundManager(IForegroundManager foregroundManager) {
+		paramsController = new ParametersController(foregroundManager);
+		analysisController = new AnalysisController(foregroundManager);
 	}
 
 	@Override
@@ -25,13 +36,11 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
-	public List<ISimulationPluginPageFactory> getPageFactories() {
-		List<ISimulationPluginPageFactory> pageFactories = new ArrayList<ISimulationPluginPageFactory>();
+	public List<AbstractPluginPageCompositeWrapper> getPageFactories() {
+		List<AbstractPluginPageCompositeWrapper> pageFactories = new ArrayList<AbstractPluginPageCompositeWrapper>();
 		
-		IPageController paramsController = new ParametersController();
-		pageFactories.add(paramsController.getPageFactory());		
-		IPageController analysisController = new AnalysisController();
-		pageFactories.add(analysisController.getPageFactory());
+		pageFactories.add(paramsController.getPageWrapper());		
+		pageFactories.add(analysisController.getPageWrapper());
 		
 		return pageFactories;
 	}
@@ -39,7 +48,8 @@ public class CBDTplugin implements ISimulationPlugin {
 	@Override
 	public Menu getMenu(Decorations shell, Menu menuBar, int index) {
 		MenuFactory menuFactory = new MenuFactory();
-		return menuFactory.getMenu(shell, menuBar, index);
+		return menuFactory.getMenu(shell, menuBar, index, paramsController);
 	}
+
 
 }

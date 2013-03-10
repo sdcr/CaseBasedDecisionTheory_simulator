@@ -1,22 +1,31 @@
 package cbdt.control;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
+import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.model.Parameters;
+import cbdt.model.persistence.IParametersPersistenceManger;
+import cbdt.model.persistence.ParametersPersistenceManager;
 import cbdt.view.parameters.ParametersPageFactory;
 
 public class ParametersController implements IPageController {
 
 	private Parameters parametersModel;
+	private ParametersPageFactory parametersPageWrapper;
+	private IForegroundManager foregroundManager;
+	private IParametersPersistenceManger parametersPersistenceManager;
 
-	public ParametersController() {
+	public ParametersController(IForegroundManager foregroundManager) {
+		this.foregroundManager = foregroundManager;
 		parametersModel = new Parameters();
+		parametersPageWrapper = new ParametersPageFactory(this);
+		parametersPersistenceManager = new ParametersPersistenceManager();
 	}
 	
 	@Override
-	public ISimulationPluginPageFactory getPageFactory(){
-		return new ParametersPageFactory(this);
+	public AbstractPluginPageCompositeWrapper getPageWrapper(){
+		return parametersPageWrapper;
 	}
 	
 	public ActorAction addDefaultActorActionToModel(){
@@ -66,5 +75,14 @@ public class ParametersController implements IPageController {
 		parametersModel.setWeightingFactorAlpha(newAspirationLevelDiscountFactor);
 	}
 
+	public void getParametersFromFile(String filepath) {
+		parametersModel = parametersPersistenceManager.getParametersFromFile(filepath);
+		foregroundManager.setToForeground(parametersPageWrapper);
+		//TODO update the view
+	}
+
+	public void saveParametersToFile(String filepath) {
+		parametersPersistenceManager.saveParametersToFile(filepath, parametersModel);
+	}
 	
 }

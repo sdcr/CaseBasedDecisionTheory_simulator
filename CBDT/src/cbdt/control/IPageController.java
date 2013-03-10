@@ -1,6 +1,6 @@
 package cbdt.control;
 
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 
 public interface IPageController {
 
@@ -8,5 +8,5 @@ public interface IPageController {
 	 * @return The ISimulationPluginPageFactory, i.e. the view, for which this 
 	 * class is the controller.
 	 */
-	public ISimulationPluginPageFactory getPageFactory();
+	public AbstractPluginPageCompositeWrapper getPageWrapper();
 }

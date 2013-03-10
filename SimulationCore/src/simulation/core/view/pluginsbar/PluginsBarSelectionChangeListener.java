@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 import simulation.core.view.ForegroundManager;
-import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 
 public class PluginsBarSelectionChangeListener implements ISelectionChangedListener{
 
@@ -19,8 +19,8 @@ public class PluginsBarSelectionChangeListener implements ISelectionChangedListe
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
 			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-			if (selection.getFirstElement() instanceof ISimulationPluginPageFactory) {
-				ISimulationPluginPageFactory newForegroundPaneContent = ((ISimulationPluginPageFactory) selection
+			if (selection.getFirstElement() instanceof AbstractPluginPageCompositeWrapper) {
+				AbstractPluginPageCompositeWrapper newForegroundPaneContent = ((AbstractPluginPageCompositeWrapper) selection
 						.getFirstElement());
 				foregroundManager.setToForeground(newForegroundPaneContent);
 			}
