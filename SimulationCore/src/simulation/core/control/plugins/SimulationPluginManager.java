@@ -3,6 +3,7 @@ package simulation.core.control.plugins;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -39,6 +40,7 @@ public class SimulationPluginManager {
 	public SimulationPluginManager(BundleContext context) {
 		this.context = context;
 		pluginBundleMapper = new PluginBundleMapper();
+		simulationPlugins = new ArrayList<ISimulationPlugin>();
 		instantiateISimulationPlugins();
 	}
 
