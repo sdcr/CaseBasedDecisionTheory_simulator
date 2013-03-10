@@ -1,20 +1,24 @@
 package cbdt.model.persistence;
 
-import com.thoughtworks.xstream.XStream;
-
 import cbdt.model.Parameters;
+import cbdt.model.ParametersFactory;
+
+import com.thoughtworks.xstream.XStream;
 
 public class ParametersPersistenceManager implements IParametersPersistenceManager {
 
+	XStream xs;
+	
 	@Override
 	public Parameters getParametersFromFile(String filepath){
-		return null;
+		ParametersFactory factory = new ParametersFactory();
+		return factory.getDefaultParameters();
 	}
 	
 	@Override
 	public void saveParametersToFile(String filepath, Parameters parameters){
-		XStream xs = new XStream();
-		String xml = xs.toXML(parameters);
-		System.out.println(xml);
+		if(xs==null)
+			xs = new XStream();
+		System.out.println(xs.toXML(new String("Blaaa")));
 	}
 }
