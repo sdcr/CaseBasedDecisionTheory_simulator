@@ -14,8 +14,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.ParametersController;
-import cbdt.model.ActorAction;
-import cbdt.model.Parameters;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.listeners.AddActorActionMouseListener;
 

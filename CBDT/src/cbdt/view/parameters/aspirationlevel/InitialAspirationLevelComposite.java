@@ -5,7 +5,7 @@ import java.util.Observable;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.ParametersController;
-import cbdt.model.Parameters;
+import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.InitialAspirationLevelModifyListener;
 
 public class InitialAspirationLevelComposite extends SimpleParameterComposite {

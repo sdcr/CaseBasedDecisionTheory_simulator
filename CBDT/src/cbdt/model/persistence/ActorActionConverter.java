@@ -1,7 +1,7 @@
 package cbdt.model.persistence;
 
-import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;

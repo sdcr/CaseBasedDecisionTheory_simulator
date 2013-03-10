@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
-import cbdt.model.Parameters;
 import cbdt.model.Result;
 import cbdt.model.TreeNode;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
+import cbdt.model.parameters.Parameters;
 
 
 

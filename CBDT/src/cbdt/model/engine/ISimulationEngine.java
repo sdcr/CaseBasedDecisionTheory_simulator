@@ -1,7 +1,7 @@
 package cbdt.model.engine;
 
-import cbdt.model.Parameters;
 import cbdt.model.Result;
+import cbdt.model.parameters.Parameters;
 
 public interface ISimulationEngine {
 	

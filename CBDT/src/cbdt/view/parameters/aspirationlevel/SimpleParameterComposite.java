@@ -9,7 +9,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.model.Parameters;
+import cbdt.model.parameters.Parameters;
 import cbdt.view.HintLabelWrapper;
 
 public abstract class SimpleParameterComposite extends Composite implements Observer {

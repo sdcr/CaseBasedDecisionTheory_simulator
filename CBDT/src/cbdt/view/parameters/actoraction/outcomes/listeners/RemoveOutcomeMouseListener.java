@@ -4,7 +4,7 @@ import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 
-import cbdt.model.ActorActionOutcome;
+import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 

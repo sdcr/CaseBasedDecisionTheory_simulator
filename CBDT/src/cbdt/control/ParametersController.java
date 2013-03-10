@@ -2,10 +2,10 @@ package cbdt.control;
 
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
-import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
-import cbdt.model.Parameters;
-import cbdt.model.ParametersFactory;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
+import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.ParametersFactory;
 import cbdt.model.persistence.IParametersPersistenceManager;
 import cbdt.model.persistence.ParametersPersistenceManager;
 import cbdt.view.parameters.ParametersPageWrapper;

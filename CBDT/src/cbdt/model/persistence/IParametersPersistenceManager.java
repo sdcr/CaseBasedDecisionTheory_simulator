@@ -1,6 +1,6 @@
 package cbdt.model.persistence;
 
-import cbdt.model.Parameters;
+import cbdt.model.parameters.Parameters;
 
 public interface IParametersPersistenceManager {
 

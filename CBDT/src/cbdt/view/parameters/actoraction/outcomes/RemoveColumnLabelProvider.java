@@ -10,7 +10,7 @@ import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableItem;
 
-import cbdt.model.ActorActionOutcome;
+import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.view.parameters.actoraction.HoverLabelWrapper;
 import cbdt.view.parameters.actoraction.outcomes.listeners.RemoveOutcomeMouseListener;
 

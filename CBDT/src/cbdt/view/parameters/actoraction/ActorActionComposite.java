@@ -14,8 +14,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.ParametersController;
-import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.listeners.RemoveActorActionMouseListener;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;

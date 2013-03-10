@@ -1,4 +1,4 @@
-package cbdt.model;
+package cbdt.model.parameters;
 
 import java.util.Observable;
 

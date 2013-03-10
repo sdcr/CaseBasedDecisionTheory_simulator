@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
-import cbdt.model.Parameters;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
+import cbdt.model.parameters.Parameters;
 import cbdt.model.persistence.ParametersPersistenceManager;
 
 public class ParameterPersistenceManagerTest {

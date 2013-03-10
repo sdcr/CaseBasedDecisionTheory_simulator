@@ -5,12 +5,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.model.ActorAction;
-import cbdt.model.ActorActionOutcome;
-import cbdt.model.Parameters;
 import cbdt.model.Result;
 import cbdt.model.ResultAnalyser;
 import cbdt.model.engine.TreeStyleSimulationEngine;
+import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
+import cbdt.model.parameters.Parameters;
 
 public class CBDTEngineTest {
 

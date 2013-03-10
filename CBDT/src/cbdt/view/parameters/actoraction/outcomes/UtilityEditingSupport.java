@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 
-import cbdt.model.ActorActionOutcome;
+import cbdt.model.parameters.ActorActionOutcome;
 
 public class UtilityEditingSupport extends EditingSupport {
 

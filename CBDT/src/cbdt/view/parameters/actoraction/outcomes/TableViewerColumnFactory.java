@@ -6,7 +6,7 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableColumn;
 
-import cbdt.model.ActorActionOutcome;
+import cbdt.model.parameters.ActorActionOutcome;
 
 public class TableViewerColumnFactory {
 

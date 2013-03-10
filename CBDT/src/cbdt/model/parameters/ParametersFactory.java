@@ -1,4 +1,5 @@
-package cbdt.model;
+package cbdt.model.parameters;
+
 
 public class ParametersFactory {
 

@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.ParametersController;
-import cbdt.model.Parameters;
+import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelIncrementComposite;

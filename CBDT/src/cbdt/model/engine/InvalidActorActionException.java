@@ -1,6 +1,6 @@
 package cbdt.model.engine;
 
-import cbdt.model.ActorAction;
+import cbdt.model.parameters.ActorAction;
 
 public class InvalidActorActionException extends RuntimeException{
 	
