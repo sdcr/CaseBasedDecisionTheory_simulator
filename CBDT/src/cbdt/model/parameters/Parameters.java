@@ -106,24 +106,7 @@ public class Parameters extends Observable {
 		notifyObservers();
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((actorActions == null) ? 0 : actorActions.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(aspirationLevelIncrement);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(initialAspirationLevel);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(weightingFactorAlpha);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Parameters obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -134,8 +117,13 @@ public class Parameters extends Observable {
 		if (actorActions == null) {
 			if (other.actorActions != null)
 				return false;
-		} else if (!actorActions.equals(other.actorActions))
-			return false;
+		} else {
+			if(actorActions.size() != other.actorActions.size())
+				return false;
+			for(int i=0; i<actorActions.size(); i++)
+				if(!actorActions.get(i).equals(other.actorActions.get(i)))
+					return false;
+		}
 		if (Double.doubleToLongBits(aspirationLevelIncrement) != Double
 				.doubleToLongBits(other.aspirationLevelIncrement))
 			return false;

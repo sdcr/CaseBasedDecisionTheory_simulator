@@ -70,20 +70,7 @@ public class ActorActionOutcome extends Observable {
 		return "(ActorActionOutcome; probability: "+probability+", utility: "+utility+")";
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(probability);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(utility);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(ActorActionOutcome obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -99,4 +86,5 @@ public class ActorActionOutcome extends Observable {
 			return false;
 		return true;
 	}
+
 }

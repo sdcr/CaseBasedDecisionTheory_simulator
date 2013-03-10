@@ -1,9 +1,12 @@
 package cbdt.model.persistence;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.ParametersFactory;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -17,6 +20,7 @@ public class ParametersPersistenceManager implements IParametersPersistenceManag
 	
 	public ParametersPersistenceManager() {
 		xStream = new XStream();
+		xStream.setClassLoader(getClass().getClassLoader());
 		
 		xStream.registerConverter(new ParametersConverter());
 		xStream.alias(PARAMETERS_NODE_NAME, Parameters.class);
@@ -28,13 +32,19 @@ public class ParametersPersistenceManager implements IParametersPersistenceManag
 	
 	@Override
 	public Parameters getParametersFromFile(String filepath){
-		ParametersFactory factory = new ParametersFactory();
-		return factory.getDefaultParameters();
+		File file = new File(filepath);
+		return (Parameters) xStream.fromXML(file);
 	}
 	
 	@Override
 	public void saveParametersToFile(String filepath, Parameters parameters){
-		System.out.println(xStream.toXML(parameters));
+		FileOutputStream outStream = null;
+		try {
+			outStream = new FileOutputStream(new File(filepath));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		xStream.toXML(parameters, outStream);
 	}
 	
 	public String convertToXML(Parameters params){

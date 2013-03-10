@@ -36,8 +36,8 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private ActorAction representedActorAction;
 	private ProbabilitySumHintLabelWrapper probabilityHintLabel;
 
-	public ActorActionComposite(final Composite parent, int style, ActorAction representedActorAction, ParametersController controller) {
-		super(parent, style | SWT.BORDER , controller);
+	public ActorActionComposite(final Composite parent, ActorAction representedActorAction, ParametersController controller) {
+		super(parent, SWT.BORDER , controller);
 		this.representedActorAction = representedActorAction;
 		representedActorAction.addObserver(this);
 

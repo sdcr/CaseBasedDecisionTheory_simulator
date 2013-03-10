@@ -16,7 +16,8 @@ public class SaveParametersSelectionListener extends OpenFileDialogSelectionList
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		controller.saveParametersToFile(this.getFilepathFromDialog());
+		String filepathFromDialog = this.getFilepathFromDialog();
+		controller.saveParametersToFile(filepathFromDialog);
 	}
 
 	@Override

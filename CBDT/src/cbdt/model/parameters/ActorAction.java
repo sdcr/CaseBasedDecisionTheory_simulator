@@ -101,19 +101,7 @@ public class ActorAction extends Observable{
 		return totalProbability == 1;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((actionName == null) ? 0 : actionName.hashCode());
-		result = prime * result
-				+ ((actionOutcomes == null) ? 0 : actionOutcomes.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(ActorAction obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -129,8 +117,13 @@ public class ActorAction extends Observable{
 		if (actionOutcomes == null) {
 			if (other.actionOutcomes != null)
 				return false;
-		} else if (!actionOutcomes.equals(other.actionOutcomes))
-			return false;
+		} else {
+			if(actionOutcomes.size() != other.actionOutcomes.size())
+				return false;
+			for(int i=0; i<actionOutcomes.size(); i++)
+				if(!actionOutcomes.get(i).equals(other.actionOutcomes.get(i)))
+					return false;
+		}
 		return true;
 	}
 	

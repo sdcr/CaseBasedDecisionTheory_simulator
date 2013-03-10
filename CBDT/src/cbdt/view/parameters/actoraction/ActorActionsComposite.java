@@ -93,7 +93,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite imp
 			Set<ActorAction> shownActions) {
 		for(ActorAction newAction : newActionsList){
 			if(!shownActions.contains(newAction)){
-				ActorActionComposite newComposite = new ActorActionComposite(actorActionsWrapper, SWT.NONE,
+				ActorActionComposite newComposite = new ActorActionComposite(actorActionsWrapper, 
 						newAction, getController());
 				shownCompositesMap.put(newAction, newComposite);
 			}
