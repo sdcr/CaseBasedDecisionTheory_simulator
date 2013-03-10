@@ -1,4 +1,4 @@
-package model.simulation.tests;
+package tests.model.engine;
 
 import java.util.List;
 

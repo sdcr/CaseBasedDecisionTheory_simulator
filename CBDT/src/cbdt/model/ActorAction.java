@@ -12,6 +12,7 @@ import java.util.Observable;
  */
 public class ActorAction extends Observable{
 
+
 	private String actionName;
 
 	/**
@@ -101,8 +102,40 @@ public class ActorAction extends Observable{
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((actionName == null) ? 0 : actionName.hashCode());
+		result = prime * result
+				+ ((actionOutcomes == null) ? 0 : actionOutcomes.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ActorAction other = (ActorAction) obj;
+		if (actionName == null) {
+			if (other.actionName != null)
+				return false;
+		} else if (!actionName.equals(other.actionName))
+			return false;
+		if (actionOutcomes == null) {
+			if (other.actionOutcomes != null)
+				return false;
+		} else if (!actionOutcomes.equals(other.actionOutcomes))
+			return false;
+		return true;
+	}
+	
+	@Override
 	public String toString() {
-		
 		return "[actionName: "+actionName+", outcomes: "+actionOutcomes+"]";
 	}
 }

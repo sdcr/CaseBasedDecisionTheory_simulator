@@ -67,6 +67,36 @@ public class ActorActionOutcome extends Observable {
 	
 	@Override
 	public String toString() {
-		return "(ActorActionOutcome; Action.name: "+action.getActionName()+", probability: "+probability+", utility: "+utility+")";
+		return "(ActorActionOutcome; probability: "+probability+", utility: "+utility+")";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(probability);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(utility);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ActorActionOutcome other = (ActorActionOutcome) obj;
+		if (Double.doubleToLongBits(probability) != Double
+				.doubleToLongBits(other.probability))
+			return false;
+		if (Double.doubleToLongBits(utility) != Double
+				.doubleToLongBits(other.utility))
+			return false;
+		return true;
 	}
 }

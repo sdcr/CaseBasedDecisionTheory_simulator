@@ -8,6 +8,7 @@ import java.util.Observable;
 
 public class Parameters extends Observable {
 
+
 	/**
 	 * The weighting factor with which the old aspiration level is calculated
 	 * into the new aspiration level in each simulation step.
@@ -105,4 +106,45 @@ public class Parameters extends Observable {
 		notifyObservers();
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((actorActions == null) ? 0 : actorActions.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(aspirationLevelIncrement);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(initialAspirationLevel);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(weightingFactorAlpha);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Parameters other = (Parameters) obj;
+		if (actorActions == null) {
+			if (other.actorActions != null)
+				return false;
+		} else if (!actorActions.equals(other.actorActions))
+			return false;
+		if (Double.doubleToLongBits(aspirationLevelIncrement) != Double
+				.doubleToLongBits(other.aspirationLevelIncrement))
+			return false;
+		if (Double.doubleToLongBits(initialAspirationLevel) != Double
+				.doubleToLongBits(other.initialAspirationLevel))
+			return false;
+		if (Double.doubleToLongBits(weightingFactorAlpha) != Double
+				.doubleToLongBits(other.weightingFactorAlpha))
+			return false;
+		return true;
+	}
 }
