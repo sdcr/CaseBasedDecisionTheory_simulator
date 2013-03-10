@@ -6,6 +6,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
+import simulation.core.control.plugins.SimulationPluginManager;
 import simulation.core.view.MainViewManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 

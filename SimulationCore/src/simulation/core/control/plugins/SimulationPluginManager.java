@@ -1,17 +1,13 @@
-package simulation.core.control;
+package simulation.core.control.plugins;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.RegistryFactory;
-import org.eclipse.core.runtime.spi.RegistryContributor;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -32,11 +28,9 @@ public class SimulationPluginManager {
 
 	private BundleContext context;
 	
-	/** 
-	 * Maps from an ISimulationPlugin object to the ID of 
-	 * the bundle in which the plugin was defined. 
-	 * */ 
-	private Map<ISimulationPlugin,Long> pluginToContributorID;
+	private PluginBundleMapper pluginBundleMapper;
+	
+	private List<ISimulationPlugin> simulationPlugins;
 	
 	/**
 	 * Instantiates the ISimulationPlugin objects which are defined by active bundles.
@@ -44,7 +38,7 @@ public class SimulationPluginManager {
 	 */
 	public SimulationPluginManager(BundleContext context) {
 		this.context = context;
-		pluginToContributorID = new HashMap<ISimulationPlugin, Long>();
+		pluginBundleMapper = new PluginBundleMapper();
 		instantiateISimulationPlugins();
 	}
 
@@ -63,35 +57,14 @@ public class SimulationPluginManager {
 				e.printStackTrace();
 			}
 			if (instantiatedExtension instanceof ISimulationPlugin) {
-				storePluginAndContributorID((ISimulationPlugin)instantiatedExtension, configElement);
+				ISimulationPlugin simulationPlugin = (ISimulationPlugin)instantiatedExtension;
+				pluginBundleMapper.putPlugin(simulationPlugin, configElement);
+				simulationPlugins.add(simulationPlugin);
 			}
 		}
 	}
 
-	/**
-	 * Puts the plugin object and the ID of the bundle, i.e. the contributor, which defines this plugin in a
-	 * hashmap.
-	 * @param plugin The ISimulationPlugin object to be stored.
-	 * @param configElement The IConfigurationElement which contains the information about the plugins contributor.
-	 */
-	private void storePluginAndContributorID(ISimulationPlugin plugin, IConfigurationElement configElement) {
-		if (configElement.getContributor() instanceof RegistryContributor) {
-			RegistryContributor contributor = (RegistryContributor) configElement.getContributor();
-			pluginToContributorID.put(plugin, Long.parseLong(contributor.getId()));
-		}
-	}
 	
-	/**
-	 * @return A list of the ISimulationPlugin objects, defined by bundles 
-	 * which were active when this class was instantiated.
-	 */
-	public List<ISimulationPlugin> getISimulationPlugins() {
-		List<ISimulationPlugin> ISimulationPlugins = new ArrayList<ISimulationPlugin>();
-		for(ISimulationPlugin plugin : pluginToContributorID.keySet())
-			ISimulationPlugins.add(plugin);
-		return ISimulationPlugins;
-	}
-
 	/**
 	 * Installs and starts a new bundle. To access a ISimulationPlugin object defined by the new bundle,
 	 * the application must be restarted and this object reinstantiated.
@@ -126,7 +99,14 @@ public class SimulationPluginManager {
 	 * @throws BundleException
 	 */
 	public void uninstallBundle(ISimulationPlugin plugin) throws BundleException{
-		Long contributorID = pluginToContributorID.get(plugin);
-		context.getBundle(contributorID).uninstall();
+		Long bundleID = pluginBundleMapper.getBundleID(plugin);
+		context.getBundle(bundleID).uninstall();
+	}
+
+	/**
+	 * @return A list with all available ISimulationPlugin objects.
+	 */
+	public List<ISimulationPlugin> getISimulationPlugins() {
+		return simulationPlugins;
 	}
 }

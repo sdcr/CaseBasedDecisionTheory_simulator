@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 import simulation.core.control.Controller;
-import simulation.core.control.SimulationPluginManager;
+import simulation.core.control.plugins.SimulationPluginManager;
 import simulation.core.view.menu.MenuBarWrapper;
 import simulation.core.view.pluginsbar.PluginsBar;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
