@@ -11,9 +11,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.Controller;
+import cbdt.control.ParametersController;
 import cbdt.model.Parameters;
-import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelIncrementComposite;
@@ -31,7 +30,7 @@ public class ParametersPage extends AbstractControllerAccessComposite implements
 	private SimpleParameterComposite aspirationLevelIncrementComposite;
 	private SimpleParameterComposite aspirationLevelDiscountComposite;
 
-	public ParametersPage(Composite parent, int style, Controller controller) {
+	public ParametersPage(Composite parent, int style, ParametersController controller) {
 		super(parent, style, controller);
 		
 		GridLayout gridLayout = new GridLayout(2, false);

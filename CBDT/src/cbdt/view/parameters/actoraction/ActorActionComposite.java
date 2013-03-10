@@ -13,10 +13,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.Controller;
+import cbdt.control.ParametersController;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
-import cbdt.view.AbstractControllerAccessComposite;
+import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.listeners.RemoveActorActionMouseListener;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
@@ -36,7 +36,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private ActorAction representedActorAction;
 	private ProbabilitySumHintLabelWrapper probabilityHintLabel;
 
-	public ActorActionComposite(final Composite parent, int style, ActorAction representedActorAction, Controller controller) {
+	public ActorActionComposite(final Composite parent, int style, ActorAction representedActorAction, ParametersController controller) {
 		super(parent, style | SWT.BORDER , controller);
 		this.representedActorAction = representedActorAction;
 		representedActorAction.addObserver(this);

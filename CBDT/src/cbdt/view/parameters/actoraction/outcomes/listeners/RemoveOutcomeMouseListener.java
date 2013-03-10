@@ -5,7 +5,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 
 import cbdt.model.ActorActionOutcome;
-import cbdt.view.AbstractControllerAccessComposite;
+import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
 public class RemoveOutcomeMouseListener implements MouseListener{

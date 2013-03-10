@@ -3,13 +3,13 @@ package cbdt.view.parameters.aspirationlevel.listeners;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.Controller;
+import cbdt.control.ParametersController;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.aspirationlevel.NumberFormatChecker;
 
 public class AspirationLevelDiscountModifyListener extends AbstractParameterModifyListener{
 
-	public AspirationLevelDiscountModifyListener(Controller controller, HintLabelWrapper hintLabel) {
+	public AspirationLevelDiscountModifyListener(ParametersController controller, HintLabelWrapper hintLabel) {
 		super(controller, hintLabel);
 	}
 

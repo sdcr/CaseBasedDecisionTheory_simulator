@@ -5,7 +5,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
-import cbdt.control.Controller;
+import cbdt.control.ParametersController;
 import cbdt.view.CBDTHeaderComposite;
 
 /**
@@ -17,9 +17,9 @@ import cbdt.view.CBDTHeaderComposite;
 public class ParametersPageFactory implements ISimulationPluginPageFactory{
 
 	private ParametersPage parameterComposite;
-	private Controller controller;
+	private ParametersController controller;
 	
-	public ParametersPageFactory(Controller controller) {
+	public ParametersPageFactory(ParametersController controller) {
 		this.controller = controller;
 	}
 	

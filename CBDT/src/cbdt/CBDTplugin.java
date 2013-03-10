@@ -1,5 +1,6 @@
 package cbdt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
@@ -9,7 +10,10 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
-import cbdt.control.Controller;
+import cbdt.control.AnalysisController;
+import cbdt.control.IPageController;
+import cbdt.control.ParametersController;
+import cbdt.view.MenuFactory;
 
 public class CBDTplugin implements ISimulationPlugin {
 
@@ -24,26 +28,20 @@ public class CBDTplugin implements ISimulationPlugin {
 
 	@Override
 	public List<ISimulationPluginPageFactory> getPageFactories() {
-		Controller controller = new Controller();
-		return controller.getPaneContents();
+		List<ISimulationPluginPageFactory> pageFactories = new ArrayList<ISimulationPluginPageFactory>();
+		
+		IPageController paramsController = new ParametersController();
+		pageFactories.add(paramsController.getPageFactory());		
+		IPageController analysisController = new AnalysisController();
+		pageFactories.add(analysisController.getPageFactory());
+		
+		return pageFactories;
 	}
 
 	@Override
 	public Menu getMenu(Decorations shell, Menu menuBar, int index) {
-		System.out.println("create the menu");
-		Menu cbdtMenu = new Menu(shell, SWT.DROP_DOWN);
-	    MenuItem cbdtMenuHeader = new MenuItem(menuBar, SWT.CASCADE, index);
-	    cbdtMenuHeader.setText("&CBDT");
-
-	    cbdtMenuHeader.setMenu(cbdtMenu);
-
-	    MenuItem fileSaveItem = new MenuItem(cbdtMenu, SWT.PUSH);
-	    fileSaveItem.setText("&Bla1");
-
-	    MenuItem fileExitItem = new MenuItem(cbdtMenu, SWT.PUSH);
-	    fileExitItem.setText("Bla2");
-	    
-		return cbdtMenu;
+		MenuFactory menuFactory = new MenuFactory();
+		return menuFactory.getMenu(shell, menuBar, index);
 	}
 
 }

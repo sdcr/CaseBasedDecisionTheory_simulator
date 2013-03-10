@@ -4,17 +4,17 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.TableItem;
 
-import cbdt.control.Controller;
+import cbdt.control.ParametersController;
 import cbdt.model.ActorAction;
 
 public class AddOutcomeSelectionListener implements
 		SelectionListener {
 
 	private TableItem emptyTableItem;
-	private Controller controller;
+	private ParametersController controller;
 	private ActorAction actorAction;
 	
-	public AddOutcomeSelectionListener(Controller controller, ActorAction actorAction, TableItem emptyTableItem) {
+	public AddOutcomeSelectionListener(ParametersController controller, ActorAction actorAction, TableItem emptyTableItem) {
 		super();
 		this.controller = controller;
 		this.actorAction = actorAction;

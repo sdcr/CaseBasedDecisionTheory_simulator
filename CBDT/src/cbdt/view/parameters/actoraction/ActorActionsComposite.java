@@ -13,10 +13,10 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.Controller;
+import cbdt.control.ParametersController;
 import cbdt.model.ActorAction;
 import cbdt.model.Parameters;
-import cbdt.view.AbstractControllerAccessComposite;
+import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.listeners.AddActorActionMouseListener;
 
 /**
@@ -29,7 +29,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite imp
 	private Composite actorActionsWrapper;
 	private Map<ActorAction,ActorActionComposite> shownCompositesMap;
 
-	public ActorActionsComposite(Composite parent, int style, Controller controller) {
+	public ActorActionsComposite(Composite parent, int style, ParametersController controller) {
 		super(parent, style, controller);
 		shownCompositesMap = new HashMap<ActorAction, ActorActionComposite>();
 
