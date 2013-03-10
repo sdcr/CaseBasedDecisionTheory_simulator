@@ -1,5 +1,7 @@
 package cbdt.view.parameters.aspirationlevel;
 
+import java.util.Observer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowData;
@@ -7,9 +9,10 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import cbdt.model.Parameters;
 import cbdt.view.HintLabelWrapper;
 
-public class SimpleParameterComposite extends Composite {
+public abstract class SimpleParameterComposite extends Composite implements Observer {
 
 	private Text text;
 	private HintLabelWrapper  hintLabel;
@@ -42,4 +45,10 @@ public class SimpleParameterComposite extends Composite {
 	public boolean hasValidValue(){
 		return NumberFormatChecker.hasValidDoubleFormat(text.getText());
 	}
+	
+	public void setParametersModel(Parameters parametersModel){
+		parametersModel.addObserver(this);
+		this.update(parametersModel, null);
+	}
+
 }

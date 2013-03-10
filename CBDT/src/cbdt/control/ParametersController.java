@@ -5,21 +5,23 @@ import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.model.Parameters;
-import cbdt.model.persistence.IParametersPersistenceManger;
+import cbdt.model.ParametersFactory;
+import cbdt.model.persistence.IParametersPersistenceManager;
 import cbdt.model.persistence.ParametersPersistenceManager;
-import cbdt.view.parameters.ParametersPageFactory;
+import cbdt.view.parameters.ParametersPageWrapper;
 
 public class ParametersController implements IPageController {
 
 	private Parameters parametersModel;
-	private ParametersPageFactory parametersPageWrapper;
+	private ParametersPageWrapper parametersPageWrapper;
 	private IForegroundManager foregroundManager;
-	private IParametersPersistenceManger parametersPersistenceManager;
+	private IParametersPersistenceManager parametersPersistenceManager;
 
 	public ParametersController(IForegroundManager foregroundManager) {
 		this.foregroundManager = foregroundManager;
-		parametersModel = new Parameters();
-		parametersPageWrapper = new ParametersPageFactory(this);
+		ParametersFactory factory = new ParametersFactory();
+		parametersModel = factory.getDefaultParameters();
+		parametersPageWrapper = new ParametersPageWrapper(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
 	}
 	
@@ -29,15 +31,14 @@ public class ParametersController implements IPageController {
 	}
 	
 	public ActorAction addDefaultActorActionToModel(){
-		ActorAction defaultActorAction = new ActorAction("");
-		ActorActionOutcome defaultActorActionOutcome = createDefaultActorActionOutcome();
-		defaultActorAction.addActionOutcome(defaultActorActionOutcome);
-		parametersModel.addActorAction(defaultActorAction);//getActorActions().add(defaultActorAction);
+		ParametersFactory factory = new ParametersFactory();
+		ActorAction defaultActorAction = factory.getDefaultActorAction();
+		parametersModel.addActorAction(defaultActorAction);
 		return defaultActorAction;
 	}
 	
 	public void removeActorActionFromModel(ActorAction actorAction){
-		parametersModel.removeActorAction(actorAction);//getActorActions().remove(actorAction);
+		parametersModel.removeActorAction(actorAction);
 	}
 	
 	public Parameters getParametersModel(){
@@ -45,7 +46,8 @@ public class ParametersController implements IPageController {
 	}
 
 	public ActorActionOutcome addDefaultActorActionOutcomeToModel(ActorAction actorAction){
-		ActorActionOutcome defaultOutcome = createDefaultActorActionOutcome(); 
+		ParametersFactory factory = new ParametersFactory();
+		ActorActionOutcome defaultOutcome = factory.getDefaultActorActionOutcome(); 
 		actorAction.addActionOutcome(defaultOutcome);
 		return defaultOutcome;
 	}
@@ -57,10 +59,6 @@ public class ParametersController implements IPageController {
 	
 	public void setActorActionName(ActorAction actorAction, String newName){
 		actorAction.setActionName(newName);
-	}
-	
-	private ActorActionOutcome createDefaultActorActionOutcome(){
-		return new ActorActionOutcome(0, 0);
 	}
 	
 	public void setInitialAspirationLevel(Double newInitAspirationLevel) {
@@ -75,14 +73,15 @@ public class ParametersController implements IPageController {
 		parametersModel.setWeightingFactorAlpha(newAspirationLevelDiscountFactor);
 	}
 
-	public void getParametersFromFile(String filepath) {
+	public void loadParametersFromFile(String filepath) {
 		parametersModel = parametersPersistenceManager.getParametersFromFile(filepath);
 		foregroundManager.setToForeground(parametersPageWrapper);
-		//TODO update the view
+		parametersPageWrapper.getParametersPage().setParametersModel(parametersModel);
 	}
 
 	public void saveParametersToFile(String filepath) {
 		parametersPersistenceManager.saveParametersToFile(filepath, parametersModel);
+		foregroundManager.setToForeground(parametersPageWrapper);
 	}
 	
 }

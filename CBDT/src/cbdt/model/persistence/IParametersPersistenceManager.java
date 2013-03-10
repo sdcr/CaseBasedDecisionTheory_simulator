@@ -2,7 +2,7 @@ package cbdt.model.persistence;
 
 import cbdt.model.Parameters;
 
-public interface IParametersPersistenceManger {
+public interface IParametersPersistenceManager {
 
 	public Parameters getParametersFromFile(String filepath);
 	

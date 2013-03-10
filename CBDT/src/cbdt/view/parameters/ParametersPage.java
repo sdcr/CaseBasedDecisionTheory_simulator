@@ -1,8 +1,5 @@
 package cbdt.view.parameters;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -23,7 +20,7 @@ import cbdt.view.parameters.aspirationlevel.SimpleParameterComposite;
  * This composite contains all view elements that deal with the user's parameter input.
  * @author S-lenovo
  */
-public class ParametersPage extends AbstractControllerAccessComposite implements Observer{
+public class ParametersPage extends AbstractControllerAccessComposite {
 
 	private ActorActionsComposite actorActionsComposite;
 	private SimpleParameterComposite initialAspirationLevelComposite;
@@ -91,13 +88,10 @@ public class ParametersPage extends AbstractControllerAccessComposite implements
 	 * @param parameters The parameters model from which to initialize this view.
 	 */
 	public void setParametersModel(Parameters parameters) {
-		parameters.addObserver(this);
 		actorActionsComposite.setParametersModel(parameters);
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		//TODO implement
+		initialAspirationLevelComposite.setParametersModel(parameters);
+		aspirationLevelIncrementComposite.setParametersModel(parameters);
+		aspirationLevelDiscountComposite.setParametersModel(parameters);
 	}
 	
 }

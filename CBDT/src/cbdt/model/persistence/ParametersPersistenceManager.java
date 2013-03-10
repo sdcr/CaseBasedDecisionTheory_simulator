@@ -4,7 +4,7 @@ import com.thoughtworks.xstream.XStream;
 
 import cbdt.model.Parameters;
 
-public class ParametersPersistenceManager implements IParametersPersistenceManger {
+public class ParametersPersistenceManager implements IParametersPersistenceManager {
 
 	@Override
 	public Parameters getParametersFromFile(String filepath){
