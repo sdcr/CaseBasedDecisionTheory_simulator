@@ -18,6 +18,7 @@ import cbdt.view.parameters.actoraction.ActorActionsComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelIncrementComposite;
 import cbdt.view.parameters.aspirationlevel.InitialAspirationLevelComposite;
+import cbdt.view.parameters.aspirationlevel.NumberFormatChecker;
 import cbdt.view.parameters.aspirationlevel.SimpleParameterComposite;
 
 /**
@@ -27,6 +28,9 @@ import cbdt.view.parameters.aspirationlevel.SimpleParameterComposite;
 public class ParametersPage extends AbstractControllerAccessComposite implements Observer{
 
 	private ActorActionsComposite actorActionsComposite;
+	private SimpleParameterComposite initialAspirationLevelComposite;
+	private SimpleParameterComposite aspirationLevelIncrementComposite;
+	private SimpleParameterComposite aspirationLevelDiscountComposite;
 
 	public ParametersPage(Composite parent, int style, Controller controller) {
 		super(parent, style, controller);
@@ -40,16 +44,24 @@ public class ParametersPage extends AbstractControllerAccessComposite implements
 		actorActionsComposite = new ActorActionsComposite(this, SWT.NONE, controller);
 
 		createParameterLabel("Initial aspiration level:");
-		SimpleParameterComposite initialAspirationLevelComposite = 
-				new InitialAspirationLevelComposite(this, getController());
+		initialAspirationLevelComposite = new InitialAspirationLevelComposite(this, getController());
 		createParameterLabel("Aspiration level increment:");
-		SimpleParameterComposite aspirationLevelIncrementComposite = 
-				new AspirationLevelIncrementComposite(this, getController());
+		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(this, getController());
 		createParameterLabel("Aspiration discount factor:");
-		SimpleParameterComposite aspirationLevelDiscountComposite = 
-				new AspirationLevelDiscountComposite(this, getController());
+		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(this, getController());
 	}
 
+	/**
+	 * @return Returns whether the aspiration level parameter fields have a valid value.
+	 */
+	public boolean hasValidAspirationLevelParameters(){
+		if(initialAspirationLevelComposite.hasValidValue()
+				&& aspirationLevelIncrementComposite.hasValidValue()
+				&& aspirationLevelDiscountComposite.hasValidValue())
+			return true;
+		return false;
+	}
+	
 	/**
 	 * Create a label that is used to denote a parameter which can be entered by the user.
 	 */

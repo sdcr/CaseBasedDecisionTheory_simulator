@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.Controller;
 import cbdt.view.parameters.HintLabelWrapper;
+import cbdt.view.parameters.aspirationlevel.NumberFormatChecker;
 
 public class AspirationLevelDiscountModifyListener extends AbstractParameterModifyListener{
 
@@ -15,11 +16,11 @@ public class AspirationLevelDiscountModifyListener extends AbstractParameterModi
 	@Override
 	public void modifyText(ModifyEvent e) {
 		Text text =  (Text)e.widget;
-		try {
-			double parseDouble = Double.parseDouble(text.getText());
-			controller.setAspirationDiscountFactor(parseDouble);
+		String textValue = text.getText();
+		if(NumberFormatChecker.hasValidDoubleFormat(textValue)){
+			controller.setAspirationDiscountFactor(Double.parseDouble(textValue));
 			hintLabel.setVisible(false);
-		} catch (NumberFormatException e1) {
+		}else{
 			hintLabel.setVisible(true);
 		}
 	}

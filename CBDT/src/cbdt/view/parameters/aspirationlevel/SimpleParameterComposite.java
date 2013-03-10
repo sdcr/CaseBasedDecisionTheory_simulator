@@ -39,4 +39,7 @@ public class SimpleParameterComposite extends Composite {
 		return hintLabel;
 	}
 
+	public boolean hasValidValue(){
+		return NumberFormatChecker.hasValidDoubleFormat(text.getText());
+	}
 }
