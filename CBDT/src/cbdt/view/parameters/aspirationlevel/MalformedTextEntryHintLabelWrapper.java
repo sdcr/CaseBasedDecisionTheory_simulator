@@ -2,7 +2,7 @@ package cbdt.view.parameters.aspirationlevel;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.view.parameters.HintLabelWrapper;
+import cbdt.view.HintLabelWrapper;
 
 public class MalformedTextEntryHintLabelWrapper extends HintLabelWrapper {
 

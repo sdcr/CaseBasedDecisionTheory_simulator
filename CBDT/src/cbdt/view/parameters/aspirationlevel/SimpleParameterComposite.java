@@ -7,7 +7,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.view.parameters.HintLabelWrapper;
+import cbdt.view.HintLabelWrapper;
 
 public class SimpleParameterComposite extends Composite {
 

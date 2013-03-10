@@ -3,7 +3,7 @@ package cbdt.view.parameters.aspirationlevel.listeners;
 import org.eclipse.swt.events.ModifyListener;
 
 import cbdt.control.Controller;
-import cbdt.view.parameters.HintLabelWrapper;
+import cbdt.view.HintLabelWrapper;
 
 public abstract class AbstractParameterModifyListener implements ModifyListener{
 

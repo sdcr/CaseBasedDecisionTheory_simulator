@@ -4,7 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.view.parameters.HintLabelWrapper;
+import cbdt.view.HintLabelWrapper;
 
 public class ProbabilitySumHintLabelWrapper extends HintLabelWrapper{
 

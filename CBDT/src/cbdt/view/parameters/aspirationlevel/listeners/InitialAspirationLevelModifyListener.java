@@ -4,7 +4,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.Controller;
-import cbdt.view.parameters.HintLabelWrapper;
+import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.aspirationlevel.NumberFormatChecker;
 
 public class InitialAspirationLevelModifyListener extends AbstractParameterModifyListener {
