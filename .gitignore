@@ -2,4 +2,6 @@
 !SimulationCore/
 !CBDT/
 !XStreamWrapper/
+XStreamWrapper/org/*
+XStreamWrapper/com/*
 !.gitignore
