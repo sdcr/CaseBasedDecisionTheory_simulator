@@ -1,4 +1,4 @@
-package cbdt.controller;
+package cbdt.control;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,19 +7,19 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPa
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.model.Parameters;
-import cbdt.view.analysis.AnalysisPaneContent;
-import cbdt.view.parameters.ParameterPageContentWrapper;
+import cbdt.view.analysis.AnalysisPageFactory;
+import cbdt.view.parameters.ParametersPageFactory;
 
 public class Controller {
 
-	private ParameterPageContentWrapper parameterPaneContent;
-	private AnalysisPaneContent analysisPaneContent;
+	private ParametersPageFactory parameterPaneContent;
+	private AnalysisPageFactory analysisPaneContent;
 	private Parameters parametersModel;
 
 	public Controller(){
 		//create the view pane
-		parameterPaneContent = new ParameterPageContentWrapper(this);
-		analysisPaneContent = new AnalysisPaneContent();
+		parameterPaneContent = new ParametersPageFactory(this);
+		analysisPaneContent = new AnalysisPageFactory();
 		
 		//create the model
 		parametersModel = new Parameters();
@@ -69,9 +69,19 @@ public class Controller {
 	}
 	
 	public void setInitialAspirationLevel(Double newInitAspirationLevel) {
-		// TODO Auto-generated method stub
-		
+		parametersModel.setInitialAspirationLevel(newInitAspirationLevel);
 	}
+	
+	public void setAspirationLevelIncrement(Double newAspirationLevelIncrement) {
+		parametersModel.setAspirationLevelIncrement(newAspirationLevelIncrement);
+	}
+	
+	public void setAspirationDiscountFactor(Double newAspirationLevelDiscountFactor) {
+		parametersModel.setWeightingFactorAlpha(newAspirationLevelDiscountFactor);
+	}
+	
+	
+	
 
 	public void printModel(){
 		System.out.println(parametersModel.getActorActions());

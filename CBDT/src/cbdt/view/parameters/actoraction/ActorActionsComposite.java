@@ -13,7 +13,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.controller.Controller;
+import cbdt.control.Controller;
 import cbdt.model.ActorAction;
 import cbdt.model.Parameters;
 import cbdt.view.AbstractControllerAccessComposite;

@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Label;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
 
-public class AnalysisPaneContent implements ISimulationPluginPageFactory{
+public class AnalysisPageFactory implements ISimulationPluginPageFactory{
 
 	
 	@Override

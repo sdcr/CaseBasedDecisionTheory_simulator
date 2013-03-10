@@ -10,22 +10,25 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
 
-import cbdt.controller.Controller;
+import cbdt.control.Controller;
 import cbdt.model.Parameters;
 import cbdt.view.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
+import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
+import cbdt.view.parameters.aspirationlevel.AspirationLevelIncrementComposite;
+import cbdt.view.parameters.aspirationlevel.InitialAspirationLevelComposite;
+import cbdt.view.parameters.aspirationlevel.SimpleParameterComposite;
 
 /**
  * This composite contains all view elements that deal with the user's parameter input.
  * @author S-lenovo
  */
-public class ParametersComposite extends AbstractControllerAccessComposite implements Observer{
+public class ParametersPage extends AbstractControllerAccessComposite implements Observer{
 
 	private ActorActionsComposite actorActionsComposite;
 
-	public ParametersComposite(Composite parent, int style, Controller controller) {
+	public ParametersPage(Composite parent, int style, Controller controller) {
 		super(parent, style, controller);
 		
 		GridLayout gridLayout = new GridLayout(2, false);
@@ -35,43 +38,29 @@ public class ParametersComposite extends AbstractControllerAccessComposite imple
 		
 		createParameterLabel("Actor actions:");
 		actorActionsComposite = new ActorActionsComposite(this, SWT.NONE, controller);
-		
+
 		createParameterLabel("Initial aspiration level:");
-		createParameterText("100");
+		SimpleParameterComposite initialAspirationLevelComposite = 
+				new InitialAspirationLevelComposite(this, getController());
 		createParameterLabel("Aspiration level increment:");
-		createParameterText("10");
+		SimpleParameterComposite aspirationLevelIncrementComposite = 
+				new AspirationLevelIncrementComposite(this, getController());
 		createParameterLabel("Aspiration discount factor:");
-		createParameterText("0,5");
+		SimpleParameterComposite aspirationLevelDiscountComposite = 
+				new AspirationLevelDiscountComposite(this, getController());
 	}
 
-	private void createParameterText(String initialText){
-		Text text = new Text(this, SWT.SINGLE | SWT.BORDER);
-		text.setText(initialText);
-		GridData gridData = new GridData();
-		gridData.widthHint = 130;
-		text.setLayoutData(gridData);
-//		initAspirationLevelText.addModifyListener(new ModifyListener() {
-//			
-//			@Override
-//			public void modifyText(ModifyEvent e) {
-//				Text text =  (Text)e.widget;
-//				getController().setInitialAspirationLevel(Double.parseDouble(text.getText()));
-//			}
-//		});
-	}
-	
 	/**
-	 * Set the label of this composite.
+	 * Create a label that is used to denote a parameter which can be entered by the user.
 	 */
 	private void createParameterLabel(String labelText) {
 		Label actorActionsLabel = new Label(this, SWT.NONE);
 		actorActionsLabel.setText(labelText);	
 		
-		GridData actorActionsLabelGridData = new GridData();
-		actorActionsLabelGridData.verticalAlignment = SWT.BEGINNING;
-		actorActionsLabel.setLayoutData(actorActionsLabelGridData);
+		GridData gridData = new GridData();
+		gridData.verticalAlignment = SWT.BEGINNING;
+		actorActionsLabel.setLayoutData(gridData);
 	}
-
 	
 	/**
 	 * Creates the title label for this composite.

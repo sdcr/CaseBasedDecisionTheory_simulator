@@ -2,7 +2,7 @@ package cbdt.view;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.controller.Controller;
+import cbdt.control.Controller;
 
 public abstract class AbstractControllerAccessComposite extends Composite {
 

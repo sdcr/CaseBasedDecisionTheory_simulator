@@ -7,24 +7,24 @@ import org.eclipse.swt.widgets.Label;
 
 public class HoverLabelMouseTrackListener implements MouseTrackListener {
 
-	private Label closeLabel;
+	private Label label;
 	private Image hoverImage;
 	private Image noHoverImage;
 
-	public HoverLabelMouseTrackListener(Label closeLabel, Image hoverImage, Image noHoverImage) {
-		this.closeLabel = closeLabel;
+	public HoverLabelMouseTrackListener(Label label, Image hoverImage, Image noHoverImage) {
+		this.label = label;
 		this.hoverImage = hoverImage;
 		this.noHoverImage = noHoverImage;
 	}
 	
 	@Override
 	public void mouseEnter(MouseEvent e) {
-		closeLabel.setImage(hoverImage);
+		label.setImage(hoverImage);
 	}
 
 	@Override
 	public void mouseExit(MouseEvent e) {
-		closeLabel.setImage(noHoverImage);
+		label.setImage(noHoverImage);
 	}
 
 	@Override

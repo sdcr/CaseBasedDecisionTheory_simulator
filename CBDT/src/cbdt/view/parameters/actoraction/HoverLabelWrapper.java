@@ -28,7 +28,7 @@ public class HoverLabelWrapper {
 		return hoverLabel;
 	}
 	
-	public Image getImageFromLocation(String location) {
+	private Image getImageFromLocation(String location) {
 		ImageData imageData = new ImageData(getClass().getResourceAsStream(location));
 		return new Image(parent.getDisplay(),imageData);
 	}

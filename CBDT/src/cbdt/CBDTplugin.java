@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPluginPageFactory;
-import cbdt.controller.Controller;
+import cbdt.control.Controller;
 
 public class CBDTplugin implements ISimulationPlugin {
 

@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.controller.Controller;
+import cbdt.control.Controller;
 import cbdt.model.ActorAction;
 import cbdt.model.ActorActionOutcome;
 import cbdt.view.AbstractControllerAccessComposite;
@@ -34,7 +34,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private Text actionNameText;
 	private ActorActionOutcomesTableViewer actorActionOutcomesTableViewer;
 	private ActorAction representedActorAction;
-	private Label probabilityHintLabel;
+	private ProbabilitySumHintLabelWrapper probabilityHintLabel;
 
 	public ActorActionComposite(final Composite parent, int style, ActorAction representedActorAction, Controller controller) {
 		super(parent, style | SWT.BORDER , controller);
@@ -48,9 +48,8 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 		createActorActionNameWidgets();
 		createActorActionRemoveWidget();
 		createActorActionOutcomesWidgets();
-		
-		ProbabilityHintLabelFactory probabilityHintLabelFactory = new ProbabilityHintLabelFactory();
-		probabilityHintLabel = probabilityHintLabelFactory.createHintLabel(this, SWT.NONE);
+
+		probabilityHintLabel = new ProbabilitySumHintLabelWrapper(this);
 	
 		update(representedActorAction, null);
 		this.getParent().getParent().pack();

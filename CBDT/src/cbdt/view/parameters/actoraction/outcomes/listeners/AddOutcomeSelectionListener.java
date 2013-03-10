@@ -4,7 +4,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.TableItem;
 
-import cbdt.controller.Controller;
+import cbdt.control.Controller;
 import cbdt.model.ActorAction;
 
 public class AddOutcomeSelectionListener implements
