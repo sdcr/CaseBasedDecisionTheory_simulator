@@ -29,19 +29,21 @@ public class MenuBarWrapper {
 		
 		shell.setMenuBar(menuBar);
 		fileMenu = new FileMenuWrapper(shell, SWT.DROP_DOWN, menuBar, controller);
-		createHelpMenu();
+		createHelpMenu(controller);
 	}
 	
 	/**
 	 * Creates the help menu and its content.
+	 * @param controller 
 	 */
-	private void createHelpMenu() {
+	private void createHelpMenu(Controller controller) {
 		MenuItem helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 	    helpMenuHeader.setText("&Help");
 	    Menu helpMenu = new Menu(shell, SWT.DROP_DOWN);
 	    helpMenuHeader.setMenu(helpMenu);
-	    MenuItem helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
-	    helpGetHelpItem.setText("&Get Help");
+	    MenuItem infoItem = new MenuItem(helpMenu, SWT.PUSH);
+	    infoItem.setText("&Info");
+	    infoItem.addSelectionListener(new AppInfoSelectionListener(controller));
 	}
 	
 	/**

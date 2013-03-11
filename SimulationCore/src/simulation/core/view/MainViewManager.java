@@ -91,8 +91,18 @@ public class MainViewManager {
 	 * Shows a message box with the passed message String to the user.
 	 * @param message
 	 */
-	public void showMessage(String message) {
-		MessageBox messageBox = new MessageBox(shell);
+	public void showInfoMessage(String message) {
+		MessageBox messageBox = new MessageBox(shell, SWT.ICON_INFORMATION);
+		messageBox.setMessage(message);
+		messageBox.open();
+	}
+	
+	/**
+	 * Shows a message box with the passed message String to the user.
+	 * @param message
+	 */
+	public void showErrorMessage(String message) {
+		MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
 		messageBox.setMessage(message);
 		messageBox.open();
 	}

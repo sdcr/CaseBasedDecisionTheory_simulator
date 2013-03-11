@@ -12,6 +12,8 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class Controller {
 
+	private static final String SIMULATION_CORE_VERSION = "0.1";
+	
 	private BundleContext context;
 	private MainViewManager mainView;
 	private SimulationPluginManager pluginManager;
@@ -49,10 +51,10 @@ public class Controller {
 				this.restartApplication();
 			}
 		} catch (FileNotFoundException e) {
-    		mainView.showMessage("Could not find the selected file.");
+    		mainView.showErrorMessage("Could not find the selected file.");
 			e.printStackTrace();
 		} catch (BundleException e) {
-    		mainView.showMessage("Could not install the selected bundle.");
+    		mainView.showErrorMessage("Could not install the selected bundle.");
 			e.printStackTrace();
 		}
 	}
@@ -70,7 +72,7 @@ public class Controller {
 				this.restartApplication();
 			}
 		} catch (BundleException e) {
-			mainView.showMessage("Could not uninstall the selected bundle.");
+			mainView.showErrorMessage("Could not uninstall the selected bundle.");
 			e.printStackTrace();
 		}
 	}
@@ -84,7 +86,7 @@ public class Controller {
 			getSystemBundle().update();
 			mainView.disposeView();
 		} catch (BundleException e) {
-			mainView.showMessage("The application restart failed.");
+			mainView.showErrorMessage("The application restart failed.");
 			e.printStackTrace();
 		}
 	}
@@ -94,6 +96,10 @@ public class Controller {
 	 */
 	private Bundle getSystemBundle(){
 		return context.getBundle(0);
+	}
+
+	public void showApplicationInformation() {
+		mainView.showInfoMessage("SimulationCore, v"+SIMULATION_CORE_VERSION + ".");
 	}
 
 }

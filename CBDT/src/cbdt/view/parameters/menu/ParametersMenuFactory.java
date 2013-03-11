@@ -15,11 +15,11 @@ public class ParametersMenuFactory {
 		ArrayList<MenuItem> parameterMenuItems = new ArrayList<MenuItem>();
 		
 		MenuItem saveParameters = new MenuItem(parent, SWT.PUSH);
-		saveParameters.setText("Save parameters");
+		saveParameters.setText("&Save parameters");
 		saveParameters.addSelectionListener(new SaveParametersSelectionListener(shell, controller));
 		
 		MenuItem openParameters = new MenuItem(parent, SWT.PUSH);
-		openParameters.setText("Open parameters");
+		openParameters.setText("&Open parameters");
 		openParameters.addSelectionListener(new OpenParametersSelectionListener(shell, controller));
 		
 		parameterMenuItems.add(saveParameters);
