@@ -4,7 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 
 /**
@@ -15,7 +15,7 @@ public class ForegroundManager implements IForegroundManager{
 
 	private Composite currentlyInBackgroundsParent;
 	private Composite pluginPane;	
-	private AbstractPluginPageCompositeWrapper currentlyInForegroundPage;
+	private AbstractPluginPageWrapper currentlyInForegroundPage;
 
 	public ForegroundManager(Composite foregroundParent) {
 		pluginPane = foregroundParent;
@@ -23,7 +23,7 @@ public class ForegroundManager implements IForegroundManager{
 	}
 
 	@Override
-	public void setToForeground(AbstractPluginPageCompositeWrapper pageFactory) {
+	public void setToForeground(AbstractPluginPageWrapper pageFactory) {
 		if(currentlyInForegroundPage != null)
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
 		pageFactory.setParent(pluginPane);

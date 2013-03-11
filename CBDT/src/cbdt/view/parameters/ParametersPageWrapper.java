@@ -4,7 +4,7 @@ package cbdt.view.parameters;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
-import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 import cbdt.control.ParametersController;
 import cbdt.view.CBDTHeaderComposite;
 
@@ -14,7 +14,7 @@ import cbdt.view.CBDTHeaderComposite;
  * 
  * @author S-lenovo
  */
-public class ParametersPageWrapper extends AbstractPluginPageCompositeWrapper{
+public class ParametersPageWrapper extends AbstractPluginPageWrapper{
 
 	private ParametersPage parameterComposite;
 	private ParametersController controller;

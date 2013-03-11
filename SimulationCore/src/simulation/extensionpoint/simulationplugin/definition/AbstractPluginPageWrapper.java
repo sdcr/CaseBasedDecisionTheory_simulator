@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Composite;
  * It is to be subclassed once for every page that is to be displayed in the simulation frame. 
  * @author S-lenovo
  */
-public abstract class AbstractPluginPageCompositeWrapper {
+public abstract class AbstractPluginPageWrapper {
 
 	private Composite simulationPluginPage;
 	

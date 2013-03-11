@@ -1,22 +1,17 @@
 package cbdt.control;
 
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
+import cbdt.model.Result;
 import cbdt.view.analysis.AnalysisPageFactory;
-import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
-import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 
-public class AnalysisController implements IPageController {
-
-	@SuppressWarnings("unused")
-	private IForegroundManager foregroundManager;
-
-	public AnalysisController(IForegroundManager foregroundManager) {
-		this.foregroundManager = foregroundManager;
-	}
+public class AnalysisController extends AbstractPageController {
 
 	@Override
-	public AbstractPluginPageCompositeWrapper getPageWrapper() {
+	public AbstractPluginPageWrapper getPageWrapper() {
 		return new AnalysisPageFactory();
 	}
 
-	
+	public void showResult(Result simulationResult){
+		
+	}
 }

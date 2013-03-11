@@ -17,7 +17,7 @@ public class SaveParametersSelectionListener extends OpenFileDialogSelectionList
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		controller.setToForeground(controller.getPageWrapper());
+		controller.goToForeground();
 		if(controller.getPageWrapper().getParametersPage().hasValidAspirationLevelParameters()){
 			String filepathFromDialog = this.getFilepathFromDialog(SWT.SAVE);
 			if(filepathFromDialog != null)

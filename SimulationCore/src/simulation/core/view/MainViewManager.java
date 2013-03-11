@@ -18,6 +18,9 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainViewManager {
 
+	private static final int HEIGHT = 800;
+	private static final int WIDTH = 840;
+	
 	private PluginsBar pluginsBar;
 	private ForegroundManager foregroundManager;
 	private Controller controller;
@@ -28,6 +31,7 @@ public class MainViewManager {
 	public MainViewManager(final Controller controller) {
 		this.controller = controller;
 		shell = new Shell(new Display());
+		shell.setSize(WIDTH, HEIGHT);
 		instantiateViewElements();
 
 		shell.addDisposeListener(new DisposeListener() {
