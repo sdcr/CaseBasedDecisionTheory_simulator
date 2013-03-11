@@ -12,10 +12,8 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class FileMenuWrapper {
 
-	private Menu fileMenu;
 	private Controller controller;
 	
-	private MenuItem addPluginItem;
 	private Menu removePluginMenu;
 	private MenuItem removePluginMenuHeader;
 	
@@ -28,14 +26,14 @@ public class FileMenuWrapper {
 	 * @param controller The controller which should be called upon user interaction with the file menu.
 	 */
 	public FileMenuWrapper(Decorations parent, int style, Menu menuBar, Controller controller) {
-		fileMenu = new Menu(parent, style);
+		Menu fileMenu = new Menu(parent, style);
 		this.controller = controller;
 		
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("&File");
 	    fileMenuHeader.setMenu(fileMenu);
 	    
-	    addPluginItem = new MenuItem(fileMenu, SWT.PUSH);
+	    MenuItem addPluginItem = new MenuItem(fileMenu, SWT.PUSH);
 	    addPluginItem.setText("&Add a simulation plugin");
 	    addPluginItem.addSelectionListener(new AddPluginMenuItemSelectionListener(fileMenu.getShell(), controller));
 	    
@@ -44,6 +42,11 @@ public class FileMenuWrapper {
 	    removePluginMenu = new Menu(fileMenu.getShell(), SWT.DROP_DOWN);
 	    removePluginMenuHeader.setMenu(removePluginMenu);		
 	    removePluginMenuHeader.setEnabled(false);
+	    
+	    new MenuItem(fileMenu, SWT.SEPARATOR);
+	    MenuItem closeAppItem = new MenuItem(fileMenu, SWT.PUSH);
+	    closeAppItem.setText("&Close");
+	    closeAppItem.addSelectionListener(new CloseAppSelectionListener(controller));
 	}
 
 	/**

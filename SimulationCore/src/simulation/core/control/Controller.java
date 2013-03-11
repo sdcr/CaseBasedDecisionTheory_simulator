@@ -29,6 +29,7 @@ public class Controller {
 	 * Stops the SimulationCore application, by stopping the system bundle.
 	 */
 	public void stopApplication() {
+		mainView.disposeView();
 		try {
 			getSystemBundle().stop();
 		} catch (BundleException e) {
@@ -94,4 +95,5 @@ public class Controller {
 	private Bundle getSystemBundle(){
 		return context.getBundle(0);
 	}
+
 }
