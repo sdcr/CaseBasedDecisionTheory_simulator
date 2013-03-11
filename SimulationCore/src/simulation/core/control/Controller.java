@@ -12,8 +12,6 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class Controller {
 
-	private static final String SIMULATION_CORE_VERSION = "0.1";
-	
 	private BundleContext context;
 	private MainViewManager mainView;
 	private SimulationPluginManager pluginManager;
