@@ -3,6 +3,7 @@ package cbdt.model.persistence;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
@@ -47,6 +48,11 @@ public class ParametersPersistenceManager implements IParametersPersistenceManag
 			e.printStackTrace();
 		}
 		xStream.toXML(parameters, outStream);
+		try {
+			outStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String convertToXML(Parameters params){

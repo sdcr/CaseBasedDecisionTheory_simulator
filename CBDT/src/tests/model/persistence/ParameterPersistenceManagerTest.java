@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,8 +19,8 @@ public class ParameterPersistenceManagerTest {
 	private Parameters params;
 	private ParametersPersistenceManager persistenceManager;
 
-	private String testfiles_folder = "testfiles/";
-	private String filepath = "testfiles/params_file2.xml";
+	private static String testfiles_folder = "testfiles/";
+	private static String params_filepath = "testfiles/params_file.xml";
 
 	@Before
 	public void setup(){
@@ -35,6 +36,14 @@ public class ParameterPersistenceManagerTest {
 		persistenceManager = new ParametersPersistenceManager();
 	}
 	
+	@AfterClass
+	public static void teardown(){
+		File params_file = new File(params_filepath);
+		params_file.delete();
+		File folder = new File(testfiles_folder);
+		folder.delete();
+	}
+	
 	@Test
 	public void testParameterXMLConversion(){
 		String inXML = persistenceManager.convertToXML(params);
@@ -44,10 +53,13 @@ public class ParameterPersistenceManagerTest {
 	
 	@Test
 	public void testParameterSaveToFile(){		
-		persistenceManager.saveParametersToFile(filepath, params);
+		persistenceManager.saveParametersToFile(params_filepath, params);
+		File params_file = new File(params_filepath);
+		assertTrue(params_file.exists());
+
 		Parameters fromFile = null;
 		try {
-			fromFile = persistenceManager.getParametersFromFile(filepath);
+			fromFile = persistenceManager.getParametersFromFile(params_filepath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,21 +67,5 @@ public class ParameterPersistenceManagerTest {
 		assertTrue(params.equals(fromFile));
 	}
 	
-	@Test
-	public void testEquality(){
-		ActorAction a = new ActorAction("A");
-		ActorAction b = new ActorAction("A");
-		System.out.println(a.equals(b));
-		
-		ActorActionOutcome o1 = new ActorActionOutcome(1, 0);
-		ActorActionOutcome o2 = new ActorActionOutcome(1, 0);
-		System.out.println(o1.equals(o2));
-		
-		a.addActionOutcome(o1);
-		b.addActionOutcome(o2);
-		System.out.println(a.equals(b));
-		
-		System.out.println(a.hashCode() + " " + b.hashCode());
-		System.out.println(a==b);
-	}
+
 }
