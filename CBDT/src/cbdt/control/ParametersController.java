@@ -2,6 +2,7 @@ package cbdt.control;
 
 import java.io.FileNotFoundException;
 
+import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
@@ -101,4 +102,7 @@ public class ParametersController implements IPageController {
 		}
 	}
 	
+	public void setToForeground(AbstractPluginPageCompositeWrapper pluginPage){
+		foregroundManager.setToForeground(pluginPage);
+	}
 }

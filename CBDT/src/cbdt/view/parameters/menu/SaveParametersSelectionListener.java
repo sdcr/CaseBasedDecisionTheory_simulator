@@ -1,5 +1,6 @@
 package cbdt.view.parameters.menu;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
@@ -16,8 +17,9 @@ public class SaveParametersSelectionListener extends OpenFileDialogSelectionList
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
+		controller.setToForeground(controller.getPageWrapper());
 		if(controller.getPageWrapper().getParametersPage().hasValidAspirationLevelParameters()){
-			String filepathFromDialog = this.getFilepathFromDialog();
+			String filepathFromDialog = this.getFilepathFromDialog(SWT.SAVE);
 			if(filepathFromDialog != null)
 				controller.saveParametersToFile(filepathFromDialog);
 		} else {

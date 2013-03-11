@@ -1,5 +1,6 @@
 package cbdt.view.parameters.menu;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
@@ -16,7 +17,7 @@ public class OpenParametersSelectionListener extends OpenFileDialogSelectionList
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		String filepathFromDialog = this.getFilepathFromDialog();
+		String filepathFromDialog = this.getFilepathFromDialog(SWT.OPEN);
 		if(filepathFromDialog != null)
 			controller.loadParametersFromFile(filepathFromDialog);
 	}

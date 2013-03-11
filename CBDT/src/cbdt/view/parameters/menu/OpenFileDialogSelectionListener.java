@@ -1,6 +1,5 @@
 package cbdt.view.parameters.menu;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -13,8 +12,8 @@ public abstract class OpenFileDialogSelectionListener implements SelectionListen
 		this.shell = shell;
 	}
 	
-	public String getFilepathFromDialog(){
-        FileDialog fileDialog = new FileDialog(shell, SWT.OPEN);
+	protected String getFilepathFromDialog(int style){
+        FileDialog fileDialog = new FileDialog(shell, style);
         fileDialog.setText("Add a plugin");
         fileDialog.setFilterPath("C:/");
         String[] filterExt = { "*.xml", "*.*" };
