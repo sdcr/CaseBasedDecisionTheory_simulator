@@ -99,7 +99,7 @@ public class Controller {
 	}
 
 	public void showApplicationInformation() {
-		mainView.showInfoMessage("SimulationCore, v"+SIMULATION_CORE_VERSION + ".");
+		mainView.showApplicationInformationDialog();
 	}
 
 }

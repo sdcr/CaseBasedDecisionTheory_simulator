@@ -117,4 +117,9 @@ public class MainViewManager {
 	    else
 	    	return false;
 	}
+
+	public void showApplicationInformationDialog() {
+		ApplicationInfoDialog appInfoDialog = new ApplicationInfoDialog(shell);
+		appInfoDialog.open();
+	}
 }
