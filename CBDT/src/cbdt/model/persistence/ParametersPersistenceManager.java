@@ -31,8 +31,10 @@ public class ParametersPersistenceManager implements IParametersPersistenceManag
 	}
 	
 	@Override
-	public Parameters getParametersFromFile(String filepath){
+	public Parameters getParametersFromFile(String filepath) throws FileNotFoundException{
 		File file = new File(filepath);
+		if(!file.exists())
+			throw new FileNotFoundException();
 		return (Parameters) xStream.fromXML(file);
 	}
 	

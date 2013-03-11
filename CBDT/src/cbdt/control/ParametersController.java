@@ -1,6 +1,7 @@
 package cbdt.control;
 
-import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
+import java.io.FileNotFoundException;
+
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
@@ -8,6 +9,7 @@ import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
 import cbdt.model.persistence.IParametersPersistenceManager;
 import cbdt.model.persistence.ParametersPersistenceManager;
+import cbdt.view.MessageBoxManager;
 import cbdt.view.parameters.ParametersPageWrapper;
 
 public class ParametersController implements IPageController {
@@ -16,6 +18,7 @@ public class ParametersController implements IPageController {
 	private ParametersPageWrapper parametersPageWrapper;
 	private IForegroundManager foregroundManager;
 	private IParametersPersistenceManager parametersPersistenceManager;
+	private MessageBoxManager messageBoxManager;
 
 	public ParametersController(IForegroundManager foregroundManager) {
 		this.foregroundManager = foregroundManager;
@@ -23,11 +26,16 @@ public class ParametersController implements IPageController {
 		parametersModel = factory.getDefaultParameters();
 		parametersPageWrapper = new ParametersPageWrapper(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
+		messageBoxManager = new MessageBoxManager(foregroundManager.getShell());
 	}
 	
 	@Override
-	public AbstractPluginPageCompositeWrapper getPageWrapper(){
+	public ParametersPageWrapper getPageWrapper(){
 		return parametersPageWrapper;
+	}
+	
+	public MessageBoxManager getMessageBoxManager(){
+		return messageBoxManager;
 	}
 	
 	public ActorAction addDefaultActorActionToModel(){
@@ -74,14 +82,23 @@ public class ParametersController implements IPageController {
 	}
 
 	public void loadParametersFromFile(String filepath) {
-		parametersModel = parametersPersistenceManager.getParametersFromFile(filepath);
-		foregroundManager.setToForeground(parametersPageWrapper);
-		parametersPageWrapper.getParametersPage().setParametersModel(parametersModel);
+		try {
+			parametersModel = parametersPersistenceManager.getParametersFromFile(filepath);
+			foregroundManager.setToForeground(parametersPageWrapper);
+			parametersPageWrapper.getParametersPage().setParametersModel(parametersModel);
+		} catch (FileNotFoundException e) {
+			messageBoxManager.showErrorMessage("The stated file could not be found.");
+		}
 	}
 
 	public void saveParametersToFile(String filepath) {
-		parametersPersistenceManager.saveParametersToFile(filepath, parametersModel);
 		foregroundManager.setToForeground(parametersPageWrapper);
+		try {
+			parametersPersistenceManager.saveParametersToFile(filepath, parametersModel);
+		} catch (Exception e) {
+			messageBoxManager.showErrorMessage("An error occured while saving the parameters.");
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -16,8 +16,13 @@ public class SaveParametersSelectionListener extends OpenFileDialogSelectionList
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		String filepathFromDialog = this.getFilepathFromDialog();
-		controller.saveParametersToFile(filepathFromDialog);
+		if(controller.getPageWrapper().getParametersPage().hasValidAspirationLevelParameters()){
+			String filepathFromDialog = this.getFilepathFromDialog();
+			if(filepathFromDialog != null)
+				controller.saveParametersToFile(filepathFromDialog);
+		} else {
+			controller.getMessageBoxManager().showInfoMessage("At least one aspiration level parameter has an invalid value.");
+		}
 	}
 
 	@Override

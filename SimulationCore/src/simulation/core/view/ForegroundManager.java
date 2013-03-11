@@ -30,5 +30,10 @@ public class ForegroundManager implements IForegroundManager{
 		currentlyInForegroundPage = pageFactory;
 		pluginPane.layout();
 	}
+
+	@Override
+	public Shell getShell() {
+		return pluginPane.getShell();
+	}
 	
 }

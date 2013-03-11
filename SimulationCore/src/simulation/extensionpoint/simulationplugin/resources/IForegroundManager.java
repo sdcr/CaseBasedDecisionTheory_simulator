@@ -1,5 +1,7 @@
 package simulation.extensionpoint.simulationplugin.resources;
 
+import org.eclipse.swt.widgets.Shell;
+
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageCompositeWrapper;
 
 public interface IForegroundManager {
@@ -11,4 +13,6 @@ public interface IForegroundManager {
 	 * @param pageWrapper The wrapper of the Composite which will be put in foreground.
 	 */
 	public void setToForeground(AbstractPluginPageCompositeWrapper pageFactory);
+	
+	public Shell getShell();
 }
