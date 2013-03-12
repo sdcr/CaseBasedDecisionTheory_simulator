@@ -29,6 +29,11 @@ public class Parameters extends Observable {
 	 */
 	private List<ActorAction> actorActions;
 
+	/**
+	 * The number of expected utilities which should be computed.
+	 */
+	private int numberOfRequestedExpectedUtilities;
+
 	public Parameters() {
 		actorActions = new ArrayList<ActorAction>();
 	}
@@ -106,6 +111,7 @@ public class Parameters extends Observable {
 		notifyObservers();
 	}
 	
+	//TODO: update to accommodate for number of expected utilities.
 	public boolean equals(Parameters obj) {
 		if (this == obj)
 			return true;
@@ -135,4 +141,13 @@ public class Parameters extends Observable {
 			return false;
 		return true;
 	}
+
+	public int getNumberOfRequestedExpectedUtilities() {
+		return numberOfRequestedExpectedUtilities;
+	}
+	
+	public void setNumberOfRequestedExpectedUtilities(int numberOfRequestedExpectedUtilities) {
+		this.numberOfRequestedExpectedUtilities = numberOfRequestedExpectedUtilities;
+	}
+	
 }
