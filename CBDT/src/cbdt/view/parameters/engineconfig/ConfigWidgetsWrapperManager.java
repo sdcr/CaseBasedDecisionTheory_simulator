@@ -20,7 +20,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 	private ParametersPage parametersPage;
 	private ParametersController controller;
 	private ConfigForegroundManager foregroundManager;
-	private ConfigWidgetsWrapperFactory configCompositeFactory;
+	private ConfigWidgetsWrapperFactory configWidgetsFactory;
 
 	public ConfigWidgetsWrapperManager(ParametersPage parametersPage,
 			ParametersController controller) {
@@ -31,28 +31,30 @@ public class ConfigWidgetsWrapperManager implements Observer {
 
 		Label parameterLabel = new Label(parametersPage, SWT.NONE);
 		parameterLabel.setText("Configuration:");
-		
 		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
 	}
 
 	public void setConfigChoiceModel(EngineConfigChoice configChoice){
-		configCompositeFactory = new ConfigWidgetsWrapperFactory();
+		configWidgetsFactory = new ConfigWidgetsWrapperFactory();
 		
 		EngineConfigSelectionListener comboSelectionListener = new EngineConfigSelectionListener(controller);
 		
 		for(AbstractEngineConfiguration config : configChoice.getAvailableEngineConfigs()){
-			AbstractConfigWidgetsWrapper configComposite = configCompositeFactory.getConfigComposite(config, parametersPage);
-			configComposite.setEngineConfigModel(config);
+			AbstractConfigWidgetsWrapper configComposite = configWidgetsFactory.getConfigComposite(config, parametersPage);
 			configComposite.setConfigController(controller.getConfigControllerFactory().getConfigController(config));
+			configComposite.setEngineConfigModel(config);
 			availableConfigsCombo.add(config.getName());
 			comboSelectionListener.addEngineConfig(config);
 		}
 		availableConfigsCombo.addSelectionListener(comboSelectionListener);
 		
 		//find out which config is in currently chosen and put it in foreground
-		if(configChoice.getCurrentlyChoosenConfig() != null)
-			foregroundManager.setToForeground(configCompositeFactory.getConfigComposite(configChoice.getCurrentlyChoosenConfig(), parametersPage));
-		
+		AbstractEngineConfiguration currentlyChoosenConfig = configChoice.getCurrentlyChoosenConfig();
+		if(currentlyChoosenConfig != null){
+			foregroundManager.setToForeground(configWidgetsFactory.getConfigComposite(currentlyChoosenConfig, parametersPage));
+			int indexOfCurrentlyChoosenConfig = configChoice.getAvailableEngineConfigs().indexOf(currentlyChoosenConfig);
+			availableConfigsCombo.select(indexOfCurrentlyChoosenConfig);
+		}
 		configChoice.addObserver(this);
 	}
 
@@ -62,7 +64,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		if(o instanceof EngineConfigChoice){
 			EngineConfigChoice choice = (EngineConfigChoice)o;
 			foregroundManager.setToForeground(
-					configCompositeFactory.getConfigComposite(
+					configWidgetsFactory.getConfigComposite(
 							choice.getCurrentlyChoosenConfig(), parametersPage));
 		}
 	}

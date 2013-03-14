@@ -12,10 +12,10 @@ import cbdt.control.ParametersController;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
+import cbdt.view.parameters.aspirationlevel.AbstractAspirationLevelParameterComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelIncrementComposite;
 import cbdt.view.parameters.aspirationlevel.InitialAspirationLevelComposite;
-import cbdt.view.parameters.aspirationlevel.SimpleParameterComposite;
 import cbdt.view.parameters.engineconfig.ConfigWidgetsWrapperManager;
 
 /**
@@ -25,9 +25,9 @@ import cbdt.view.parameters.engineconfig.ConfigWidgetsWrapperManager;
 public class ParametersPage extends AbstractControllerAccessComposite {
 
 	private ActorActionsComposite actorActionsComposite;
-	private SimpleParameterComposite initialAspirationLevelComposite;
-	private SimpleParameterComposite aspirationLevelIncrementComposite;
-	private SimpleParameterComposite aspirationLevelDiscountComposite;
+	private AbstractAspirationLevelParameterComposite initialAspirationLevelComposite;
+	private AbstractAspirationLevelParameterComposite aspirationLevelIncrementComposite;
+	private AbstractAspirationLevelParameterComposite aspirationLevelDiscountComposite;
 	private ConfigWidgetsWrapperManager configsComposite;
 
 	public ParametersPage(Composite parent, int style, ParametersController controller) {
@@ -48,13 +48,18 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		createParameterLabel("Aspiration discount factor:");
 		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(this, getController());
 		
+		Composite spacerComposite = new Composite(this, SWT.NONE);
+		GridData spacerGridData = new GridData();
+		spacerGridData.heightHint = 25;
+		spacerGridData.horizontalSpan = 2;
+		spacerComposite.setLayoutData(spacerGridData);
+		
 		createEngineConfigTitleLabel();
 		
 		configsComposite = new ConfigWidgetsWrapperManager(this, getController());
 	}
 
 	private void createEngineConfigTitleLabel() {
-		// TODO Auto-generated method stub
 		Label configLabel = new Label(this, SWT.NONE);
 		configLabel.setText("Engine-Configuration");
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
@@ -62,6 +67,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		
 		GridData parameterLabelGridData = new GridData();
 		parameterLabelGridData.horizontalSpan = 2;
+//		parameterLabelGridData.heightHint = 50;
 		configLabel.setLayoutData(parameterLabelGridData);
 	}
 

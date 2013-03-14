@@ -3,6 +3,7 @@ package cbdt.view;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -23,6 +24,10 @@ public class CBDTHeaderComposite extends Composite{
 		Label cbdtTitle = new Label(this, SWT.NONE);
 		cbdtTitle.setText("Case-Based Decision Theory");
 		cbdtTitle.setFont(new Font(parent.getDisplay(), CBDT_TITLE_FONT_DATA));
+		
+		RowData rowData = new RowData();
+		rowData.height = 35;
+		cbdtTitle.setLayoutData(rowData);
 	}
 
 	

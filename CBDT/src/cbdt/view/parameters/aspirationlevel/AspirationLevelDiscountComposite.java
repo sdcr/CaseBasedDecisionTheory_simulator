@@ -8,13 +8,14 @@ import cbdt.control.ParametersController;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelDiscountModifyListener;
 
-public class AspirationLevelDiscountComposite extends SimpleParameterComposite{
+public class AspirationLevelDiscountComposite extends AbstractAspirationLevelParameterComposite{
 
 	public AspirationLevelDiscountComposite(Composite parent, ParametersController controller) {
 		super(parent);
+		DoubleFormatChecker doubleFormatChecker = new DoubleFormatChecker();
+		this.setNumberFormatChecker(doubleFormatChecker);
 		getText().addModifyListener(new AspirationLevelDiscountModifyListener(controller, 
-				getHintLabel()));
-		getText().setText("0.9");
+				getHintLabel(), doubleFormatChecker));
 	}
 
 	@Override

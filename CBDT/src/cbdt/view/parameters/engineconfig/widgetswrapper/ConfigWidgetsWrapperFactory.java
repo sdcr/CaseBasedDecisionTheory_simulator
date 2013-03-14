@@ -4,6 +4,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.NaiveEngineConfig;
+import cbdt.view.parameters.engineconfig.widgetswrapper.naiveconfig.NaiveConfigWidgetsWrapper;
 
 
 public class ConfigWidgetsWrapperFactory {

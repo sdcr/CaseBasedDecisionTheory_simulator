@@ -8,13 +8,14 @@ import cbdt.control.ParametersController;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelIncrementModifyListener;
 
-public class AspirationLevelIncrementComposite extends SimpleParameterComposite {
+public class AspirationLevelIncrementComposite extends AbstractAspirationLevelParameterComposite {
 
 	public AspirationLevelIncrementComposite (Composite parent, ParametersController controller) {
 		super(parent);
+		DoubleFormatChecker doubleFormatChecker = new DoubleFormatChecker();
+		this.setNumberFormatChecker(doubleFormatChecker);
 		getText().addModifyListener(new AspirationLevelIncrementModifyListener(controller, 
-				getHintLabel()));
-		getText().setText("10");
+				getHintLabel(), doubleFormatChecker));
 	}
 
 	@Override

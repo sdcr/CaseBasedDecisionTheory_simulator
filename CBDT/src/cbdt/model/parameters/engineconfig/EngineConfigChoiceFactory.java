@@ -11,6 +11,9 @@ public class EngineConfigChoiceFactory {
 		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();  
 		configs.add(new NaiveEngineConfig());
 		defaultChoice.addAvailableConfigs(configs);
+		
+		defaultChoice.choosenConfig = configs.get(0);
+		
 		return defaultChoice;
 	}
 }

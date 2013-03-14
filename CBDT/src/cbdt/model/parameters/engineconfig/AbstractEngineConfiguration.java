@@ -12,5 +12,17 @@ import java.util.Observable;
  */
 public abstract class AbstractEngineConfiguration extends Observable {
 
+	private int requestedExpectedUtilityValues;
+	
 	public abstract String getName();
+
+	public int getRequestedExpectedUtilityValues() {
+		return requestedExpectedUtilityValues;
+	}
+
+	public void setRequestedExpectedUtilityValues(
+			int requestedExpectedUtilityValues) {
+		this.requestedExpectedUtilityValues = requestedExpectedUtilityValues;
+	}
+	
 }

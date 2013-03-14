@@ -23,9 +23,7 @@ public class ConfigForegroundManager {
 		configWidgetsWrapper.setParent(parametersPage);
 		currentlyInForegroundPage = configWidgetsWrapper;
 		
-		//TODO still to be tested
 		parametersPage.getParent().getParent().pack();
-//		parametersPage.layout();
 	}
 	
 }

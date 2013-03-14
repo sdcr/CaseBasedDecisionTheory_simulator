@@ -1,6 +1,4 @@
-package cbdt.view.parameters.aspirationlevel;
-
-import java.util.Observer;
+package cbdt.view.parameters;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -9,16 +7,18 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.model.parameters.Parameters;
 import cbdt.view.HintLabelWrapper;
+import cbdt.view.NumberFormatChecker;
 
-public abstract class SimpleParameterComposite extends Composite implements Observer {
+public class SimpleParameterComposite extends Composite {
 
 	private Text text;
 	private HintLabelWrapper  hintLabel;
+	
+	private NumberFormatChecker numberFormatChecker;
 
 	public SimpleParameterComposite(Composite parent) {
-		super(parent, SWT.NONE);
+		super(parent, SWT.NONE | SWT.BORDER);
 
 		GridData gridData = new GridData();
 		gridData.widthHint = 200;
@@ -30,8 +30,6 @@ public abstract class SimpleParameterComposite extends Composite implements Obse
 		RowData textRowData = new RowData();
 		textRowData.width = 150;
 		text.setLayoutData(textRowData);
-		
-		hintLabel = new MalformedTextEntryHintLabelWrapper(this);
 	}
 
 	public Text getText(){
@@ -42,13 +40,20 @@ public abstract class SimpleParameterComposite extends Composite implements Obse
 		return hintLabel;
 	}
 
-	public boolean hasValidValue(){
-		return NumberFormatChecker.hasValidDoubleFormat(text.getText());
-	}
-	
-	public void setParametersModel(Parameters parametersModel){
-		parametersModel.addObserver(this);
-		this.update(parametersModel, null);
+	public void setHintLabel(HintLabelWrapper hintLabel) {
+		this.hintLabel = hintLabel;
 	}
 
+	public boolean hasValidValue(){
+		return numberFormatChecker.isValidValue(text.getText());
+	}
+	
+
+	public NumberFormatChecker getNumberFormatChecker() {
+		return numberFormatChecker;
+	}
+
+	public void setNumberFormatChecker(NumberFormatChecker numberFormatChecker) {
+		this.numberFormatChecker = numberFormatChecker;
+	}
 }

@@ -38,4 +38,11 @@ public class HintLabelWrapper {
 		hintLabel.setVisible(visible);
 	}
 	
+	/**
+	 * See Label's documentation for {@link #org.eclipse.swt.widgets.Label.setToolTipText(boolean) setToolTipText()}.
+	 * @param string
+	 */
+	public void setToolTipText(String string){
+		hintLabel.setToolTipText(string);
+	}
 }
