@@ -33,6 +33,7 @@ public class ParametersPageWrapper extends AbstractPluginPageWrapper{
 		Composite parametersPluginPage = new CBDTHeaderComposite(parent, SWT.NONE| SWT.BORDER);		
 		parameterComposite = new ParametersPage(parametersPluginPage, SWT.NONE, controller);
 		parameterComposite.setParametersModel(controller.getParametersModel());
+		parameterComposite.setConfigChoiceModel(controller.getConfigChoiceModel());
 		return parametersPluginPage;
 	}
 

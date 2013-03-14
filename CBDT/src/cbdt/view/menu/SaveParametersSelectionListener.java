@@ -1,4 +1,4 @@
-package cbdt.view.parameters.menu;
+package cbdt.view.menu;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;

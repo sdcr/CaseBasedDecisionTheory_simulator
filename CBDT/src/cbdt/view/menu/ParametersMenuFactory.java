@@ -1,4 +1,4 @@
-package cbdt.view.parameters.menu;
+package cbdt.view.menu;
 
 import java.util.ArrayList;
 

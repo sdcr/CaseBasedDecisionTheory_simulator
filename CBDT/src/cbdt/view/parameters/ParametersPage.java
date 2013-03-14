@@ -10,11 +10,13 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.ParametersController;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelIncrementComposite;
 import cbdt.view.parameters.aspirationlevel.InitialAspirationLevelComposite;
 import cbdt.view.parameters.aspirationlevel.SimpleParameterComposite;
+import cbdt.view.parameters.engineconfig.ConfigWidgetsWrapperManager;
 
 /**
  * This composite contains all view elements that deal with the user's parameter input.
@@ -26,6 +28,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	private SimpleParameterComposite initialAspirationLevelComposite;
 	private SimpleParameterComposite aspirationLevelIncrementComposite;
 	private SimpleParameterComposite aspirationLevelDiscountComposite;
+	private ConfigWidgetsWrapperManager configsComposite;
 
 	public ParametersPage(Composite parent, int style, ParametersController controller) {
 		super(parent, style, controller);
@@ -44,6 +47,22 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(this, getController());
 		createParameterLabel("Aspiration discount factor:");
 		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(this, getController());
+		
+		createEngineConfigTitleLabel();
+		
+		configsComposite = new ConfigWidgetsWrapperManager(this, getController());
+	}
+
+	private void createEngineConfigTitleLabel() {
+		// TODO Auto-generated method stub
+		Label configLabel = new Label(this, SWT.NONE);
+		configLabel.setText("Engine-Configuration");
+		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
+		configLabel.setFont(new Font(this.getDisplay(), labelFontData));
+		
+		GridData parameterLabelGridData = new GridData();
+		parameterLabelGridData.horizontalSpan = 2;
+		configLabel.setLayoutData(parameterLabelGridData);
 	}
 
 	/**
@@ -94,4 +113,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		aspirationLevelDiscountComposite.setParametersModel(parameters);
 	}
 	
+	public void setConfigChoiceModel(EngineConfigChoice configChoice){
+		configsComposite.setConfigChoiceModel(configChoice);
+	}
 }

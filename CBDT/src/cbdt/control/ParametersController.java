@@ -2,10 +2,14 @@ package cbdt.control;
 
 import java.io.FileNotFoundException;
 
+import cbdt.control.engineconfig.EngineConfigControllerFactory;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.EngineConfigChoice;
+import cbdt.model.parameters.engineconfig.EngineConfigChoiceFactory;
 import cbdt.model.parameters.persistence.IParametersPersistenceManager;
 import cbdt.model.parameters.persistence.ParametersPersistenceManager;
 import cbdt.view.parameters.ParametersPageWrapper;
@@ -13,14 +17,21 @@ import cbdt.view.parameters.ParametersPageWrapper;
 public class ParametersController extends AbstractPageController {
 
 	private Parameters parametersModel;
+	private EngineConfigChoice configChoice;
 	private ParametersPageWrapper parametersPageWrapper;
 	private IParametersPersistenceManager parametersPersistenceManager;
+	private EngineConfigControllerFactory configControllerFactory;
 
 	public ParametersController() {
 		ParametersFactory factory = new ParametersFactory();
 		parametersModel = factory.getDefaultParameters();
 		parametersPageWrapper = new ParametersPageWrapper(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
+		
+		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
+		configChoice = configChoiceFactory.getDefaultConfigChoice();
+		
+		configControllerFactory = new EngineConfigControllerFactory();
 	}
 	
 	@Override
@@ -91,7 +102,21 @@ public class ParametersController extends AbstractPageController {
 		}
 	}
 	
+	public EngineConfigChoice getConfigChoiceModel(){
+		return configChoice;
+	}
+
+	public EngineConfigControllerFactory getConfigControllerFactory(){
+		return configControllerFactory;
+	}
+	
 	public void startComputation(){
 		getMainController().computeCDBTSimulation(parametersModel);
 	}
+
+	public void setChoosenConfig(
+			AbstractEngineConfiguration config) {
+		configChoice.setCurrentlyChoosenConfig(config);
+	}
+
 }
