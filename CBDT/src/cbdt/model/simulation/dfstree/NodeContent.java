@@ -1,4 +1,4 @@
-package cbdt.model.simulation;
+package cbdt.model.simulation.dfstree;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -6,8 +6,8 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
-import cbdt.model.persistence.IParametersPersistenceManager;
-import cbdt.model.persistence.ParametersPersistenceManager;
+import cbdt.model.parameters.persistence.IParametersPersistenceManager;
+import cbdt.model.parameters.persistence.ParametersPersistenceManager;
 import cbdt.view.parameters.ParametersPageWrapper;
 
 public class ParametersController extends AbstractPageController {

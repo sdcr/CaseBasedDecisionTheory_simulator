@@ -12,7 +12,7 @@ import org.junit.Test;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.persistence.ParametersPersistenceManager;
+import cbdt.model.parameters.persistence.ParametersPersistenceManager;
 
 public class ParameterPersistenceManagerTest {
 

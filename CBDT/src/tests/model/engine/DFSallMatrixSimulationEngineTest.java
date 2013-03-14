@@ -1,16 +1,14 @@
 package tests.model.engine;
 
-import static org.junit.Assert.*;
-
-import org.junit.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.simulation.DFSstyleSimulationEngine;
+import cbdt.model.simulation.dfsallmatrix.DFSallMatrixStyleSimulationEngine;
 
-public class DFSstyleSimulationEngineTest {
+public class DFSallMatrixSimulationEngineTest {
 
 	private Parameters parameters;
 
@@ -30,12 +28,12 @@ public class DFSstyleSimulationEngineTest {
 		parameters.setInitialAspirationLevel(100);
 		parameters.setWeightingFactorAlpha(0.5);
 		
-		parameters.setNumberOfRequestedExpectedUtilities(23);
+		parameters.setNumberOfRequestedExpectedUtilities(40);
 	}
 	
 	@Test
 	public void computeExpectedUtilitiesTest(){
-		DFSstyleSimulationEngine engine = new DFSstyleSimulationEngine();
+		DFSallMatrixStyleSimulationEngine engine = new DFSallMatrixStyleSimulationEngine();
 		double[] computedUtilities = engine.computeExpectedUtilities(parameters);
 		for(double expectedUtility : computedUtilities){
 			System.out.println(expectedUtility);

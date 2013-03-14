@@ -1,4 +1,4 @@
-package cbdt.model.simulation;
+package cbdt.model.simulation.dfstree;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 
-public class DFSstyleSimulationEngine {
+public class DFStreeSimulationEngine {
 
 	public double[] computeExpectedUtilities(Parameters parameters){
 		NodeContent rootContent = new NodeContent();
