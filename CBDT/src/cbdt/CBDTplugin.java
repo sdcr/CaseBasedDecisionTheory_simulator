@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Menu;
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
-import cbdt.control.AnalysisController;
 import cbdt.control.MainController;
-import cbdt.control.ParametersController;
+import cbdt.control.pages.AnalysisController;
+import cbdt.control.pages.ParametersController;
 import cbdt.view.MenuFactory;
 
 public class CBDTplugin implements ISimulationPlugin {

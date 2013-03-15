@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;

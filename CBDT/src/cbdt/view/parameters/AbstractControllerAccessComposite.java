@@ -2,7 +2,7 @@ package cbdt.view.parameters;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 
 public abstract class AbstractControllerAccessComposite extends Composite {
 

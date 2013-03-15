@@ -4,7 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 import cbdt.view.CBDTHeaderComposite;
 
 /**

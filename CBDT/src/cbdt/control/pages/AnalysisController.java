@@ -1,4 +1,4 @@
-package cbdt.control;
+package cbdt.control.pages;
 
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 import cbdt.model.Result;

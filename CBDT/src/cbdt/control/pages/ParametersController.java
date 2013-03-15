@@ -1,4 +1,4 @@
-package cbdt.control;
+package cbdt.control.pages;
 
 import java.io.FileNotFoundException;
 
@@ -121,7 +121,7 @@ public class ParametersController extends AbstractPageController {
 	}
 
 	public void startComputation() {
-		getMainController().computeCDBTSimulation(parametersModel);
+		getMainController().computeCDBTSimulation(parametersModel, configChoice.getCurrentlyChoosenConfig());
 	}
 
 	public void setChoosenConfig(AbstractEngineConfiguration config) {

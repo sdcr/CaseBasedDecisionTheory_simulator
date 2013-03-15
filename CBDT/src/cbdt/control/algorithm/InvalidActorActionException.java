@@ -1,4 +1,4 @@
-package cbdt.model.engine;
+package cbdt.control.algorithm;
 
 import cbdt.model.parameters.ActorAction;
 

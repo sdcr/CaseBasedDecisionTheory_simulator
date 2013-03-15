@@ -4,7 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 
 public class SaveParametersSelectionListener extends OpenFileDialogSelectionListener {
 

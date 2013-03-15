@@ -2,7 +2,7 @@ package cbdt.view.parameters.aspirationlevel.listeners;
 
 import org.eclipse.swt.events.ModifyListener;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.NumberFormatChecker;
 

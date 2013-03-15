@@ -1,4 +1,4 @@
-package cbdt.model.engine;
+package cbdt.control.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import cbdt.model.parameters.Parameters;
 
 
 
-public class TreeStyleSimulationEngine implements ISimulationEngine {
+public class TreeStyleSimulationEngine {
 
 	/**
 	 * By default limit the simulation to a maximum number of steps.
@@ -28,7 +28,6 @@ public class TreeStyleSimulationEngine implements ISimulationEngine {
 	 */
 	private Parameters parameters;
 	
-	@Override
 	public Result computeSimulation(Parameters parameters) {
 		//test this before casting
 		this.parameters = (Parameters) parameters;

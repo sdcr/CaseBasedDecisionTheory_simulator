@@ -1,5 +1,6 @@
-package cbdt.control;
+package cbdt.control.pages;
 
+import cbdt.control.MainController;
 import cbdt.view.MessageBoxManager;
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 

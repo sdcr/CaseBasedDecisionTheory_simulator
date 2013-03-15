@@ -3,11 +3,13 @@ package cbdt.control.algorithm.dfskeeptree;
 import java.util.HashMap;
 import java.util.Map;
 
+import cbdt.control.algorithm.CBDTAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 
-public class DFStreeSimulationAlgorithm {
+public class DFStreeSimulationAlgorithm implements CBDTAlgorithm {
 
+	@Override
 	public double[] computeExpectedUtilities(Parameters parameters){
 		NodeContent rootContent = new NodeContent();
 		rootContent.setProbabilityProduct(1);
@@ -28,4 +30,5 @@ public class DFStreeSimulationAlgorithm {
 		rootShell.computeChildren(parameters, expectedUtilities, 0);
 		return expectedUtilities;
 	}
+
 }

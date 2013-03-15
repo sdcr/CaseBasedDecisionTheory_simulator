@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 
 public class ParametersMenuFactory {
 

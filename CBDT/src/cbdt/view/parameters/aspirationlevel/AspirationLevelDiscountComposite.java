@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelDiscountModifyListener;
 

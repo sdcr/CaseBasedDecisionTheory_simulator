@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.view.parameters.AbstractControllerAccessComposite;

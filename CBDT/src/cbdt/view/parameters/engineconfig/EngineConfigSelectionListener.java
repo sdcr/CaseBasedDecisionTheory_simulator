@@ -7,7 +7,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
 
-import cbdt.control.ParametersController;
+import cbdt.control.pages.ParametersController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 
 public class EngineConfigSelectionListener implements SelectionListener {
