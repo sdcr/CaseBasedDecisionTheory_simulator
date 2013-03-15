@@ -15,7 +15,7 @@ public class DFSmatrixStyleSimulationEngine {
 		
 		int numOfOutcomes = 0;
 		for(ActorAction action : parameters.getActorActions()){
-			for(ActorActionOutcome outcome : action.getActionOutcomes()){
+			for(@SuppressWarnings("unused") ActorActionOutcome outcome : action.getActionOutcomes()){
 				numOfOutcomes++;
 			}
 		}

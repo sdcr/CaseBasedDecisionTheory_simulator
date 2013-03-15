@@ -37,7 +37,7 @@ public class DFSlistsStyleSimulationEngine {
 		for(int i=0; i<parameters.getNumberOfRequestedExpectedUtilities(); i++){
 			ArrayList<NodeContent> stageList = new ArrayList<NodeContent>();
 			for(ActorAction action : parameters.getActorActions()){
-				for(ActorActionOutcome outcome : action.getActionOutcomes()){
+				for(@SuppressWarnings("unused") ActorActionOutcome outcome : action.getActionOutcomes()){
 					NodeContent nodeContent = new NodeContent();
 					nodeContent.setNumberOfOccurances(getInitNumberOfOccurences(parameters));
 					nodeContent.setSumOfUtilities(getInitSumOfUtilities(parameters));

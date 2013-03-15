@@ -13,7 +13,9 @@ public class MainController {
 
 	private EngineContext simulationEngine;
 
+	@SuppressWarnings("unused")
 	private ParametersController parametersController;
+	@SuppressWarnings("unused")
 	private AnalysisController analysisController;
 
 	private MessageBoxManager messageBoxManager;

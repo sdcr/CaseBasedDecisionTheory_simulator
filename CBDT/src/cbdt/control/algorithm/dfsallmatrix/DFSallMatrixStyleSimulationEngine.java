@@ -1,7 +1,5 @@
 package cbdt.control.algorithm.dfsallmatrix;
 
-import java.math.BigDecimal;
-
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
@@ -21,7 +19,7 @@ public class DFSallMatrixStyleSimulationEngine {
 		
 		int numOfOutcomes = 0;
 		for(ActorAction action : parameters.getActorActions()){
-			for(ActorActionOutcome outcome : action.getActionOutcomes()){
+			for(@SuppressWarnings("unused") ActorActionOutcome outcome : action.getActionOutcomes()){
 				numOfOutcomes++;
 			}
 		}
