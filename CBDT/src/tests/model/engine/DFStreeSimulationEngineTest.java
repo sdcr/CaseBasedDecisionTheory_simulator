@@ -3,11 +3,11 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.control.algorithm.dfsmatrix.DFSmatrixStyleSimulationEngine;
+import cbdt.control.algorithm.dfstree.DFStreeSimulationEngine;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.simulation.dfsmatrix.DFSmatrixStyleSimulationEngine;
-import cbdt.model.simulation.dfstree.DFStreeSimulationEngine;
 
 public class DFStreeSimulationEngineTest {
 

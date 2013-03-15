@@ -3,10 +3,10 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.control.algorithm.dfslists.DFSlistsStyleSimulationEngine;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.simulation.dfslists.DFSlistsStyleSimulationEngine;
 
 public class DFSlistsStyleSimulationEngineTest {
 

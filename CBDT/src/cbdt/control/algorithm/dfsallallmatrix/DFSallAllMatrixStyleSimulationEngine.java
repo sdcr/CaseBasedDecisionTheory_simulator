@@ -1,26 +1,26 @@
-package cbdt.model.simulation.dfsallallmatrix.highprecision;
+package cbdt.control.algorithm.dfsallallmatrix;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.ArrayList;
 import java.util.List;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 
-public class DFSallAllHighPrecMatrixStyleSimulationEngine {
+public class DFSallAllMatrixStyleSimulationEngine {
 
-	private static final BigDecimal BIG_DECIMAL_1_0 = new BigDecimal(1.0);
 	int requestedNumberOfExpectedUtilities;
 	int numberOfActorActions;
 	private ActorActionOutcome[][] outcomeMatrix;
 	double alpha;
 	private List<List<Character>> choosenActions;
 	
-	private int[][] choosenActionNumbers;
+	private BigDecimal[][] choosenActionNumbers;
+	private MathContext mathContext;
+	private BigDecimal big_one;
 	
-	public int[][] getChoosenActionNumbers() {
+	public BigDecimal[][] getChoosenActionNumbers() {
 		return choosenActionNumbers;
 	}
 
@@ -29,29 +29,27 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 		return choosenActions;
 	}
 
-	MathContext mathContext;
-	private BigDecimal multiActionProbability;
-	private BigDecimal childrensExpectedUtilitySum;
-	private BigDecimal big_one_minus_alpha;
-	private BigDecimal big_alpha;
-	private BigDecimal big_0_0 = new BigDecimal(0.0);;
 
-	public BigDecimal[] computeExpectedUtilities(Parameters parameters){
+	public double[] computeExpectedUtilities(Parameters parameters){
 //		List<List<NodeContent>> contents = new ArrayList<List<NodeContent>>();
-		mathContext = new MathContext(30);
 		
 		requestedNumberOfExpectedUtilities = parameters.getNumberOfRequestedExpectedUtilities();
 		numberOfActorActions = parameters.getActorActions().size();
 		alpha = parameters.getWeightingFactorAlpha();
-		big_one_minus_alpha = new BigDecimal(1 - alpha);
-		big_alpha = new BigDecimal(alpha);
-		
-		choosenActionNumbers = new int[requestedNumberOfExpectedUtilities][numberOfActorActions];
-		
-		choosenActions = new ArrayList<List<Character>>();
+				
+		choosenActionNumbers = new BigDecimal[requestedNumberOfExpectedUtilities][numberOfActorActions];
 		for(int i=0; i<requestedNumberOfExpectedUtilities; i++){
-			choosenActions.add(new ArrayList<Character>());
+			for (int j=0; j<numberOfActorActions; j++) {
+				choosenActionNumbers[i][j] = new BigDecimal(0);
+			}
 		}
+		big_one = new BigDecimal(1);
+		mathContext = new MathContext(30);
+		
+//		choosenActions = new ArrayList<List<Character>>();
+//		for(int i=0; i<requestedNumberOfExpectedUtilities; i++){
+//			choosenActions.add(new ArrayList<Character>());
+//		}
 		
 		int numOfOutcomes = 0;
 		int maxNumberOfOutcomes = 0;
@@ -83,14 +81,11 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 		NodeContent rootContent = contentsMatrix[0][0];
 		rootContent.numberOfOccurances = (getInitNumberOfOccurences(parameters));
 		rootContent.sumOfUtilities = (getInitSumOfUtilities(parameters));
-		rootContent.aspirationLevel = (new BigDecimal(parameters.getInitialAspirationLevel()));
-		rootContent.probabilityProduct = BIG_DECIMAL_1_0;		
+		rootContent.aspirationLevel = (parameters.getInitialAspirationLevel());
+		rootContent.probabilityProduct = (1.0);		
 		
 		int[] selectedActions = new int[parameters.getActorActions().size()];
-		
-		BigDecimal[] expectedUtilities = new BigDecimal[requestedNumberOfExpectedUtilities];
-		for(int i=0; i<requestedNumberOfExpectedUtilities; i++)
-			expectedUtilities[i] = new BigDecimal(0.0);
+		double[] expectedUtilities = new double[requestedNumberOfExpectedUtilities];
 		computeNextStage(contentsMatrix, 0, 0, selectedActions, expectedUtilities);
 		
 		return expectedUtilities;
@@ -98,7 +93,7 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 
 
 	private void computeNextStage(NodeContent[][] contentsMatrix, int stage,
-			int index, int[] selectedActionsIndices, BigDecimal[] expectedUtilities) {
+			int index, int[] selectedActionsIndices, double[] expectedUtilities) {
 		if(stage < requestedNumberOfExpectedUtilities){
 			computeSelectedActions(contentsMatrix, selectedActionsIndices, stage, index);
 			int numberOfSelectedActions = 0;
@@ -106,15 +101,15 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 				if(selectedActionsIndices[i]>-1)
 					numberOfSelectedActions++;
 			}
-			multiActionProbability = BIG_DECIMAL_1_0.divide(new BigDecimal(numberOfSelectedActions), mathContext);
+			double multiActionProbability = 1.0 / numberOfSelectedActions;
 			
-			childrensExpectedUtilitySum = big_0_0;
+			double childrensExpectedUtilitySum = 0;
 			int childIndex = 0;
 			int childrenStage = stage+1;
 			for(int i=0; i<numberOfSelectedActions; i++){
 				int selectedActionIndex = selectedActionsIndices[i];
-				choosenActions.get(stage).add((char) selectedActionIndex);
-				choosenActionNumbers[stage][selectedActionIndex]++;
+
+				choosenActionNumbers[stage][selectedActionIndex] = choosenActionNumbers[stage][selectedActionIndex].add(big_one, mathContext);
 				for(int outcomeIndex=0; outcomeIndex<outcomeMatrix[selectedActionIndex].length; outcomeIndex++){
 					for(int actionIndex=0; actionIndex< numberOfActorActions; actionIndex++){
 						contentsMatrix[childrenStage][childIndex].numberOfOccurances[actionIndex] = contentsMatrix[stage][index].numberOfOccurances[actionIndex];
@@ -124,20 +119,15 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 							contentsMatrix[childrenStage][childIndex].numberOfOccurances[selectedActionIndex]+1;
 					contentsMatrix[childrenStage][childIndex].sumOfUtilities[selectedActionIndex] = 
 							contentsMatrix[childrenStage][childIndex].sumOfUtilities[selectedActionIndex] + outcomeMatrix[selectedActionIndex][outcomeIndex].getUtility();
-					contentsMatrix[childrenStage][childIndex].probabilityProduct = contentsMatrix[stage][index].probabilityProduct
-							.multiply(multiActionProbability, mathContext)
-							.multiply(new BigDecimal(outcomeMatrix[selectedActionIndex][outcomeIndex].getProbability()), mathContext);
-					contentsMatrix[childrenStage][childIndex].aspirationLevel = contentsMatrix[stage][index].aspirationLevel
-							.multiply(big_alpha, mathContext)
-							.add(computeChildsMaxAverageUtility(contentsMatrix, childrenStage, childIndex).multiply(big_one_minus_alpha,mathContext), mathContext);
+					contentsMatrix[childrenStage][childIndex].probabilityProduct = contentsMatrix[stage][index].probabilityProduct * multiActionProbability * outcomeMatrix[selectedActionIndex][outcomeIndex].getProbability();
+					contentsMatrix[childrenStage][childIndex].aspirationLevel = contentsMatrix[stage][index].aspirationLevel * alpha
+							+ (computeChildsMaxAverageUtility(contentsMatrix, childrenStage, childIndex) * (1 - alpha));
 					
-					childrensExpectedUtilitySum = childrensExpectedUtilitySum
-							.add(contentsMatrix[childrenStage][childIndex].probabilityProduct
-									.multiply(new BigDecimal(outcomeMatrix[selectedActionIndex][outcomeIndex].getUtility()),mathContext),mathContext);
+					childrensExpectedUtilitySum += contentsMatrix[childrenStage][childIndex].probabilityProduct * outcomeMatrix[selectedActionIndex][outcomeIndex].getUtility();
 					childIndex++;
 				}
 			}
-			expectedUtilities[stage] = expectedUtilities[stage].add(childrensExpectedUtilitySum, mathContext);
+			expectedUtilities[stage] += childrensExpectedUtilitySum;
 
 			initChildComputation(contentsMatrix, selectedActionsIndices, expectedUtilities,
 					childIndex, childrenStage);
@@ -145,26 +135,19 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 	}
 
 	private void initChildComputation(NodeContent[][] contents,
-			int[] selectedActionsIndices, BigDecimal[] expectedUtilities, int childIndex, int childrenStage) {
+			int[] selectedActionsIndices, double[] expectedUtilities, int childIndex, int childrenStage) {
 		for(int i=0; i<childIndex; i++){
 			computeNextStage(contents, childrenStage, i, selectedActionsIndices, expectedUtilities);
 		}
 	}
 
-	private BigDecimal computeChildsMaxAverageUtility(NodeContent[][] contents, int childStage,
+	private double computeChildsMaxAverageUtility(NodeContent[][] contents, int childStage,
 			int childIndex) {
-		BigDecimal maxAverageUtility = null;
+		double maxAverageUtility = Double.NEGATIVE_INFINITY;
 		for(int existingActionIndex=0; existingActionIndex<numberOfActorActions; existingActionIndex++){
-			BigDecimal actionOccurances = new BigDecimal(contents[childStage][childIndex].numberOfOccurances[existingActionIndex]);
-			if(actionOccurances.compareTo(new BigDecimal(0)) == 1){
-				BigDecimal possiblyNewMax = new BigDecimal(contents[childStage][childIndex].sumOfUtilities[existingActionIndex]).divide(actionOccurances, mathContext);
-				if(maxAverageUtility == null)
-					maxAverageUtility = possiblyNewMax;
-				else{
-					if(maxAverageUtility.compareTo(possiblyNewMax) == -1){
-						maxAverageUtility = possiblyNewMax;
-					}
-				}
+			double actionOccurances = contents[childStage][childIndex].numberOfOccurances[existingActionIndex];
+			if(actionOccurances>0){
+				maxAverageUtility = Math.max(maxAverageUtility, contents[childStage][childIndex].sumOfUtilities[existingActionIndex] / actionOccurances);
 			}
 		}
 		return maxAverageUtility;
@@ -175,27 +158,26 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 		for(int i=0; i<selectedActionsIndices.length; i++)
 			selectedActionsIndices[i]=-1;
 		int j=0;
-		BigDecimal maxCumulativePerformance = null;//Double.NEGATIVE_INFINITY;
+		double maxCumulativePerformance = Double.NEGATIVE_INFINITY;
 		
 		for(int actorActionIndex=0; actorActionIndex<numberOfActorActions; actorActionIndex++){
-			BigDecimal cumulativePerformance = computeCumulativePerformance(contentsMatrix, actorActionIndex, stage, index);
-			if(maxCumulativePerformance == null || cumulativePerformance.compareTo(maxCumulativePerformance)==1){
+			double cumulativePerformance = computeCumulativePerformance(contentsMatrix, actorActionIndex, stage, index);
+			if(cumulativePerformance > maxCumulativePerformance){
 				for(int i=0; i<selectedActionsIndices.length; i++)
 					selectedActionsIndices[i]=-1;
 				j=0;
 				selectedActionsIndices[j] = actorActionIndex;
 				maxCumulativePerformance = cumulativePerformance;
-			} else if(cumulativePerformance.compareTo(maxCumulativePerformance)==0) {
+			} else if(cumulativePerformance == maxCumulativePerformance) {
 				j++;
 				selectedActionsIndices[j] = actorActionIndex;
 			}
 		}
 	}
 
-	private BigDecimal computeCumulativePerformance(NodeContent[][] contentsMatrix, int actorActionIndex, int stage, int index) {
-		return new BigDecimal(contentsMatrix[stage][index].sumOfUtilities[actorActionIndex])
-		.subtract(contentsMatrix[stage][index].aspirationLevel
-					.multiply(new BigDecimal(contentsMatrix[stage][index].numberOfOccurances[actorActionIndex]), mathContext), mathContext);
+	private double computeCumulativePerformance(NodeContent[][] contentsMatrix, int actorActionIndex, int stage, int index) {
+		return contentsMatrix[stage][index].sumOfUtilities[actorActionIndex] - 
+				contentsMatrix[stage][index].aspirationLevel * contentsMatrix[stage][index].numberOfOccurances[actorActionIndex];
 	}
 	
 	private int[] getInitNumberOfOccurences(Parameters parameters) {

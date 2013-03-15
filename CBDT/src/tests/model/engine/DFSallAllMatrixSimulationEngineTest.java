@@ -10,10 +10,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.control.algorithm.dfsallallmatrix.DFSallAllMatrixStyleSimulationEngine;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.simulation.dfsallallmatrix.DFSallAllMatrixStyleSimulationEngine;
 
 public class DFSallAllMatrixSimulationEngineTest {
 

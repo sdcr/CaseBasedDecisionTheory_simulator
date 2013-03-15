@@ -1,4 +1,4 @@
-package cbdt.model.simulation.dfstree;
+package cbdt.control.algorithm.dfstree;
 
 import java.util.ArrayList;
 import java.util.List;

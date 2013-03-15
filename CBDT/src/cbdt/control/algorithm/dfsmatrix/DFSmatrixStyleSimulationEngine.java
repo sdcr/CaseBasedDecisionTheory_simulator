@@ -1,4 +1,4 @@
-package cbdt.model.simulation.dfsmatrix;
+package cbdt.control.algorithm.dfsmatrix;
 
 import java.util.ArrayList;
 import java.util.HashMap;
