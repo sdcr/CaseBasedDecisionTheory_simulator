@@ -13,17 +13,17 @@ import cbdt.view.NumberFormatChecker;
 public class SimpleParameterComposite extends Composite {
 
 	private Text text;
-	private HintLabelWrapper  hintLabel;
-	
+	private HintLabelWrapper hintLabel;
+
 	private NumberFormatChecker numberFormatChecker;
 
 	public SimpleParameterComposite(Composite parent) {
-		super(parent, SWT.NONE | SWT.BORDER);
+		super(parent, SWT.NONE);
 
 		GridData gridData = new GridData();
 		gridData.widthHint = 200;
 		this.setLayoutData(gridData);
-		
+
 		this.setLayout(new RowLayout());
 
 		text = new Text(this, SWT.SINGLE | SWT.BORDER);
@@ -32,11 +32,11 @@ public class SimpleParameterComposite extends Composite {
 		text.setLayoutData(textRowData);
 	}
 
-	public Text getText(){
+	public Text getText() {
 		return text;
 	}
-	
-	public HintLabelWrapper  getHintLabel(){
+
+	public HintLabelWrapper getHintLabel() {
 		return hintLabel;
 	}
 
@@ -44,10 +44,9 @@ public class SimpleParameterComposite extends Composite {
 		this.hintLabel = hintLabel;
 	}
 
-	public boolean hasValidValue(){
+	public boolean hasValidValue() {
 		return numberFormatChecker.isValidValue(text.getText());
 	}
-	
 
 	public NumberFormatChecker getNumberFormatChecker() {
 		return numberFormatChecker;

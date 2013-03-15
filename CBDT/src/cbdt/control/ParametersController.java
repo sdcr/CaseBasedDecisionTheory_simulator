@@ -27,95 +27,104 @@ public class ParametersController extends AbstractPageController {
 		parametersModel = factory.getDefaultParameters();
 		parametersPageWrapper = new ParametersPageWrapper(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
-		
+
 		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
 		configChoice = configChoiceFactory.getDefaultConfigChoice();
-		
+
 		configControllerFactory = new EngineConfigControllerFactory();
 	}
-	
+
 	@Override
-	public ParametersPageWrapper getPageWrapper(){
+	public ParametersPageWrapper getPageWrapper() {
 		return parametersPageWrapper;
 	}
-	
-	public ActorAction addDefaultActorActionToModel(){
+
+	public ActorAction addDefaultActorActionToModel() {
 		ParametersFactory factory = new ParametersFactory();
 		ActorAction defaultActorAction = factory.getDefaultActorAction();
 		parametersModel.addActorAction(defaultActorAction);
 		return defaultActorAction;
 	}
-	
-	public void removeActorActionFromModel(ActorAction actorAction){
+
+	public void removeActorActionFromModel(ActorAction actorAction) {
 		parametersModel.removeActorAction(actorAction);
 	}
-	
-	public Parameters getParametersModel(){
+
+	public Parameters getParametersModel() {
 		return parametersModel;
 	}
 
-	public ActorActionOutcome addDefaultActorActionOutcomeToModel(ActorAction actorAction){
+	public ActorActionOutcome addDefaultActorActionOutcomeToModel(
+			ActorAction actorAction) {
 		ParametersFactory factory = new ParametersFactory();
-		ActorActionOutcome defaultOutcome = factory.getDefaultActorActionOutcome(); 
+		ActorActionOutcome defaultOutcome = factory
+				.getDefaultActorActionOutcome();
 		actorAction.addActionOutcome(defaultOutcome);
 		return defaultOutcome;
 	}
-	
-	public void removeActorActionOutcomeFromModel(ActorActionOutcome outcome){
+
+	public void removeActorActionOutcomeFromModel(ActorActionOutcome outcome) {
 		ActorAction actorAction = outcome.getAction();
 		actorAction.removeActionOutcome(outcome);
 	}
-	
-	public void setActorActionName(ActorAction actorAction, String newName){
+
+	public void setActorActionName(ActorAction actorAction, String newName) {
 		actorAction.setActionName(newName);
 	}
-	
+
 	public void setInitialAspirationLevel(Double newInitAspirationLevel) {
 		parametersModel.setInitialAspirationLevel(newInitAspirationLevel);
 	}
-	
+
 	public void setAspirationLevelIncrement(Double newAspirationLevelIncrement) {
-		parametersModel.setAspirationLevelIncrement(newAspirationLevelIncrement);
+		parametersModel
+				.setAspirationLevelIncrement(newAspirationLevelIncrement);
 	}
-	
-	public void setAspirationDiscountFactor(Double newAspirationLevelDiscountFactor) {
-		parametersModel.setWeightingFactorAlpha(newAspirationLevelDiscountFactor);
+
+	public void setAspirationDiscountFactor(
+			Double newAspirationLevelDiscountFactor) {
+		parametersModel
+				.setWeightingFactorAlpha(newAspirationLevelDiscountFactor);
 	}
 
 	public void loadParametersFromFile(String filepath) {
 		try {
-			parametersModel = parametersPersistenceManager.getParametersFromFile(filepath);
+			parametersModel = parametersPersistenceManager
+					.getParametersFromFile(filepath);
 			goToForeground();
-			parametersPageWrapper.getParametersPage().setParametersModel(parametersModel);
+			parametersPageWrapper.getParametersPage().setParametersModel(
+					parametersModel);
 		} catch (FileNotFoundException e) {
-			getMessageBoxManager().showErrorMessage("The stated file could not be found.");
+			getMessageBoxManager().showErrorMessage(
+					"The stated file could not be found.");
 		}
 	}
 
 	public void saveParametersToFile(String filepath) {
 		goToForeground();
 		try {
-			parametersPersistenceManager.saveParametersToFile(filepath, parametersModel);
+			parametersPersistenceManager.saveParametersToFile(filepath,
+					parametersModel);
 		} catch (Exception e) {
-			getMessageBoxManager().showErrorMessage("An error occured while saving the parameters.");
+			getMessageBoxManager().showErrorMessage(
+					"An error occured while saving the parameters.");
 			e.printStackTrace();
 		}
 	}
-	
-	public EngineConfigChoice getConfigChoiceModel(){
+
+	public EngineConfigChoice getConfigChoiceModel() {
 		return configChoice;
 	}
 
-	public EngineConfigControllerFactory getConfigControllerFactory(){
+	public EngineConfigControllerFactory getConfigControllerFactory() {
 		return configControllerFactory;
 	}
-	
-	public void startComputation(){
+
+	public void startComputation() {
 		getMainController().computeCDBTSimulation(parametersModel);
 	}
 
-	public void setChoosenConfig(
-			AbstractEngineConfiguration config) {
+	public void setChoosenConfig(AbstractEngineConfiguration config) {
 		configChoice.setCurrentlyChoosenConfig(config);
 	}
 

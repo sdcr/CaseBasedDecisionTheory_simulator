@@ -7,20 +7,23 @@ import cbdt.control.ParametersController;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.NumberFormatChecker;
 
-public class InitialAspirationLevelModifyListener extends AbstractParameterModifyListener {
+public class InitialAspirationLevelModifyListener extends
+		AbstractParameterModifyListener {
 
-	public InitialAspirationLevelModifyListener(ParametersController controller, HintLabelWrapper hintLabel, NumberFormatChecker numberFormatChecker) {
+	public InitialAspirationLevelModifyListener(
+			ParametersController controller, HintLabelWrapper hintLabel,
+			NumberFormatChecker numberFormatChecker) {
 		super(controller, hintLabel, numberFormatChecker);
 	}
 
 	@Override
 	public void modifyText(ModifyEvent e) {
-		Text text =  (Text)e.widget;
+		Text text = (Text) e.widget;
 		String textValue = text.getText();
-		if(numberFormatChecker.isValidValue(textValue)){
+		if (numberFormatChecker.isValidValue(textValue)) {
 			controller.setInitialAspirationLevel(Double.parseDouble(textValue));
 			hintLabel.setVisible(false);
-		}else{
+		} else {
 			hintLabel.setVisible(true);
 		}
 	}

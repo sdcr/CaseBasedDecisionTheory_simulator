@@ -14,9 +14,10 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 
 	public abstract void setParent(Composite parent);
 
-	public abstract void setConfigController(AbstractEngineConfigController configController);
+	public abstract void setConfigController(
+			AbstractEngineConfigController configController);
 
-	public void setEngineConfigModel(AbstractEngineConfiguration config){
+	public void setEngineConfigModel(AbstractEngineConfiguration config) {
 		config.addObserver(this);
 		update(config, null);
 	}

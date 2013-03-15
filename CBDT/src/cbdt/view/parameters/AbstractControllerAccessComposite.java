@@ -8,7 +8,8 @@ public abstract class AbstractControllerAccessComposite extends Composite {
 
 	private ParametersController controller;
 
-	public AbstractControllerAccessComposite(Composite parent, int style, ParametersController controller) {
+	public AbstractControllerAccessComposite(Composite parent, int style,
+			ParametersController controller) {
 		super(parent, style);
 		this.controller = controller;
 	}
@@ -16,5 +17,5 @@ public abstract class AbstractControllerAccessComposite extends Composite {
 	public ParametersController getController() {
 		return controller;
 	}
-	
+
 }

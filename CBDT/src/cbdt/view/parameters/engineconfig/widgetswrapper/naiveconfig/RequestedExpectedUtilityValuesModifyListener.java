@@ -15,21 +15,23 @@ public class RequestedExpectedUtilityValuesModifyListener implements
 	private HintLabelWrapper hintLabel;
 	private NumberFormatChecker numberFormatChecker;
 
-	public RequestedExpectedUtilityValuesModifyListener(NaiveConfigController configController, HintLabelWrapper hintLabel, NumberFormatChecker formatChecker) {
+	public RequestedExpectedUtilityValuesModifyListener(
+			NaiveConfigController configController, HintLabelWrapper hintLabel,
+			NumberFormatChecker formatChecker) {
 		this.controller = configController;
 		this.hintLabel = hintLabel;
 		this.numberFormatChecker = formatChecker;
 	}
 
-
 	@Override
 	public void modifyText(ModifyEvent e) {
-		Text text =  (Text)e.widget;
+		Text text = (Text) e.widget;
 		String textValue = text.getText();
-		if(numberFormatChecker.isValidValue(textValue)){
-			controller.setRequestedNumberOfExpectedUtilities(Integer.parseInt(textValue));
+		if (numberFormatChecker.isValidValue(textValue)) {
+			controller.setRequestedNumberOfExpectedUtilities(Integer
+					.parseInt(textValue));
 			hintLabel.setVisible(false);
-		}else{
+		} else {
 			hintLabel.setVisible(true);
 		}
 	}

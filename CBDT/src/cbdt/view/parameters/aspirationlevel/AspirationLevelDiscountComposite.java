@@ -8,22 +8,25 @@ import cbdt.control.ParametersController;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelDiscountModifyListener;
 
-public class AspirationLevelDiscountComposite extends AbstractAspirationLevelParameterComposite{
+public class AspirationLevelDiscountComposite extends
+		AbstractAspirationLevelParameterComposite {
 
-	public AspirationLevelDiscountComposite(Composite parent, ParametersController controller) {
+	public AspirationLevelDiscountComposite(Composite parent,
+			ParametersController controller) {
 		super(parent);
 		DoubleFormatChecker doubleFormatChecker = new DoubleFormatChecker();
 		this.setNumberFormatChecker(doubleFormatChecker);
-		getText().addModifyListener(new AspirationLevelDiscountModifyListener(controller, 
-				getHintLabel(), doubleFormatChecker));
+		getText().addModifyListener(
+				new AspirationLevelDiscountModifyListener(controller,
+						getHintLabel(), doubleFormatChecker));
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof Parameters){
-			Parameters params = (Parameters)o;
+		if (o instanceof Parameters) {
+			Parameters params = (Parameters) o;
 			getText().setText(String.valueOf(params.getWeightingFactorAlpha()));
 		}
 	}
-	
+
 }

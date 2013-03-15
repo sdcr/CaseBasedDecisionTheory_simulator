@@ -5,15 +5,15 @@ import java.util.List;
 
 public class EngineConfigChoiceFactory {
 
-	public EngineConfigChoice getDefaultConfigChoice(){
+	public EngineConfigChoice getDefaultConfigChoice() {
 		EngineConfigChoice defaultChoice = new EngineConfigChoice();
-		
-		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();  
+
+		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();
 		configs.add(new NaiveEngineConfig());
 		defaultChoice.addAvailableConfigs(configs);
-		
+
 		defaultChoice.choosenConfig = configs.get(0);
-		
+
 		return defaultChoice;
 	}
 }

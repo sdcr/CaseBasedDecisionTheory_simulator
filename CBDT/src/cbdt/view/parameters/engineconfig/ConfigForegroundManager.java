@@ -17,13 +17,14 @@ public class ConfigForegroundManager {
 		currentlyInBackgroundsParent = new Composite(new Shell(), SWT.NONE);
 	}
 
-	public void setToForeground(AbstractConfigWidgetsWrapper configWidgetsWrapper) {
+	public void setToForeground(
+			AbstractConfigWidgetsWrapper configWidgetsWrapper) {
 		if (currentlyInForegroundPage != null)
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
 		configWidgetsWrapper.setParent(parametersPage);
 		currentlyInForegroundPage = configWidgetsWrapper;
-		
-		parametersPage.getParent().getParent().pack();
+
+		parametersPage.getParent().getParent().getParent().pack();
 	}
-	
+
 }

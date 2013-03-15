@@ -96,7 +96,7 @@ public class ActorActionOutcomesTableViewer extends TableViewer {
 		table.setLayoutData(tableGridData);
 		
 		//cbdtFrameComposite repack
-		parent.getParent().getParent().getParent().getParent().getParent().pack();
+		parent.getParent().getParent().getParent().getParent().getParent().getParent().pack();
 	}
 	
 	public ActorActionComposite getParent() {

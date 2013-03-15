@@ -20,43 +20,50 @@ import cbdt.view.parameters.AbstractControllerAccessComposite;
 import cbdt.view.parameters.actoraction.listeners.AddActorActionMouseListener;
 
 /**
- * This composite contains all view elements that deal with the display of actor actions.
- * In particular, it allows the creation and removal of actor actions.
+ * This composite contains all view elements that deal with the display of actor
+ * actions. In particular, it allows the creation and removal of actor actions.
+ * 
  * @author S-lenovo
  */
-public class ActorActionsComposite extends AbstractControllerAccessComposite implements Observer {
+public class ActorActionsComposite extends AbstractControllerAccessComposite
+		implements Observer {
 
 	private Composite actorActionsWrapper;
-	private Map<ActorAction,ActorActionComposite> shownCompositesMap;
+	private Map<ActorAction, ActorActionComposite> shownCompositesMap;
 
-	public ActorActionsComposite(Composite parent, int style, ParametersController controller) {
+	public ActorActionsComposite(Composite parent, int style,
+			ParametersController controller) {
 		super(parent, style, controller);
 		shownCompositesMap = new HashMap<ActorAction, ActorActionComposite>();
 
 		RowLayout thisLayout = new RowLayout();
 		thisLayout.type = SWT.VERTICAL;
 		this.setLayout(thisLayout);
-		
-		actorActionsWrapper = new Composite(this, SWT.NONE);		
+
+		actorActionsWrapper = new Composite(this, SWT.NONE);
 		RowLayout wrapperLayout = new RowLayout();
 		wrapperLayout.type = SWT.VERTICAL;
 		actorActionsWrapper.setLayout(wrapperLayout);
 
 		createAddActorActionButton();
 	}
-	
+
 	/**
 	 * Set a button that allows the adding of another actor action.
 	 */
 	private void createAddActorActionButton() {
 		Button addActorActionItemButton = new Button(this, SWT.NONE);
 		addActorActionItemButton.setText("Add additional actor action");
-		addActorActionItemButton.addMouseListener(new AddActorActionMouseListener(this));
+		addActorActionItemButton
+				.addMouseListener(new AddActorActionMouseListener(this));
 	}
 
 	/**
-	 * Initializes the actor action view elements with an existing list of ActorAction objects.
-	 * @param actorActions The ActorAction parameters from which to initialize.
+	 * Initializes the actor action view elements with an existing list of
+	 * ActorAction objects.
+	 * 
+	 * @param actorActions
+	 *            The ActorAction parameters from which to initialize.
 	 */
 	public void setParametersModel(Parameters params) {
 		params.addObserver(this);
@@ -65,36 +72,36 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite imp
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(arg0 instanceof Parameters){
-			Parameters params = (Parameters)arg0;
+		if (arg0 instanceof Parameters) {
+			Parameters params = (Parameters) arg0;
 			List<ActorAction> newActionsList = params.getActorActions();
 			Set<ActorAction> shownActions = shownCompositesMap.keySet();
 
 			addNewActorActionComposites(newActionsList, shownActions);
 			removeSuperfluosActorActionComposites(newActionsList, shownActions);
-			this.getParent().getParent().getParent().pack();
+			this.getParent().getParent().getParent().getParent().pack();
 		}
 	}
 
-	private void removeSuperfluosActorActionComposites(List<ActorAction> newActionsList,
-			Set<ActorAction> shownActions) {
+	private void removeSuperfluosActorActionComposites(
+			List<ActorAction> newActionsList, Set<ActorAction> shownActions) {
 		Set<ActorAction> toRemoveFromMap = new HashSet<ActorAction>();
-		for(ActorAction shownAction : shownActions){
-			if(!newActionsList.contains(shownAction)){
+		for (ActorAction shownAction : shownActions) {
+			if (!newActionsList.contains(shownAction)) {
 				shownCompositesMap.get(shownAction).dispose();
 				toRemoveFromMap.add(shownAction);
 			}
 		}
-		for(ActorAction actionToRemove : toRemoveFromMap)
+		for (ActorAction actionToRemove : toRemoveFromMap)
 			shownCompositesMap.remove(actionToRemove);
 	}
 
 	private void addNewActorActionComposites(List<ActorAction> newActionsList,
 			Set<ActorAction> shownActions) {
-		for(ActorAction newAction : newActionsList){
-			if(!shownActions.contains(newAction)){
-				ActorActionComposite newComposite = new ActorActionComposite(actorActionsWrapper, 
-						newAction, getController());
+		for (ActorAction newAction : newActionsList) {
+			if (!shownActions.contains(newAction)) {
+				ActorActionComposite newComposite = new ActorActionComposite(
+						actorActionsWrapper, newAction, getController());
 				shownCompositesMap.put(newAction, newComposite);
 			}
 		}

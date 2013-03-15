@@ -52,7 +52,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 		probabilityHintLabel = new ProbabilitySumHintLabelWrapper(this);
 	
 		update(representedActorAction, null);
-		this.getParent().getParent().pack();
+		this.getParent().getParent().getParent().pack();
 	}
 
 	/**

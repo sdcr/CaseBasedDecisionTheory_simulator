@@ -14,7 +14,6 @@ import cbdt.view.parameters.SimpleParameterComposite;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.IntegerFormatChecker;
 
-
 public class NaiveConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
 
 	private Label reqValuesLabel;
@@ -24,20 +23,25 @@ public class NaiveConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
 	public NaiveConfigWidgetsWrapper(Composite parent) {
 		reqValuesLabel = new Label(parent, SWT.NONE);
 		reqValuesLabel.setText("Required expected utility values:");
-		
-		requiredExpectedUtilitiesComposite = new SimpleParameterComposite(parent);
-		requiredExpectedUtilitiesComposite.setHintLabel(new HintLabelWrapper(requiredExpectedUtilitiesComposite));
-		requiredExpectedUtilitiesComposite.setToolTipText("The value must be a natural number");
-		
+
+		requiredExpectedUtilitiesComposite = new SimpleParameterComposite(
+				parent);
+		requiredExpectedUtilitiesComposite.setHintLabel(new HintLabelWrapper(
+				requiredExpectedUtilitiesComposite));
+		requiredExpectedUtilitiesComposite
+				.setToolTipText("The value must be a natural number");
+
 		integerFormatChecker = new IntegerFormatChecker();
-		requiredExpectedUtilitiesComposite.setNumberFormatChecker(integerFormatChecker);
+		requiredExpectedUtilitiesComposite
+				.setNumberFormatChecker(integerFormatChecker);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(arg0 instanceof NaiveEngineConfig){
-			NaiveEngineConfig config = (NaiveEngineConfig)arg0;
-			requiredExpectedUtilitiesComposite.getText().setText(String.valueOf(config.getRequestedExpectedUtilityValues()));
+		if (arg0 instanceof NaiveEngineConfig) {
+			NaiveEngineConfig config = (NaiveEngineConfig) arg0;
+			requiredExpectedUtilitiesComposite.getText().setText(
+					String.valueOf(config.getRequestedExpectedUtilityValues()));
 		}
 	}
 
@@ -50,10 +54,13 @@ public class NaiveConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
 	@Override
 	public void setConfigController(
 			AbstractEngineConfigController configController) {
-		NaiveConfigController naiveConfigController = (NaiveConfigController)configController;
-		
-		requiredExpectedUtilitiesComposite.getText().addModifyListener(new RequestedExpectedUtilityValuesModifyListener(
-				naiveConfigController, requiredExpectedUtilitiesComposite.getHintLabel(), integerFormatChecker));
+		NaiveConfigController naiveConfigController = (NaiveConfigController) configController;
+
+		requiredExpectedUtilitiesComposite.getText().addModifyListener(
+				new RequestedExpectedUtilityValuesModifyListener(
+						naiveConfigController,
+						requiredExpectedUtilitiesComposite.getHintLabel(),
+						integerFormatChecker));
 	}
 
 }

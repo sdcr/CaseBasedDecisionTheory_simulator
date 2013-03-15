@@ -13,18 +13,19 @@ import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 public class EngineConfigSelectionListener implements SelectionListener {
 
 	ParametersController controller;
-	
+
 	List<AbstractEngineConfiguration> configsList;
-	
+
 	public EngineConfigSelectionListener(ParametersController controller) {
 		this.controller = controller;
 		configsList = new ArrayList<AbstractEngineConfiguration>();
 	}
-	
+
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		Combo comboBox = (Combo)e.getSource();
-		controller.setChoosenConfig(configsList.get(comboBox.getSelectionIndex()));
+		Combo comboBox = (Combo) e.getSource();
+		controller.setChoosenConfig(configsList.get(comboBox
+				.getSelectionIndex()));
 	}
 
 	@Override
@@ -34,5 +35,5 @@ public class EngineConfigSelectionListener implements SelectionListener {
 	public void addEngineConfig(AbstractEngineConfiguration config) {
 		configsList.add(config);
 	}
-	
+
 }
