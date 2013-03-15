@@ -3,7 +3,7 @@ package cbdt.view.parameters.aspirationlevel.listeners;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.NumberFormatChecker;
 
@@ -11,7 +11,7 @@ public class InitialAspirationLevelModifyListener extends
 		AbstractParameterModifyListener {
 
 	public InitialAspirationLevelModifyListener(
-			ParametersController controller, HintLabelWrapper hintLabel,
+			ParametersPageController controller, HintLabelWrapper hintLabel,
 			NumberFormatChecker numberFormatChecker) {
 		super(controller, hintLabel, numberFormatChecker);
 	}

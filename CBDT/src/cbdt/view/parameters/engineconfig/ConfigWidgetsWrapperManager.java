@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
@@ -18,12 +18,12 @@ public class ConfigWidgetsWrapperManager implements Observer {
 
 	private Combo availableConfigsCombo;
 	private Composite parametersPage;
-	private ParametersController controller;
+	private ParametersPageController controller;
 	private ConfigForegroundManager foregroundManager;
 	private ConfigWidgetsWrapperFactory configWidgetsFactory;
 
 	public ConfigWidgetsWrapperManager(Composite parametersPage,
-			ParametersController controller) {
+			ParametersPageController controller) {
 		this.parametersPage = parametersPage;
 		this.controller = controller;
 

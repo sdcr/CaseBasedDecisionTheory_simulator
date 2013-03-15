@@ -4,7 +4,7 @@ import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageW
 import cbdt.model.Result;
 import cbdt.view.analysis.AnalysisPageFactory;
 
-public class AnalysisController extends AbstractPageController {
+public class AnalysisPageController extends AbstractPageController {
 
 	@Override
 	public AbstractPluginPageWrapper getPageWrapper() {

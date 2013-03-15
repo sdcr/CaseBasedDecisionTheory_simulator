@@ -1,4 +1,4 @@
-package cbdt.model.parameters.persistence;
+package cbdt.control.persistence.parameters;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;

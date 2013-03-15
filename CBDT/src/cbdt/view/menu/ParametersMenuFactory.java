@@ -7,11 +7,11 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 
 public class ParametersMenuFactory {
 
-	public void createParameterMenuItems(Shell shell, Menu parent, ParametersController controller){
+	public void createParameterMenuItems(Shell shell, Menu parent, ParametersPageController controller){
 		ArrayList<MenuItem> parameterMenuItems = new ArrayList<MenuItem>();
 		
 		MenuItem saveParameters = new MenuItem(parent, SWT.PUSH);

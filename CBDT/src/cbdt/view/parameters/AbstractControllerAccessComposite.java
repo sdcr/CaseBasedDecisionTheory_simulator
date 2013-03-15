@@ -2,19 +2,19 @@ package cbdt.view.parameters;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 
 public abstract class AbstractControllerAccessComposite extends Composite {
 
-	private ParametersController controller;
+	private ParametersPageController controller;
 
 	public AbstractControllerAccessComposite(Composite parent, int style,
-			ParametersController controller) {
+			ParametersPageController controller) {
 		super(parent, style);
 		this.controller = controller;
 	}
 
-	public ParametersController getController() {
+	public ParametersPageController getController() {
 		return controller;
 	}
 

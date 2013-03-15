@@ -1,4 +1,4 @@
-package cbdt.model.parameters.persistence;
+package cbdt.control.persistence.parameters;
 
 import java.io.File;
 import java.io.FileNotFoundException;

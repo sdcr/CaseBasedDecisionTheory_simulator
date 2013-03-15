@@ -4,7 +4,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.engineconfig.NaiveConfigController;
+import cbdt.control.pages.engineconfig.NaiveConfigController;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.NumberFormatChecker;
 

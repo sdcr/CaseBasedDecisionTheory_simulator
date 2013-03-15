@@ -9,10 +9,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.control.persistence.parameters.ParametersPersistenceManager;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.persistence.ParametersPersistenceManager;
 
 public class ParameterPersistenceManagerTest {
 

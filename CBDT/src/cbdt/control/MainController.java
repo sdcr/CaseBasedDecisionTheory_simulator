@@ -3,8 +3,8 @@ package cbdt.control;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.control.algorithm.EngineContext;
 import cbdt.control.pages.AbstractPageController;
-import cbdt.control.pages.AnalysisController;
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.AnalysisPageController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.view.MessageBoxManager;
@@ -14,16 +14,16 @@ public class MainController {
 	private EngineContext simulationEngine;
 
 	@SuppressWarnings("unused")
-	private ParametersController parametersController;
+	private ParametersPageController parametersController;
 	@SuppressWarnings("unused")
-	private AnalysisController analysisController;
+	private AnalysisPageController analysisController;
 
 	private MessageBoxManager messageBoxManager;
 
 	private IForegroundManager foregroundManager;
 
-	public MainController(AnalysisController analysisController,
-			ParametersController parametersController,
+	public MainController(AnalysisPageController analysisController,
+			ParametersPageController parametersController,
 			IForegroundManager foregroundManager) {
 		this.analysisController = analysisController;
 		this.parametersController = parametersController;

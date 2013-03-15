@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
@@ -36,7 +36,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	private Composite parametersWrapper;
 
 	public ParametersPage(Composite parent, int style,
-			ParametersController controller) {
+			ParametersPageController controller) {
 		super(parent, style, controller);
 
 		RowLayout rowLayout = new RowLayout();

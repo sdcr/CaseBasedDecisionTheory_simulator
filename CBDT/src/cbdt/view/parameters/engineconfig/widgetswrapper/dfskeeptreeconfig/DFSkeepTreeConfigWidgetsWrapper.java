@@ -6,8 +6,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.engineconfig.AbstractEngineConfigController;
-import cbdt.control.engineconfig.NaiveConfigController;
+import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
+import cbdt.control.pages.engineconfig.NaiveConfigController;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.SimpleParameterComposite;

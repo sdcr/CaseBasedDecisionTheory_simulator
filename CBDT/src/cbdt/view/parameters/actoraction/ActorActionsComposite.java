@@ -13,7 +13,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
@@ -32,7 +32,7 @@ public class ActorActionsComposite extends AbstractControllerAccessComposite
 	private Map<ActorAction, ActorActionComposite> shownCompositesMap;
 
 	public ActorActionsComposite(Composite parent, int style,
-			ParametersController controller) {
+			ParametersPageController controller) {
 		super(parent, style, controller);
 		shownCompositesMap = new HashMap<ActorAction, ActorActionComposite>();
 

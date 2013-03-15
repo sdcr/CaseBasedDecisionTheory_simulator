@@ -2,7 +2,9 @@ package cbdt.control.pages;
 
 import java.io.FileNotFoundException;
 
-import cbdt.control.engineconfig.EngineConfigControllerFactory;
+import cbdt.control.pages.engineconfig.EngineConfigControllerFactory;
+import cbdt.control.persistence.parameters.IParametersPersistenceManager;
+import cbdt.control.persistence.parameters.ParametersPersistenceManager;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
@@ -10,11 +12,9 @@ import cbdt.model.parameters.ParametersFactory;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.parameters.engineconfig.EngineConfigChoiceFactory;
-import cbdt.model.parameters.persistence.IParametersPersistenceManager;
-import cbdt.model.parameters.persistence.ParametersPersistenceManager;
 import cbdt.view.parameters.ParametersPageWrapper;
 
-public class ParametersController extends AbstractPageController {
+public class ParametersPageController extends AbstractPageController {
 
 	private Parameters parametersModel;
 	private EngineConfigChoice configChoice;
@@ -22,7 +22,7 @@ public class ParametersController extends AbstractPageController {
 	private IParametersPersistenceManager parametersPersistenceManager;
 	private EngineConfigControllerFactory configControllerFactory;
 
-	public ParametersController() {
+	public ParametersPageController() {
 		ParametersFactory factory = new ParametersFactory();
 		parametersModel = factory.getDefaultParameters();
 		parametersPageWrapper = new ParametersPageWrapper(this);

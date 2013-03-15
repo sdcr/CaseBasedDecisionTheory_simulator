@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
@@ -36,7 +36,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private ActorAction representedActorAction;
 	private ProbabilitySumHintLabelWrapper probabilityHintLabel;
 
-	public ActorActionComposite(final Composite parent, ActorAction representedActorAction, ParametersController controller) {
+	public ActorActionComposite(final Composite parent, ActorAction representedActorAction, ParametersPageController controller) {
 		super(parent, SWT.BORDER , controller);
 		this.representedActorAction = representedActorAction;
 		representedActorAction.addObserver(this);

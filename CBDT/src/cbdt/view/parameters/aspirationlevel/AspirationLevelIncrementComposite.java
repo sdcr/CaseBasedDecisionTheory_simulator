@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelIncrementModifyListener;
 
@@ -12,7 +12,7 @@ public class AspirationLevelIncrementComposite extends
 		AbstractAspirationLevelParameterComposite {
 
 	public AspirationLevelIncrementComposite(Composite parent,
-			ParametersController controller) {
+			ParametersPageController controller) {
 		super(parent);
 		DoubleFormatChecker doubleFormatChecker = new DoubleFormatChecker();
 		this.setNumberFormatChecker(doubleFormatChecker);

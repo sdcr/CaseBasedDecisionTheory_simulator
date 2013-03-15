@@ -7,16 +7,16 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
 
-import cbdt.control.pages.ParametersController;
+import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 
 public class EngineConfigSelectionListener implements SelectionListener {
 
-	ParametersController controller;
+	ParametersPageController controller;
 
 	List<AbstractEngineConfiguration> configsList;
 
-	public EngineConfigSelectionListener(ParametersController controller) {
+	public EngineConfigSelectionListener(ParametersPageController controller) {
 		this.controller = controller;
 		configsList = new ArrayList<AbstractEngineConfiguration>();
 	}

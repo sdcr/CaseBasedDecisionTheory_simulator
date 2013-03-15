@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.engineconfig.AbstractEngineConfigController;
+import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 
 public abstract class AbstractConfigWidgetsWrapper implements Observer {
