@@ -79,10 +79,6 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 
 		Button startComputation = new Button(this, SWT.PUSH | SWT.END);
 		startComputation.setText("Start computation");
-
-		RowData rowData = new RowData();
-		// rowData.height = 50;
-		startComputation.setLayoutData(rowData);
 	}
 
 	private void createEngineConfigTitleLabel() {

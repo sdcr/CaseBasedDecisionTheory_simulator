@@ -1,4 +1,4 @@
-package cbdt.view.parameters.engineconfig.widgetswrapper.naiveconfig;
+package cbdt.view.parameters.engineconfig.widgetswrapper.dfskeeptreeconfig;
 
 import java.util.Observable;
 
@@ -8,19 +8,19 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.engineconfig.AbstractEngineConfigController;
 import cbdt.control.engineconfig.NaiveConfigController;
-import cbdt.model.parameters.engineconfig.NaiveEngineConfig;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.SimpleParameterComposite;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.IntegerFormatChecker;
 
-public class NaiveConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
+public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
 
 	private Label reqValuesLabel;
 	private SimpleParameterComposite requiredExpectedUtilitiesComposite;
 	private IntegerFormatChecker integerFormatChecker;
 
-	public NaiveConfigWidgetsWrapper(Composite parent) {
+	public DFSkeepTreeConfigWidgetsWrapper(Composite parent) {
 		reqValuesLabel = new Label(parent, SWT.NONE);
 		reqValuesLabel.setText("Required expected utility values:");
 
@@ -38,8 +38,8 @@ public class NaiveConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof NaiveEngineConfig) {
-			NaiveEngineConfig config = (NaiveEngineConfig) arg0;
+		if (arg0 instanceof DFSkeepTreeEngineConfig) {
+			DFSkeepTreeEngineConfig config = (DFSkeepTreeEngineConfig) arg0;
 			requiredExpectedUtilitiesComposite.getText().setText(
 					String.valueOf(config.getRequestedExpectedUtilityValues()));
 		}

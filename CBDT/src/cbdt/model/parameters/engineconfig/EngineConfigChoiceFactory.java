@@ -9,7 +9,7 @@ public class EngineConfigChoiceFactory {
 		EngineConfigChoice defaultChoice = new EngineConfigChoice();
 
 		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();
-		configs.add(new NaiveEngineConfig());
+		configs.add(new DFSkeepTreeEngineConfig());
 		defaultChoice.addAvailableConfigs(configs);
 
 		defaultChoice.choosenConfig = configs.get(0);

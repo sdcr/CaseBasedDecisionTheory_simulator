@@ -30,7 +30,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		foregroundManager = new ConfigForegroundManager(parametersPage);
 
 		Label parameterLabel = new Label(parametersPage, SWT.NONE);
-		parameterLabel.setText("Configuration:");
+		parameterLabel.setText("Algorithm:");
 		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
 	}
 

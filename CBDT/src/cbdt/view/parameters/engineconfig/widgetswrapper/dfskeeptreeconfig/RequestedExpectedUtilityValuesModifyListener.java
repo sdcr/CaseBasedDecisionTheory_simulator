@@ -1,4 +1,4 @@
-package cbdt.view.parameters.engineconfig.widgetswrapper.naiveconfig;
+package cbdt.view.parameters.engineconfig.widgetswrapper.dfskeeptreeconfig;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;

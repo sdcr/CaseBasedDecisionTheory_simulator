@@ -3,12 +3,12 @@ package cbdt.view.parameters.engineconfig.widgetswrapper;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.NaiveEngineConfig;
-import cbdt.view.parameters.engineconfig.widgetswrapper.naiveconfig.NaiveConfigWidgetsWrapper;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.view.parameters.engineconfig.widgetswrapper.dfskeeptreeconfig.DFSkeepTreeConfigWidgetsWrapper;
 
 public class ConfigWidgetsWrapperFactory {
 
-	NaiveConfigWidgetsWrapper naiveConfigWidgetsWrapper;
+	DFSkeepTreeConfigWidgetsWrapper naiveConfigWidgetsWrapper;
 
 	/**
 	 * 
@@ -17,9 +17,9 @@ public class ConfigWidgetsWrapperFactory {
 	 */
 	public AbstractConfigWidgetsWrapper getConfigComposite(
 			AbstractEngineConfiguration config, Composite parent) {
-		if (config instanceof NaiveEngineConfig) {
+		if (config instanceof DFSkeepTreeEngineConfig) {
 			if (naiveConfigWidgetsWrapper == null)
-				naiveConfigWidgetsWrapper = new NaiveConfigWidgetsWrapper(
+				naiveConfigWidgetsWrapper = new DFSkeepTreeConfigWidgetsWrapper(
 						parent);
 			naiveConfigWidgetsWrapper.setParent(parent);
 			return naiveConfigWidgetsWrapper;

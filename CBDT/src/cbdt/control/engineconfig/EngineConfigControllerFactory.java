@@ -1,13 +1,13 @@
 package cbdt.control.engineconfig;
 
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.NaiveEngineConfig;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
 public class EngineConfigControllerFactory {
 
 	public AbstractEngineConfigController getConfigController(
 			AbstractEngineConfiguration config) {
-		if (config instanceof NaiveEngineConfig)
+		if (config instanceof DFSkeepTreeEngineConfig)
 			return new NaiveConfigController();
 		return null;
 	}
