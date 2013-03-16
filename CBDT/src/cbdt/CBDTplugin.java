@@ -12,7 +12,7 @@ import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.control.MainController;
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.control.pages.ParametersPageController;
-import cbdt.view.MenuFactory;
+import cbdt.view.menu.MenuFactory;
 
 public class CBDTplugin implements ISimulationPlugin {
 

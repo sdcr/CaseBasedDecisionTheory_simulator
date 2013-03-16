@@ -78,6 +78,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 
 		Button startComputation = new Button(this, SWT.PUSH | SWT.END);
 		startComputation.setText("Start computation");
+		startComputation.addSelectionListener(new StartComputationSelectionListener(controller));
 	}
 
 	private void createEngineConfigTitleLabel() {

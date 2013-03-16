@@ -1,4 +1,4 @@
-package cbdt.view;
+package cbdt.view.menu;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Decorations;
@@ -6,7 +6,6 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import cbdt.control.pages.ParametersPageController;
-import cbdt.view.menu.ParametersMenuFactory;
 
 public class MenuFactory {
 

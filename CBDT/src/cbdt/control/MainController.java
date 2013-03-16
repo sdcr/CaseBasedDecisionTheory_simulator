@@ -1,5 +1,7 @@
 package cbdt.control;
 
+import java.lang.reflect.InvocationTargetException;
+
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.control.algorithm.EngineContext;
 import cbdt.control.pages.AbstractPageController;
@@ -19,7 +21,6 @@ public class MainController {
 	private AnalysisPageController analysisController;
 
 	private MessageBoxManager messageBoxManager;
-
 	private IForegroundManager foregroundManager;
 
 	public MainController(AnalysisPageController analysisController,
@@ -30,13 +31,22 @@ public class MainController {
 		this.foregroundManager = foregroundManager;
 
 		messageBoxManager = new MessageBoxManager(foregroundManager.getShell());
-
-		simulationEngine = new EngineContext();
+		simulationEngine = new EngineContext(foregroundManager.getShell());
 	}
 
 	public void computeCDBTSimulation(Parameters parameters, AbstractEngineConfiguration engineConfig) {
 		simulationEngine.setEngineConfig(engineConfig);
-		simulationEngine.performSimulation(parameters);
+		try {
+			simulationEngine.performSimulation(parameters);
+		} catch (InterruptedException e) {
+		} catch (InvocationTargetException e) {
+			if(e.getCause() instanceof OutOfMemoryError){
+				messageBoxManager.showErrorMessage("Out of memory error.");
+			} else {
+				messageBoxManager.showErrorMessage("An unknown error occured error.");
+			}
+			e.printStackTrace();
+		}
 	}
 
 	public void setToForeground(AbstractPageController pageController) {
