@@ -4,4 +4,8 @@
 !XStreamWrapper/
 XStreamWrapper/org/*
 XStreamWrapper/com/*
+!ProcessingCoreWrapper/
+ProcessingCoreWrapper/icon/*
+ProcessingCoreWrapper/japplemenubar/*
+ProcessingCoreWrapper/processing/*
 !.gitignore
