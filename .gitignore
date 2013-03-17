@@ -4,8 +4,13 @@
 !XStreamWrapper/
 XStreamWrapper/org/*
 XStreamWrapper/com/*
-!ProcessingCoreWrapper/
-ProcessingCoreWrapper/icon/*
-ProcessingCoreWrapper/japplemenubar/*
-ProcessingCoreWrapper/processing/*
+!ProcessingWrapper/
+ProcessingWrapper/icon/*
+ProcessingWrapper/japplemenubar/*
+ProcessingWrapper/processing/*
+ProcessingWrapper/com/*
+ProcessingWrapper/gluegen/*
+ProcessingWrapper/javax/*
+ProcessingWrapper/jogamp/*
+ProcessingWrapper/jogl/*
 !.gitignore
