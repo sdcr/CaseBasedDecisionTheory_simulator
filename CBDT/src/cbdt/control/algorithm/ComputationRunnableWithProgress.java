@@ -7,6 +7,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 public class ComputationRunnableWithProgress implements IRunnableWithProgress {
 
+	@SuppressWarnings("unused")
 	private CBDTAlgorithm algorithm;
 
 	public ComputationRunnableWithProgress(CBDTAlgorithm algorithm) {

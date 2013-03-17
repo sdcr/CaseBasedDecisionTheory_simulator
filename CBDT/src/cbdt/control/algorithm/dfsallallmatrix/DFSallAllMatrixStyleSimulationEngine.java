@@ -57,7 +57,7 @@ public class DFSallAllMatrixStyleSimulationEngine {
 			maxNumberOfOutcomes = Math.max(action.getActionOutcomes().size(), maxNumberOfOutcomes);
 			numOfOutcomes += action.getActionOutcomes().size();
 		}
-
+		
 		outcomeMatrix = new ActorActionOutcome[numberOfActorActions][];
 		for (int i = 0; i < outcomeMatrix.length; i++) {
 			int numberOfOutcomes = parameters.getActorActions().get(i).getActionOutcomes().size();
