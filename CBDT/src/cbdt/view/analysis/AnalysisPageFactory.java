@@ -45,7 +45,7 @@ public class AnalysisPageFactory extends AbstractPluginPageWrapper{
 		Display display = parent.getDisplay();
 		Shell shell = new Shell(display);
 		shell.setLayout(new RowLayout());
-		shell.setSize(TREE_ANIMATION_WIDTH + 20, TREE_ANIMATION_HEIGHT + 20);
+		shell.setSize(TREE_ANIMATION_WIDTH + 30, TREE_ANIMATION_HEIGHT + 50);
 		
 		Composite appletComposite = new Composite(shell, SWT.EMBEDDED | SWT.NO_BACKGROUND);
 		
@@ -60,11 +60,13 @@ public class AnalysisPageFactory extends AbstractPluginPageWrapper{
 		frame.add(treePApplet);
 		treePApplet.init();
 		shell.open();
-		while (!shell.isDisposed ()) {
-			if (!display.readAndDispatch ()) display.sleep ();
+		
+		while(!shell.isDisposed()) {
+			if (!display.readAndDispatch()) 
+				display.sleep();
 		}
-//		treePApplet.stop();
-		shell.dispose ();
+		treePApplet.stop();
+		shell.dispose();
 	}
 
 }
