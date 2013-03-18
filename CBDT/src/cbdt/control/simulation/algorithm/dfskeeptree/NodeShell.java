@@ -1,4 +1,4 @@
-package cbdt.control.algorithm.dfskeeptree;
+package cbdt.control.simulation.algorithm.dfskeeptree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,10 @@ public class NodeShell {
 	
 	List<NodeShell> children;
 	
+	public NodeContent getContent() {
+		return content;
+	}
+
 	public NodeShell(NodeContent content) {
 		this.content = content;
 		this.children = new ArrayList<NodeShell>();

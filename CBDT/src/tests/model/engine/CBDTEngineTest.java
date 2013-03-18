@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.algorithm.TreeStyleSimulationEngine;
+import cbdt.control.simulation.TreeStyleSimulationEngine;
 import cbdt.model.Result;
 import cbdt.model.ResultAnalyser;
 import cbdt.model.parameters.ActorAction;

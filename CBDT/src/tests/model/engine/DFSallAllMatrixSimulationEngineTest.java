@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.algorithm.dfsallallmatrix.DFSallAllMatrixStyleSimulationEngine;
+import cbdt.control.simulation.algorithm.dfsmatrix.DFSallAllMatrixStyleSimulationEngine;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;

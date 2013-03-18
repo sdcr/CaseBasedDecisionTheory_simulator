@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PShape;
-import cbdt.control.algorithm.dfskeeptree.NodeShell;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 
 public class TreePApplet extends PApplet{
 	private static final long serialVersionUID = 1L;
@@ -25,6 +26,8 @@ public class TreePApplet extends PApplet{
 	private NodeContext nodeFrame;
 	private NodeContext visualWindow;
 
+	private NodeCircle infoShowingCircle;
+
 	public TreePApplet() {
 		stageIndexes = new ArrayList<Integer>();
 		nodeFrame = new NodeContext();
@@ -37,6 +40,8 @@ public class TreePApplet extends PApplet{
 		visualWindow.setMarginTop(0);
 		visualWindow.setWidth(500);
 		visualWindow.setHeight(500);
+//		PFont f = createFont("Arial", 16, true);
+//		textFont(f);
 	}
 	
 	public void setup() {
@@ -86,9 +91,10 @@ public class TreePApplet extends PApplet{
 
 	public void draw() {
 		background(255);
-		pushMatrix();
 		rootCircle.draw();
-		popMatrix();
+		if(infoShowingCircle != null)
+			infoShowingCircle.showDataRectangle();
+		infoShowingCircle = null;
 	}
 	
 	public void setTreeModel(NodeShell rootShell){
@@ -107,6 +113,7 @@ public class TreePApplet extends PApplet{
 
 	private NodeCircle getNodeCircle(NodeShell nodeShell, int stage){
 		NodeCircle nodeCircle = new NodeCircle(this);
+		nodeCircle.setRepresentedShell(nodeShell);
 		while(stageIndexes.size()<stage+1){
 			stageIndexes.add(new Integer(0));
 		}
@@ -127,5 +134,9 @@ public class TreePApplet extends PApplet{
 		nodeCircle.setChildren(children);
 		nodeCircle.setLinesTochildren(linesToChildren);
 		return nodeCircle;
+	}
+
+	public void setInfoShowingCircle(NodeCircle nodeCircle) {
+		this.infoShowingCircle = nodeCircle;
 	}
 }

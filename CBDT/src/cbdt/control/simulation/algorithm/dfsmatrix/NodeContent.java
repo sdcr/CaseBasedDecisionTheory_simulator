@@ -1,4 +1,4 @@
-package cbdt.control.algorithm.dfsallmatrix;
+package cbdt.control.simulation.algorithm.dfsmatrix;
 
 
 public class NodeContent {
@@ -10,7 +10,7 @@ public class NodeContent {
 	public double[] sumOfUtilities;
 	
 	public double aspirationLevel;
-
+	
 	public double getProbabilityProduct() {
 		return probabilityProduct;
 	}
@@ -42,4 +42,5 @@ public class NodeContent {
 	public void setAspirationLevel(double aspirationLevel) {
 		this.aspirationLevel = aspirationLevel;
 	}
+
 }

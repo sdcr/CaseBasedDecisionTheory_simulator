@@ -1,9 +1,9 @@
-package cbdt.control.algorithm.dfskeeptree;
+package cbdt.control.simulation.algorithm.dfskeeptree;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import cbdt.control.algorithm.CBDTAlgorithm;
+import cbdt.control.simulation.CBDTAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 

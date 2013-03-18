@@ -3,10 +3,10 @@ package cbdt.control;
 import java.lang.reflect.InvocationTargetException;
 
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
-import cbdt.control.algorithm.EngineContext;
 import cbdt.control.pages.AbstractPageController;
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.control.pages.ParametersPageController;
+import cbdt.control.simulation.EngineContext;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.view.MessageBoxManager;

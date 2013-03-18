@@ -1,7 +1,7 @@
 package cbdt.view.analysis.tree;
 
-import processing.core.PApplet;
 import processing.core.PShape;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 
 public class NodeCircle {
 
@@ -9,14 +9,12 @@ public class NodeCircle {
 	private int DEFAULT_STROKE_WEIGHT = 1;
 	private int DEFAULT_STROKE_WEIGHT_MOUSE_OVER = 5;
 	
-	private PApplet pApplet;
+	private TreePApplet pApplet;
 	private NodeCircle[] children;
 	private NodeLine[] linesTochildren;
 
 	private PShape circleShape;
 	private int radius;
-	private int absCenterX;
-	private int absCenterY;
 
 	private int stageIndex;
 	private int stageLength;
@@ -27,8 +25,9 @@ public class NodeCircle {
 	private int relCenterX;
 	private int relCenterY;
 
+	private NodeShell representedShell;
 
-	public NodeCircle(PApplet treePApplet) {
+	public NodeCircle(TreePApplet treePApplet) {
 		pApplet = treePApplet;
 	}
 	
@@ -48,8 +47,8 @@ public class NodeCircle {
 
 	public void calcPosition() {
 		int horizontalStageDist = context.getWidth() / (stageLength - 1);
-		absCenterX = horizontalStageDist * stageIndex + horizontalStageDist/2;
-		absCenterY = context.VERTICAL_DIFF * stage;
+		int absCenterX = horizontalStageDist * stageIndex + horizontalStageDist/2;
+		int absCenterY = context.VERTICAL_DIFF * stage;
 		
 		setRelCenterX((int) (((double)absCenterX - visualWindow.getMarginLeft())/visualWindow.getWidth() * context.getWidth() + context.getMarginLeft() ));
 		setRelCenterY((int) (((double)absCenterY - visualWindow.getMarginTop())/visualWindow.getHeight() * context.getHeight() + context.getMarginTop() ));
@@ -60,10 +59,33 @@ public class NodeCircle {
 	}
 
 	private void update() {
-		if(isMouseInside())
+		if(isMouseInside()){
 			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT_MOUSE_OVER);
-		else
+			pApplet.setInfoShowingCircle(this);
+		} else
 			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT);
+	}
+
+	public void showDataRectangle() {
+		if(getRepresentedShell().getContent() != null){
+			pApplet.fill(255);
+			pApplet.rect(pApplet.mouseX+10, pApplet.mouseY+10, 150, 50);
+			
+			pApplet.fill(0);
+			int offsetY = 0;			
+
+			if(getRepresentedShell().getContent().getLastAction() != null){
+				String lastActionName = getRepresentedShell().getContent().getLastAction().getActionName();
+				pApplet.text("Last action: "+lastActionName, pApplet.mouseX+30, pApplet.mouseY+25);
+				offsetY = 15;
+			}
+
+			double aspLevel = getRepresentedShell().getContent().getAspirationLevel();
+			pApplet.text("Asp. level: "+aspLevel, pApplet.mouseX+30, pApplet.mouseY+25 + offsetY);
+
+			double probProd = getRepresentedShell().getContent().getProbabilityProduct();
+			pApplet.text("Prob.: "+probProd, pApplet.mouseX+30, pApplet.mouseY+40 + offsetY);
+		}
 	}
 
 	public void setChildren(NodeCircle[] children) {
@@ -128,14 +150,6 @@ public class NodeCircle {
 		this.linesTochildren = linesTochildren;
 	}
 
-	public int getAbsCenterX() {
-		return absCenterX;
-	}
-	
-	public int getAbsCenterY() {
-		return absCenterY;
-	}
-	
 	public NodeContext getVisualWindow() {
 		return visualWindow;
 	}
@@ -162,5 +176,13 @@ public class NodeCircle {
 
 	public void setRelCenterY(int relCenterY) {
 		this.relCenterY = relCenterY;
+	}
+
+	public NodeShell getRepresentedShell() {
+		return representedShell;
+	}
+
+	public void setRepresentedShell(NodeShell representedShell) {
+		this.representedShell = representedShell;
 	}
 }

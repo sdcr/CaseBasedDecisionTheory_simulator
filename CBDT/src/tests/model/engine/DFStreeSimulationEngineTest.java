@@ -3,7 +3,7 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
+import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;

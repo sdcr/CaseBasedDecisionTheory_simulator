@@ -1,4 +1,4 @@
-package cbdt.control.algorithm;
+package cbdt.control.simulation;
 
 import java.lang.reflect.InvocationTargetException;
 

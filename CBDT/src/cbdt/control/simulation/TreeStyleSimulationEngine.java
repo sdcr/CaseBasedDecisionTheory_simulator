@@ -1,4 +1,4 @@
-package cbdt.control.algorithm;
+package cbdt.control.simulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

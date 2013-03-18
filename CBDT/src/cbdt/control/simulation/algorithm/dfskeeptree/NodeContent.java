@@ -1,4 +1,4 @@
-package cbdt.control.algorithm.dfsmatrix;
+package cbdt.control.simulation.algorithm.dfskeeptree;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,8 @@ public class NodeContent {
 	
 	private double aspirationLevel;
 
+	private ActorAction lastAction;
+	
 	public NodeContent getCopy(){
 		NodeContent copy = new NodeContent();
 		copy.setAspirationLevel(aspirationLevel);
@@ -62,5 +64,13 @@ public class NodeContent {
 
 	public void setAspirationLevel(double aspirationLevel) {
 		this.aspirationLevel = aspirationLevel;
+	}
+
+	public ActorAction getLastAction() {
+		return lastAction;
+	}
+
+	public void setLastAction(ActorAction lastAction) {
+		this.lastAction = lastAction;
 	}
 }

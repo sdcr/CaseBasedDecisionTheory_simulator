@@ -14,7 +14,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.algorithm.dfskeeptree.NodeShell;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeContent;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.model.parameters.ActorAction;
 import cbdt.view.analysis.AnalysisPageFactory;
 import cbdt.view.analysis.tree.TreePApplet;
 
@@ -33,7 +35,12 @@ public class TreePAppletTest {
 			return;
 		List<NodeShell> children = new ArrayList<NodeShell>();
 		for(int i=0; i<3; i++){
-			NodeShell child = new NodeShell(null);
+			NodeContent content = new NodeContent();
+			content.setAspirationLevel(12.5);
+			content.setProbabilityProduct(0.0125);
+			content.setLastAction(new ActorAction("A"));
+			NodeShell child = new NodeShell(content);
+			
 			children.add(child);
 			createChildren(child, stage+1, maxstage);
 		}
