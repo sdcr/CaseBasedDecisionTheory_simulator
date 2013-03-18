@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cbdt.model.parameters.ActorAction;
 
-public class NodeContent {
+public class NodeContentMaps {
 	
 	private double probabilityProduct;
 	
@@ -17,8 +17,8 @@ public class NodeContent {
 
 	private ActorAction lastAction;
 	
-	public NodeContent getCopy(){
-		NodeContent copy = new NodeContent();
+	public NodeContentMaps getCopy(){
+		NodeContentMaps copy = new NodeContentMaps();
 		copy.setAspirationLevel(aspirationLevel);
 
 		HashMap<ActorAction,Integer> copysNumberOfOccurances = new HashMap<ActorAction,Integer>();

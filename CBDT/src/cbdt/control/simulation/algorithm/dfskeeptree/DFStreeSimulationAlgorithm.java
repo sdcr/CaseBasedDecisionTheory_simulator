@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cbdt.control.simulation.CBDTAlgorithm;
+import cbdt.control.simulation.algorithm.NodeShell;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 
@@ -11,7 +12,7 @@ public class DFStreeSimulationAlgorithm implements CBDTAlgorithm {
 
 	@Override
 	public double[] computeExpectedUtilities(Parameters parameters){
-		NodeContent rootContent = new NodeContent();
+		NodeContentMaps rootContent = new NodeContentMaps();
 		rootContent.setProbabilityProduct(1);
 		Map<ActorAction, Integer> numberOfOccurances = new HashMap<ActorAction, Integer>();
 		Map<ActorAction, Double> sumOfUtilities = new HashMap<ActorAction, Double>();

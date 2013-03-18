@@ -1,23 +1,24 @@
-package cbdt.control.simulation.algorithm.dfskeeptree;
+package cbdt.control.simulation.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentMaps;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 
 public class NodeShell {
 
-	NodeContent content;
+	NodeContentMaps content;
 	
 	List<NodeShell> children;
 	
-	public NodeContent getContent() {
+	public NodeContentMaps getContent() {
 		return content;
 	}
 
-	public NodeShell(NodeContent content) {
+	public NodeShell(NodeContentMaps content) {
 		this.content = content;
 		this.children = new ArrayList<NodeShell>();
 	}
@@ -40,7 +41,7 @@ public class NodeShell {
 			
 			for(ActorAction selectedAction : selectedActions){
 				for(ActorActionOutcome outcome : selectedAction.getActionOutcomes()){
-					NodeContent childsContent = computeChildsContent(parameters,
+					NodeContentMaps childsContent = computeChildsContent(parameters,
 							multiActionProbability, selectedAction, outcome);
 					childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
 					NodeShell child = new NodeShell(childsContent);
@@ -64,10 +65,10 @@ public class NodeShell {
 		}
 	}
 
-	private NodeContent computeChildsContent(Parameters parameters,
+	private NodeContentMaps computeChildsContent(Parameters parameters,
 			double multiActionProbability, ActorAction selectedAction,
 			ActorActionOutcome outcome) {
-		NodeContent childsContent = content.getCopy();
+		NodeContentMaps childsContent = content.getCopy();
 
 		childsContent.setProbabilityProduct(content.getProbabilityProduct() 
 				* multiActionProbability * outcome.getProbability());
@@ -79,7 +80,7 @@ public class NodeShell {
 		return childsContent;
 	}
 
-	private double computeChildsAspirationLevel(Parameters parameters, NodeContent childsContent) {
+	private double computeChildsAspirationLevel(Parameters parameters, NodeContentMaps childsContent) {
 		double maxAverageUtility = Double.NEGATIVE_INFINITY;
 		for(ActorAction existingAction : parameters.getActorActions()){
 			Integer actionOccurances = childsContent.getNumberOfOccurances().get(existingAction);

@@ -1,7 +1,7 @@
 package cbdt.view.analysis.tree;
 
 import processing.core.PShape;
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.control.simulation.algorithm.NodeShell;
 
 public class NodeCircle {
 

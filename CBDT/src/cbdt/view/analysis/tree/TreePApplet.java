@@ -9,7 +9,7 @@ import java.util.List;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PShape;
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.control.simulation.algorithm.NodeShell;
 
 public class TreePApplet extends PApplet{
 	private static final long serialVersionUID = 1L;
