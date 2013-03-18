@@ -17,6 +17,14 @@ public class NodeShell {
 		this.content = content;
 		this.children = new ArrayList<NodeShell>();
 	}
+
+	public void setChildren(List<NodeShell> children) {
+		this.children = children;
+	}
+
+	public List<NodeShell> getChildren() {
+		return children;
+	}
 	
 	public void computeChildren(Parameters parameters, double[] expectedUtilities, int childrensLevelIndex){
 		if(childrensLevelIndex < parameters.getNumberOfRequestedExpectedUtilities()){

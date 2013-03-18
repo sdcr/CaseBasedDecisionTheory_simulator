@@ -18,8 +18,8 @@ import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageW
 public class AnalysisPageFactory extends AbstractPluginPageWrapper{
 
 	
-	private static final int TREE_ANIMATION_HEIGHT = 800;
-	private static final int TREE_ANIMATION_WIDTH = 800;
+	public static final int TREE_ANIMATION_HEIGHT = 800;
+	public static final int TREE_ANIMATION_WIDTH = 800;
 
 	@Override
 	public String getName() {

@@ -1,51 +1,131 @@
 package cbdt.view.analysis.tree;
 
+import java.awt.Point;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import processing.core.PApplet;
 import processing.core.PShape;
+import cbdt.control.algorithm.dfskeeptree.NodeShell;
 
 public class TreePApplet extends PApplet{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	private NodeCircle[] nodeCircles;
+	private NodeCircle rootCircle;
 
-	private int numberOfNodeCircles;
+	private PShape circleShape;
+	private PShape lineShape;
+	
+	private int ROOT_X = 300;
+	private int ROOT_Y = 200;
+	
+	List<Integer> stageIndexes;
+	private NodeContext nodeFrame;
+	private NodeContext visualWindow;
+
+	public TreePApplet() {
+		stageIndexes = new ArrayList<Integer>();
+		nodeFrame = new NodeContext();
+		nodeFrame.setWidth(500);
+		nodeFrame.setHeight(500);
+		nodeFrame.setMarginLeft(50);
+		nodeFrame.setMarginTop(50);
+		visualWindow = new NodeContext();
+		visualWindow.setMarginLeft(0);
+		visualWindow.setMarginTop(0);
+		visualWindow.setWidth(500);
+		visualWindow.setHeight(500);
+	}
 	
 	public void setup() {
-		size(500, 500, P2D);
+		size(800, 800, P2D);
 		background(255);
+		smooth();
 
-//		addMouseWheelListener(new MouseWheelListener() {
-//			public void mouseWheelMoved(MouseWheelEvent mwe) {
-//				mouseWheel(mwe.getWheelRotation());
-//			}
-//		});
-
-		PShape circleShape = createShape(ELLIPSE, 0, 0, 100, 100);
+		int radius = 10;
 		
-		numberOfNodeCircles = 10;
-		nodeCircles = new NodeCircle[numberOfNodeCircles];
-		
-		for (int i = 0; i < 10; i++){
-			nodeCircles[i] = new NodeCircle(this, circleShape);
+		circleShape = createShape(ELLIPSE, 0, 0, radius*2, radius*2);
+		if(rootCircle!=null){
+			rootCircle.setChildrenShape(circleShape);
+			rootCircle.setChildrenRadius(radius);
 		}
+		
+		addMouseWheelListener(new MouseWheelListener() { 
+		    public void mouseWheelMoved(MouseWheelEvent mwe) { 
+		      mouseWheel(mwe.getWheelRotation(), mwe.getPoint());
+		  }});
 	}
 
-	protected void mouseWheel(int wheelRotation) {
+	protected void mouseWheel(int wheelRotation, Point mousePos) {
 		System.out.println(wheelRotation);
+		mousePos = getInDocumentCoordinates(mousePos);
+		
+		if(wheelRotation<0){
+			visualWindow.setWidth((int) (visualWindow.getWidth() * 0.8));
+			visualWindow.setHeight((int) (visualWindow.getHeight() * 0.8));
+			visualWindow.setMarginLeft((int) (visualWindow.getMarginLeft() + (mousePos.x - visualWindow.getMarginLeft()) * 0.2));
+			visualWindow.setMarginTop((int) (visualWindow.getMarginTop() + (mousePos.y - visualWindow.getMarginTop()) * 0.2));
+		}else{
+			visualWindow.setWidth((int) (visualWindow.getWidth() * 1.25));
+			visualWindow.setHeight((int) (visualWindow.getHeight() * 1.25));
+			visualWindow.setMarginLeft((int) (visualWindow.getMarginLeft() - (mousePos.x - visualWindow.getMarginLeft()) * 0.25));
+			visualWindow.setMarginTop((int) (visualWindow.getMarginTop() - (mousePos.y - visualWindow.getMarginTop()) * 0.25));
+		}
+		
+		rootCircle.calcPosition();
+	}
+
+	private Point getInDocumentCoordinates(Point mousePos) {
+		Point newPoint = new Point();
+		newPoint.x = (int) (((double)(mousePos.x - nodeFrame.getMarginLeft()) / nodeFrame.getWidth() * visualWindow.getWidth()) + visualWindow.getMarginLeft());
+		newPoint.y = (int) (((double)(mousePos.y - nodeFrame.getMarginTop()) / nodeFrame.getHeight() * visualWindow.getHeight()) + visualWindow.getMarginTop());
+		return newPoint;
 	}
 
 	public void draw() {
 		background(255);
-		
-		for (int i = 0; i < numberOfNodeCircles; i++){
-//			NodeCircle cicle = new NodeCircle(this, 200, i*200, 100);
-//			nodeCircles[i].update(mouseX,mouseY);
-			nodeCircles[i].draw();
-			translate(mouseX, mouseY);
+		pushMatrix();
+		rootCircle.draw();
+		popMatrix();
+	}
+	
+	public void setTreeModel(NodeShell rootShell){
+		rootCircle = getNodeCircle(rootShell, 0);
+		setStageLengths(rootCircle, 0);
+		rootCircle.setVisualWindow(visualWindow);
+		rootCircle.calcPosition();
+	}
+	
+	private void setStageLengths(NodeCircle nodeCircle, int stage) {
+		nodeCircle.setStageLength(stageIndexes.get(stage)+1);
+		for(NodeCircle child : nodeCircle.getChildren()){
+			setStageLengths(child, stage+1);
 		}
+	}
+
+	private NodeCircle getNodeCircle(NodeShell nodeShell, int stage){
+		NodeCircle nodeCircle = new NodeCircle(this);
+		while(stageIndexes.size()<stage+1){
+			stageIndexes.add(new Integer(0));
+		}
+		nodeCircle.setStageIndex(stageIndexes.get(stage));
+		stageIndexes.set(stage, stageIndexes.get(stage) +1);
+		nodeCircle.setStage(stage);
+		nodeCircle.setFrame(nodeFrame);
+		
+		NodeCircle[] children = new NodeCircle[nodeShell.getChildren().size()];
+		NodeLine[] linesToChildren = new NodeLine[nodeShell.getChildren().size()];
+		
+		int i=0;
+		for(NodeShell shell : nodeShell.getChildren()){
+			children[i] = getNodeCircle(shell, stage+1);
+			linesToChildren[i] = new NodeLine(this, null, nodeCircle, children[i]);
+			i++;
+		}
+		nodeCircle.setChildren(children);
+		nodeCircle.setLinesTochildren(linesToChildren);
+		return nodeCircle;
 	}
 }
