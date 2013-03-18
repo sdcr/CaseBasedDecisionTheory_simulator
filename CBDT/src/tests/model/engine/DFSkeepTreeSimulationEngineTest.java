@@ -8,7 +8,7 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 
-public class DFStreeSimulationEngineTest {
+public class DFSkeepTreeSimulationEngineTest {
 
 	private Parameters parameters;
 

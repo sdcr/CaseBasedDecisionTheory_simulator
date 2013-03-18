@@ -12,7 +12,7 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 
-public class DFSallAllMatrixSimulationEngineTest {
+public class DFSMatrixSimulationEngineTest {
 
 	private Parameters parameters;
 
