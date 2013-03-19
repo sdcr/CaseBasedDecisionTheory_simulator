@@ -19,12 +19,20 @@ public class ConfigForegroundManager {
 
 	public void setToForeground(
 			AbstractConfigWidgetsWrapper configWidgetsWrapper) {
-		if (currentlyInForegroundPage != null)
+		if (currentlyInForegroundPage != null){
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
+			currentlyInForegroundPage.setVisible(false);
+		}
 		configWidgetsWrapper.setParent(parametersPage);
+//		configWidgetsWrapper.setGridData();
+		configWidgetsWrapper.setVisible(true);
 		currentlyInForegroundPage = configWidgetsWrapper;
 
 		parametersPage.getParent().getParent().getParent().pack();
+	}
+
+	public void setToBackground(AbstractConfigWidgetsWrapper configComposite) {
+		configComposite.setParent(currentlyInBackgroundsParent);
 	}
 
 }

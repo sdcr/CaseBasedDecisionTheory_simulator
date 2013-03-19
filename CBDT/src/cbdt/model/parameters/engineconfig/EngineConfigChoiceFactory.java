@@ -10,6 +10,9 @@ public class EngineConfigChoiceFactory {
 
 		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();
 		configs.add(new DFSkeepTreeEngineConfig());
+		configs.add(new DFSmatrixEngineConfig());
+		configs.add(new DFSmatrixHighPrecEngineConfig());
+		
 		defaultChoice.addAvailableConfigs(configs);
 
 		defaultChoice.choosenConfig = configs.get(0);

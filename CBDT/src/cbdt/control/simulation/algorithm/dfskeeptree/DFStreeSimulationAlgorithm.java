@@ -3,12 +3,12 @@ package cbdt.control.simulation.algorithm.dfskeeptree;
 import java.util.HashMap;
 import java.util.Map;
 
-import cbdt.control.simulation.CBDTAlgorithm;
+import cbdt.control.simulation.SimulationAlgorithm;
 import cbdt.control.simulation.algorithm.NodeShell;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 
-public class DFStreeSimulationAlgorithm implements CBDTAlgorithm {
+public class DFStreeSimulationAlgorithm implements SimulationAlgorithm {
 
 	@Override
 	public double[] computeExpectedUtilities(Parameters parameters){

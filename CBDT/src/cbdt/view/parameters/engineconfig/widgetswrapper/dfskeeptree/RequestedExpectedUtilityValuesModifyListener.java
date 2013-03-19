@@ -1,22 +1,22 @@
-package cbdt.view.parameters.engineconfig.widgetswrapper.dfskeeptreeconfig;
+package cbdt.view.parameters.engineconfig.widgetswrapper.dfskeeptree;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.pages.engineconfig.NaiveConfigController;
+import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.NumberFormatChecker;
 
 public class RequestedExpectedUtilityValuesModifyListener implements
 		ModifyListener {
 
-	private NaiveConfigController controller;
+	private AbstractEngineConfigController controller;
 	private HintLabelWrapper hintLabel;
 	private NumberFormatChecker numberFormatChecker;
 
 	public RequestedExpectedUtilityValuesModifyListener(
-			NaiveConfigController configController, HintLabelWrapper hintLabel,
+			AbstractEngineConfigController configController, HintLabelWrapper hintLabel,
 			NumberFormatChecker formatChecker) {
 		this.controller = configController;
 		this.hintLabel = hintLabel;

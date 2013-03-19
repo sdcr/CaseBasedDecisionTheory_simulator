@@ -9,10 +9,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.pages.ParametersPageController;
+import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
+import cbdt.control.pages.engineconfig.NoEngineConfigControllerException;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.ConfigWidgetsWrapperFactory;
+import cbdt.view.parameters.engineconfig.widgetswrapper.NoWidgetWrapperException;
 
 public class ConfigWidgetsWrapperManager implements Observer {
 
@@ -42,13 +45,19 @@ public class ConfigWidgetsWrapperManager implements Observer {
 
 		for (AbstractEngineConfiguration config : configChoice
 				.getAvailableEngineConfigs()) {
-			AbstractConfigWidgetsWrapper configComposite = configWidgetsFactory
-					.getConfigComposite(config, parametersPage);
-			configComposite.setConfigController(controller
-					.getConfigControllerFactory().getConfigController(config));
-			configComposite.setEngineConfigModel(config);
-			availableConfigsCombo.add(config.getName());
-			comboSelectionListener.addEngineConfig(config);
+			try {
+				AbstractEngineConfigController configController = controller
+						.getConfigControllerFactory().getConfigController(config);
+				AbstractConfigWidgetsWrapper configComposite = configWidgetsFactory
+						.getConfigComposite(config, parametersPage);
+				configComposite.setConfigController(configController);
+				configComposite.setEngineConfigModel(config);
+				availableConfigsCombo.add(config.getName());
+				comboSelectionListener.addEngineConfig(config);
+				foregroundManager.setToBackground(configComposite);
+			} catch (NoWidgetWrapperException | NoEngineConfigControllerException e) {
+				e.printStackTrace();
+			}
 		}
 		availableConfigsCombo.addSelectionListener(comboSelectionListener);
 
@@ -56,13 +65,16 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		AbstractEngineConfiguration currentlyChoosenConfig = configChoice
 				.getCurrentlyChoosenConfig();
 		if (currentlyChoosenConfig != null) {
-			foregroundManager
-					.setToForeground(configWidgetsFactory.getConfigComposite(
-							currentlyChoosenConfig, parametersPage));
-			int indexOfCurrentlyChoosenConfig = configChoice
-					.getAvailableEngineConfigs()
-					.indexOf(currentlyChoosenConfig);
-			availableConfigsCombo.select(indexOfCurrentlyChoosenConfig);
+			try {
+				foregroundManager.setToForeground(configWidgetsFactory.getConfigComposite(
+								currentlyChoosenConfig, parametersPage));
+				int indexOfCurrentlyChoosenConfig = configChoice
+						.getAvailableEngineConfigs()
+						.indexOf(currentlyChoosenConfig);
+				availableConfigsCombo.select(indexOfCurrentlyChoosenConfig);
+			} catch (NoWidgetWrapperException e) {
+				e.printStackTrace();
+			}
 		}
 		configChoice.addObserver(this);
 	}
@@ -72,9 +84,13 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		// update which config is in foreground.
 		if (o instanceof EngineConfigChoice) {
 			EngineConfigChoice choice = (EngineConfigChoice) o;
-			foregroundManager.setToForeground(configWidgetsFactory
-					.getConfigComposite(choice.getCurrentlyChoosenConfig(),
-							parametersPage));
+			try {
+				foregroundManager.setToForeground(configWidgetsFactory
+						.getConfigComposite(choice.getCurrentlyChoosenConfig(),
+								parametersPage));
+			} catch (NoWidgetWrapperException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

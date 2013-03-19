@@ -30,7 +30,7 @@ public class EngineContext {
 	}
 	
 	public void performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException{
-		CBDTAlgorithm algorithm = determineAlgorithm();
+		SimulationAlgorithm algorithm = determineAlgorithm();
 		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(algorithm);
 
 		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(shell);
@@ -42,8 +42,8 @@ public class EngineContext {
 //		}
 	}
 
-	private CBDTAlgorithm determineAlgorithm() {
-		CBDTAlgorithm algorithm = null;
+	private SimulationAlgorithm determineAlgorithm() {
+		SimulationAlgorithm algorithm = null;
 		if(engineConfig instanceof DFSkeepTreeEngineConfig){
 			algorithm = new DFStreeSimulationAlgorithm();
 		}

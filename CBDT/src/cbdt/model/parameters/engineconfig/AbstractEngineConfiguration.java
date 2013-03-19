@@ -15,7 +15,29 @@ public abstract class AbstractEngineConfiguration extends Observable {
 
 	private int requestedExpectedUtilityValues;
 
+	private boolean calculateAbsoluteActionOccurances;
+	
+	private boolean calculateRelativeActionOccurances;
+	
 	public abstract String getName();
+
+	public boolean isCalculateAbsoluteActionOccurances() {
+		return calculateAbsoluteActionOccurances;
+	}
+
+	public void setCalculateAbsoluteActionOccurances(
+			boolean calculateAbsoluteActionOccurances) {
+		this.calculateAbsoluteActionOccurances = calculateAbsoluteActionOccurances;
+	}
+
+	public boolean isCalculateRelativeActionOccurances() {
+		return calculateRelativeActionOccurances;
+	}
+
+	public void setCalculateRelativeActionOccurances(
+			boolean calculateRelativeActionOccurances) {
+		this.calculateRelativeActionOccurances = calculateRelativeActionOccurances;
+	}
 
 	public int getRequestedExpectedUtilityValues() {
 		return requestedExpectedUtilityValues;
