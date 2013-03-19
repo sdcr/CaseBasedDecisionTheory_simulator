@@ -10,6 +10,7 @@ import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.result.Result;
 
 /**
  * This class constitutes the context class of the strategy pattern.
@@ -21,6 +22,12 @@ public class EngineContext {
 	private Shell shell;
 
 	private AbstractEngineConfiguration engineConfig;
+	
+	private Result simulationResult;
+
+	public Result getSimulationResult() {
+		return simulationResult;
+	}
 
 	public EngineContext(Shell shell) {
 		this.shell = shell;
@@ -32,21 +39,21 @@ public class EngineContext {
 	
 	public void performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException{
 		SimulationAlgorithm algorithm = determineAlgorithm();
+		algorithm.setParameters(parameters);
 		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(algorithm);
 
 		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(shell);
 		progressDialog.run(true, true, runnable);
 
-		
-//		if (algorithm != null) {
-//			algorithm.computeExpectedUtilities(parameters);
-//		}
+		simulationResult = runnable.getResult();
 	}
 
 	private SimulationAlgorithm determineAlgorithm() {
 		SimulationAlgorithm algorithm = null;
 		if(engineConfig instanceof DFSkeepTreeEngineConfig){
-			algorithm = new DFStreeSimulationAlgorithm();
+			DFStreeSimulationAlgorithm keepTreeAlgorithm = new DFStreeSimulationAlgorithm();
+			keepTreeAlgorithm.setConfig((DFSkeepTreeEngineConfig) engineConfig);
+			algorithm = keepTreeAlgorithm;
 		}
 		return algorithm;
 	}

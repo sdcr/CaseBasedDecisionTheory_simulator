@@ -11,12 +11,12 @@ import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 
-public class DFStreeSimulationAlgorithm implements SimulationAlgorithm {
+public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 
 	private DFSkeepTreeEngineConfig config;
 	
 	@Override
-	public Result computeExpectedUtilities(Parameters parameters){
+	public Result computeExpectedUtilities(){
 		NodeContentKeepTree rootContent = getInitRootContent(parameters);
 		NodeShellKeepTree rootShell = new NodeShellKeepTree(rootContent);
 

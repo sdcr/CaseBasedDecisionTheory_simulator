@@ -1,5 +1,7 @@
 package cbdt.control.simulation.algorithm;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+
 import cbdt.model.parameters.Parameters;
 import cbdt.model.result.Result;
 
@@ -8,7 +10,19 @@ import cbdt.model.result.Result;
  * The different algorithms implementing this interface are the concrete strategies.
  * @author S-lenovo
  */
-public interface SimulationAlgorithm {
+public abstract class SimulationAlgorithm {
 
-	public Result computeExpectedUtilities(Parameters parameters);
+	protected IProgressMonitor monitor;
+	
+	protected Parameters parameters;
+	
+	public abstract Result computeExpectedUtilities();
+
+	public void setMonitor(IProgressMonitor monitor) {
+		this.monitor = monitor;
+	}
+
+	public void setParameters(Parameters parameters) {
+		this.parameters = parameters;
+	}
 }

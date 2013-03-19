@@ -8,7 +8,7 @@ public class DFSkeepTreeConfigController extends AbstractEngineConfigController 
 	private DFSkeepTreeEngineConfig config;
 
 	public void setEngineConfigModel(AbstractEngineConfiguration engineConfig) {
-		DFSkeepTreeEngineConfig config = (DFSkeepTreeEngineConfig) engineConfig;
+		config = (DFSkeepTreeEngineConfig) engineConfig;
 		super.setEngineConfigModel(config);
 	}
 	

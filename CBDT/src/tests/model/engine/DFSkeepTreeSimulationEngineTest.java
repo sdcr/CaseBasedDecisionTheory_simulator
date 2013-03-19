@@ -40,7 +40,8 @@ public class DFSkeepTreeSimulationEngineTest {
 	@Test
 	public void computeExpectedUtilitiesTest(){
 		DFStreeSimulationAlgorithm engine = new DFStreeSimulationAlgorithm();
-		DFStreeResult result = (DFStreeResult) engine.computeExpectedUtilities(parameters);
+		engine.setParameters(parameters);
+		DFStreeResult result = (DFStreeResult) engine.computeExpectedUtilities();
 		for(double expectedUtility : result.getExpectedUtilities()){
 			System.out.println(expectedUtility);
 		}
