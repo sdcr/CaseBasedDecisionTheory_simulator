@@ -1,6 +1,5 @@
-package cbdt.view.parameters.engineconfig.widgetswrapper;
+package cbdt.view;
 
-import cbdt.view.NumberFormatChecker;
 
 public class IntegerFormatChecker implements NumberFormatChecker {
 

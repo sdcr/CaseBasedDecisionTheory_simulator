@@ -48,6 +48,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 			try {
 				AbstractEngineConfigController configController = controller
 						.getConfigControllerFactory().getConfigController(config);
+				configController.setEngineConfigModel(config);
 				AbstractConfigWidgetsWrapper configComposite = configWidgetsFactory
 						.getConfigComposite(config, parametersPage);
 				configComposite.setConfigController(configController);

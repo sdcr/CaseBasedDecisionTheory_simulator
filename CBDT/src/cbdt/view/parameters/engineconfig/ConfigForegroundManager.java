@@ -21,11 +21,8 @@ public class ConfigForegroundManager {
 			AbstractConfigWidgetsWrapper configWidgetsWrapper) {
 		if (currentlyInForegroundPage != null){
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
-			currentlyInForegroundPage.setVisible(false);
 		}
 		configWidgetsWrapper.setParent(parametersPage);
-//		configWidgetsWrapper.setGridData();
-		configWidgetsWrapper.setVisible(true);
 		currentlyInForegroundPage = configWidgetsWrapper;
 
 		parametersPage.getParent().getParent().getParent().pack();
