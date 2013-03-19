@@ -28,6 +28,8 @@ public abstract class AbstractEngineConfiguration extends Observable {
 	public void setCalculateAbsoluteActionOccurances(
 			boolean calculateAbsoluteActionOccurances) {
 		this.calculateAbsoluteActionOccurances = calculateAbsoluteActionOccurances;
+		setChanged();
+		notifyObservers();
 	}
 
 	public boolean isCalculateRelativeActionOccurances() {
@@ -37,6 +39,8 @@ public abstract class AbstractEngineConfiguration extends Observable {
 	public void setCalculateRelativeActionOccurances(
 			boolean calculateRelativeActionOccurances) {
 		this.calculateRelativeActionOccurances = calculateRelativeActionOccurances;
+		setChanged();
+		notifyObservers();
 	}
 
 	public int getRequestedExpectedUtilityValues() {

@@ -2,29 +2,45 @@ package cbdt.model.parameters.engineconfig;
 
 public class DFSkeepTreeEngineConfig extends AbstractEngineConfiguration {
 	
-	private boolean calculateActionNames;
+	private boolean saveTreeStructure;
 	
-	private boolean calculateAspirationLevels;
+	private boolean saveActionNames;
+	
+	private boolean saveAspirationLevels;
 	
 	@Override
 	public String getName() {
 		return "Depth first search with tree structure";
 	}
 
-	public boolean isCalculateActionNames() {
-		return calculateActionNames;
+	public boolean isSaveActionNames() {
+		return saveActionNames;
 	}
 
-	public void setCalculateActionNames(boolean calculateActionNames) {
-		this.calculateActionNames = calculateActionNames;
+	public void setSaveActionNames(boolean calculateActionNames) {
+		this.saveActionNames = calculateActionNames;
+		setChanged();
+		notifyObservers();
 	}
 
-	public boolean isCalculateAspirationLevels() {
-		return calculateAspirationLevels;
+	public boolean isSaveAspirationLevels() {
+		return saveAspirationLevels;
 	}
 
-	public void setCalculateAspirationLevels(boolean calculateAspirationLevels) {
-		this.calculateAspirationLevels = calculateAspirationLevels;
+	public void setSaveAspirationLevels(boolean calculateAspirationLevels) {
+		this.saveAspirationLevels = calculateAspirationLevels;
+		setChanged();
+		notifyObservers();
+	}
+
+	public boolean isSaveTreeStructure() {
+		return saveTreeStructure;
+	}
+
+	public void setSaveTreeStructure(boolean saveTreeStructure) {
+		this.saveTreeStructure = saveTreeStructure;
+		setChanged();
+		notifyObservers();
 	}
 
 }

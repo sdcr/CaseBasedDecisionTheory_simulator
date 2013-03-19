@@ -30,7 +30,10 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 	
 	public AbstractConfigWidgetsWrapper(Composite parent) {
 		createRequestedExpectedUtilitiesWidgets(parent);
-		
+		createSaveActionOccurancesCheckBoxes(parent);
+	}
+
+	private void createSaveActionOccurancesCheckBoxes(Composite parent) {
 		calcActionOcurrancesLabel = new Label(parent, SWT.NONE);
 		calcActionOcurrancesLabel.setText("Save action occurances:");
 		GridData checkBoxGridData = new GridData();
@@ -61,11 +64,14 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 				.setNumberFormatChecker(integerFormatChecker);
 	}
 
-	public void setEngineConfigModel(AbstractEngineConfiguration config) {
-		config.addObserver(this);
-		update(config, null);
-	}
+//	public void setEngineConfigModel(AbstractEngineConfiguration config) {
+//		config.addObserver(this);
+//		update(config, null);
+//	}
+
+	public abstract void setEngineConfigModel(AbstractEngineConfiguration config);
 	
+	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 instanceof AbstractEngineConfiguration) {
 			AbstractEngineConfiguration config = (AbstractEngineConfiguration) arg0;

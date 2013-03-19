@@ -5,6 +5,7 @@ import java.util.Observable;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 
 public class DFSmatrixConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
@@ -27,5 +28,11 @@ public class DFSmatrixConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper 
 	public void setConfigController(
 			AbstractEngineConfigController configController) {
 		super.setConfigController(configController);
+	}
+
+	@Override
+	public void setEngineConfigModel(AbstractEngineConfiguration config) {
+		// TODO Auto-generated method stub
+		
 	}
 }
