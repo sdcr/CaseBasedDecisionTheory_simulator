@@ -6,7 +6,7 @@ public class DFSmatrixHighPrecEngineConfig extends AbstractEngineConfiguration {
 	
 	@Override
 	public String getName() {
-		return "Depth first search with matrix, arbitrary precision";
+		return "DFS with matrix structure, arbitrary precision";
 	}
 	
 	public int getNumberOfDecimalPlaces() {

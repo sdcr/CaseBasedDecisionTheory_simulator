@@ -10,7 +10,7 @@ public class DFSkeepTreeEngineConfig extends AbstractEngineConfiguration {
 	
 	@Override
 	public String getName() {
-		return "Depth first search with tree structure";
+		return "DFS with tree structure";
 	}
 
 	public boolean isSaveActionNames() {

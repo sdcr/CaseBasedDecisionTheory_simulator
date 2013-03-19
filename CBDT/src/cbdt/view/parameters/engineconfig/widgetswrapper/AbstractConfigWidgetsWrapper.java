@@ -20,6 +20,8 @@ import cbdt.view.parameters.engineconfig.widgetswrapper.listener.RequestedExpect
 
 public abstract class AbstractConfigWidgetsWrapper implements Observer {
 
+	protected static final int MARGIN_TOP = 10;
+	
 	private Label reqValuesLabel;
 	private SimpleParameterComposite requiredExpectedUtilitiesComposite;
 	private IntegerFormatChecker integerFormatChecker;
@@ -36,10 +38,10 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 	private void createSaveActionOccurancesCheckBoxes(Composite parent) {
 		calcActionOcurrancesLabel = new Label(parent, SWT.NONE);
 		calcActionOcurrancesLabel.setText("Save action occurances:");
-		GridData checkBoxGridData = new GridData();
-		checkBoxGridData.verticalSpan = 2;
-		checkBoxGridData.verticalAlignment = SWT.BEGINNING;
-		calcActionOcurrancesLabel.setLayoutData(checkBoxGridData);
+		GridData labelGridData = new GridData();
+		labelGridData.verticalSpan = 2;
+		labelGridData.verticalAlignment = SWT.BEGINNING;
+		calcActionOcurrancesLabel.setLayoutData(labelGridData);
 		
 		absActionOcurrancesButton = new Button(parent, SWT.CHECK);
 		absActionOcurrancesButton.setText("absolute numbers");
@@ -64,13 +66,11 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 				.setNumberFormatChecker(integerFormatChecker);
 	}
 
-//	public void setEngineConfigModel(AbstractEngineConfiguration config) {
-//		config.addObserver(this);
-//		update(config, null);
-//	}
+	public void setEngineConfigModel(AbstractEngineConfiguration config) {
+		config.addObserver(this);
+		update(config, null);
+	}
 
-	public abstract void setEngineConfigModel(AbstractEngineConfiguration config);
-	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 instanceof AbstractEngineConfiguration) {

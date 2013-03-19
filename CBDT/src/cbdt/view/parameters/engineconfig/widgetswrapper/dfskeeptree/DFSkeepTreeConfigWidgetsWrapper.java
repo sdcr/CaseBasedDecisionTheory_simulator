@@ -10,12 +10,13 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.control.pages.engineconfig.DFSkeepTreeConfigController;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 
 public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
 
+	private static final int INNER_CHECKBOX_MARGIN_LEFT = 20;
+	
 	private Label saveTreeStructureLabel;
 	private Button saveActionNamesButton;
 	private Button saveAspirationLevelsButton;
@@ -25,24 +26,28 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 		super(parent);
 		saveTreeStructureLabel = new Label(parent, SWT.NONE);
 		saveTreeStructureLabel.setText("Save tree structure:");
-		GridData checkBoxGridData = new GridData();
-		checkBoxGridData.verticalSpan = 3;
-		checkBoxGridData.verticalAlignment = SWT.BEGINNING;
-		saveTreeStructureLabel.setLayoutData(checkBoxGridData);
+		GridData labelGridData = new GridData();
+		labelGridData.verticalSpan = 3;
+		labelGridData.verticalAlignment = SWT.BEGINNING;
+		labelGridData.verticalIndent = MARGIN_TOP;
+		saveTreeStructureLabel.setLayoutData(labelGridData);
 		
 		saveTreeButton = new Button(parent, SWT.CHECK);
 		saveTreeButton.setText("save tree");
-
+		GridData saveTreeButtonGridData = new GridData();
+		saveTreeButtonGridData.verticalIndent = MARGIN_TOP;
+		saveTreeButton.setLayoutData(saveTreeButtonGridData);
+		
 		saveActionNamesButton = new Button(parent, SWT.CHECK);
 		saveActionNamesButton.setText("action names");
 		GridData saveActionNamesGridData = new GridData();
-		saveActionNamesGridData.horizontalIndent = 20;
+		saveActionNamesGridData.horizontalIndent = INNER_CHECKBOX_MARGIN_LEFT;
 		saveActionNamesButton.setLayoutData(saveActionNamesGridData);
 
 		saveAspirationLevelsButton = new Button(parent, SWT.CHECK);
 		saveAspirationLevelsButton.setText("aspiration levels");
 		GridData saveAspirationLevelsGridData = new GridData();
-		saveAspirationLevelsGridData.horizontalIndent = 20;
+		saveAspirationLevelsGridData.horizontalIndent = INNER_CHECKBOX_MARGIN_LEFT;
 		saveAspirationLevelsButton.setLayoutData(saveAspirationLevelsGridData);
 	}
 
@@ -60,6 +65,10 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 	@Override
 	public void setParent(Composite parent) {
 		super.setParent(parent);
+		saveTreeStructureLabel.setParent(parent);
+		saveTreeButton.setParent(parent);
+		saveActionNamesButton.setParent(parent);
+		saveAspirationLevelsButton.setParent(parent);
 	}
 
 	@Override
@@ -70,12 +79,6 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 		saveTreeButton.addSelectionListener(new SaveTreeSelectionListener(customConfigController, saveTreeButton));
 		saveActionNamesButton.addSelectionListener(new SaveActionNamesSelectionListener(customConfigController, saveActionNamesButton));
 		saveAspirationLevelsButton.addSelectionListener(new SaveAspirationLevelsSelectionListener(customConfigController, saveAspirationLevelsButton));
-	}
-
-	@Override
-	public void setEngineConfigModel(AbstractEngineConfiguration config) {
-		config.addObserver(this);
-		update(config, null);
 	}
 
 }
