@@ -50,7 +50,7 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 		if (arg0 instanceof DFSmatrixHighPrecEngineConfig) {
 			DFSmatrixHighPrecEngineConfig config = (DFSmatrixHighPrecEngineConfig) arg0;
 			requiredDecimalPlacesComposite.getText().setText(
-					String.valueOf(config.getRequestedExpectedUtilityValues()));
+					String.valueOf(config.getNumberOfDecimalPlaces()));
 		}
 	}
 

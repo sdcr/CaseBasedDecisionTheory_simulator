@@ -12,14 +12,19 @@ import cbdt.control.simulation.algorithm.dfsmatrix.highprecision.DFSallAllHighPr
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 
 public class DFSMatrixHighPrecSimulationEngineTest {
 
 	private Parameters parameters;
 
+	private DFSmatrixHighPrecEngineConfig config;
+	
 	@Before
 	public void setup(){
 		parameters = new Parameters();
+		config = new DFSmatrixHighPrecEngineConfig();
 		ActorAction actionA = new ActorAction("A");
 		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
 		
@@ -33,7 +38,7 @@ public class DFSMatrixHighPrecSimulationEngineTest {
 		parameters.setInitialAspirationLevel(100);
 		parameters.setWeightingFactorAlpha(0.5);
 		
-		parameters.setNumberOfRequestedExpectedUtilities(25);
+		config.setNumberOfRequestedExpectedUtilityValues(25);
 	}
 	
 //	@Test

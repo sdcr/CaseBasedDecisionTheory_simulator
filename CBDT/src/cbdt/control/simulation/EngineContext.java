@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;

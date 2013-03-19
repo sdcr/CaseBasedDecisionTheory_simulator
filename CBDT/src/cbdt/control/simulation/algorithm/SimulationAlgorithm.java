@@ -1,6 +1,7 @@
-package cbdt.control.simulation;
+package cbdt.control.simulation.algorithm;
 
 import cbdt.model.parameters.Parameters;
+import cbdt.model.result.Result;
 
 /**
  * This class is the interface of the strategies in the strategy pattern. 
@@ -9,5 +10,5 @@ import cbdt.model.parameters.Parameters;
  */
 public interface SimulationAlgorithm {
 
-	public double[] computeExpectedUtilities(Parameters parameters);
+	public Result computeExpectedUtilities(Parameters parameters);
 }

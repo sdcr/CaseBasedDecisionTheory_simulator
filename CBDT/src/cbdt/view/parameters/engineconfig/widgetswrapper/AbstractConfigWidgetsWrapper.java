@@ -76,7 +76,7 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 		if (arg0 instanceof AbstractEngineConfiguration) {
 			AbstractEngineConfiguration config = (AbstractEngineConfiguration) arg0;
 			requiredExpectedUtilitiesComposite.getText().setText(
-					String.valueOf(config.getRequestedExpectedUtilityValues()));
+					String.valueOf(config.getNumberOfRequestedExpectedUtilityValues()));
 			absActionOcurrancesButton.setSelection(config.isCalculateAbsoluteActionOccurances());
 			relActionOcurrancesButton.setSelection(config.isCalculateRelativeActionOccurances());
 		}

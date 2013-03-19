@@ -3,17 +3,23 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeResult;
 import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.result.Result;
 
 public class DFSkeepTreeSimulationEngineTest {
 
 	private Parameters parameters;
 
+	private DFSkeepTreeEngineConfig config;
+	
 	@Before
 	public void setup(){
+		config = new DFSkeepTreeEngineConfig();
 		parameters = new Parameters();
 		ActorAction actionA = new ActorAction("A");
 		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
@@ -28,14 +34,14 @@ public class DFSkeepTreeSimulationEngineTest {
 		parameters.setInitialAspirationLevel(100);
 		parameters.setWeightingFactorAlpha(0.5);
 		
-		parameters.setNumberOfRequestedExpectedUtilities(25);
+		config.setNumberOfRequestedExpectedUtilityValues(25);
 	}
 	
 	@Test
 	public void computeExpectedUtilitiesTest(){
 		DFStreeSimulationAlgorithm engine = new DFStreeSimulationAlgorithm();
-		double[] computedUtilities = engine.computeExpectedUtilities(parameters);
-		for(double expectedUtility : computedUtilities){
+		DFStreeResult result = (DFStreeResult) engine.computeExpectedUtilities(parameters);
+		for(double expectedUtility : result.getExpectedUtilities()){
 			System.out.println(expectedUtility);
 		}
 //		double[] expected = {1.5, 1.5, 1.5, 1.5};

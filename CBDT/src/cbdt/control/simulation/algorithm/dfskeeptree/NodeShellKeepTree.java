@@ -1,38 +1,40 @@
-package cbdt.control.simulation.algorithm;
+package cbdt.control.simulation.algorithm.dfskeeptree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
-public class NodeShell {
+public class NodeShellKeepTree {
 
 	NodeContentKeepTree content;
 	
-	List<NodeShell> children;
+	List<NodeShellKeepTree> children;
 	
 	public NodeContentKeepTree getContent() {
 		return content;
 	}
 
-	public NodeShell(NodeContentKeepTree content) {
+	public NodeShellKeepTree(NodeContentKeepTree content) {
 		this.content = content;
-		this.children = new ArrayList<NodeShell>();
+		this.children = new ArrayList<NodeShellKeepTree>();
 	}
 
-	public void setChildren(List<NodeShell> children) {
+	public void setChildren(List<NodeShellKeepTree> children) {
 		this.children = children;
 	}
 
-	public List<NodeShell> getChildren() {
+	public List<NodeShellKeepTree> getChildren() {
 		return children;
 	}
 	
-	public void computeChildren(Parameters parameters, double[] expectedUtilities, int childrensLevelIndex){
-		if(childrensLevelIndex < expectedUtilities.length){
+	public void computeChildren(Parameters parameters, DFSkeepTreeEngineConfig config, 
+			double[] expectedUtilities, List<Map<ActorAction,Integer>> actionOccurances, int childrensStage){
+		if(childrensStage < config.getNumberOfRequestedExpectedUtilityValues()){
 		
 			List<ActorAction> selectedActions = computeSelectedActions(parameters);
 			double multiActionProbability = 1.0 / selectedActions.size();
@@ -44,24 +46,37 @@ public class NodeShell {
 					NodeContentKeepTree childsContent = computeChildsContent(parameters,
 							multiActionProbability, selectedAction, outcome);
 					childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
-					NodeShell child = new NodeShell(childsContent);
+					NodeShellKeepTree child = new NodeShellKeepTree(childsContent);
 					children.add(child);
 				}
+				if(config.isCalculateAbsoluteActionOccurances() || config.isCalculateRelativeActionOccurances())
+					actionOccurances.get(childrensStage).put(selectedAction, actionOccurances.get(childrensStage).get(selectedAction) +1);
 			}
-			expectedUtilities[childrensLevelIndex] += childrensExpectedUtilitySum;
+			expectedUtilities[childrensStage] += childrensExpectedUtilitySum;
 			
-			content = null;
-			
-			initiateChildrensComputation(parameters, expectedUtilities, childrensLevelIndex);
+			setContentAccordingToConfig(config);
+			initiateChildrensComputation(parameters, config, expectedUtilities, actionOccurances, childrensStage);
 		}
-		content = null;
-		children = null;
+		
+		if(config.isSaveTreeStructure() == false)
+			children = null;
 	}
 
-	private void initiateChildrensComputation(Parameters parameters, double[] expectedUtilities,
-			int childrensLevelIndex) {
-		for(NodeShell child : children){
-			child.computeChildren(parameters, expectedUtilities, childrensLevelIndex+1);
+	private void setContentAccordingToConfig(DFSkeepTreeEngineConfig config) {
+		if(!config.isSaveActionNames() && !config.isSaveAspirationLevels())
+			content = null;
+		else{
+			content.setNumberOfOccurances(null);
+			content.setSumOfUtilities(null);
+			if(!config.isSaveActionNames())
+				content.setLastAction(null);
+		}
+	}
+
+	private void initiateChildrensComputation(Parameters parameters, DFSkeepTreeEngineConfig config, double[] expectedUtilities,
+			List<Map<ActorAction, Integer>> actionOccurances, int childrensLevelIndex) {
+		for(NodeShellKeepTree child : children){
+			child.computeChildren(parameters, config, expectedUtilities, actionOccurances, childrensLevelIndex+1);
 		}
 	}
 

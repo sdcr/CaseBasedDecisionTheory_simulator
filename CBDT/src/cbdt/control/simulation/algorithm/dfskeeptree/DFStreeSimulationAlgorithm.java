@@ -1,18 +1,76 @@
 package cbdt.control.simulation.algorithm.dfskeeptree;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import cbdt.control.simulation.SimulationAlgorithm;
-import cbdt.control.simulation.algorithm.NodeShell;
+import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.result.Result;
 
 public class DFStreeSimulationAlgorithm implements SimulationAlgorithm {
 
+	private DFSkeepTreeEngineConfig config;
+	
 	@Override
-	public double[] computeExpectedUtilities(Parameters parameters){
-		NodeContentMaps rootContent = new NodeContentMaps();
+	public Result computeExpectedUtilities(Parameters parameters){
+		NodeContentKeepTree rootContent = getInitRootContent(parameters);
+		NodeShellKeepTree rootShell = new NodeShellKeepTree(rootContent);
+
+		double[] expectedUtilities = new double[config.getNumberOfRequestedExpectedUtilityValues()];
+
+		List<Map<ActorAction, Integer>> absActionOccurancesMaps = getEmptyAbsoluteActionOccuranceMaps(parameters);
+		rootShell.computeChildren(parameters, config, expectedUtilities, absActionOccurancesMaps, 0);
+		
+		DFStreeResult endResult = new DFStreeResult();
+		if(config.isCalculateAbsoluteActionOccurances()){
+			endResult.setAbsoluteActionOccurances(absActionOccurancesMaps);
+		}
+		if (config.isCalculateRelativeActionOccurances()) {
+			endResult.setRelativeActionOccurances(getRelativeActionOccuranceMaps(absActionOccurancesMaps));
+		}
+		if (config.isSaveTreeStructure()) {
+			endResult.setRootNode(rootShell);
+		}
+		return endResult;
+	}
+
+	private List<Map<ActorAction, Double>> getRelativeActionOccuranceMaps(
+			List<Map<ActorAction, Integer>> absActionOccurancesMaps) {
+		List<Map<ActorAction, Double>> relativeActionOccurances = new ArrayList<Map<ActorAction, Double>>();
+		for(int i=0; i< config.getNumberOfRequestedExpectedUtilityValues(); i++){
+			Map<ActorAction, Double> relativeOccuranceMap = new HashMap<ActorAction, Double>();
+			int totalOccurances=0;
+			for (int occurances : absActionOccurancesMaps.get(i).values()){
+				totalOccurances += occurances;
+			}
+			for(ActorAction action : absActionOccurancesMaps.get(i).keySet()){
+				relativeOccuranceMap.put(action, (double) absActionOccurancesMaps.get(i).get(action) / totalOccurances);
+			}
+			relativeActionOccurances.add(relativeOccuranceMap);
+		}
+		return relativeActionOccurances;
+	}
+
+	private List<Map<ActorAction, Integer>> getEmptyAbsoluteActionOccuranceMaps(Parameters parameters) {
+		List<Map<ActorAction, Integer>> actionOccurances = null;
+		if(config.isCalculateAbsoluteActionOccurances() || config.isCalculateRelativeActionOccurances()){
+			actionOccurances = new ArrayList<Map<ActorAction, Integer>>();
+			for(int i=0; i<config.getNumberOfRequestedExpectedUtilityValues(); i++){
+				Map<ActorAction, Integer> occurancesMap = new HashMap<ActorAction, Integer>();
+				for(ActorAction action : parameters.getActorActions()){
+					occurancesMap.put(action, 0);
+				}
+			}
+		}
+		return actionOccurances;
+	}
+
+	private NodeContentKeepTree getInitRootContent(Parameters parameters) {
+		NodeContentKeepTree rootContent = new NodeContentKeepTree();
 		rootContent.setProbabilityProduct(1);
 		Map<ActorAction, Integer> numberOfOccurances = new HashMap<ActorAction, Integer>();
 		Map<ActorAction, Double> sumOfUtilities = new HashMap<ActorAction, Double>();
@@ -24,12 +82,15 @@ public class DFStreeSimulationAlgorithm implements SimulationAlgorithm {
 		rootContent.setNumberOfOccurances(numberOfOccurances);
 		rootContent.setSumOfUtilities(sumOfUtilities);
 		rootContent.setAspirationLevel(parameters.getInitialAspirationLevel());
+		return rootContent;
+	}
 
-		NodeShell rootShell = new NodeShell(rootContent);
+	public DFSkeepTreeEngineConfig getConfig() {
+		return config;
+	}
 
-		double[] expectedUtilities = new double[parameters.getNumberOfRequestedExpectedUtilities()];
-		rootShell.computeChildren(parameters, expectedUtilities, 0);
-		return expectedUtilities;
+	public void setConfig(DFSkeepTreeEngineConfig config) {
+		this.config = config;
 	}
 
 }

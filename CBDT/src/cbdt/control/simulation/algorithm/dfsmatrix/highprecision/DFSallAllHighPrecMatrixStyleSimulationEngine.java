@@ -8,9 +8,12 @@ import java.util.List;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 
 public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 
+	private DFSmatrixHighPrecEngineConfig config;
+	
 	private static final BigDecimal BIG_DECIMAL_1_0 = new BigDecimal(1.0);
 	int requestedNumberOfExpectedUtilities;
 	int numberOfActorActions;
@@ -40,7 +43,7 @@ public class DFSallAllHighPrecMatrixStyleSimulationEngine {
 //		List<List<NodeContent>> contents = new ArrayList<List<NodeContent>>();
 		mathContext = new MathContext(30);
 		
-		requestedNumberOfExpectedUtilities = parameters.getNumberOfRequestedExpectedUtilities();
+		requestedNumberOfExpectedUtilities = config.getNumberOfRequestedExpectedUtilityValues();
 		numberOfActorActions = parameters.getActorActions().size();
 		alpha = parameters.getWeightingFactorAlpha();
 		big_one_minus_alpha = new BigDecimal(1 - alpha);

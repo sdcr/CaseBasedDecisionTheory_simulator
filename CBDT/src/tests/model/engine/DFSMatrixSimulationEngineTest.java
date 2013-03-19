@@ -11,10 +11,13 @@ import cbdt.control.simulation.algorithm.dfsmatrix.DFSallAllMatrixStyleSimulatio
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 
 public class DFSMatrixSimulationEngineTest {
 
 	private Parameters parameters;
+	
+	private DFSmatrixEngineConfig config;
 
 	@Before
 	public void setup() {
@@ -32,7 +35,7 @@ public class DFSMatrixSimulationEngineTest {
 		parameters.setInitialAspirationLevel(100);
 		parameters.setWeightingFactorAlpha(0.5);
 
-		parameters.setNumberOfRequestedExpectedUtilities(50);
+		config.setNumberOfRequestedExpectedUtilityValues(50);
 	}
 
 	// @Test

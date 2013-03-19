@@ -11,7 +11,7 @@ public abstract class AbstractEngineConfigController {
 	}
 	
 	public void setRequestedNumberOfExpectedUtilities(int num) {
-		engineConfig.setRequestedExpectedUtilityValues(num);
+		engineConfig.setNumberOfRequestedExpectedUtilityValues(num);
 	}
 
 	public void setCalcAbsActionOccurances(boolean selection) {

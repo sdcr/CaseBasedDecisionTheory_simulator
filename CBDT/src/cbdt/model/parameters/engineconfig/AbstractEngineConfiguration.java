@@ -13,7 +13,10 @@ import java.util.Observable;
  */
 public abstract class AbstractEngineConfiguration extends Observable {
 
-	private int requestedExpectedUtilityValues;
+	/**
+	 * The number of expected utilities which should be computed.
+	 */
+	private int numberOfRequestedExpectedUtilityValues;
 
 	private boolean calculateAbsoluteActionOccurances;
 	
@@ -43,13 +46,14 @@ public abstract class AbstractEngineConfiguration extends Observable {
 		notifyObservers();
 	}
 
-	public int getRequestedExpectedUtilityValues() {
-		return requestedExpectedUtilityValues;
+	public int getNumberOfRequestedExpectedUtilityValues() {
+		return numberOfRequestedExpectedUtilityValues;
 	}
 
-	public void setRequestedExpectedUtilityValues(
-			int requestedExpectedUtilityValues) {
-		this.requestedExpectedUtilityValues = requestedExpectedUtilityValues;
+	public void setNumberOfRequestedExpectedUtilityValues(
+			int numberOfRequestedExpectedUtilityValues) {
+		this.numberOfRequestedExpectedUtilityValues = numberOfRequestedExpectedUtilityValues;
 	}
+
 
 }

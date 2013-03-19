@@ -8,9 +8,12 @@ import cbdt.control.simulation.algorithm.NodeContent;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 
 public class DFSallAllMatrixStyleSimulationEngine {
 
+	private DFSmatrixEngineConfig config;
+	
 	int requestedNumberOfExpectedUtilities;
 	int numberOfActorActions;
 	private ActorActionOutcome[][] outcomeMatrix;
@@ -34,7 +37,7 @@ public class DFSallAllMatrixStyleSimulationEngine {
 	public double[] computeExpectedUtilities(Parameters parameters){
 //		List<List<NodeContent>> contents = new ArrayList<List<NodeContent>>();
 		
-		requestedNumberOfExpectedUtilities = parameters.getNumberOfRequestedExpectedUtilities();
+		requestedNumberOfExpectedUtilities = config.getNumberOfRequestedExpectedUtilityValues();
 		numberOfActorActions = parameters.getActorActions().size();
 		alpha = parameters.getWeightingFactorAlpha();
 				
