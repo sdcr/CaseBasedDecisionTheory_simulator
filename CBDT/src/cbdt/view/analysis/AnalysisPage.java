@@ -2,11 +2,12 @@ package cbdt.view.analysis;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
-import cbdt.model.result.StageResult;
 import cbdt.view.LabelFactory;
 
 public class AnalysisPage extends Composite {
@@ -14,6 +15,9 @@ public class AnalysisPage extends Composite {
 	private AbstractEngineConfiguration config;
 	private Result simulationResult;
 	private AnalysisTableViewer tableViewer;
+	private Button showTreeButton;
+	private Button exportResultButton;
+	private ShowTreeSelectionListener showTreeSelectionListener;
 
 	public AnalysisPage(Composite parent, int style) {
 		super(parent, style);
@@ -28,61 +32,35 @@ public class AnalysisPage extends Composite {
 		
 		tableViewer = new AnalysisTableViewer(this);
 		
-		StageResult[] sr = new StageResult[3];
-		
-//		sr[0] = new StageResult();
-//		sr[0].setExpectedUtility(1);
-//		
-//		sr[1] = new StageResult();
-//		sr[1].setExpectedUtility(2);
-//		
-//		sr[2] = new StageResult();
-//		sr[2].setExpectedUtility(2);
-//		tableViewer.setInput(sr);
+		exportResultButton = new Button(this, SWT.PUSH);
+		exportResultButton.setText("Export as CSV");
+		showTreeButton = new Button(this, SWT.PUSH);
+		showTreeButton.setText("Show tree structure");
 	}
 
-	public void setEngineConfigModel(AbstractEngineConfiguration config){
+	private void createButtons() {
+		if(config!=null && simulationResult!=null){
+			if(config instanceof DFSkeepTreeEngineConfig && ((DFSkeepTreeEngineConfig) config).isSaveTreeStructure()){
+				showTreeButton.setVisible(true);
+				if(showTreeSelectionListener!=null)
+					showTreeButton.removeSelectionListener(showTreeSelectionListener);
+				showTreeSelectionListener = new ShowTreeSelectionListener(simulationResult, this);
+				showTreeButton.addSelectionListener(showTreeSelectionListener);
+			} else
+				showTreeButton.setVisible(false);
+			
+			this.getParent().pack();
+		}
+	}
+
+	public void setResultModel(AbstractEngineConfiguration config, Result simulationResult){
 		this.config = config;
-	}
-
-	public void setResultModel(Result simulationResult){
 		this.simulationResult = simulationResult;
 		tableViewer.createOccuranceColumns(config, simulationResult);
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
-		simulationResult.getStageResults().add(new StageResult());
 		tableViewer.setInput(simulationResult.getStageResults());
 		tableViewer.resizeTable();
-		this.pack();
+		createButtons();
+		this.getParent().pack();
 	}
 
 }

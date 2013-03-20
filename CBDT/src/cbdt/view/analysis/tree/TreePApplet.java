@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 import processing.core.PShape;
-import cbdt.control.simulation.algorithm.NodeShell;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShellKeepTree;
 
 public class TreePApplet extends PApplet{
 	private static final long serialVersionUID = 1L;
@@ -17,10 +16,6 @@ public class TreePApplet extends PApplet{
 	private NodeCircle rootCircle;
 
 	private PShape circleShape;
-	private PShape lineShape;
-	
-	private int ROOT_X = 300;
-	private int ROOT_Y = 200;
 	
 	List<Integer> stageIndexes;
 	private NodeContext nodeFrame;
@@ -64,7 +59,6 @@ public class TreePApplet extends PApplet{
 	}
 
 	protected void mouseWheel(int wheelRotation, Point mousePos) {
-		System.out.println(wheelRotation);
 		mousePos = getInDocumentCoordinates(mousePos);
 		
 		if(wheelRotation<0){
@@ -97,7 +91,7 @@ public class TreePApplet extends PApplet{
 		infoShowingCircle = null;
 	}
 	
-	public void setTreeModel(NodeShell rootShell){
+	public void setTreeModel(NodeShellKeepTree rootShell){
 		rootCircle = getNodeCircle(rootShell, 0);
 		setStageLengths(rootCircle, 0);
 		rootCircle.setVisualWindow(visualWindow);
@@ -111,7 +105,7 @@ public class TreePApplet extends PApplet{
 		}
 	}
 
-	private NodeCircle getNodeCircle(NodeShell nodeShell, int stage){
+	private NodeCircle getNodeCircle(NodeShellKeepTree nodeShell, int stage){
 		NodeCircle nodeCircle = new NodeCircle(this);
 		nodeCircle.setRepresentedShell(nodeShell);
 		while(stageIndexes.size()<stage+1){
@@ -126,9 +120,9 @@ public class TreePApplet extends PApplet{
 		NodeLine[] linesToChildren = new NodeLine[nodeShell.getChildren().size()];
 		
 		int i=0;
-		for(NodeShell shell : nodeShell.getChildren()){
+		for(NodeShellKeepTree shell : nodeShell.getChildren()){
 			children[i] = getNodeCircle(shell, stage+1);
-			linesToChildren[i] = new NodeLine(this, null, nodeCircle, children[i]);
+			linesToChildren[i] = new NodeLine(this, nodeCircle, children[i]);
 			i++;
 		}
 		nodeCircle.setChildren(children);

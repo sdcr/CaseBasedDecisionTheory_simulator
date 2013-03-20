@@ -63,7 +63,7 @@ public class NodeShellKeepTree {
 	}
 
 	private void setContentAccordingToConfig(DFSkeepTreeEngineConfig config) {
-		if(!config.isSaveActionNames() && !config.isSaveAspirationLevels())
+		if(!config.isSaveActionNames() && !config.isSaveAspirationLevels() && !config.isSaveTreeStructure())
 			content = null;
 		else{
 			content.setNumberOfOccurances(null);
@@ -89,6 +89,7 @@ public class NodeShellKeepTree {
 				* multiActionProbability * outcome.getProbability());
 		childsContent.getNumberOfOccurances().put(selectedAction, content.getNumberOfOccurances().get(selectedAction) + 1);
 		childsContent.getSumOfUtilities().put(selectedAction, content.getSumOfUtilities().get(selectedAction) + outcome.getUtility());
+		childsContent.setLastAction(selectedAction);
 		
 		double childsAspirationLevel = computeChildsAspirationLevel(parameters, childsContent);
 		childsContent.setAspirationLevel(childsAspirationLevel);

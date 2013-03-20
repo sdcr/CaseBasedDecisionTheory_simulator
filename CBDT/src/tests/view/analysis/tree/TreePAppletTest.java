@@ -50,31 +50,31 @@ public class TreePAppletTest {
 	
 	@Test
 	public void testView(){
-		Display display = new Display();
-		Shell shell = new Shell(display);
-		shell.setLayout(new RowLayout());
-		shell.setSize(AnalysisPageReference.TREE_ANIMATION_WIDTH + 30, AnalysisPageReference.TREE_ANIMATION_HEIGHT + 50);
-		
-		Composite appletComposite = new Composite(shell, SWT.EMBEDDED | SWT.NO_BACKGROUND);
-		
-		RowData rData = new RowData();
-		rData.width = AnalysisPageReference.TREE_ANIMATION_WIDTH;
-		rData.height = AnalysisPageReference.TREE_ANIMATION_HEIGHT;
-		appletComposite.setLayoutData(rData);
-		
-		Frame frame = SWT_AWT.new_Frame(appletComposite);
-		
-		TreePApplet treePApplet = new TreePApplet();
-		treePApplet.setTreeModel(rootNode);
-		frame.add(treePApplet);
-		treePApplet.init();
-		shell.open();
-		
-		while(!shell.isDisposed()) {
-			if (!display.readAndDispatch()) 
-				display.sleep();
-		}
-		treePApplet.stop();
-		display.dispose();
+//		Display display = new Display();
+//		Shell shell = new Shell(display);
+//		shell.setLayout(new RowLayout());
+//		shell.setSize(AnalysisPageReference.TREE_ANIMATION_WIDTH + 30, AnalysisPageReference.TREE_ANIMATION_HEIGHT + 50);
+//		
+//		Composite appletComposite = new Composite(shell, SWT.EMBEDDED | SWT.NO_BACKGROUND);
+//		
+//		RowData rData = new RowData();
+//		rData.width = AnalysisPageReference.TREE_ANIMATION_WIDTH;
+//		rData.height = AnalysisPageReference.TREE_ANIMATION_HEIGHT;
+//		appletComposite.setLayoutData(rData);
+//		
+//		Frame frame = SWT_AWT.new_Frame(appletComposite);
+//		
+//		TreePApplet treePApplet = new TreePApplet();
+//		treePApplet.setTreeModel(rootNode);
+//		frame.add(treePApplet);
+//		treePApplet.init();
+//		shell.open();
+//		
+//		while(!shell.isDisposed()) {
+//			if (!display.readAndDispatch()) 
+//				display.sleep();
+//		}
+//		treePApplet.stop();
+//		display.dispose();
 	}
 }

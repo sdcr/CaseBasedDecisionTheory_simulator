@@ -10,8 +10,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
@@ -23,7 +21,7 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainViewManager {
 
-	private static final int DEFAULT_HEIGHT = 600;
+	private static final int DEFAULT_HEIGHT = 800;
 	private static final int DEFAULT_WIDTH = 840;
 	
 	private PluginsBar pluginsBar;

@@ -72,7 +72,7 @@ public class AnalysisTableViewer extends TableViewer{
 			if (config.isCalculateAbsoluteActionOccurances() && simulationResult.getStageResults()!=null && !simulationResult.getStageResults().isEmpty()) {
 				for(final ActorAction action : simulationResult.getStageResults().get(0).getAbsoluteActionOccurances().keySet()){
 					TableViewerColumn colAbsOccurances = new TableViewerColumn(this, SWT.NONE);
-					colAbsOccurances.getColumn().setText("Occurance: "+action.getActionName());
+					colAbsOccurances.getColumn().setText("Abs. occ.: "+action.getActionName());
 					colAbsOccurances.getColumn().setWidth(100);
 					colAbsOccurances.setLabelProvider(new ColumnLabelProvider(){
 						@Override
@@ -87,7 +87,7 @@ public class AnalysisTableViewer extends TableViewer{
 			if (config.isCalculateRelativeActionOccurances() && !simulationResult.getStageResults().isEmpty()) {
 				for(final ActorAction action : simulationResult.getStageResults().get(0).getRelativeActionOccurances().keySet()){
 					TableViewerColumn colRelOccurances = new TableViewerColumn(this, SWT.NONE);
-					colRelOccurances.getColumn().setText("Rel. occurance: "+action.getActionName());
+					colRelOccurances.getColumn().setText("Rel. occ.: "+action.getActionName());
 					colRelOccurances.getColumn().setWidth(100);
 					colRelOccurances.setLabelProvider(new ColumnLabelProvider(){
 						@Override

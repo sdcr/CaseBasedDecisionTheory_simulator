@@ -22,33 +22,32 @@ public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 		NodeShellKeepTree rootShell = new NodeShellKeepTree(rootContent);
 
 		double[] expectedUtilities = new double[config.getNumberOfRequestedExpectedUtilityValues()];
-
-		List<Map<ActorAction, Integer>> absActionOccurancesMaps = getEmptyAbsoluteActionOccuranceMaps(parameters);
-		rootShell.computeChildren(parameters, config, expectedUtilities, absActionOccurancesMaps, 0);
 		
-		List<Map<ActorAction, Double>> relActionOccurancesMaps = getRelativeActionOccuranceMaps(absActionOccurancesMaps);
+		List<Map<ActorAction, Integer>> absActionOccurancesMaps = null;
+		if(config.isCalculateRelativeActionOccurances() || config.isCalculateAbsoluteActionOccurances())
+			absActionOccurancesMaps = getEmptyAbsoluteActionOccuranceMaps(parameters);
+
+		rootShell.computeChildren(parameters, config, expectedUtilities, absActionOccurancesMaps, 0);
+	
+		List<Map<ActorAction, Double>> relActionOccurancesMaps = null;
+		if(config.isCalculateRelativeActionOccurances())
+			relActionOccurancesMaps = getRelativeActionOccuranceMaps(absActionOccurancesMaps);
+
 		Result result = new Result();
 		List<StageResult> stageResults = new ArrayList<StageResult>();
 		for (int i = 0; i < config.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			StageResult stageResult = new StageResult();
 			stageResult.setStage(i);
 			stageResult.setExpectedUtility(expectedUtilities[i]);
-			stageResult.setAbsoluteActionOccurances(absActionOccurancesMaps.get(i));
-			stageResult.setRelativeActionOccurances(relActionOccurancesMaps.get(i));
+			if(config.isCalculateAbsoluteActionOccurances())
+				stageResult.setAbsoluteActionOccurances(absActionOccurancesMaps.get(i));
+			if(config.isCalculateRelativeActionOccurances())
+				stageResult.setRelativeActionOccurances(relActionOccurancesMaps.get(i));
 			stageResults.add(stageResult);
 		}
 		result.setStageResults(stageResults);
-		
-//		DFStreeResult endResult = new DFStreeResult();
-//		if(config.isCalculateAbsoluteActionOccurances()){
-//			endResult.setAbsoluteActionOccurances(absActionOccurancesMaps);
-//		}
-//		if (config.isCalculateRelativeActionOccurances()) {
-//			endResult.setRelativeActionOccurances(getRelativeActionOccuranceMaps(absActionOccurancesMaps));
-//		}
-//		if (config.isSaveTreeStructure()) {
-//			endResult.setRootNode(rootShell);
-//		}
+		if(config.isSaveTreeStructure())
+			result.setRootNode(rootShell);
 		return result;
 	}
 

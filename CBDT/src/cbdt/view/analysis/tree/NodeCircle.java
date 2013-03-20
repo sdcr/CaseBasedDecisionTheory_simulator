@@ -1,7 +1,7 @@
 package cbdt.view.analysis.tree;
 
 import processing.core.PShape;
-import cbdt.control.simulation.algorithm.NodeShell;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShellKeepTree;
 
 public class NodeCircle {
 
@@ -25,7 +25,7 @@ public class NodeCircle {
 	private int relCenterX;
 	private int relCenterY;
 
-	private NodeShell representedShell;
+	private NodeShellKeepTree representedShell;
 
 	public NodeCircle(TreePApplet treePApplet) {
 		pApplet = treePApplet;
@@ -48,7 +48,7 @@ public class NodeCircle {
 	public void calcPosition() {
 		int horizontalStageDist = context.getWidth() / (stageLength - 1);
 		int absCenterX = horizontalStageDist * stageIndex + horizontalStageDist/2;
-		int absCenterY = context.VERTICAL_DIFF * stage;
+		int absCenterY = NodeContext.VERTICAL_DIFF * stage;
 		
 		setRelCenterX((int) (((double)absCenterX - visualWindow.getMarginLeft())/visualWindow.getWidth() * context.getWidth() + context.getMarginLeft() ));
 		setRelCenterY((int) (((double)absCenterY - visualWindow.getMarginTop())/visualWindow.getHeight() * context.getHeight() + context.getMarginTop() ));
@@ -178,11 +178,11 @@ public class NodeCircle {
 		this.relCenterY = relCenterY;
 	}
 
-	public NodeShell getRepresentedShell() {
+	public NodeShellKeepTree getRepresentedShell() {
 		return representedShell;
 	}
 
-	public void setRepresentedShell(NodeShell representedShell) {
+	public void setRepresentedShell(NodeShellKeepTree representedShell) {
 		this.representedShell = representedShell;
 	}
 }

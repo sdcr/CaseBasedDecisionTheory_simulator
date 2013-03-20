@@ -7,6 +7,7 @@ import cbdt.view.analysis.AnalysisPageReference;
 
 public class AnalysisPageController extends AbstractPageController {
 
+	@SuppressWarnings("unused")
 	private Result simulationResult;
 	private AbstractEngineConfiguration config;
 	private AnalysisPageReference analysisPageReference;
@@ -22,12 +23,11 @@ public class AnalysisPageController extends AbstractPageController {
 
 	public void setConfig(AbstractEngineConfiguration config) {
 		this.config = config;
-		analysisPageReference.getAnalysisPage().setEngineConfigModel(config);
 	}
 
 	public void setSimulationResult(Result simulationResult) {
 		this.simulationResult = simulationResult;
-		analysisPageReference.getAnalysisPage().setResultModel(simulationResult);
+		analysisPageReference.getAnalysisPage().setResultModel(config, simulationResult);
 	}
 
 }
