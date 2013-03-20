@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.result.Result;
 
 /**
  * Contains the results of the DFS with tree structure algorithm.
  * @author S-lenovo
  */
-public class DFStreeResult implements Result {
+public class DFStreeResult {
 
 	private double[] expectedUtilities;
 	

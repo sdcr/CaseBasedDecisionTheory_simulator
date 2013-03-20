@@ -14,7 +14,7 @@ public class CBDTHeaderComposite extends Composite {
 			SWT.NORMAL);
 
 	public CBDTHeaderComposite(Composite parent, int style) {
-		super(parent, style);
+		super(parent, style | SWT.BORDER);
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;

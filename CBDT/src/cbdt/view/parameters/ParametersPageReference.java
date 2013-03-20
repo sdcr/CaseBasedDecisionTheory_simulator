@@ -14,12 +14,12 @@ import cbdt.view.CBDTHeaderComposite;
  * 
  * @author S-lenovo
  */
-public class ParametersPageWrapper extends AbstractPluginPageWrapper {
+public class ParametersPageReference extends AbstractPluginPageWrapper {
 
 	private ParametersPage parameterComposite;
 	private ParametersPageController controller;
 
-	public ParametersPageWrapper(ParametersPageController controller) {
+	public ParametersPageReference(ParametersPageController controller) {
 		this.controller = controller;
 	}
 
@@ -30,8 +30,7 @@ public class ParametersPageWrapper extends AbstractPluginPageWrapper {
 
 	@Override
 	protected Composite getPageComposite(Composite parent) {
-		Composite parametersPluginPage = new CBDTHeaderComposite(parent,
-				SWT.NONE | SWT.BORDER);
+		Composite parametersPluginPage = new CBDTHeaderComposite(parent, SWT.NONE);
 		parameterComposite = new ParametersPage(parametersPluginPage, SWT.NONE,
 				controller);
 		parameterComposite.setParametersModel(controller.getParametersModel());

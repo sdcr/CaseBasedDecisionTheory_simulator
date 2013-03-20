@@ -39,12 +39,12 @@ public class DFSkeepTreeSimulationEngineTest {
 	
 	@Test
 	public void computeExpectedUtilitiesTest(){
-		DFStreeSimulationAlgorithm engine = new DFStreeSimulationAlgorithm();
-		engine.setParameters(parameters);
-		DFStreeResult result = (DFStreeResult) engine.computeExpectedUtilities();
-		for(double expectedUtility : result.getExpectedUtilities()){
-			System.out.println(expectedUtility);
-		}
+//		DFStreeSimulationAlgorithm engine = new DFStreeSimulationAlgorithm();
+//		engine.setParameters(parameters);
+//		DFStreeResult result = (DFStreeResult) engine.computeExpectedUtilities();
+//		for(double expectedUtility : result.getExpectedUtilities()){
+//			System.out.println(expectedUtility);
+//		}
 //		double[] expected = {1.5, 1.5, 1.5, 1.5};
 //		assertArrayEquals(computedUtilities, expected, Double.MIN_VALUE);
 	}

@@ -10,6 +10,7 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
+import cbdt.model.result.StageResult;
 
 public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 
@@ -25,17 +26,30 @@ public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 		List<Map<ActorAction, Integer>> absActionOccurancesMaps = getEmptyAbsoluteActionOccuranceMaps(parameters);
 		rootShell.computeChildren(parameters, config, expectedUtilities, absActionOccurancesMaps, 0);
 		
-		DFStreeResult endResult = new DFStreeResult();
-		if(config.isCalculateAbsoluteActionOccurances()){
-			endResult.setAbsoluteActionOccurances(absActionOccurancesMaps);
+		List<Map<ActorAction, Double>> relActionOccurancesMaps = getRelativeActionOccuranceMaps(absActionOccurancesMaps);
+		Result result = new Result();
+		List<StageResult> stageResults = new ArrayList<StageResult>();
+		for (int i = 0; i < config.getNumberOfRequestedExpectedUtilityValues(); i++) {
+			StageResult stageResult = new StageResult();
+			stageResult.setStage(i);
+			stageResult.setExpectedUtility(expectedUtilities[i]);
+			stageResult.setAbsoluteActionOccurances(absActionOccurancesMaps.get(i));
+			stageResult.setRelativeActionOccurances(relActionOccurancesMaps.get(i));
+			stageResults.add(stageResult);
 		}
-		if (config.isCalculateRelativeActionOccurances()) {
-			endResult.setRelativeActionOccurances(getRelativeActionOccuranceMaps(absActionOccurancesMaps));
-		}
-		if (config.isSaveTreeStructure()) {
-			endResult.setRootNode(rootShell);
-		}
-		return endResult;
+		result.setStageResults(stageResults);
+		
+//		DFStreeResult endResult = new DFStreeResult();
+//		if(config.isCalculateAbsoluteActionOccurances()){
+//			endResult.setAbsoluteActionOccurances(absActionOccurancesMaps);
+//		}
+//		if (config.isCalculateRelativeActionOccurances()) {
+//			endResult.setRelativeActionOccurances(getRelativeActionOccuranceMaps(absActionOccurancesMaps));
+//		}
+//		if (config.isSaveTreeStructure()) {
+//			endResult.setRootNode(rootShell);
+//		}
+		return result;
 	}
 
 	private List<Map<ActorAction, Double>> getRelativeActionOccuranceMaps(
@@ -64,6 +78,7 @@ public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 				for(ActorAction action : parameters.getActorActions()){
 					occurancesMap.put(action, 0);
 				}
+				actionOccurances.add(occurancesMap);
 			}
 		}
 		return actionOccurances;

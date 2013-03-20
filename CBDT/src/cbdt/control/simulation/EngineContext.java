@@ -37,7 +37,7 @@ public class EngineContext {
 		this.engineConfig = engineConfig;
 	}
 	
-	public void performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException{
+	public Result performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException{
 		SimulationAlgorithm algorithm = determineAlgorithm();
 		algorithm.setParameters(parameters);
 		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(algorithm);
@@ -46,6 +46,7 @@ public class EngineContext {
 		progressDialog.run(true, true, runnable);
 
 		simulationResult = runnable.getResult();
+		return simulationResult;
 	}
 
 	private SimulationAlgorithm determineAlgorithm() {

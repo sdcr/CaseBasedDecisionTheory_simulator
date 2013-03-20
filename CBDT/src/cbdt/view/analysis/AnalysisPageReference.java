@@ -8,39 +8,36 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.view.analysis.tree.TreePApplet;
-
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
+import cbdt.view.CBDTHeaderComposite;
 
-public class AnalysisPageFactory extends AbstractPluginPageWrapper{
+public class AnalysisPageReference extends AbstractPluginPageWrapper{
 
-	
 	public static final int TREE_ANIMATION_HEIGHT = 800;
 	public static final int TREE_ANIMATION_WIDTH = 800;
+	private AnalysisPage analysisPage;
+	
 
 	@Override
 	public String getName() {
-		return "Ergebnis-Analyse";
+		return "Result analysis";
 	}
-
+	
 	@Override
 	public Composite getPageComposite(Composite parent) {
-		Composite parameterComposite = new Composite(parent, SWT.NONE);
-		
-		RowLayout rowLayout = new RowLayout();
-		rowLayout.type=SWT.VERTICAL;
-		parameterComposite.setLayout(rowLayout);
-		Label l = new Label(parameterComposite, SWT.NONE);
-		l.setText("Analyse");
-		
-		showTreeAnimation(parent);
-		
-		return parameterComposite;
+		Composite wrapperComposite = new CBDTHeaderComposite(parent, SWT.NONE);
+		analysisPage = new AnalysisPage(wrapperComposite, SWT.NONE);
+		wrapperComposite.pack();
+		return wrapperComposite;
 	}
 
+	public AnalysisPage getAnalysisPage() {
+		return analysisPage;
+	}
+
+	@SuppressWarnings("unused")
 	private void showTreeAnimation(Composite parent) {
 		Display display = parent.getDisplay();
 		Shell shell = new Shell(display);
@@ -56,16 +53,16 @@ public class AnalysisPageFactory extends AbstractPluginPageWrapper{
 		
 		Frame frame = SWT_AWT.new_Frame(appletComposite);
 		
-		TreePApplet treePApplet = new TreePApplet();
-		frame.add(treePApplet);
-		treePApplet.init();
+//		TreePApplet treePApplet = new TreePApplet();
+//		frame.add(treePApplet);
+//		treePApplet.init();
 		shell.open();
 		
 		while(!shell.isDisposed()) {
 			if (!display.readAndDispatch()) 
 				display.sleep();
 		}
-		treePApplet.stop();
+//		treePApplet.stop();
 		shell.dispose();
 	}
 

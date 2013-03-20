@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Label;
 import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
+import cbdt.view.LabelFactory;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 import cbdt.view.parameters.aspirationlevel.AbstractAspirationLevelParameterComposite;
 import cbdt.view.parameters.aspirationlevel.AspirationLevelDiscountComposite;
@@ -82,14 +83,11 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	}
 
 	private void createEngineConfigTitleLabel() {
-		Label configLabel = new Label(parametersWrapper, SWT.NONE);
-		configLabel.setText("Engine-Configuration");
-		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
-		configLabel.setFont(new Font(this.getDisplay(), labelFontData));
+		LabelFactory factory = new LabelFactory();
+		Label configLabel = factory.createTitleLabel(parametersWrapper, "Engine configuration:");
 
 		GridData parameterLabelGridData = new GridData();
 		parameterLabelGridData.horizontalSpan = 2;
-		// parameterLabelGridData.heightHint = 50;
 		configLabel.setLayoutData(parameterLabelGridData);
 	}
 
@@ -122,10 +120,8 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	 * Creates the title label for this composite.
 	 */
 	private void createParametersTitleLabel() {
-		Label parameterLabel = new Label(parametersWrapper, SWT.NONE);
-		parameterLabel.setText("Parameter-Eingabe");
-		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
-		parameterLabel.setFont(new Font(this.getDisplay(), labelFontData));
+		LabelFactory factory = new LabelFactory();
+		Label parameterLabel = factory.createTitleLabel(parametersWrapper, "Parameter values:");
 
 		GridData parameterLabelGridData = new GridData();
 		parameterLabelGridData.horizontalSpan = 2;

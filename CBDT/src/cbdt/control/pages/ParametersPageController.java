@@ -12,20 +12,20 @@ import cbdt.model.parameters.ParametersFactory;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.parameters.engineconfig.EngineConfigChoiceFactory;
-import cbdt.view.parameters.ParametersPageWrapper;
+import cbdt.view.parameters.ParametersPageReference;
 
 public class ParametersPageController extends AbstractPageController {
 
 	private Parameters parametersModel;
 	private EngineConfigChoice configChoice;
-	private ParametersPageWrapper parametersPageWrapper;
+	private ParametersPageReference parametersPageWrapper;
 	private IParametersPersistenceManager parametersPersistenceManager;
 	private EngineConfigControllerFactory configControllerFactory;
 
 	public ParametersPageController() {
 		ParametersFactory factory = new ParametersFactory();
 		parametersModel = factory.getDefaultParameters();
-		parametersPageWrapper = new ParametersPageWrapper(this);
+		parametersPageWrapper = new ParametersPageReference(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
 
 		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
@@ -35,7 +35,7 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	@Override
-	public ParametersPageWrapper getPageWrapper() {
+	public ParametersPageReference getPageWrapper() {
 		return parametersPageWrapper;
 	}
 

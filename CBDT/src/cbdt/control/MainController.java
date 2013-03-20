@@ -9,6 +9,7 @@ import cbdt.control.pages.ParametersPageController;
 import cbdt.control.simulation.EngineContext;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.result.Result;
 import cbdt.view.MessageBoxManager;
 
 public class MainController {
@@ -17,7 +18,6 @@ public class MainController {
 
 	@SuppressWarnings("unused")
 	private ParametersPageController parametersController;
-	@SuppressWarnings("unused")
 	private AnalysisPageController analysisController;
 
 	private MessageBoxManager messageBoxManager;
@@ -37,7 +37,10 @@ public class MainController {
 	public void computeCDBTSimulation(Parameters parameters, AbstractEngineConfiguration engineConfig) {
 		simulationEngine.setEngineConfig(engineConfig);
 		try {
-			simulationEngine.performSimulation(parameters);
+			Result result = simulationEngine.performSimulation(parameters);
+			setToForeground(analysisController);
+			analysisController.setConfig(engineConfig);
+			analysisController.setSimulationResult(result);
 		} catch (InterruptedException e) {
 		} catch (InvocationTargetException e) {
 			if(e.getCause() instanceof OutOfMemoryError){

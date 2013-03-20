@@ -1,5 +1,16 @@
 package cbdt.model.result;
 
-public interface Result {
+import java.util.List;
 
+public class Result {
+
+	private List<StageResult> stageResults;
+
+	public List<StageResult> getStageResults() {
+		return stageResults;
+	}
+
+	public void setStageResults(List<StageResult> stageResults) {
+		this.stageResults = stageResults;
+	}
 }

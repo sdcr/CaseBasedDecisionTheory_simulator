@@ -17,7 +17,7 @@ import org.junit.Test;
 import cbdt.control.simulation.algorithm.NodeShell;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
 import cbdt.model.parameters.ActorAction;
-import cbdt.view.analysis.AnalysisPageFactory;
+import cbdt.view.analysis.AnalysisPageReference;
 import cbdt.view.analysis.tree.TreePApplet;
 
 public class TreePAppletTest {
@@ -53,13 +53,13 @@ public class TreePAppletTest {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setLayout(new RowLayout());
-		shell.setSize(AnalysisPageFactory.TREE_ANIMATION_WIDTH + 30, AnalysisPageFactory.TREE_ANIMATION_HEIGHT + 50);
+		shell.setSize(AnalysisPageReference.TREE_ANIMATION_WIDTH + 30, AnalysisPageReference.TREE_ANIMATION_HEIGHT + 50);
 		
 		Composite appletComposite = new Composite(shell, SWT.EMBEDDED | SWT.NO_BACKGROUND);
 		
 		RowData rData = new RowData();
-		rData.width = AnalysisPageFactory.TREE_ANIMATION_WIDTH;
-		rData.height = AnalysisPageFactory.TREE_ANIMATION_HEIGHT;
+		rData.width = AnalysisPageReference.TREE_ANIMATION_WIDTH;
+		rData.height = AnalysisPageReference.TREE_ANIMATION_HEIGHT;
 		appletComposite.setLayoutData(rData);
 		
 		Frame frame = SWT_AWT.new_Frame(appletComposite);
