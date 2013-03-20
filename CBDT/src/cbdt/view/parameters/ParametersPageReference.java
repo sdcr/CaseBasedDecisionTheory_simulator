@@ -36,6 +36,7 @@ public class ParametersPageReference extends AbstractPluginPageWrapper {
 		parameterComposite.setParametersModel(controller.getParametersModel());
 		parameterComposite.setConfigChoiceModel(controller
 				.getConfigChoiceModel());
+		parametersPluginPage.layout();
 		return parametersPluginPage;
 	}
 

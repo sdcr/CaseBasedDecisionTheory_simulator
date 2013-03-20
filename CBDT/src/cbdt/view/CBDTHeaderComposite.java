@@ -18,6 +18,7 @@ public class CBDTHeaderComposite extends Composite {
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
+		rowLayout.wrap = false;
 		rowLayout.marginTop = 25;
 		rowLayout.marginLeft = 30;
 		// rowLayout.marginBottom = 20;

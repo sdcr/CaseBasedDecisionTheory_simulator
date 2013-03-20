@@ -3,10 +3,15 @@ package simulation.core.view;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
@@ -18,8 +23,8 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainViewManager {
 
-	private static final int HEIGHT = 800;
-	private static final int WIDTH = 840;
+	private static final int DEFAULT_HEIGHT = 600;
+	private static final int DEFAULT_WIDTH = 840;
 	
 	private PluginsBar pluginsBar;
 	private ForegroundManager foregroundManager;
@@ -31,7 +36,7 @@ public class MainViewManager {
 	public MainViewManager(final Controller controller) {
 		this.controller = controller;
 		shell = new Shell(new Display());
-		shell.setSize(WIDTH, HEIGHT);
+		shell.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		instantiateViewElements();
 
 		shell.addDisposeListener(new DisposeListener() {
@@ -68,10 +73,22 @@ public class MainViewManager {
 	 * @param shell
 	 */
 	private void instantiateViewElements() {
-		shell.setLayout(new GridLayout(2, false));
+		shell.setLayout(new FillLayout());
+		final ScrolledComposite scrolledComposite = new ScrolledComposite(shell, SWT.V_SCROLL);
+		scrolledComposite.setLayout(new FillLayout(SWT.VERTICAL));
 		
-		pluginsBar = new PluginsBar(shell, SWT.PUSH);
-		PluginPane pluginPane = new PluginPane(shell, SWT.NONE);
+		final Composite generalWrapper = new Composite(scrolledComposite, SWT.NONE);
+		generalWrapper.setLayout(new GridLayout(2, false));
+		scrolledComposite.setContent(generalWrapper);
+		scrolledComposite.setMinHeight(SWT.DEFAULT);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		shell.addListener(SWT.Resize, new ResizeListener(scrolledComposite, generalWrapper));
+
+		pluginsBar = new PluginsBar(generalWrapper, SWT.PUSH);
+		PluginPane pluginPane = new PluginPane(generalWrapper, SWT.NONE);
+		pluginPane.addListener(SWT.Resize, new ResizeListener(scrolledComposite, generalWrapper));
 		foregroundManager = new ForegroundManager(pluginPane);
 		pluginsBar.setForegroundManager(foregroundManager);
 		
