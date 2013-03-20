@@ -4,12 +4,17 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
+import cbdt.control.pages.AnalysisPageController;
 import cbdt.view.CBDTHeaderComposite;
 
 public class AnalysisPageReference extends AbstractPluginPageWrapper{
 
 	private AnalysisPage analysisPage;
+	private AnalysisPageController controller;
 	
+	public AnalysisPageReference(AnalysisPageController controller) {
+		this.controller = controller;
+	}
 
 	@Override
 	public String getName() {
@@ -19,7 +24,7 @@ public class AnalysisPageReference extends AbstractPluginPageWrapper{
 	@Override
 	public Composite getPageComposite(Composite parent) {
 		Composite wrapperComposite = new CBDTHeaderComposite(parent, SWT.NONE);
-		analysisPage = new AnalysisPage(wrapperComposite, SWT.NONE);
+		analysisPage = new AnalysisPage(wrapperComposite, SWT.NONE, controller);
 		wrapperComposite.pack();
 		return wrapperComposite;
 	}

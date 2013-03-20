@@ -12,11 +12,10 @@ public abstract class OpenFileDialogSelectionListener implements SelectionListen
 		this.shell = shell;
 	}
 	
-	protected String getFilepathFromDialog(int style){
+	protected String getFilepathFromDialog(int style, String title, String[] filterExt){
         FileDialog fileDialog = new FileDialog(shell, style);
-        fileDialog.setText("Add a plugin");
+        fileDialog.setText(title);
         fileDialog.setFilterPath("C:/");
-        String[] filterExt = { "*.xml", "*.*" };
         fileDialog.setFilterExtensions(filterExt);
         return fileDialog.open();
 	}

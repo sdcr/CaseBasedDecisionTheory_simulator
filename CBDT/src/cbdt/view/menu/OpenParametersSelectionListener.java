@@ -17,7 +17,8 @@ public class OpenParametersSelectionListener extends OpenFileDialogSelectionList
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		String filepathFromDialog = this.getFilepathFromDialog(SWT.OPEN);
+		String[] filterExt = { "*.xml", "*.*" };
+		String filepathFromDialog = this.getFilepathFromDialog(SWT.OPEN, "Open parameters", filterExt);
 		if(filepathFromDialog != null)
 			controller.loadParametersFromFile(filepathFromDialog);
 	}
