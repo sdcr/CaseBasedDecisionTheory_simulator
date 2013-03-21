@@ -33,7 +33,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 		saveTreeStructureLabel.setLayoutData(labelGridData);
 		
 		saveTreeButton = new Button(parent, SWT.CHECK);
-		saveTreeButton.setText("save tree");
+		saveTreeButton.setText("keep tree");
 		GridData saveTreeButtonGridData = new GridData();
 		saveTreeButtonGridData.verticalIndent = MARGIN_TOP;
 		saveTreeButton.setLayoutData(saveTreeButtonGridData);

@@ -37,7 +37,7 @@ public class AnalysisPageController extends AbstractPageController {
 
 	public void exportResults(String filepathFromDialog) {
 		try {
-			resultPersistenceManager.saveResultToFile(filepathFromDialog, simulationResult);
+			resultPersistenceManager.saveResultToFile(filepathFromDialog, simulationResult, config);
 		} catch (IOException e) {
 			getMessageBoxManager().showErrorMessage(e.getMessage());
 			e.printStackTrace();

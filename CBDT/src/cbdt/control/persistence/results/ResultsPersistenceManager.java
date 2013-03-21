@@ -9,13 +9,16 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
 public class ResultsPersistenceManager implements IResultsPersistenceManager {
 
 	@Override
-	public void saveResultToFile(String filepath, Result result) throws IOException {
+	public void saveResultToFile(String filepath, Result result, AbstractEngineConfiguration config) throws IOException {
 		BufferedWriter outWriter = null;
 		outWriter = new BufferedWriter(new FileWriter(filepath));
 		outWriter.write("Stage;Expected utility");
@@ -79,7 +82,23 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 
 			outWriter.newLine();
 		}
+		
+		outWriter.newLine();
+		writeConfigurationDetails(config, outWriter);
 		outWriter.close();
+	}
+
+	private void writeConfigurationDetails(AbstractEngineConfiguration config,
+			BufferedWriter outWriter) throws IOException {
+		outWriter.write("Used algorithm: ;"+config.getName());
+		if(config instanceof DFSkeepTreeEngineConfig){
+			outWriter.write("Keeping tree in memory:;"+((DFSkeepTreeEngineConfig)config).isSaveTreeStructure());
+			outWriter.write("Keeping action names:;"+((DFSkeepTreeEngineConfig)config).isSaveActionNames());
+			outWriter.write("Keeping aspiration levels:;"+((DFSkeepTreeEngineConfig)config).isSaveAspirationLevels());
+		}
+		if(config instanceof DFSmatrixHighPrecEngineConfig){
+			outWriter.write("Number of used required places:;"+((DFSmatrixHighPrecEngineConfig)config).getNumberOfDecimalPlaces());
+		}
 	}
 
 }
