@@ -43,7 +43,8 @@ public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 		stageNodeShells.add(rootShell);
 		monitoredStage = 0;
 		
-		while(stageNodeShells.size()<MIN_NUMBER_OF_MONITOR_WORK_UNITS){
+		while(stageNodeShells.size()<MIN_NUMBER_OF_MONITOR_WORK_UNITS 
+				&& monitoredStage<config.getNumberOfRequestedExpectedUtilityValues()){
 			List<NodeShellKeepTree> childrenShells = new ArrayList<NodeShellKeepTree>();
 			StageResult childrensStageResult = result.getStageResults().get(monitoredStage);
 			for(NodeShellKeepTree parentShell : stageNodeShells){
