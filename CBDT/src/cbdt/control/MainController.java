@@ -43,9 +43,11 @@ public class MainController {
 			analysisController.setConfig(engineConfig);
 			analysisController.setSimulationResult(result);
 		} catch (InterruptedException e) {
+			messageBoxManager.showInfoMessage(e.getMessage());
+			System.gc();
 		} catch (InvocationTargetException e) {
 			if(e.getCause() instanceof OutOfMemoryError){
-				messageBoxManager.showErrorMessage("Out of memory error.");
+				messageBoxManager.showErrorMessage("OutOfMemoryError: "+e.getCause().getMessage());
 			} else {
 				messageBoxManager.showErrorMessage("An unknown error occured error.");
 			}
@@ -53,6 +55,8 @@ public class MainController {
 		} catch (InvalidActorActionException e) {
 			messageBoxManager.showErrorMessage(e.getMessage());
 			e.printStackTrace();
+		} catch (RuntimeException e){
+			messageBoxManager.showErrorMessage(e.getMessage());
 		}
 	}
 

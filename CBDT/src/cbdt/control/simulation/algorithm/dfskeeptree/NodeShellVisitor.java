@@ -3,6 +3,8 @@ package cbdt.control.simulation.algorithm.dfskeeptree;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
@@ -15,16 +17,20 @@ public class NodeShellVisitor {
 	private Result result;
 	private ActionSelector actionSelector;
 	private ChildNodeContentGenerator childContentGenerator;
+	private IProgressMonitor monitor;
 
 	public NodeShellVisitor(Parameters parameters, DFSkeepTreeEngineConfig config, Result result,
-			NodeContentFactory factory) {
+			NodeContentFactory factory, IProgressMonitor monitor) {
 		this.config = config;
 		this.result = result;
+		this.monitor = monitor;
 		actionSelector = new ActionSelector(parameters.getActorActions());
 		childContentGenerator = new ChildNodeContentGenerator(parameters.getWeightingFactorAlpha(), factory);
 	}
 
-	public void visitRecursively(NodeShellKeepTree nodeShell, int childrensStage){
+	public void visitRecursively(NodeShellKeepTree nodeShell, int childrensStage) throws InterruptedException{
+		if(monitor.isCanceled())
+			throw new InterruptedException("Computation aborted.");
 		if(childrensStage < config.getNumberOfRequestedExpectedUtilityValues()) {
 			StageResult childrensStageResult = result.getStageResults().get(childrensStage);
 

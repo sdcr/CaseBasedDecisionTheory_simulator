@@ -5,12 +5,14 @@ import java.math.MathContext;
 import java.util.List;
 
 import cbdt.control.simulation.algorithm.NodeContent;
+import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
+import cbdt.model.result.Result;
 
-public class DFSallAllMatrixStyleSimulationEngine {
+public class DFSallAllMatrixStyleSimulationEngine extends SimulationAlgorithm {
 
 	private DFSmatrixEngineConfig config;
 	
@@ -35,7 +37,6 @@ public class DFSallAllMatrixStyleSimulationEngine {
 
 
 	public double[] computeExpectedUtilities(Parameters parameters){
-//		List<List<NodeContent>> contents = new ArrayList<List<NodeContent>>();
 		
 		requestedNumberOfExpectedUtilities = config.getNumberOfRequestedExpectedUtilityValues();
 		numberOfActorActions = parameters.getActorActions().size();
@@ -198,5 +199,12 @@ public class DFSallAllMatrixStyleSimulationEngine {
 			sumOfUtilities[i] = 0.0;
 		}
 		return sumOfUtilities;
+	}
+
+
+	@Override
+	public void computeResult(Result initResult) {
+		// TODO Auto-generated method stub
+		
 	}
 }

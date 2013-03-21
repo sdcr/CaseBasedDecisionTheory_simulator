@@ -16,7 +16,7 @@ public abstract class SimulationAlgorithm {
 	
 	protected Parameters parameters;
 	
-	public abstract void computeResult(Result initResult);
+	public abstract void computeResult(Result initResult) throws InterruptedException;
 
 	public void setMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;

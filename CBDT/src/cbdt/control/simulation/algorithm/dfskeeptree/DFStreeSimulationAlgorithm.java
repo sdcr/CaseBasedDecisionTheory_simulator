@@ -16,12 +16,12 @@ public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 	private int monitoredStage;
 	
 	@Override
-	public void computeResult(Result result){
+	public void computeResult(Result result) throws InterruptedException{
 		NodeContentFactory factory = new NodeContentFactory();
 		NodeContentKeepTree rootContent = factory.getInitRootContent(parameters);
 		NodeShellKeepTree rootShell = new NodeShellKeepTree(rootContent);
 
-		NodeShellVisitor nodeShellVisitor = new NodeShellVisitor(parameters, config, result, factory);
+		NodeShellVisitor nodeShellVisitor = new NodeShellVisitor(parameters, config, result, factory, monitor);
 		
 		List<NodeShellKeepTree> monitoredStageNodeShells = computeMonitoredStageNodeShells(
 				result, rootShell, nodeShellVisitor);
