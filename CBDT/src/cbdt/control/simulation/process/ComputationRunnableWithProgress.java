@@ -23,9 +23,7 @@ public class ComputationRunnableWithProgress implements IRunnableWithProgress {
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException {
 		algorithm.setMonitor(monitor);
-		monitor.beginTask("Simulation computation", 5);
 		algorithm.computeResult(result);
-		monitor.done();
 		
 //		for(int i=0; i<5; i++){
 //			monitor.worked(1);
