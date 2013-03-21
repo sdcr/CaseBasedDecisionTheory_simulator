@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.pages.ParametersPageController;
+import cbdt.control.validators.ParameterValidator;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.view.parameters.AbstractControllerAccessComposite;
@@ -35,6 +36,7 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	private ActorActionOutcomesTableViewer actorActionOutcomesTableViewer;
 	private ActorAction representedActorAction;
 	private ProbabilitySumHintLabelWrapper probabilityHintLabel;
+	private ParameterValidator validator;
 
 	public ActorActionComposite(final Composite parent, ActorAction representedActorAction, ParametersPageController controller) {
 		super(parent, SWT.BORDER , controller);
@@ -123,7 +125,8 @@ public class ActorActionComposite extends AbstractControllerAccessComposite impl
 	}
 
 	private void updateProbabilityHintVisibility() {
-		if(representedActorAction.hasValidProbabilityDistribution())
+		validator = new ParameterValidator();
+		if(validator.hasValidProbabilityDistribution(representedActorAction))
 			probabilityHintLabel.setVisible(false);
 		else
 			probabilityHintLabel.setVisible(true);

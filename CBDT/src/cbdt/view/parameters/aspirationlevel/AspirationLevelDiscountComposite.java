@@ -5,6 +5,7 @@ import java.util.Observable;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.pages.ParametersPageController;
+import cbdt.control.validators.DoubleFormatChecker;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelDiscountModifyListener;
 

@@ -1,4 +1,4 @@
-package cbdt.control.simulation;
+package cbdt.control.simulation.process;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -14,7 +14,8 @@ public class ComputationRunnableWithProgress implements IRunnableWithProgress {
 
 	private Result result;
 	
-	public ComputationRunnableWithProgress(SimulationAlgorithm algorithm) {
+	public ComputationRunnableWithProgress(Result result, SimulationAlgorithm algorithm) {
+		this.result = result;
 		this.algorithm = algorithm;
 	}
 
@@ -23,7 +24,7 @@ public class ComputationRunnableWithProgress implements IRunnableWithProgress {
 			InterruptedException {
 		algorithm.setMonitor(monitor);
 		monitor.beginTask("Simulation computation", 5);
-		result = algorithm.computeExpectedUtilities();
+		algorithm.computeResult(result);
 		monitor.done();
 		
 //		for(int i=0; i<5; i++){
@@ -37,10 +38,6 @@ public class ComputationRunnableWithProgress implements IRunnableWithProgress {
 //			Thread.sleep(500);
 //		}
 		
-	}
-
-	public Result getResult() {
-		return result;
 	}
 
 }

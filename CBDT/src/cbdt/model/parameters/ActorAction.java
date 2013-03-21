@@ -84,23 +84,6 @@ public class ActorAction extends Observable{
 		notifyObservers();
 	}
 	
-	/**
-	 * @return Returns whether the probabilities of the ActorActionOutcomes
-	 *         associated with this ActorAction form a valid probability
-	 *         distribution.
-	 * 
-	 *         Validity is assumed if the sum of the probabilities equals one.
-	 */
-	public boolean hasValidProbabilityDistribution() {
-		double totalProbability = 0;
-
-		for (ActorActionOutcome pair : actionOutcomes) {
-			totalProbability += pair.getProbability();
-		}
-
-		return totalProbability == 1;
-	}
-	
 	public boolean equals(ActorAction obj) {
 		if (this == obj)
 			return true;

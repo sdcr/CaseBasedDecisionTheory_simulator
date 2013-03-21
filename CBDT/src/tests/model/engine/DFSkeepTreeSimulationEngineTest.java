@@ -3,13 +3,10 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeResult;
-import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
-import cbdt.model.result.Result;
 
 public class DFSkeepTreeSimulationEngineTest {
 

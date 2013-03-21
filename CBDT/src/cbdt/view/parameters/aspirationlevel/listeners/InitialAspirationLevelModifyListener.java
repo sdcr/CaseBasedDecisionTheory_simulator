@@ -4,8 +4,8 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.pages.ParametersPageController;
+import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
-import cbdt.view.NumberFormatChecker;
 
 public class InitialAspirationLevelModifyListener extends
 		AbstractParameterModifyListener {

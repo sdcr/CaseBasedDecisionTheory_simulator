@@ -10,9 +10,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
+import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.view.HintLabelWrapper;
-import cbdt.view.IntegerFormatChecker;
 import cbdt.view.parameters.SimpleParameterComposite;
 import cbdt.view.parameters.engineconfig.widgetswrapper.listener.AbsoluteActionOccurancesSelectionListener;
 import cbdt.view.parameters.engineconfig.widgetswrapper.listener.RelativeActionOccurancesSelectionListener;

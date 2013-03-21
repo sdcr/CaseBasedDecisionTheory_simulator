@@ -7,6 +7,7 @@ import cbdt.control.pages.AbstractPageController;
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.control.pages.ParametersPageController;
 import cbdt.control.simulation.EngineContext;
+import cbdt.control.validators.InvalidActorActionException;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.result.Result;
@@ -48,6 +49,9 @@ public class MainController {
 			} else {
 				messageBoxManager.showErrorMessage("An unknown error occured error.");
 			}
+			e.printStackTrace();
+		} catch (InvalidActorActionException e) {
+			messageBoxManager.showErrorMessage(e.getMessage());
 			e.printStackTrace();
 		}
 	}

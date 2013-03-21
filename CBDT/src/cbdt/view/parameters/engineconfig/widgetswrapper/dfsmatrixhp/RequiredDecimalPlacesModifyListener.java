@@ -5,8 +5,8 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.pages.engineconfig.DFSmatrixHighPrecisionConfigController;
+import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.view.HintLabelWrapper;
-import cbdt.view.IntegerFormatChecker;
 
 public class RequiredDecimalPlacesModifyListener implements ModifyListener {
 

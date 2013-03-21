@@ -1,6 +1,5 @@
 package cbdt.control.simulation.algorithm.dfskeeptree;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import cbdt.model.parameters.ActorAction;
@@ -16,23 +15,6 @@ public class NodeContentKeepTree {
 	private double aspirationLevel;
 
 	private ActorAction lastAction;
-	
-	public NodeContentKeepTree getCopy(){
-		NodeContentKeepTree copy = new NodeContentKeepTree();
-		copy.setAspirationLevel(aspirationLevel);
-
-		HashMap<ActorAction,Integer> copysNumberOfOccurances = new HashMap<ActorAction,Integer>();
-		HashMap<ActorAction,Double> copysSumOfUtilities = new HashMap<ActorAction,Double>();
-		for(ActorAction actorAction : numberOfOccurances.keySet()){
-			copysNumberOfOccurances.put(actorAction, numberOfOccurances.get(actorAction));
-			copysSumOfUtilities.put(actorAction, sumOfUtilities.get(actorAction));
-		}
-		
-		copy.setNumberOfOccurances(copysNumberOfOccurances);
-		copy.setSumOfUtilities(copysSumOfUtilities);
-		copy.setProbabilityProduct(probabilityProduct);
-		return copy;
-	}
 	
 	public double getProbabilityProduct() {
 		return probabilityProduct;

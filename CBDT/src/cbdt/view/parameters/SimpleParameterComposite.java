@@ -7,8 +7,8 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
-import cbdt.view.NumberFormatChecker;
 
 public class SimpleParameterComposite extends Composite {
 

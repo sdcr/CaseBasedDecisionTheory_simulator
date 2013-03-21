@@ -7,6 +7,11 @@ import org.eclipse.swt.widgets.Shell;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
+import cbdt.control.simulation.process.ComputationRunnableWithProgress;
+import cbdt.control.simulation.process.EmptyResultFactory;
+import cbdt.control.simulation.process.PostProcessor;
+import cbdt.control.validators.InvalidActorActionException;
+import cbdt.control.validators.ParameterValidator;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
@@ -23,12 +28,6 @@ public class EngineContext {
 
 	private AbstractEngineConfiguration engineConfig;
 	
-	private Result simulationResult;
-
-	public Result getSimulationResult() {
-		return simulationResult;
-	}
-
 	public EngineContext(Shell shell) {
 		this.shell = shell;
 	}
@@ -37,16 +36,23 @@ public class EngineContext {
 		this.engineConfig = engineConfig;
 	}
 	
-	public Result performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException{
+	public Result performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException, InvalidActorActionException{
+		ParameterValidator parameterValidator = new ParameterValidator();
+		parameterValidator.checkValidity(parameters);
+
+		EmptyResultFactory resultFactory = new EmptyResultFactory();
+		Result result = resultFactory.getEmptyResult(engineConfig, parameters);
+		
 		SimulationAlgorithm algorithm = determineAlgorithm();
 		algorithm.setParameters(parameters);
-		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(algorithm);
-
+		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(result, algorithm);
 		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(shell);
 		progressDialog.run(true, true, runnable);
 
-		simulationResult = runnable.getResult();
-		return simulationResult;
+		PostProcessor postProcessor = new PostProcessor();
+		postProcessor.postProcess(result, engineConfig);
+		
+		return result;
 	}
 
 	private SimulationAlgorithm determineAlgorithm() {

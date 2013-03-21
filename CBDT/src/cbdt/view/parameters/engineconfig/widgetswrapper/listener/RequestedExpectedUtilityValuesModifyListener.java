@@ -5,8 +5,8 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Text;
 
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
+import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
-import cbdt.view.NumberFormatChecker;
 
 public class RequestedExpectedUtilityValuesModifyListener implements
 		ModifyListener {

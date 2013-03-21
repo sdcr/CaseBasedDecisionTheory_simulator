@@ -3,8 +3,8 @@ package cbdt.view.parameters.aspirationlevel.listeners;
 import org.eclipse.swt.events.ModifyListener;
 
 import cbdt.control.pages.ParametersPageController;
+import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
-import cbdt.view.NumberFormatChecker;
 
 public abstract class AbstractParameterModifyListener implements ModifyListener {
 

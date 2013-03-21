@@ -1,4 +1,4 @@
-package cbdt.view;
+package cbdt.control.validators;
 
 public interface NumberFormatChecker {
 

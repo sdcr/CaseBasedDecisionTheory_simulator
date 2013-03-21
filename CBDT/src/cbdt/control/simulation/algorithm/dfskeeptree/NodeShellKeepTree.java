@@ -8,6 +8,8 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.result.Result;
+import cbdt.model.result.StageResult;
 
 public class NodeShellKeepTree {
 
@@ -33,7 +35,7 @@ public class NodeShellKeepTree {
 	}
 	
 	public void computeChildren(Parameters parameters, DFSkeepTreeEngineConfig config, 
-			double[] expectedUtilities, List<Map<ActorAction,Integer>> actionOccurances, int childrensStage){
+			Result result, int childrensStage, NodeContentFactory factory){
 		if(childrensStage < config.getNumberOfRequestedExpectedUtilityValues()){
 		
 			List<ActorAction> selectedActions = computeSelectedActions(parameters);
@@ -41,21 +43,26 @@ public class NodeShellKeepTree {
 			
 			double childrensExpectedUtilitySum = 0;
 			
+			StageResult stageResult = result.getStageResults().get(childrensStage);
 			for(ActorAction selectedAction : selectedActions){
 				for(ActorActionOutcome outcome : selectedAction.getActionOutcomes()){
 					NodeContentKeepTree childsContent = computeChildsContent(parameters,
-							multiActionProbability, selectedAction, outcome);
+							multiActionProbability, selectedAction, outcome, factory);
 					childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
 					NodeShellKeepTree child = new NodeShellKeepTree(childsContent);
 					children.add(child);
 				}
-				if(config.isCalculateAbsoluteActionOccurances() || config.isCalculateRelativeActionOccurances())
-					actionOccurances.get(childrensStage).put(selectedAction, actionOccurances.get(childrensStage).get(selectedAction) +1);
+				if(config.isCalculateAbsoluteActionOccurances() || config.isCalculateRelativeActionOccurances()) {
+					Map<ActorAction, Integer> absoluteActionOccurances = stageResult
+							.getAbsoluteActionOccurances();
+					absoluteActionOccurances.put(selectedAction,
+							absoluteActionOccurances.get(selectedAction) + 1);
+				}
 			}
-			expectedUtilities[childrensStage] += childrensExpectedUtilitySum;
+			stageResult.setExpectedUtility(stageResult.getExpectedUtility() +childrensExpectedUtilitySum);
 			
 			setContentAccordingToConfig(config);
-			initiateChildrensComputation(parameters, config, expectedUtilities, actionOccurances, childrensStage);
+			initiateChildrensComputation(parameters, config, result, childrensStage, factory);
 		}
 		
 		if(config.isSaveTreeStructure() == false)
@@ -73,17 +80,17 @@ public class NodeShellKeepTree {
 		}
 	}
 
-	private void initiateChildrensComputation(Parameters parameters, DFSkeepTreeEngineConfig config, double[] expectedUtilities,
-			List<Map<ActorAction, Integer>> actionOccurances, int childrensLevelIndex) {
+	private void initiateChildrensComputation(Parameters parameters, DFSkeepTreeEngineConfig config, 
+			Result result, int childrensLevelIndex, NodeContentFactory factory) {
 		for(NodeShellKeepTree child : children){
-			child.computeChildren(parameters, config, expectedUtilities, actionOccurances, childrensLevelIndex+1);
+			child.computeChildren(parameters, config, result, childrensLevelIndex+1, factory);
 		}
 	}
 
 	private NodeContentKeepTree computeChildsContent(Parameters parameters,
 			double multiActionProbability, ActorAction selectedAction,
-			ActorActionOutcome outcome) {
-		NodeContentKeepTree childsContent = content.getCopy();
+			ActorActionOutcome outcome, NodeContentFactory factory) {
+		NodeContentKeepTree childsContent = factory.getCopy(content);
 
 		childsContent.setProbabilityProduct(content.getProbabilityProduct() 
 				* multiActionProbability * outcome.getProbability());

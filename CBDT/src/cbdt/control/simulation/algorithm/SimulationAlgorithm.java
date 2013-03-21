@@ -16,7 +16,7 @@ public abstract class SimulationAlgorithm {
 	
 	protected Parameters parameters;
 	
-	public abstract Result computeExpectedUtilities();
+	public abstract void computeResult(Result initResult);
 
 	public void setMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
