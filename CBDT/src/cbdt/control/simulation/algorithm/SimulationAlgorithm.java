@@ -3,6 +3,7 @@ package cbdt.control.simulation.algorithm;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.result.Result;
 
 /**
@@ -16,6 +17,8 @@ public abstract class SimulationAlgorithm {
 	
 	protected Parameters parameters;
 	
+	protected CommonEngineConfiguration commonConfig;
+	
 	public abstract void computeResult(Result initResult) throws InterruptedException;
 
 	public void setMonitor(IProgressMonitor monitor) {
@@ -24,5 +27,13 @@ public abstract class SimulationAlgorithm {
 
 	public void setParameters(Parameters parameters) {
 		this.parameters = parameters;
+	}
+
+	public CommonEngineConfiguration getCommonConfig() {
+		return commonConfig;
+	}
+
+	public void setCommonConfig(CommonEngineConfiguration commonConfig) {
+		this.commonConfig = commonConfig;
 	}
 }

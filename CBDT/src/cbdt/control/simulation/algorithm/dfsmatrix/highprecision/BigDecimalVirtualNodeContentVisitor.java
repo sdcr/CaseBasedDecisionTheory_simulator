@@ -8,7 +8,7 @@ import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.control.simulation.algorithm.dfsmatrix.AbstractInitFactory;
 import cbdt.control.simulation.algorithm.dfsmatrix.VirtualNodeContentVisitor;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 
 public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisitor{
 
@@ -17,10 +17,10 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 	private BigDecimalNodeContent[][] contentsMatrix;
 
 	public BigDecimalVirtualNodeContentVisitor(Parameters parameters,
-			AbstractEngineConfiguration config, BigDecimalNodeContent[][] contentsMatrix,
+			CommonEngineConfiguration commonConfig, BigDecimalNodeContent[][] contentsMatrix,
 			AbstractInitFactory factory, BigDecimal[] emptyExpectedUtilities,
 			BigDecimal[][] absoluteActionOccurances, IProgressMonitor monitor) {
-		super(parameters, config, null, factory, null,
+		super(parameters, commonConfig, null, factory, null,
 				absoluteActionOccurances, monitor);
 		this.contentsMatrix = contentsMatrix;
 		this.expectedUtilities = emptyExpectedUtilities;
@@ -36,15 +36,12 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 			throw new InterruptedException();
 		if(leafStage!=null && leafStage==stage)
 			numberOfLeafs++;
-		else if (stage < config.getNumberOfRequestedExpectedUtilityValues()) {
+		else if (stage < commonConfig.getNumberOfRequestedExpectedUtilityValues()) {
 			BigDecimalNodeContent parentContent = contentsMatrix[stage][index];
 			actionSelector.computeSelectedActions(selectedActionsIndices, parentContent);
 			int numberOfSelectedActions = getNumberOfSelectedActions();
 			
-			//
 			BigDecimal multiActionProbability = big_one.divide(new BigDecimal(numberOfSelectedActions), mathContext);
-			//
-			
 			
 			BigDecimal childrensExpectedUtilitySum = new BigDecimal(0);
 			int childIndex = 0;
@@ -52,8 +49,8 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 			for (int i = 0; i < numberOfSelectedActions; i++) {
 				int selectedActionIndex = selectedActionsIndices[i];
 
-				if (leafStage==null && (config.isCalculateAbsoluteActionOccurances()
-						|| config.isCalculateRelativeActionOccurances()))
+				if (leafStage==null && (commonConfig.isCalculateAbsoluteActionOccurances()
+						|| commonConfig.isCalculateRelativeActionOccurances()))
 					absoluteActionOccurances[stage][selectedActionIndex] = absoluteActionOccurances[stage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {

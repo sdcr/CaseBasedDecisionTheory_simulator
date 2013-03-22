@@ -4,24 +4,25 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 
-import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
+import cbdt.control.pages.ParametersPageController;
 
 public class RelativeActionOccurancesSelectionListener implements
 		SelectionListener {
 
-	private AbstractEngineConfigController configController;
 	private Button relActionOcurrancesButton;
+	private ParametersPageController pageController;
 
 	public RelativeActionOccurancesSelectionListener(
-			AbstractEngineConfigController configController,
+			ParametersPageController pageController,
 			Button relActionOcurrancesButton) {
-				this.configController = configController;
-				this.relActionOcurrancesButton = relActionOcurrancesButton;
+		this.pageController = pageController;
+		this.relActionOcurrancesButton = relActionOcurrancesButton;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		configController.setCalcRelActionOccurances(relActionOcurrancesButton.getSelection());
+		pageController.setCalcRelActionOccurances(relActionOcurrancesButton
+				.getSelection());
 	}
 
 	@Override

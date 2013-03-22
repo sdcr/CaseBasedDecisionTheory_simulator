@@ -121,11 +121,23 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public void startComputation() {
-		getMainController().computeCDBTSimulation(parametersModel, configChoice.getCurrentlyChoosenConfig());
+		getMainController().computeCDBTSimulation(parametersModel, configChoice);
 	}
 
 	public void setChoosenConfig(AbstractEngineConfiguration config) {
 		configChoice.setCurrentlyChoosenConfig(config);
+	}
+
+	public void setCalcAbsActionOccurances(boolean selection) {
+		configChoice.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
+	}
+
+	public void setCalcRelActionOccurances(boolean selection) {
+		configChoice.getCommonConfig().setCalculateRelativeActionOccurances(selection);
+	}
+
+	public void setRequestedNumberOfExpectedUtilities(int numOfRequestedValues) {
+		configChoice.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
 	}
 
 }

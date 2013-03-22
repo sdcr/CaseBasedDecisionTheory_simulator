@@ -15,7 +15,8 @@ public class EngineConfigChoiceFactory {
 		
 		defaultChoice.addAvailableConfigs(configs);
 
-		defaultChoice.choosenConfig = configs.get(0);
+		defaultChoice.setCurrentlyChoosenConfig(configs.get(0));
+		defaultChoice.setCommonConfig(new CommonEngineConfiguration());
 
 		return defaultChoice;
 	}

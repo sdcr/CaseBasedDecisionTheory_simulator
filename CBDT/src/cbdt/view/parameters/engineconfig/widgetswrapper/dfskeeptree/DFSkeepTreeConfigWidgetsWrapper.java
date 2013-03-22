@@ -23,7 +23,6 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 	private Button saveTreeButton;
 
 	public DFSkeepTreeConfigWidgetsWrapper(Composite parent) {
-		super(parent);
 		saveTreeStructureLabel = new Label(parent, SWT.NONE);
 		saveTreeStructureLabel.setText("Save tree structure:");
 		GridData labelGridData = new GridData();
@@ -53,7 +52,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		super.update(arg0, arg1);
+//		super.update(arg0, arg1);
 		if (arg0 instanceof DFSkeepTreeEngineConfig) {
 			DFSkeepTreeEngineConfig config = (DFSkeepTreeEngineConfig) arg0;
 			saveTreeButton.setSelection(config.isSaveTreeStructure());
@@ -64,7 +63,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 
 	@Override
 	public void setParent(Composite parent) {
-		super.setParent(parent);
+//		super.setParent(parent);
 		saveTreeStructureLabel.setParent(parent);
 		saveTreeButton.setParent(parent);
 		saveActionNamesButton.setParent(parent);
@@ -74,7 +73,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 	@Override
 	public void setConfigController(
 			AbstractEngineConfigController configController) {
-		super.setConfigController(configController);
+//		super.setControllers(pageController, configController);
 		DFSkeepTreeConfigController customConfigController = (DFSkeepTreeConfigController) configController; 
 		saveTreeButton.addSelectionListener(new SaveTreeSelectionListener(customConfigController, saveTreeButton));
 		saveActionNamesButton.addSelectionListener(new SaveActionNamesSelectionListener(customConfigController, saveActionNamesButton));

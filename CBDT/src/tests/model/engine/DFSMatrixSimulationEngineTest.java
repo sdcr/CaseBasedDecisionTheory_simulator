@@ -19,21 +19,21 @@ public class DFSMatrixSimulationEngineTest {
 
 	@Before
 	public void setup() {
-		parameters = new Parameters();
-		ActorAction actionA = new ActorAction("A");
-		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
-
-		ActorAction actionB = new ActorAction("B");
-		actionB.addActionOutcome(new ActorActionOutcome(0.5, 0));
-		actionB.addActionOutcome(new ActorActionOutcome(0.5, 1));
-
-		parameters.addActorAction(actionA);
-		parameters.addActorAction(actionB);
-
-		parameters.setInitialAspirationLevel(100);
-		parameters.setWeightingFactorAlpha(0.5);
-
-		config.setNumberOfRequestedExpectedUtilityValues(50);
+//		parameters = new Parameters();
+//		ActorAction actionA = new ActorAction("A");
+//		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
+//
+//		ActorAction actionB = new ActorAction("B");
+//		actionB.addActionOutcome(new ActorActionOutcome(0.5, 0));
+//		actionB.addActionOutcome(new ActorActionOutcome(0.5, 1));
+//
+//		parameters.addActorAction(actionA);
+//		parameters.addActorAction(actionB);
+//
+//		parameters.setInitialAspirationLevel(100);
+//		parameters.setWeightingFactorAlpha(0.5);
+//
+//		config.setNumberOfRequestedExpectedUtilityValues(50);
 	}
 
 	// @Test

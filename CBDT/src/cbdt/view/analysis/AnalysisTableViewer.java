@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
@@ -73,11 +73,11 @@ public class AnalysisTableViewer extends TableViewer{
 		});
 	}
 
-	public void createOccuranceColumns(AbstractEngineConfiguration config, Result simulationResult) {
+	public void createOccuranceColumns(CommonEngineConfiguration commonConfig, Result simulationResult) {
 		disposeOccuranceColumns();
-		if(config != null){
+		if(commonConfig != null){
 			StageResult firstStageResult = simulationResult.getStageResults().get(0);
-			if (config.isCalculateAbsoluteActionOccurances() && simulationResult.getStageResults()!=null && !simulationResult.getStageResults().isEmpty()) {
+			if (commonConfig.isCalculateAbsoluteActionOccurances() && simulationResult.getStageResults()!=null && !simulationResult.getStageResults().isEmpty()) {
 				for(final ActorAction action : firstStageResult.getAbsoluteActionOccurances().keySet()){
 					TableViewerColumn colAbsOccurances = new TableViewerColumn(this, SWT.NONE);
 					colAbsOccurances.getColumn().setText("Abs. occ.: "+action.getActionName());
@@ -92,7 +92,7 @@ public class AnalysisTableViewer extends TableViewer{
 					absoluteOccuranceColumns.add(colAbsOccurances);
 				}
 			}
-			if (config.isCalculateRelativeActionOccurances() && !simulationResult.getStageResults().isEmpty()) {
+			if (commonConfig.isCalculateRelativeActionOccurances() && !simulationResult.getStageResults().isEmpty()) {
 				Map<ActorAction, Double> relativeActionOccurances = firstStageResult.getRelativeActionOccurances();
 				Set<ActorAction> actorActions = null;
 				if(relativeActionOccurances != null)

@@ -16,22 +16,22 @@ public class DFSkeepTreeSimulationEngineTest {
 	
 	@Before
 	public void setup(){
-		config = new DFSkeepTreeEngineConfig();
-		parameters = new Parameters();
-		ActorAction actionA = new ActorAction("A");
-		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
-		
-		ActorAction actionB = new ActorAction("B");
-		actionB.addActionOutcome(new ActorActionOutcome(0.5, 0));
-		actionB.addActionOutcome(new ActorActionOutcome(0.5, 4));
-		
-		parameters.addActorAction(actionA);
-		parameters.addActorAction(actionB);
-		
-		parameters.setInitialAspirationLevel(100);
-		parameters.setWeightingFactorAlpha(0.5);
-		
-		config.setNumberOfRequestedExpectedUtilityValues(25);
+//		config = new DFSkeepTreeEngineConfig();
+//		parameters = new Parameters();
+//		ActorAction actionA = new ActorAction("A");
+//		actionA.addActionOutcome(new ActorActionOutcome(1, 1));
+//		
+//		ActorAction actionB = new ActorAction("B");
+//		actionB.addActionOutcome(new ActorActionOutcome(0.5, 0));
+//		actionB.addActionOutcome(new ActorActionOutcome(0.5, 4));
+//		
+//		parameters.addActorAction(actionA);
+//		parameters.addActorAction(actionB);
+//		
+//		parameters.setInitialAspirationLevel(100);
+//		parameters.setWeightingFactorAlpha(0.5);
+//		
+//		config.setNumberOfRequestedExpectedUtilityValues(25);
 	}
 	
 	@Test

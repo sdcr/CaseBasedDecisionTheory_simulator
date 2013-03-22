@@ -4,12 +4,13 @@ import java.util.List;
 
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 
 public class BasicInitFactory extends AbstractInitFactory {
 
-	public BasicInitFactory(Parameters parameters, AbstractEngineConfiguration config) {
-		super(parameters, config);
+	public BasicInitFactory(Parameters parameters,
+			CommonEngineConfiguration commonConfig) {
+		super(parameters, commonConfig);
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class BasicInitFactory extends AbstractInitFactory {
 	@Override
 	public NodeContent[][] getInitialContentsMatrix() {
 		int numberOfOutcomes = getNumberOfOutcomes();
-		NodeContent[][] contentsMatrix = new NodeContent[config
+		NodeContent[][] contentsMatrix = new NodeContent[commonConfig
 				.getNumberOfRequestedExpectedUtilityValues() + 1][numberOfOutcomes];
 		for (int i = 0; i < contentsMatrix.length; i++) {
 			for (int j = 0; j < contentsMatrix[i].length; j++) {
@@ -68,7 +69,7 @@ public class BasicInitFactory extends AbstractInitFactory {
 
 	@Override
 	public Double[] getInitExpectedUtilities() {
-		Double[] expectedUtilities = new Double[config
+		Double[] expectedUtilities = new Double[commonConfig
 				.getNumberOfRequestedExpectedUtilityValues()];
 		for (int i = 0; i < expectedUtilities.length; i++)
 			expectedUtilities[i] = (double) 0;

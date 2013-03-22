@@ -9,7 +9,7 @@ import cbdt.control.pages.ParametersPageController;
 import cbdt.control.simulation.EngineContext;
 import cbdt.control.validators.InvalidActorActionException;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.result.Result;
 import cbdt.view.MessageBoxManager;
 
@@ -35,13 +35,12 @@ public class MainController {
 		simulationEngine = new EngineContext(foregroundManager.getShell());
 	}
 
-	public void computeCDBTSimulation(Parameters parameters, AbstractEngineConfiguration engineConfig) {
-		simulationEngine.setEngineConfig(engineConfig);
+	public void computeCDBTSimulation(Parameters parameters, EngineConfigChoice configChoice) {
+		simulationEngine.setEngineConfig(configChoice.getCurrentlyChoosenConfig(), configChoice.getCommonConfig());
 		try {
 			Result result = simulationEngine.performSimulation(parameters);
 			setToForeground(analysisController);
-			analysisController.setConfig(engineConfig);
-			analysisController.setSimulationResult(result);
+			analysisController.setSimulationResult(result, configChoice);
 		} catch (InterruptedException e) {
 			messageBoxManager.showInfoMessage("Computation aborted.");
 			System.gc();

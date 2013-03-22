@@ -10,6 +10,7 @@ import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
@@ -20,10 +21,12 @@ public class NodeShellVisitor extends NodeVisitor {
 	private ActionSelector actionSelector;
 	private ChildNodeContentGenerator childContentGenerator;
 	private IProgressMonitor monitor;
+	private CommonEngineConfiguration commonConfig;
 
-	public NodeShellVisitor(Parameters parameters, DFSkeepTreeEngineConfig config, Result result,
-			NodeContentKeepTreeFactory factory, IProgressMonitor monitor) {
+	public NodeShellVisitor(Parameters parameters, DFSkeepTreeEngineConfig config, CommonEngineConfiguration commonConfig,
+			Result result, NodeContentKeepTreeFactory factory, IProgressMonitor monitor) {
 		this.config = config;
+		this.commonConfig = commonConfig;
 		this.result = result;
 		this.monitor = monitor;
 		actionSelector = new ActionSelector(parameters.getActorActions());
@@ -33,7 +36,7 @@ public class NodeShellVisitor extends NodeVisitor {
 	public void visitRecursively(NodeShell nodeShell, int childrensStage) throws InterruptedException{
 		if(monitor.isCanceled())
 			throw new InterruptedException();
-		if(childrensStage < config.getNumberOfRequestedExpectedUtilityValues()) {
+		if(childrensStage < commonConfig.getNumberOfRequestedExpectedUtilityValues()) {
 			StageResult childrensStageResult = result.getStageResults().get(childrensStage);
 
 			computeChildren(nodeShell, childrensStageResult);
@@ -61,7 +64,7 @@ public class NodeShellVisitor extends NodeVisitor {
 				nodeShell.getChildren().add(new NodeShell(childsContent));
 				childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
 			}
-			if(config.isCalculateAbsoluteActionOccurances() || config.isCalculateRelativeActionOccurances()) {
+			if(commonConfig.isCalculateAbsoluteActionOccurances() || commonConfig.isCalculateRelativeActionOccurances()) {
 				increaseAbsoluteOccurance(childrensStageResult, selectedAction);
 			}
 		}

@@ -22,12 +22,12 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
-		BasicInitFactory factory = new BasicInitFactory(parameters,config);
+		BasicInitFactory factory = new BasicInitFactory(parameters, commonConfig);
 		absoluteActionOccurances = factory.getInitialAbsoluteActionOccurances();
 		Double[] expectedUtilities = factory.getInitExpectedUtilities();
 		NodeContent[][] contentsMatrix = factory.getInitialContentsMatrix();
 		
-		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, config, contentsMatrix, factory, expectedUtilities, absoluteActionOccurances, monitor);
+		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, commonConfig, contentsMatrix, factory, expectedUtilities, absoluteActionOccurances, monitor);
 
 		computeWithVisitor(initResult, visitor);
 		
@@ -52,7 +52,7 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 		int numberOfLeafs = 1;
 		while(stageNumber<15 && numberOfLeafs<15){
 			stageNumber++;
-			if(stageNumber==config.getNumberOfRequestedExpectedUtilityValues()){
+			if(stageNumber==commonConfig.getNumberOfRequestedExpectedUtilityValues()){
 				computeWithProgressShowing = false;
 				break;
 			}

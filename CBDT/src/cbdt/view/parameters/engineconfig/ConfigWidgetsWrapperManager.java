@@ -14,6 +14,7 @@ import cbdt.control.pages.engineconfig.NoEngineConfigControllerException;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
+import cbdt.view.parameters.engineconfig.widgetswrapper.CommonConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.ConfigWidgetsWrapperFactory;
 import cbdt.view.parameters.engineconfig.widgetswrapper.NoWidgetWrapperException;
 
@@ -24,6 +25,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 	private ParametersPageController controller;
 	private ConfigForegroundManager foregroundManager;
 	private ConfigWidgetsWrapperFactory configWidgetsFactory;
+	private CommonConfigWidgetsWrapper commonWidgets;
 
 	public ConfigWidgetsWrapperManager(Composite parametersPage,
 			ParametersPageController controller) {
@@ -35,6 +37,8 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		Label parameterLabel = new Label(parametersPage, SWT.NONE);
 		parameterLabel.setText("Algorithm:");
 		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
+		commonWidgets = new CommonConfigWidgetsWrapper(parametersPage);
+		commonWidgets.setController(controller);
 	}
 
 	public void setConfigChoiceModel(EngineConfigChoice configChoice) {
@@ -43,6 +47,8 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		EngineConfigSelectionListener comboSelectionListener = new EngineConfigSelectionListener(
 				controller);
 
+		commonWidgets.setEngineConfigModel(configChoice.getCommonConfig());
+		
 		for (AbstractEngineConfiguration config : configChoice
 				.getAvailableEngineConfigs()) {
 			try {

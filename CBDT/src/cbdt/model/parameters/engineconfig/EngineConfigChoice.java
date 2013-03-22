@@ -6,9 +6,19 @@ import java.util.Observable;
 
 public class EngineConfigChoice extends Observable {
 
-	List<AbstractEngineConfiguration> availableEngineConfigs;
+	private CommonEngineConfiguration commonConfig;
 
-	AbstractEngineConfiguration choosenConfig;
+	private List<AbstractEngineConfiguration> availableEngineConfigs;
+
+	private AbstractEngineConfiguration choosenConfig;
+
+	public CommonEngineConfiguration getCommonConfig() {
+		return commonConfig;
+	}
+	
+	public void setCommonConfig(CommonEngineConfiguration commonConfig) {
+		this.commonConfig = commonConfig;
+	}
 
 	public EngineConfigChoice() {
 		availableEngineConfigs = new ArrayList<AbstractEngineConfiguration>();

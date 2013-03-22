@@ -7,24 +7,25 @@ import java.util.Map;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 
 public class PostProcessor {
 	
-	public void postProcess(Result result, AbstractEngineConfiguration config){
-		if(config.isCalculateRelativeActionOccurances()){
+	public void postProcess(Result result, AbstractEngineConfiguration config, CommonEngineConfiguration commonConfig){
+		if(commonConfig.isCalculateRelativeActionOccurances()){
 			if(config instanceof DFSmatrixHighPrecEngineConfig){
 				Map<ActorAction, BigDecimal> relActionOccurancesMap = null;
-				for (int i = 0; i < config.getNumberOfRequestedExpectedUtilityValues(); i++) {
+				for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 					relActionOccurancesMap = getBigDecimalRelativeActionOccuranceMaps(result.getStageResults().get(i).getAbsoluteActionOccurances());
 					((BigDecimalStageResult)result.getStageResults().get(i)).setRelativeBigDecimalActionOccurances(relActionOccurancesMap);
 				}
 				
 			} else{
 				Map<ActorAction, Double> relActionOccurancesMap = null;
-				for (int i = 0; i < config.getNumberOfRequestedExpectedUtilityValues(); i++) {
+				for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 					relActionOccurancesMap = getRelativeActionOccuranceMaps(result.getStageResults().get(i).getAbsoluteActionOccurances());
 					result.getStageResults().get(i).setRelativeActionOccurances(relActionOccurancesMap);
 				}

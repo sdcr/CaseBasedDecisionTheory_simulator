@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.result.Result;
 import cbdt.view.LabelFactory;
 
@@ -19,11 +20,9 @@ public class AnalysisPage extends Composite {
 	private Button showTreeButton;
 	private Button exportResultButton;
 	private ShowTreeSelectionListener showTreeSelectionListener;
-	private AnalysisPageController controller;
 
 	public AnalysisPage(Composite parent, int style, AnalysisPageController controller) {
 		super(parent, style);
-		this.controller = controller;
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
@@ -59,10 +58,10 @@ public class AnalysisPage extends Composite {
 		}
 	}
 
-	public void setResultModel(AbstractEngineConfiguration config, Result simulationResult){
-		this.config = config;
+	public void setResultModel(EngineConfigChoice configChoice, Result simulationResult){
+		this.config = configChoice.getCurrentlyChoosenConfig();
 		this.simulationResult = simulationResult;
-		tableViewer.createOccuranceColumns(config, simulationResult);
+		tableViewer.createOccuranceColumns(configChoice.getCommonConfig(), simulationResult);
 		tableViewer.setInput(simulationResult.getStageResults());
 		tableViewer.resizeTable();
 		updateButtons();

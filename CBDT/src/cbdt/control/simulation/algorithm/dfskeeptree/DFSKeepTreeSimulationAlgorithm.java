@@ -21,7 +21,7 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 		NodeContentKeepTree rootContent = factory.getInitRootContent(parameters);
 		NodeShell rootShell = new NodeShell(rootContent);
 
-		NodeShellVisitor nodeShellVisitor = new NodeShellVisitor(parameters, config, result, factory, monitor);
+		NodeShellVisitor nodeShellVisitor = new NodeShellVisitor(parameters, config, commonConfig, result, factory, monitor);
 		
 		List<NodeShell> monitoredStageNodeShells = computeMonitoredStageNodeShells(
 				result, rootShell, nodeShellVisitor);
@@ -44,7 +44,7 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 		monitoredStage = 0;
 		
 		while(stageNodeShells.size()<MIN_NUMBER_OF_MONITOR_WORK_UNITS 
-				&& monitoredStage<config.getNumberOfRequestedExpectedUtilityValues()){
+				&& monitoredStage<commonConfig.getNumberOfRequestedExpectedUtilityValues()){
 			List<NodeShell> childrenShells = new ArrayList<NodeShell>();
 			StageResult childrensStageResult = result.getStageResults().get(monitoredStage);
 			for(NodeShell parentShell : stageNodeShells){

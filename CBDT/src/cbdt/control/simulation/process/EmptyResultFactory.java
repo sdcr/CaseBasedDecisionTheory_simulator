@@ -9,6 +9,7 @@ import java.util.Map;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
@@ -16,37 +17,38 @@ import cbdt.model.result.StageResult;
 
 public class EmptyResultFactory {
 
-	public Result getEmptyResult(AbstractEngineConfiguration config, Parameters parameters) {
+	public Result getEmptyResult(AbstractEngineConfiguration config, 
+			CommonEngineConfiguration commonConfig, Parameters parameters) {
 		Result result = new Result();
 		List<StageResult> stageResults = new ArrayList<StageResult>();
 		result.setStageResults(stageResults);
 		
 		if(config instanceof DFSmatrixHighPrecEngineConfig)
-			setBigDecimalStageResults(config, parameters, stageResults);
+			setBigDecimalStageResults(commonConfig, parameters, stageResults);
 		else
-			setNonBigDecimalStageResults(config, parameters, stageResults);
+			setNonBigDecimalStageResults(commonConfig, parameters, stageResults);
 		return result;
 	}
 
-	private void setBigDecimalStageResults(AbstractEngineConfiguration config,
+	private void setBigDecimalStageResults(CommonEngineConfiguration commonConfig,
 			Parameters parameters, List<StageResult> stageResults) {
-		for (int i = 0; i < config.getNumberOfRequestedExpectedUtilityValues(); i++) {
+		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			BigDecimalStageResult stageResult = new BigDecimalStageResult();
 			stageResult.setStage(i);
 			stageResult.setExpectedBigDecimalUtility(new BigDecimal(0));
-			if(config.isCalculateRelativeActionOccurances() || config.isCalculateAbsoluteActionOccurances())
+			if(commonConfig.isCalculateRelativeActionOccurances() || commonConfig.isCalculateAbsoluteActionOccurances())
 				stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
 			stageResults.add(stageResult);
 		}
 	}
 
-	private void setNonBigDecimalStageResults(AbstractEngineConfiguration config,
+	private void setNonBigDecimalStageResults(CommonEngineConfiguration commonConfig,
 			Parameters parameters, List<StageResult> stageResults) {
-		for (int i = 0; i < config.getNumberOfRequestedExpectedUtilityValues(); i++) {
+		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			StageResult stageResult = new StageResult();
 			stageResult.setStage(i);
 			stageResult.setExpectedUtility(0);
-			if(config.isCalculateRelativeActionOccurances() || config.isCalculateAbsoluteActionOccurances())
+			if(commonConfig.isCalculateRelativeActionOccurances() || commonConfig.isCalculateAbsoluteActionOccurances())
 				stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
 			stageResults.add(stageResult);
 		}

@@ -14,12 +14,12 @@ public class DFSHighPrecMatrixSimulationAlgorithm extends DFSMatrixSimulationAlg
 	
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
-		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters,config);
+		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters, commonConfig);
 		absoluteActionOccurances = factory.getInitialAbsoluteActionOccurances();
 		BigDecimal[] expectedUtilities = (BigDecimal[])factory.getInitExpectedUtilities();
 		BigDecimalNodeContent[][] contentsMatrix = (BigDecimalNodeContent[][]) factory.getInitialContentsMatrix();
 		
-		BigDecimalVirtualNodeContentVisitor visitor = new BigDecimalVirtualNodeContentVisitor(parameters, config, contentsMatrix, factory, expectedUtilities, absoluteActionOccurances, monitor);
+		BigDecimalVirtualNodeContentVisitor visitor = new BigDecimalVirtualNodeContentVisitor(parameters, commonConfig, contentsMatrix, factory, expectedUtilities, absoluteActionOccurances, monitor);
 
 		computeWithVisitor(initResult, visitor);
 		

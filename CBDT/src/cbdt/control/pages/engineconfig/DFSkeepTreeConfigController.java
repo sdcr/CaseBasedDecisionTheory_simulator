@@ -3,13 +3,12 @@ package cbdt.control.pages.engineconfig;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
-public class DFSkeepTreeConfigController extends AbstractEngineConfigController {
+public class DFSkeepTreeConfigController implements AbstractEngineConfigController {
 
 	private DFSkeepTreeEngineConfig config;
 
 	public void setEngineConfigModel(AbstractEngineConfiguration engineConfig) {
 		config = (DFSkeepTreeEngineConfig) engineConfig;
-		super.setEngineConfigModel(config);
 	}
 	
 	public void setSaveTree(boolean selection) {

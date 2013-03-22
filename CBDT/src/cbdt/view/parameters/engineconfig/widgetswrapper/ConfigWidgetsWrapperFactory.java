@@ -33,8 +33,7 @@ public class ConfigWidgetsWrapperFactory {
 		}
 		if (config instanceof DFSmatrixEngineConfig) {
 			if (matrixConfigWidgetsWrapper == null)
-				matrixConfigWidgetsWrapper = new DFSmatrixConfigWidgetsWrapper(
-						parent);
+				matrixConfigWidgetsWrapper = new DFSmatrixConfigWidgetsWrapper();
 //			matrixConfigWidgetsWrapper.setParent(parent);
 			return matrixConfigWidgetsWrapper;
 		}

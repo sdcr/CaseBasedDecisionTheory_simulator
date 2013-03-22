@@ -6,16 +6,16 @@ import cbdt.control.simulation.algorithm.INodeContent;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 
 public abstract class AbstractInitFactory {
 
 	protected Parameters parameters;
-	protected AbstractEngineConfiguration config;
+	protected CommonEngineConfiguration commonConfig;
 	
-	public AbstractInitFactory(Parameters parameters, AbstractEngineConfiguration config) {
+	public AbstractInitFactory(Parameters parameters, CommonEngineConfiguration commonConfig) {
 		this.parameters = parameters;
-		this.config = config;
+		this.commonConfig = commonConfig;
 	}
 	
 	public abstract INodeContent[][] getInitialContentsMatrix();
@@ -26,8 +26,8 @@ public abstract class AbstractInitFactory {
 	
 	public BigDecimal[][] getInitialAbsoluteActionOccurances() {
 		int numberOfActorActions = parameters.getActorActions().size();
-		BigDecimal[][] absoluteActionOccurances = new BigDecimal[config.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
-		for(int i=0; i<config.getNumberOfRequestedExpectedUtilityValues(); i++){
+		BigDecimal[][] absoluteActionOccurances = new BigDecimal[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
+		for(int i=0; i<commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++){
 			for (int j=0; j<numberOfActorActions; j++) {
 				absoluteActionOccurances[i][j] = new BigDecimal(0);
 			}

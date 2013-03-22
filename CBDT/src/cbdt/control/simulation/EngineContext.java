@@ -16,6 +16,7 @@ import cbdt.control.validators.InvalidActorActionException;
 import cbdt.control.validators.ParameterValidator;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
@@ -32,12 +33,15 @@ public class EngineContext {
 
 	private AbstractEngineConfiguration engineConfig;
 	
+	private CommonEngineConfiguration commonConfig;
+	
 	public EngineContext(Shell shell) {
 		this.shell = shell;
 	}
 
-	public void setEngineConfig(AbstractEngineConfiguration engineConfig){
+	public void setEngineConfig(AbstractEngineConfiguration engineConfig, CommonEngineConfiguration commonConfig){
 		this.engineConfig = engineConfig;
+		this.commonConfig = commonConfig;
 	}
 	
 	public Result performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException, InvalidActorActionException{
@@ -45,7 +49,7 @@ public class EngineContext {
 		parameterValidator.checkValidity(parameters);
 
 		EmptyResultFactory resultFactory = new EmptyResultFactory();
-		Result result = resultFactory.getEmptyResult(engineConfig, parameters);
+		Result result = resultFactory.getEmptyResult(engineConfig, commonConfig, parameters);
 		
 		SimulationAlgorithm algorithm = determineAlgorithm();
 		algorithm.setParameters(parameters);
@@ -54,7 +58,7 @@ public class EngineContext {
 		progressDialog.run(true, true, runnable);
 
 		PostProcessor postProcessor = new PostProcessor();
-		postProcessor.postProcess(result, engineConfig);
+		postProcessor.postProcess(result, engineConfig, commonConfig);
 		
 		return result;
 	}
@@ -76,6 +80,8 @@ public class EngineContext {
 			matrixHighPrecAlgorithm.setMatrixConfig((DFSmatrixHighPrecEngineConfig) engineConfig);
 			algorithm = matrixHighPrecAlgorithm;
 		}
+		if(algorithm != null)
+			algorithm.setCommonConfig(commonConfig);
 		return algorithm;
 	}
 }

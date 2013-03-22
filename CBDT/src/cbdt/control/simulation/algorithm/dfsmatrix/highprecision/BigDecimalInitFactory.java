@@ -7,19 +7,19 @@ import cbdt.control.simulation.algorithm.INodeContent;
 import cbdt.control.simulation.algorithm.dfsmatrix.AbstractInitFactory;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 
 public class BigDecimalInitFactory extends AbstractInitFactory {
 
 	public BigDecimalInitFactory(Parameters parameters,
-			AbstractEngineConfiguration config) {
-		super(parameters, config);
+			CommonEngineConfiguration commonConfig) {
+		super(parameters, commonConfig);
 	}
 
 	@Override
 	public INodeContent[][] getInitialContentsMatrix() {
 		int numberOfOutcomes = getNumberOfOutcomes();
-		BigDecimalNodeContent[][] contentsMatrix = new BigDecimalNodeContent[config
+		BigDecimalNodeContent[][] contentsMatrix = new BigDecimalNodeContent[commonConfig
 				.getNumberOfRequestedExpectedUtilityValues() + 1][numberOfOutcomes];
 		for (int i = 0; i < contentsMatrix.length; i++) {
 			for (int j = 0; j < contentsMatrix[i].length; j++) {
@@ -57,7 +57,7 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 
 	@Override
 	public Object[] getInitExpectedUtilities() {
-		BigDecimal[] expectedUtilities = new BigDecimal[config
+		BigDecimal[] expectedUtilities = new BigDecimal[commonConfig
 				.getNumberOfRequestedExpectedUtilityValues()];
 		for (int i = 0; i < expectedUtilities.length; i++)
 			expectedUtilities[i] = new BigDecimal(0);

@@ -22,7 +22,6 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 	private IntegerFormatChecker integerFormatChecker;
 
 	public DFSmatrixHighPrecisionConfigWidgetsWrapper(Composite parent) {
-		super(parent);
 		reqDecimalPlacesLabel = new Label(parent, SWT.NONE);
 		reqDecimalPlacesLabel.setText("Precision in decimal places:");
 		GridData reqDecPlacesLabelGridData = new GridData();
@@ -46,7 +45,6 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		super.update(arg0, arg1);
 		if (arg0 instanceof DFSmatrixHighPrecEngineConfig) {
 			DFSmatrixHighPrecEngineConfig config = (DFSmatrixHighPrecEngineConfig) arg0;
 			requiredDecimalPlacesComposite.getText().setText(
@@ -56,15 +54,12 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 
 	@Override
 	public void setParent(Composite parent) {
-		super.setParent(parent);
 		reqDecimalPlacesLabel.setParent(parent);
 		requiredDecimalPlacesComposite.setParent(parent);
 	}
 
 	@Override
-	public void setConfigController(
-			AbstractEngineConfigController configController) {
-		super.setConfigController(configController);
+	public void setConfigController(AbstractEngineConfigController configController) {
 		DFSmatrixHighPrecisionConfigController customController = 
 				(DFSmatrixHighPrecisionConfigController)configController;
 		requiredDecimalPlacesComposite.getText().addModifyListener(
