@@ -1,10 +1,12 @@
 package cbdt.control.simulation.algorithm.dfskeeptree;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import cbdt.control.simulation.algorithm.Visitor;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
@@ -12,7 +14,7 @@ import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
-public class NodeShellVisitor {
+public class NodeShellVisitor extends Visitor {
 	private DFSkeepTreeEngineConfig config;
 	private Result result;
 	private ActionSelector actionSelector;
@@ -20,7 +22,7 @@ public class NodeShellVisitor {
 	private IProgressMonitor monitor;
 
 	public NodeShellVisitor(Parameters parameters, DFSkeepTreeEngineConfig config, Result result,
-			NodeContentFactory factory, IProgressMonitor monitor) {
+			NodeContentKeepTreeFactory factory, IProgressMonitor monitor) {
 		this.config = config;
 		this.result = result;
 		this.monitor = monitor;
@@ -67,10 +69,9 @@ public class NodeShellVisitor {
 	}
 
 	private void increaseAbsoluteOccurance(StageResult stageResult, ActorAction selectedAction) {
-		Map<ActorAction, Integer> absoluteActionOccurances = stageResult
-				.getAbsoluteActionOccurances();
+		Map<ActorAction, BigDecimal> absoluteActionOccurances = stageResult.getAbsoluteActionOccurances();
 		absoluteActionOccurances.put(selectedAction,
-				absoluteActionOccurances.get(selectedAction) + 1);
+				absoluteActionOccurances.get(selectedAction).add(big_one, mathContext));
 	}
 
 	private void setContentAccordingToConfig(NodeShellKeepTree nodeShell) {

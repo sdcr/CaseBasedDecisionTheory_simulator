@@ -3,6 +3,7 @@ package cbdt.control.persistence.results;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,7 +24,7 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 		outWriter = new BufferedWriter(new FileWriter(filepath));
 		outWriter.write("Stage;Expected utility");
 
-		Map<ActorAction, Integer> firstAbsOccurnces = null;
+		Map<ActorAction, BigDecimal> firstAbsOccurnces = null;
 		Map<ActorAction, Double> firstRelOccurnces = null;
 
 		List<StageResult> stageResults = result.getStageResults();
@@ -66,9 +67,9 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 			outWriter.write(stageResult.getStage() + ";"
 					+ stageResult.getExpectedUtility());
 			if (firstAbsOccurnces != null) {
-				Set<Entry<ActorAction, Integer>> entries = stageResult
+				Set<Entry<ActorAction, BigDecimal>> entries = stageResult
 						.getAbsoluteActionOccurances().entrySet();
-				for (Entry<ActorAction, Integer> entry : entries) {
+				for (Entry<ActorAction, BigDecimal> entry : entries) {
 					outWriter.write(";" + entry.getValue());
 				}
 			}

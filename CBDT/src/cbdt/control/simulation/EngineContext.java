@@ -6,7 +6,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
-import cbdt.control.simulation.algorithm.dfskeeptree.DFStreeSimulationAlgorithm;
+import cbdt.control.simulation.algorithm.dfskeeptree.DFSKeepTreeSimulationAlgorithm;
 import cbdt.control.simulation.process.ComputationRunnableWithProgress;
 import cbdt.control.simulation.process.EmptyResultFactory;
 import cbdt.control.simulation.process.PostProcessor;
@@ -58,7 +58,7 @@ public class EngineContext {
 	private SimulationAlgorithm determineAlgorithm() {
 		SimulationAlgorithm algorithm = null;
 		if(engineConfig instanceof DFSkeepTreeEngineConfig){
-			DFStreeSimulationAlgorithm keepTreeAlgorithm = new DFStreeSimulationAlgorithm();
+			DFSKeepTreeSimulationAlgorithm keepTreeAlgorithm = new DFSKeepTreeSimulationAlgorithm();
 			keepTreeAlgorithm.setConfig((DFSkeepTreeEngineConfig) engineConfig);
 			algorithm = keepTreeAlgorithm;
 		}

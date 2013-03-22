@@ -8,7 +8,7 @@ import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
-public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
+public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 
 	private static final int MIN_NUMBER_OF_MONITOR_WORK_UNITS = 10;
 	private DFSkeepTreeEngineConfig config;
@@ -17,7 +17,7 @@ public class DFStreeSimulationAlgorithm extends SimulationAlgorithm {
 	
 	@Override
 	public void computeResult(Result result) throws InterruptedException{
-		NodeContentFactory factory = new NodeContentFactory();
+		NodeContentKeepTreeFactory factory = new NodeContentKeepTreeFactory();
 		NodeContentKeepTree rootContent = factory.getInitRootContent(parameters);
 		NodeShellKeepTree rootShell = new NodeShellKeepTree(rootContent);
 

@@ -1,4 +1,4 @@
-package cbdt.control.simulation.algorithm;
+package cbdt.control.simulation.algorithm.dfsmatrix;
 
 
 public class NodeContent {

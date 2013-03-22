@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.simulation.algorithm.dfsmatrix.DFSallAllMatrixStyleSimulationEngine;
+import cbdt.control.simulation.algorithm.dfsmatrix.DFSMatrixSimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
@@ -52,34 +52,34 @@ public class DFSMatrixSimulationEngineTest {
 
 	@Test
 	public void computeExpectedUtilitiesTest() {
-		MathContext mathContext = new MathContext(30);
-		DFSallAllMatrixStyleSimulationEngine engine = new DFSallAllMatrixStyleSimulationEngine();
-		double[] computedUtilities = engine
-				.computeExpectedUtilities(parameters);
-		for (double expectedUtility : computedUtilities) {
-			System.out.println(expectedUtility);
-		}
-		DecimalFormat df = new DecimalFormat("#.#####");
-		for (BigDecimal[] stageChoosenActionNumbers : engine
-				.getChoosenActionNumbers()) {
-			BigDecimal sum = new BigDecimal(0);
-			for (int i = 0; i < stageChoosenActionNumbers.length; i++) {
-				System.out.print(parameters.getActorActions().get(i)
-						.getActionName()
-						+ ": " + stageChoosenActionNumbers[i] + ", ");
-				sum = sum.add(stageChoosenActionNumbers[i], mathContext);
-			}
-			System.out.print("Anteile: ");
-			for (int i = 0; i < stageChoosenActionNumbers.length; i++) {
-				BigDecimal anteil = stageChoosenActionNumbers[i].divide(sum,
-						mathContext);
-				System.out.print(parameters.getActorActions().get(i)
-						.getActionName()
-						+ ": " + df.format(anteil) + ", ");
-			}
-
-			System.out.println();
-		}
+//		MathContext mathContext = new MathContext(30);
+//		DFSMatrixSimulationAlgorithm engine = new DFSMatrixSimulationAlgorithm();
+//		double[] computedUtilities = engine
+//				.computeExpectedUtilities(parameters);
+//		for (double expectedUtility : computedUtilities) {
+//			System.out.println(expectedUtility);
+//		}
+//		DecimalFormat df = new DecimalFormat("#.#####");
+//		for (BigDecimal[] stageChoosenActionNumbers : engine
+//				.getChoosenActionNumbers()) {
+//			BigDecimal sum = new BigDecimal(0);
+//			for (int i = 0; i < stageChoosenActionNumbers.length; i++) {
+//				System.out.print(parameters.getActorActions().get(i)
+//						.getActionName()
+//						+ ": " + stageChoosenActionNumbers[i] + ", ");
+//				sum = sum.add(stageChoosenActionNumbers[i], mathContext);
+//			}
+//			System.out.print("Anteile: ");
+//			for (int i = 0; i < stageChoosenActionNumbers.length; i++) {
+//				BigDecimal anteil = stageChoosenActionNumbers[i].divide(sum,
+//						mathContext);
+//				System.out.print(parameters.getActorActions().get(i)
+//						.getActionName()
+//						+ ": " + df.format(anteil) + ", ");
+//			}
+//
+//			System.out.println();
+//		}
 		// List<List<Character>> choosenActions = engine.getChoosenActions();
 		// for(int i=0; i<5; i++){
 		// List<Character> stageActions = choosenActions.get(i);

@@ -78,7 +78,7 @@ public class AnalysisTableViewer extends TableViewer{
 						@Override
 						public String getText(Object element) {
 							StageResult stageResult = (StageResult) element;
-							return Integer.toString(stageResult.getAbsoluteActionOccurances().get(action));
+							return stageResult.getAbsoluteActionOccurances().get(action).toString();
 						}
 					});
 					absoluteOccuranceColumns.add(colAbsOccurances);

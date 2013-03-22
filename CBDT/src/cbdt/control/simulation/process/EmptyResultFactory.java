@@ -1,5 +1,6 @@
 package cbdt.control.simulation.process;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +30,10 @@ public class EmptyResultFactory {
 		return result;
 	}
 	
-	private Map<ActorAction, Integer> getEmptyAbsoluteActionOccuranceMap(Parameters parameters) {
-		Map<ActorAction, Integer> occurancesMap = new HashMap<ActorAction, Integer>();
+	private Map<ActorAction, BigDecimal> getEmptyAbsoluteActionOccuranceMap(Parameters parameters) {
+		Map<ActorAction, BigDecimal> occurancesMap = new HashMap<ActorAction, BigDecimal>();
 		for(ActorAction action : parameters.getActorActions()){
-			occurancesMap.put(action, 0);
+			occurancesMap.put(action, new BigDecimal(0));
 		}
 		return occurancesMap;
 	}

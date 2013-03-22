@@ -1,5 +1,6 @@
 package cbdt.model.result;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import cbdt.model.parameters.ActorAction;
@@ -10,7 +11,7 @@ public class StageResult {
 	
 	private double expectedUtility;
 	
-	private Map<ActorAction, Integer> absoluteActionOccurances;
+	private Map<ActorAction, BigDecimal> absoluteActionOccurances;
 	
 	private Map<ActorAction, Double> relativeActionOccurances;
 
@@ -22,11 +23,11 @@ public class StageResult {
 		this.expectedUtility = expectedUtility;
 	}
 
-	public Map<ActorAction, Integer> getAbsoluteActionOccurances() {
+	public Map<ActorAction, BigDecimal> getAbsoluteActionOccurances() {
 		return absoluteActionOccurances;
 	}
 
-	public void setAbsoluteActionOccurances(Map<ActorAction, Integer> absoluteActionOccurances) {
+	public void setAbsoluteActionOccurances(Map<ActorAction, BigDecimal> absoluteActionOccurances) {
 		this.absoluteActionOccurances = absoluteActionOccurances;
 	}
 

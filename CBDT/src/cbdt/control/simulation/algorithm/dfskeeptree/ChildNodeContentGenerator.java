@@ -5,10 +5,10 @@ import cbdt.model.parameters.ActorActionOutcome;
 
 public class ChildNodeContentGenerator {
 
-	private NodeContentFactory factory;
+	private NodeContentKeepTreeFactory factory;
 	private double aspirationLevelDiscountFactor;
 	
-	public ChildNodeContentGenerator(double aspirationLevelDiscountFactor, NodeContentFactory factory) {
+	public ChildNodeContentGenerator(double aspirationLevelDiscountFactor, NodeContentKeepTreeFactory factory) {
 		this.aspirationLevelDiscountFactor = aspirationLevelDiscountFactor;
 		this.factory = factory;
 	}

@@ -6,7 +6,7 @@ import java.util.Map;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 
-public class NodeContentFactory {
+public class NodeContentKeepTreeFactory {
 	
 	public NodeContentKeepTree getInitRootContent(Parameters parameters) {
 		NodeContentKeepTree rootContent = new NodeContentKeepTree();

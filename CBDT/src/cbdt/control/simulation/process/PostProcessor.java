@@ -1,5 +1,7 @@
 package cbdt.control.simulation.process;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,16 +22,16 @@ public class PostProcessor {
 	}
 	
 	private Map<ActorAction, Double> getRelativeActionOccuranceMaps(
-			Map<ActorAction, Integer> absActionOccurancesMap) {
+			Map<ActorAction, BigDecimal> absActionOccurancesMap) {
 		Map<ActorAction, Double> relativeOccuranceMap = new HashMap<ActorAction, Double>();
-		int totalOccurances = 0;
-		for (int occurances : absActionOccurancesMap.values()) {
-			totalOccurances += occurances;
+		MathContext mathContext = new MathContext(30);
+		BigDecimal totalOccurances = new BigDecimal(0);
+		for (BigDecimal occurances : absActionOccurancesMap.values()) {
+			totalOccurances = totalOccurances.add(occurances, mathContext);
 		}
 		for (ActorAction action : absActionOccurancesMap.keySet()) {
 			relativeOccuranceMap.put(action,
-					(double) absActionOccurancesMap.get(action)
-							/ totalOccurances);
+					absActionOccurancesMap.get(action).divide(totalOccurances, mathContext).doubleValue());
 		}
 		return relativeOccuranceMap;
 	}
