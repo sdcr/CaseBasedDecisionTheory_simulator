@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfskeeptree.DFSKeepTreeSimulationAlgorithm;
+import cbdt.control.simulation.algorithm.dfsmatrix.DFSMatrixSimulationAlgorithm;
 import cbdt.control.simulation.process.ComputationRunnableWithProgress;
 import cbdt.control.simulation.process.EmptyResultFactory;
 import cbdt.control.simulation.process.PostProcessor;
@@ -15,6 +16,7 @@ import cbdt.control.validators.ParameterValidator;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 import cbdt.model.result.Result;
 
 /**
@@ -61,6 +63,11 @@ public class EngineContext {
 			DFSKeepTreeSimulationAlgorithm keepTreeAlgorithm = new DFSKeepTreeSimulationAlgorithm();
 			keepTreeAlgorithm.setConfig((DFSkeepTreeEngineConfig) engineConfig);
 			algorithm = keepTreeAlgorithm;
+		}
+		if(engineConfig instanceof DFSmatrixEngineConfig){
+			DFSMatrixSimulationAlgorithm matrixAlgorithm = new DFSMatrixSimulationAlgorithm();
+			matrixAlgorithm.setConfig((DFSmatrixEngineConfig) engineConfig);
+			algorithm = matrixAlgorithm;
 		}
 		return algorithm;
 	}

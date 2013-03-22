@@ -43,7 +43,7 @@ public class MainController {
 			analysisController.setConfig(engineConfig);
 			analysisController.setSimulationResult(result);
 		} catch (InterruptedException e) {
-			messageBoxManager.showInfoMessage(e.getMessage());
+			messageBoxManager.showInfoMessage("Computation aborted.");
 			System.gc();
 		} catch (InvocationTargetException e) {
 			if(e.getCause() instanceof OutOfMemoryError){
@@ -57,6 +57,7 @@ public class MainController {
 			e.printStackTrace();
 		} catch (RuntimeException e){
 			messageBoxManager.showErrorMessage(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

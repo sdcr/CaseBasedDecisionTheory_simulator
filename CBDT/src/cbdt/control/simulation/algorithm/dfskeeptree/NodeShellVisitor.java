@@ -32,7 +32,7 @@ public class NodeShellVisitor extends Visitor {
 
 	public void visitRecursively(NodeShellKeepTree nodeShell, int childrensStage) throws InterruptedException{
 		if(monitor.isCanceled())
-			throw new InterruptedException("Computation aborted.");
+			throw new InterruptedException();
 		if(childrensStage < config.getNumberOfRequestedExpectedUtilityValues()) {
 			StageResult childrensStageResult = result.getStageResults().get(childrensStage);
 

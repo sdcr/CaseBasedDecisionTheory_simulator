@@ -25,7 +25,7 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 		
 		List<NodeShellKeepTree> monitoredStageNodeShells = computeMonitoredStageNodeShells(
 				result, rootShell, nodeShellVisitor);
-		monitor.beginTask("Computation with DFSkeepTree", monitoredStageNodeShells.size());
+		monitor.beginTask("Computation with DFS and tree datastructure", monitoredStageNodeShells.size());
 		
 		for(NodeShellKeepTree nodeShell : monitoredStageNodeShells){
 			nodeShellVisitor.visitRecursively(nodeShell, monitoredStage);
