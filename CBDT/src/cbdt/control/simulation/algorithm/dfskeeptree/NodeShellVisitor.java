@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import cbdt.control.simulation.algorithm.Visitor;
+import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
@@ -14,7 +14,7 @@ import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
-public class NodeShellVisitor extends Visitor {
+public class NodeShellVisitor extends NodeVisitor {
 	private DFSkeepTreeEngineConfig config;
 	private Result result;
 	private ActionSelector actionSelector;
@@ -30,7 +30,7 @@ public class NodeShellVisitor extends Visitor {
 		childContentGenerator = new ChildNodeContentGenerator(parameters.getWeightingFactorAlpha(), factory);
 	}
 
-	public void visitRecursively(NodeShellKeepTree nodeShell, int childrensStage) throws InterruptedException{
+	public void visitRecursively(NodeShell nodeShell, int childrensStage) throws InterruptedException{
 		if(monitor.isCanceled())
 			throw new InterruptedException();
 		if(childrensStage < config.getNumberOfRequestedExpectedUtilityValues()) {
@@ -39,7 +39,7 @@ public class NodeShellVisitor extends Visitor {
 			computeChildren(nodeShell, childrensStageResult);
 			
 			setContentAccordingToConfig(nodeShell);
-			for(NodeShellKeepTree child : nodeShell.getChildren()){
+			for(NodeShell child : nodeShell.getChildren()){
 				this.visitRecursively(child, childrensStage+1);
 			}
 		}
@@ -48,7 +48,7 @@ public class NodeShellVisitor extends Visitor {
 			nodeShell.setChildren(null);
 	}
 	
-	public void computeChildren(NodeShellKeepTree nodeShell, StageResult childrensStageResult) {
+	public void computeChildren(NodeShell nodeShell, StageResult childrensStageResult) {
 		List<ActorAction> selectedActions = actionSelector.computeSelectedActions(nodeShell.getContent());
 		double multiActionProbability = 1.0 / selectedActions.size();
 		
@@ -58,7 +58,7 @@ public class NodeShellVisitor extends Visitor {
 			for(ActorActionOutcome outcome : selectedAction.getActionOutcomes()){
 				NodeContentKeepTree childsContent = childContentGenerator.computeChildContent( 
 						nodeShell.getContent(), multiActionProbability, outcome);					
-				nodeShell.getChildren().add(new NodeShellKeepTree(childsContent));
+				nodeShell.getChildren().add(new NodeShell(childsContent));
 				childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
 			}
 			if(config.isCalculateAbsoluteActionOccurances() || config.isCalculateRelativeActionOccurances()) {
@@ -74,7 +74,7 @@ public class NodeShellVisitor extends Visitor {
 				absoluteActionOccurances.get(selectedAction).add(big_one, mathContext));
 	}
 
-	private void setContentAccordingToConfig(NodeShellKeepTree nodeShell) {
+	private void setContentAccordingToConfig(NodeShell nodeShell) {
 		if (config.isSaveActionNames() || config.isSaveAspirationLevels() || config.isSaveTreeStructure()) {
 			nodeShell.getContent().setNumberOfOccurances(null);
 			nodeShell.getContent().setSumOfUtilities(null);

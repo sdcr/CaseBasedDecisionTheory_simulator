@@ -4,32 +4,32 @@ import java.math.BigDecimal;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import cbdt.control.simulation.algorithm.Visitor;
+import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 
-public class VirtualNodeContentVisitor extends Visitor {
+public class VirtualNodeContentVisitor extends NodeVisitor {
 
 	private NodeContent[][] contentsMatrix;
-	private double[] expectedUtilities;
-	private int[] selectedActionsIndices;
-	private ActorActionOutcome[][] outcomeMatrix;
+	private Double[] expectedUtilities;
+	protected int[] selectedActionsIndices;
+	protected ActorActionOutcome[][] outcomeMatrix;
 	
-	private int numberOfLeafs;
+	protected int numberOfLeafs;
 
-	private ActionSelector actionSelector;
-	private AbstractEngineConfiguration config;
-	private BigDecimal[][] absoluteActionOccurances;
+	protected ActionSelector actionSelector;
+	protected AbstractEngineConfiguration config;
+	protected BigDecimal[][] absoluteActionOccurances;
 	private ChildNodeContentGenerator childContentGenerator;
-	private IProgressMonitor monitor;
+	protected IProgressMonitor monitor;
 	
-	private Integer leafCountStage;
-	private Integer progessStage;
+	protected Integer leafStage;
+	protected Integer progessStage;
 
 	public VirtualNodeContentVisitor(Parameters parameters,
 			AbstractEngineConfiguration config, NodeContent[][] contentsMatrix,
-			InitFactory factory, double[] emptyExpectedUtilities,
+			AbstractInitFactory factory, Double[] emptyExpectedUtilities,
 			BigDecimal[][] absoluteActionOccurances, IProgressMonitor monitor) {
 		this.config = config;
 		this.contentsMatrix = contentsMatrix;
@@ -45,8 +45,8 @@ public class VirtualNodeContentVisitor extends Visitor {
 				parameters.getWeightingFactorAlpha());
 	}
 	
-	public int calculteNumberOfLeafs(Integer leafCountStage) throws InterruptedException{
-		this.leafCountStage = leafCountStage;
+	public int calculteNumberOfLeafs(Integer leafStage) throws InterruptedException{
+		this.leafStage = leafStage;
 		this.progessStage = null;
 		numberOfLeafs = 0;
 		
@@ -56,14 +56,14 @@ public class VirtualNodeContentVisitor extends Visitor {
 	
 	public void visitRecursively(int stage, int index, Integer progessStage) throws InterruptedException{
 		this.progessStage = progessStage;
-		this.leafCountStage = null;
+		this.leafStage = null;
 		visitRecursively(stage, index);
 	}
 	
-	private void visitRecursively(int stage, int index) throws InterruptedException {
+	protected void visitRecursively(int stage, int index) throws InterruptedException {
 		if(monitor.isCanceled())
 			throw new InterruptedException();
-		if(leafCountStage!=null && leafCountStage==stage)
+		if(leafStage!=null && leafStage==stage)
 			numberOfLeafs++;
 		else if (stage < config.getNumberOfRequestedExpectedUtilityValues()) {
 			NodeContent parentContent = contentsMatrix[stage][index];
@@ -77,7 +77,7 @@ public class VirtualNodeContentVisitor extends Visitor {
 			for (int i = 0; i < numberOfSelectedActions; i++) {
 				int selectedActionIndex = selectedActionsIndices[i];
 
-				if (leafCountStage==null && (config.isCalculateAbsoluteActionOccurances()
+				if (leafStage==null && (config.isCalculateAbsoluteActionOccurances()
 						|| config.isCalculateRelativeActionOccurances()))
 					absoluteActionOccurances[stage][selectedActionIndex] = absoluteActionOccurances[stage][selectedActionIndex]
 							.add(big_one, mathContext);
@@ -87,14 +87,14 @@ public class VirtualNodeContentVisitor extends Visitor {
 							childContent, multiActionProbability,
 							selectedActionIndex, outcomeIndex);
 
-					if(leafCountStage==null){
+					if(leafStage==null){
 						childrensExpectedUtilitySum += childContent.probabilityProduct
 								* outcomeMatrix[selectedActionIndex][outcomeIndex].getUtility();
 					}
 					childIndex++;
 				}
 			}
-			if(leafCountStage==null)
+			if(leafStage==null)
 				expectedUtilities[stage] += childrensExpectedUtilitySum;
 
 			for (int i = 0; i < childIndex; i++) {
@@ -106,7 +106,7 @@ public class VirtualNodeContentVisitor extends Visitor {
 
 	}
 
-	private int getNumberOfSelectedActions() {
+	protected int getNumberOfSelectedActions() {
 		int numberOfSelectedActions = 0;
 		for (int i = 0; i < selectedActionsIndices.length; i++) {
 			if (selectedActionsIndices[i] > -1)

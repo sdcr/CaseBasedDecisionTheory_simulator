@@ -1,21 +1,23 @@
 package cbdt.control.simulation.algorithm.dfsmatrix;
 
+import cbdt.control.simulation.algorithm.INodeContent;
+
 public class ActionSelector {
 
-	private int numberOfActorActions;
+	protected int numberOfActorActions;
 	
 	public ActionSelector(int numberOfActorActions) {
 		this.numberOfActorActions = numberOfActorActions;
 	}
 	
-	public void computeSelectedActions(int[] selectedActionsIndices, NodeContent content) {
+	public void computeSelectedActions(int[] selectedActionsIndices, INodeContent content) {
 		for(int i=0; i<selectedActionsIndices.length; i++)
 			selectedActionsIndices[i]=-1;
 		int j=0;
 		double maxCumulativePerformance = Double.NEGATIVE_INFINITY;
 		
 		for(int actorActionIndex=0; actorActionIndex<numberOfActorActions; actorActionIndex++){
-			double cumulativePerformance = computeCumulativePerformance(actorActionIndex, content);
+			double cumulativePerformance = computeCumulativePerformance(actorActionIndex, (NodeContent)content);
 			if(cumulativePerformance > maxCumulativePerformance){
 				for(int i=0; i<selectedActionsIndices.length; i++)
 					selectedActionsIndices[i]=-1;

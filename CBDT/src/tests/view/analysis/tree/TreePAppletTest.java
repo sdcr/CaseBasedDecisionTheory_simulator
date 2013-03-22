@@ -1,24 +1,14 @@
 package tests.view.analysis.tree;
 
-import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.simulation.algorithm.NodeShell;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 import cbdt.model.parameters.ActorAction;
-import cbdt.view.analysis.AnalysisPageReference;
-import cbdt.view.analysis.tree.TreePApplet;
 
 public class TreePAppletTest {
 	

@@ -2,6 +2,8 @@ package cbdt.view.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -15,6 +17,7 @@ import org.eclipse.swt.widgets.Table;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
@@ -39,10 +42,10 @@ public class AnalysisTableViewer extends TableViewer{
 		absoluteOccuranceColumns = new ArrayList<TableViewerColumn>();
 		relativeOccuranceColumns = new ArrayList<TableViewerColumn>();
 		
-		createEUColumns();
+		createStageAndEUColumns();
 	}
 	
-	private void createEUColumns() {
+	private void createStageAndEUColumns() {
 		TableViewerColumn colStage = new TableViewerColumn(this, SWT.NONE);
 		colStage.getColumn().setText("Stage");
 		colStage.getColumn().setWidth(45);
@@ -60,6 +63,10 @@ public class AnalysisTableViewer extends TableViewer{
 		colEU.setLabelProvider(new ColumnLabelProvider(){
 			@Override
 			public String getText(Object element) {
+				if(element instanceof BigDecimalStageResult){
+					BigDecimalStageResult stageResult = (BigDecimalStageResult) element;
+					return stageResult.getExpectedBigDecimalUtility().toString();
+				}
 				StageResult stageResult = (StageResult) element;
 				return Double.toString(stageResult.getExpectedUtility());
 			}
@@ -69,8 +76,9 @@ public class AnalysisTableViewer extends TableViewer{
 	public void createOccuranceColumns(AbstractEngineConfiguration config, Result simulationResult) {
 		disposeOccuranceColumns();
 		if(config != null){
+			StageResult firstStageResult = simulationResult.getStageResults().get(0);
 			if (config.isCalculateAbsoluteActionOccurances() && simulationResult.getStageResults()!=null && !simulationResult.getStageResults().isEmpty()) {
-				for(final ActorAction action : simulationResult.getStageResults().get(0).getAbsoluteActionOccurances().keySet()){
+				for(final ActorAction action : firstStageResult.getAbsoluteActionOccurances().keySet()){
 					TableViewerColumn colAbsOccurances = new TableViewerColumn(this, SWT.NONE);
 					colAbsOccurances.getColumn().setText("Abs. occ.: "+action.getActionName());
 					colAbsOccurances.getColumn().setWidth(100);
@@ -85,13 +93,24 @@ public class AnalysisTableViewer extends TableViewer{
 				}
 			}
 			if (config.isCalculateRelativeActionOccurances() && !simulationResult.getStageResults().isEmpty()) {
-				for(final ActorAction action : simulationResult.getStageResults().get(0).getRelativeActionOccurances().keySet()){
+				Map<ActorAction, Double> relativeActionOccurances = firstStageResult.getRelativeActionOccurances();
+				Set<ActorAction> actorActions = null;
+				if(relativeActionOccurances != null)
+					actorActions = relativeActionOccurances.keySet();
+				else
+					actorActions = ((BigDecimalStageResult)firstStageResult).getRelativeBigDecimalActionOccurances().keySet();
+				
+				for(final ActorAction action : actorActions){
 					TableViewerColumn colRelOccurances = new TableViewerColumn(this, SWT.NONE);
 					colRelOccurances.getColumn().setText("Rel. occ.: "+action.getActionName());
 					colRelOccurances.getColumn().setWidth(100);
 					colRelOccurances.setLabelProvider(new ColumnLabelProvider(){
 						@Override
 						public String getText(Object element) {
+							if(element instanceof BigDecimalStageResult){
+								BigDecimalStageResult stageResult = (BigDecimalStageResult) element;
+								return stageResult.getRelativeBigDecimalActionOccurances().get(action).toString();
+							}
 							StageResult stageResult = (StageResult) element;
 							return Double.toString(stageResult.getRelativeActionOccurances().get(action));
 						}

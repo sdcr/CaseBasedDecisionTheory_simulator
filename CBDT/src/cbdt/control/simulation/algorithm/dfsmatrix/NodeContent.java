@@ -1,7 +1,9 @@
 package cbdt.control.simulation.algorithm.dfsmatrix;
 
+import cbdt.control.simulation.algorithm.INodeContent;
 
-public class NodeContent {
+
+public class NodeContent implements INodeContent {
 	
 	public double probabilityProduct;
 	

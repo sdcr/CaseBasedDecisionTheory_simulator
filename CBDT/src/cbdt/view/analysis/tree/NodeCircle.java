@@ -1,7 +1,7 @@
 package cbdt.view.analysis.tree;
 
 import processing.core.PShape;
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeShellKeepTree;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 
 public class NodeCircle {
 
@@ -25,7 +25,7 @@ public class NodeCircle {
 	private int relCenterX;
 	private int relCenterY;
 
-	private NodeShellKeepTree representedShell;
+	private NodeShell representedShell;
 
 	public NodeCircle(TreePApplet treePApplet) {
 		pApplet = treePApplet;
@@ -178,11 +178,11 @@ public class NodeCircle {
 		this.relCenterY = relCenterY;
 	}
 
-	public NodeShellKeepTree getRepresentedShell() {
+	public NodeShell getRepresentedShell() {
 		return representedShell;
 	}
 
-	public void setRepresentedShell(NodeShellKeepTree representedShell) {
+	public void setRepresentedShell(NodeShell representedShell) {
 		this.representedShell = representedShell;
 	}
 }

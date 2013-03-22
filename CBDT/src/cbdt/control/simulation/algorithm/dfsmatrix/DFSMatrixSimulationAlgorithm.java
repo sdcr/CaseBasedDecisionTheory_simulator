@@ -6,15 +6,15 @@ import java.util.Map;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
 public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 
-	private DFSmatrixEngineConfig config;
+	protected AbstractEngineConfiguration config;
 	
-	private BigDecimal[][] absoluteActionOccurances;
+	protected BigDecimal[][] absoluteActionOccurances;
 	
 	public BigDecimal[][] getChoosenActionNumbers() {
 		return absoluteActionOccurances;
@@ -22,13 +22,30 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
-		InitFactory factory = new InitFactory(parameters,config);
+		BasicInitFactory factory = new BasicInitFactory(parameters,config);
 		absoluteActionOccurances = factory.getInitialAbsoluteActionOccurances();
-		double[] expectedUtilities = factory.getInitExpectedUtilities();
+		Double[] expectedUtilities = factory.getInitExpectedUtilities();
 		NodeContent[][] contentsMatrix = factory.getInitialContentsMatrix();
 		
 		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, config, contentsMatrix, factory, expectedUtilities, absoluteActionOccurances, monitor);
 
+		computeWithVisitor(initResult, visitor);
+		
+		
+		for(int stage=0; stage<initResult.getStageResults().size(); stage++){
+			StageResult stageResult = initResult.getStageResults().get(stage);
+			stageResult.setStage(stage);
+			stageResult.setExpectedUtility(expectedUtilities[stage]);
+			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = new HashMap<ActorAction, BigDecimal>();
+			for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
+				absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), absoluteActionOccurances[stage][actionIndex]);
+			}
+			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
+		}
+	}
+
+	protected void computeWithVisitor(Result initResult,
+			VirtualNodeContentVisitor visitor) throws InterruptedException {
 		boolean computeWithProgressShowing = true;
 		
 		int stageNumber=0;
@@ -49,25 +66,14 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 		}else{
 			visitor.visitRecursively(0, 0, 1);
 		}
-		
-		for(int stage=0; stage<initResult.getStageResults().size(); stage++){
-			StageResult stageResult = initResult.getStageResults().get(stage);
-			stageResult.setStage(stage);
-			stageResult.setExpectedUtility(expectedUtilities[stage]);
-			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = new HashMap<ActorAction, BigDecimal>();
-			for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
-				absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), absoluteActionOccurances[stage][actionIndex]);
-			}
-			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
-		}
+
 	}
 
-
-	public DFSmatrixEngineConfig getConfig() {
+	public AbstractEngineConfiguration getMatrixConfig() {
 		return config;
 	}
 
-	public void setConfig(DFSmatrixEngineConfig config) {
+	public void setMatrixConfig(AbstractEngineConfiguration config) {
 		this.config = config;
 	}
 }

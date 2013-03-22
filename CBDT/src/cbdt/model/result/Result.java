@@ -2,13 +2,13 @@ package cbdt.model.result;
 
 import java.util.List;
 
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeShellKeepTree;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 
 public class Result {
 
 	private List<StageResult> stageResults;
 	
-	private NodeShellKeepTree rootNode;
+	private NodeShell rootNode;
 
 	public List<StageResult> getStageResults() {
 		return stageResults;
@@ -18,11 +18,11 @@ public class Result {
 		this.stageResults = stageResults;
 	}
 
-	public NodeShellKeepTree getRootNode() {
+	public NodeShell getRootNode() {
 		return rootNode;
 	}
 
-	public void setRootNode(NodeShellKeepTree rootNode) {
+	public void setRootNode(NodeShell rootNode) {
 		this.rootNode = rootNode;
 	}
 }

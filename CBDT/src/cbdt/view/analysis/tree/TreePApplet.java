@@ -8,7 +8,7 @@ import java.util.List;
 
 import processing.core.PApplet;
 import processing.core.PShape;
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeShellKeepTree;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 
 public class TreePApplet extends PApplet{
 	private static final long serialVersionUID = 1L;
@@ -91,7 +91,7 @@ public class TreePApplet extends PApplet{
 		infoShowingCircle = null;
 	}
 	
-	public void setTreeModel(NodeShellKeepTree rootShell){
+	public void setTreeModel(NodeShell rootShell){
 		rootCircle = getNodeCircle(rootShell, 0);
 		setStageLengths(rootCircle, 0);
 		rootCircle.setVisualWindow(visualWindow);
@@ -105,7 +105,7 @@ public class TreePApplet extends PApplet{
 		}
 	}
 
-	private NodeCircle getNodeCircle(NodeShellKeepTree nodeShell, int stage){
+	private NodeCircle getNodeCircle(NodeShell nodeShell, int stage){
 		NodeCircle nodeCircle = new NodeCircle(this);
 		nodeCircle.setRepresentedShell(nodeShell);
 		while(stageIndexes.size()<stage+1){
@@ -120,7 +120,7 @@ public class TreePApplet extends PApplet{
 		NodeLine[] linesToChildren = new NodeLine[nodeShell.getChildren().size()];
 		
 		int i=0;
-		for(NodeShellKeepTree shell : nodeShell.getChildren()){
+		for(NodeShell shell : nodeShell.getChildren()){
 			children[i] = getNodeCircle(shell, stage+1);
 			linesToChildren[i] = new NodeLine(this, nodeCircle, children[i]);
 			i++;

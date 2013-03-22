@@ -19,15 +19,15 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 	public void computeResult(Result result) throws InterruptedException{
 		NodeContentKeepTreeFactory factory = new NodeContentKeepTreeFactory();
 		NodeContentKeepTree rootContent = factory.getInitRootContent(parameters);
-		NodeShellKeepTree rootShell = new NodeShellKeepTree(rootContent);
+		NodeShell rootShell = new NodeShell(rootContent);
 
 		NodeShellVisitor nodeShellVisitor = new NodeShellVisitor(parameters, config, result, factory, monitor);
 		
-		List<NodeShellKeepTree> monitoredStageNodeShells = computeMonitoredStageNodeShells(
+		List<NodeShell> monitoredStageNodeShells = computeMonitoredStageNodeShells(
 				result, rootShell, nodeShellVisitor);
 		monitor.beginTask("Computation with DFS and tree datastructure", monitoredStageNodeShells.size());
 		
-		for(NodeShellKeepTree nodeShell : monitoredStageNodeShells){
+		for(NodeShell nodeShell : monitoredStageNodeShells){
 			nodeShellVisitor.visitRecursively(nodeShell, monitoredStage);
 			monitor.worked(1);
 		}
@@ -37,17 +37,17 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 		monitor.done();
 	}
 
-	private List<NodeShellKeepTree> computeMonitoredStageNodeShells(Result result,
-			NodeShellKeepTree rootShell, NodeShellVisitor nodeShellVisitor) {
-		List<NodeShellKeepTree> stageNodeShells = new ArrayList<NodeShellKeepTree>();
+	private List<NodeShell> computeMonitoredStageNodeShells(Result result,
+			NodeShell rootShell, NodeShellVisitor nodeShellVisitor) {
+		List<NodeShell> stageNodeShells = new ArrayList<NodeShell>();
 		stageNodeShells.add(rootShell);
 		monitoredStage = 0;
 		
 		while(stageNodeShells.size()<MIN_NUMBER_OF_MONITOR_WORK_UNITS 
 				&& monitoredStage<config.getNumberOfRequestedExpectedUtilityValues()){
-			List<NodeShellKeepTree> childrenShells = new ArrayList<NodeShellKeepTree>();
+			List<NodeShell> childrenShells = new ArrayList<NodeShell>();
 			StageResult childrensStageResult = result.getStageResults().get(monitoredStage);
-			for(NodeShellKeepTree parentShell : stageNodeShells){
+			for(NodeShell parentShell : stageNodeShells){
 				nodeShellVisitor.computeChildren(parentShell, childrensStageResult);
 				childrenShells.addAll(parentShell.getChildren());
 			}

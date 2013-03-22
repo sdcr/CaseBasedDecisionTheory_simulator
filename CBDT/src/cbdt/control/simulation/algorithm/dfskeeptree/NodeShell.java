@@ -3,22 +3,22 @@ package cbdt.control.simulation.algorithm.dfskeeptree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NodeShellKeepTree {
+public class NodeShell {
 
 	private NodeContentKeepTree content;
 	
-	List<NodeShellKeepTree> children;
+	List<NodeShell> children;
 
-	public NodeShellKeepTree(NodeContentKeepTree content) {
+	public NodeShell(NodeContentKeepTree content) {
 		this.setContent(content);
-		this.children = new ArrayList<NodeShellKeepTree>();
+		this.children = new ArrayList<NodeShell>();
 	}
 
-	public void setChildren(List<NodeShellKeepTree> children) {
+	public void setChildren(List<NodeShell> children) {
 		this.children = children;
 	}
 
-	public List<NodeShellKeepTree> getChildren() {
+	public List<NodeShell> getChildren() {
 		return children;
 	}
 	

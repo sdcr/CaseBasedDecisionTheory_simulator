@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfskeeptree.DFSKeepTreeSimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfsmatrix.DFSMatrixSimulationAlgorithm;
+import cbdt.control.simulation.algorithm.dfsmatrix.highprecision.DFSHighPrecMatrixSimulationAlgorithm;
 import cbdt.control.simulation.process.ComputationRunnableWithProgress;
 import cbdt.control.simulation.process.EmptyResultFactory;
 import cbdt.control.simulation.process.PostProcessor;
@@ -17,6 +18,7 @@ import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
+import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.Result;
 
 /**
@@ -66,8 +68,13 @@ public class EngineContext {
 		}
 		if(engineConfig instanceof DFSmatrixEngineConfig){
 			DFSMatrixSimulationAlgorithm matrixAlgorithm = new DFSMatrixSimulationAlgorithm();
-			matrixAlgorithm.setConfig((DFSmatrixEngineConfig) engineConfig);
+			matrixAlgorithm.setMatrixConfig((DFSmatrixEngineConfig) engineConfig);
 			algorithm = matrixAlgorithm;
+		}
+		if(engineConfig instanceof DFSmatrixHighPrecEngineConfig){
+			DFSHighPrecMatrixSimulationAlgorithm matrixHighPrecAlgorithm = new DFSHighPrecMatrixSimulationAlgorithm();
+			matrixHighPrecAlgorithm.setMatrixConfig((DFSmatrixHighPrecEngineConfig) engineConfig);
+			algorithm = matrixHighPrecAlgorithm;
 		}
 		return algorithm;
 	}
