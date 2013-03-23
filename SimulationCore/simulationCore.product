@@ -30,7 +30,10 @@
 
 
    <plugins>
+      <plugin id="CBDT"/>
+      <plugin id="ProcessingWrapper"/>
       <plugin id="SimulationCore"/>
+      <plugin id="XStreamWrapper"/>
       <plugin id="org.apache.felix.gogo.command"/>
       <plugin id="org.apache.felix.gogo.runtime"/>
       <plugin id="org.apache.felix.gogo.shell"/>

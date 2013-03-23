@@ -16,9 +16,9 @@ public class NodeLine {
 	
 	public void draw(){
 		int x1 = from.getRelCenterX();
-		int y1 = from.getRelCenterY() + from.getRadius();
+		int y1 = from.getWindowCoordinateY() + from.getRadius();
 		int x2 = to.getRelCenterX();
-		int y2 = to.getRelCenterY() - to.getRadius();
+		int y2 = to.getWindowCoordinateY() - to.getRadius();
 		pApplet.line(x1, y1, x2, y2);
 	}
 }

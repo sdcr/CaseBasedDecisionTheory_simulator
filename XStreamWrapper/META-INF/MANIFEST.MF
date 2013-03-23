@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XStreamWrapper
-Bundle-SymbolicName: XStreamWrapper
+Bundle-SymbolicName: XStreamWrapper;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Export-Package: com.thoughtworks.xstream,

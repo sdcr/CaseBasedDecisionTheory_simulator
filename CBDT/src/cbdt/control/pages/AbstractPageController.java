@@ -17,7 +17,7 @@ public abstract class AbstractPageController {
 	/**
 	 * @return The plugin page, i.e. the view, for which this class is the controller.
 	 */
-	public abstract AbstractPluginPageWrapper getPageWrapper();
+	public abstract AbstractPluginPageWrapper getPageReference();
 	
 	public void setMainController(MainController mainController){
 		this.mainController = mainController;

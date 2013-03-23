@@ -18,14 +18,14 @@ public class ParametersPageController extends AbstractPageController {
 
 	private Parameters parametersModel;
 	private EngineConfigChoice configChoice;
-	private ParametersPageReference parametersPageWrapper;
+	private ParametersPageReference parametersPageReference;
 	private IParametersPersistenceManager parametersPersistenceManager;
 	private EngineConfigControllerFactory configControllerFactory;
 
 	public ParametersPageController() {
 		ParametersFactory factory = new ParametersFactory();
 		parametersModel = factory.getDefaultParameters();
-		parametersPageWrapper = new ParametersPageReference(this);
+		parametersPageReference = new ParametersPageReference(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
 
 		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
@@ -35,8 +35,8 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	@Override
-	public ParametersPageReference getPageWrapper() {
-		return parametersPageWrapper;
+	public ParametersPageReference getPageReference() {
+		return parametersPageReference;
 	}
 
 	public ActorAction addDefaultActorActionToModel() {
@@ -60,7 +60,7 @@ public class ParametersPageController extends AbstractPageController {
 		ActorActionOutcome defaultOutcome = factory
 				.getDefaultActorActionOutcome();
 		actorAction.addActionOutcome(defaultOutcome);
-		parametersPageWrapper.getParametersPage().setFocus();
+		parametersPageReference.getParametersPage().setFocus();
 		return defaultOutcome;
 	}
 
@@ -93,7 +93,7 @@ public class ParametersPageController extends AbstractPageController {
 			parametersModel = parametersPersistenceManager
 					.getParametersFromFile(filepath);
 			goToForeground();
-			parametersPageWrapper.getParametersPage().setParametersModel(
+			parametersPageReference.getParametersPage().setParametersModel(
 					parametersModel);
 		} catch (FileNotFoundException e) {
 			getMessageBoxManager().showErrorMessage(

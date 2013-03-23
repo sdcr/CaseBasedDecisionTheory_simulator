@@ -50,7 +50,7 @@ public class SimulationPluginManager {
 	private void instantiateISimulationPlugins(){
 		IConfigurationElement[] configurations = RegistryFactory.getRegistry()
 				.getConfigurationElementsFor(EXTENSION_POINT_ID);
-
+		
 		for (IConfigurationElement configElement : configurations) {
 			Object instantiatedExtension = null;
 			try {
@@ -75,7 +75,7 @@ public class SimulationPluginManager {
 	 * @throws BundleException
 	 */
 	public void installBundle(String filePath) throws FileNotFoundException, BundleException{
-    	File file = new File(filePath);
+		File file = new File(filePath);
     	
     	Bundle installedBundle = null;
     	try {
@@ -83,11 +83,8 @@ public class SimulationPluginManager {
     		installedBundle = context.installBundle(filePath, fileStream);
     		installedBundle.start();
     	} catch (BundleException e) {
-    		try {
+			if (installedBundle != null) {
 				installedBundle.uninstall();
-			} catch (BundleException e2) {
-				System.out.println("Could not uninstall the bundle which failed to start or install.");
-				e2.printStackTrace();
 			}
     		//throwing the exception again, so that the calling class also reacts on the error.
     		throw e;

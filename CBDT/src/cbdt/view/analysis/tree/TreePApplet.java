@@ -4,11 +4,15 @@ import java.awt.Point;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import processing.core.PApplet;
 import processing.core.PShape;
+import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.model.parameters.ActorAction;
 
 public class TreePApplet extends PApplet{
 	private static final long serialVersionUID = 1L;
@@ -23,6 +27,10 @@ public class TreePApplet extends PApplet{
 
 	private NodeCircle infoShowingCircle;
 
+	private CoordinateConverter coordinateConverter;
+
+	private DataRectangleShower dataRectangleShower;
+
 	public TreePApplet() {
 		stageIndexes = new ArrayList<Integer>();
 		nodeFrame = new NodeContext();
@@ -35,8 +43,8 @@ public class TreePApplet extends PApplet{
 		visualWindow.setMarginTop(0);
 		visualWindow.setWidth(500);
 		visualWindow.setHeight(500);
-//		PFont f = createFont("Arial", 16, true);
-//		textFont(f);
+		coordinateConverter = new CoordinateConverter(nodeFrame, visualWindow);
+		dataRectangleShower = new DataRectangleShower(this);
 	}
 	
 	public void setup() {
@@ -48,17 +56,17 @@ public class TreePApplet extends PApplet{
 		
 		circleShape = createShape(ELLIPSE, 0, 0, radius*2, radius*2);
 		if(rootCircle!=null){
-			rootCircle.setChildrenShape(circleShape);
-			rootCircle.setChildrenRadius(radius);
+			rootCircle.setShapeRecursively(circleShape);
+			rootCircle.setRadiusRecursively(radius);
 		}
 		
 		addMouseWheelListener(new MouseWheelListener() { 
 		    public void mouseWheelMoved(MouseWheelEvent mwe) { 
-		      mouseWheel(mwe.getWheelRotation(), mwe.getPoint());
+		      updateZooming(mwe.getWheelRotation(), mwe.getPoint());
 		  }});
 	}
 
-	protected void mouseWheel(int wheelRotation, Point mousePos) {
+	private void updateZooming(int wheelRotation, Point mousePos) {
 		mousePos = getInDocumentCoordinates(mousePos);
 		
 		if(wheelRotation<0){
@@ -73,7 +81,7 @@ public class TreePApplet extends PApplet{
 			visualWindow.setMarginTop((int) (visualWindow.getMarginTop() - (mousePos.y - visualWindow.getMarginTop()) * 0.25));
 		}
 		
-		rootCircle.calcPosition();
+		rootCircle.calcPositionRecursively();
 	}
 
 	private Point getInDocumentCoordinates(Point mousePos) {
@@ -94,37 +102,47 @@ public class TreePApplet extends PApplet{
 	public void setTreeModel(NodeShell rootShell){
 		rootCircle = getNodeCircle(rootShell, 0);
 		setStageLengths(rootCircle, 0);
-		rootCircle.setVisualWindow(visualWindow);
-		rootCircle.calcPosition();
+		rootCircle.calcPositionRecursively();
 	}
 	
 	private void setStageLengths(NodeCircle nodeCircle, int stage) {
-		nodeCircle.setStageLength(stageIndexes.get(stage)+1);
+		nodeCircle.setNumberOfNodesOnStage(stageIndexes.get(stage)+1);
 		for(NodeCircle child : nodeCircle.getChildren()){
 			setStageLengths(child, stage+1);
 		}
 	}
 
 	private NodeCircle getNodeCircle(NodeShell nodeShell, int stage){
-		NodeCircle nodeCircle = new NodeCircle(this);
+		NodeCircle nodeCircle = new NodeCircle(this, dataRectangleShower, coordinateConverter);
 		nodeCircle.setRepresentedShell(nodeShell);
 		while(stageIndexes.size()<stage+1){
 			stageIndexes.add(new Integer(0));
 		}
-		nodeCircle.setStageIndex(stageIndexes.get(stage));
+		nodeCircle.setIndexOnStage(stageIndexes.get(stage));
 		stageIndexes.set(stage, stageIndexes.get(stage) +1);
-		nodeCircle.setStage(stage);
-		nodeCircle.setFrame(nodeFrame);
+		nodeCircle.setStagesIndex(stage);
 		
 		NodeCircle[] children = new NodeCircle[nodeShell.getChildren().size()];
 		NodeLine[] linesToChildren = new NodeLine[nodeShell.getChildren().size()];
 		
+		Map<ActorAction, List<NodeCircle>> actionOccuranceMap = new HashMap<ActorAction, List<NodeCircle>>(); 
+		
 		int i=0;
 		for(NodeShell shell : nodeShell.getChildren()){
-			children[i] = getNodeCircle(shell, stage+1);
-			linesToChildren[i] = new NodeLine(this, nodeCircle, children[i]);
+			NodeContentKeepTree childContent = shell.getContent();
+			if(childContent!=null && childContent.getLastAction()!=null)
+				children[i] = getNodeCircle(shell, stage+1);
+				if(!actionOccuranceMap.containsKey(childContent.getLastAction())){
+//					linesToChildren[i] = new NodeLine(this, nodeCircle, children[i]);
+					List<NodeCircle> sameActionList = new ArrayList<NodeCircle>();
+					sameActionList.add(children[i]);
+					actionOccuranceMap.put(childContent.getLastAction(), sameActionList);
+				}else{
+					actionOccuranceMap.get(childContent.getLastAction()).add(children[i]);
+				}
 			i++;
 		}
+		
 		nodeCircle.setChildren(children);
 		nodeCircle.setLinesTochildren(linesToChildren);
 		return nodeCircle;
