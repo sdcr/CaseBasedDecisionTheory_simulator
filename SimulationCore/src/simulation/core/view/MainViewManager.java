@@ -72,7 +72,7 @@ public class MainViewManager {
 	 */
 	private void instantiateViewElements() {
 		shell.setLayout(new FillLayout());
-		final ScrolledComposite scrolledComposite = new ScrolledComposite(shell, SWT.V_SCROLL);
+		final ScrolledComposite scrolledComposite = new ScrolledComposite(shell, SWT.V_SCROLL | SWT.H_SCROLL);
 		scrolledComposite.setLayout(new FillLayout(SWT.VERTICAL));
 		
 		final Composite generalWrapper = new Composite(scrolledComposite, SWT.NONE);
@@ -81,11 +81,12 @@ public class MainViewManager {
 		scrolledComposite.setMinHeight(SWT.DEFAULT);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.getVerticalBar().setIncrement(33);
 		
 		shell.addListener(SWT.Resize, new ResizeListener(scrolledComposite, generalWrapper));
 
 		pluginsBar = new PluginsBar(generalWrapper, SWT.PUSH);
-		PluginPane pluginPane = new PluginPane(generalWrapper, SWT.NONE);
+		final PluginPane pluginPane = new PluginPane(generalWrapper, SWT.NONE);
 		pluginPane.addListener(SWT.Resize, new ResizeListener(scrolledComposite, generalWrapper));
 		foregroundManager = new ForegroundManager(pluginPane);
 		pluginsBar.setForegroundManager(foregroundManager);

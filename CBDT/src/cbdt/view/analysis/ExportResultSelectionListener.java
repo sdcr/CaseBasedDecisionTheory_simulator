@@ -19,7 +19,9 @@ public class ExportResultSelectionListener extends OpenFileDialogSelectionListen
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		String[] filterExt = { "*.csv", "*.*" };
-		controller.exportResults(getFilepathFromDialog(SWT.SAVE, "Export simulation results", filterExt));
+		String filePath = getFilepathFromDialog(SWT.SAVE, "Export simulation results", filterExt);
+		if(filePath != null)
+			controller.exportResults(filePath);
 	}
 
 	@Override

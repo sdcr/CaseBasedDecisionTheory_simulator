@@ -31,6 +31,7 @@ public class AnalysisPageController extends AbstractPageController {
 		this.simulationResult = simulationResult;
 		analysisPageReference.getAnalysisPage().setResultModel(configChoice, simulationResult);
 		usedConfig = configChoice.getCurrentlyChoosenConfig();
+		getMainController().setToForeground(this);
 	}
 
 	public void exportResults(String filepathFromDialog) {

@@ -28,7 +28,8 @@ public class ForegroundManager implements IForegroundManager{
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
 		pageFactory.setParent(pluginPane);
 		currentlyInForegroundPage = pageFactory;
-		pluginPane.layout();
+		pluginPane.pack();
+		pluginPane.setFocus();
 	}
 
 	@Override

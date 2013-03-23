@@ -60,6 +60,7 @@ public class ParametersPageController extends AbstractPageController {
 		ActorActionOutcome defaultOutcome = factory
 				.getDefaultActorActionOutcome();
 		actorAction.addActionOutcome(defaultOutcome);
+		parametersPageWrapper.getParametersPage().setFocus();
 		return defaultOutcome;
 	}
 

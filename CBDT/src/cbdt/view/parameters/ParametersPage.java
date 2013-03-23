@@ -41,6 +41,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
 		rowLayout.spacing = 20;
+		rowLayout.marginBottom = 50;
 		this.setLayout(rowLayout);
 
 		parametersWrapper = new Composite(this, SWT.NONE);
@@ -75,9 +76,9 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		configsComposite = new ConfigWidgetsWrapperManager(parametersWrapper,
 				getController());
 
-		Button startComputation = new Button(this, SWT.PUSH | SWT.END);
-		startComputation.setText("Start computation");
-		startComputation.addSelectionListener(new StartComputationSelectionListener(controller));
+		Button startComputationButton = new Button(this, SWT.PUSH | SWT.END);
+		startComputationButton.setText("Start computation");
+		startComputationButton.addSelectionListener(new StartComputationSelectionListener(controller));
 	}
 
 	private void createEngineConfigTitleLabel() {

@@ -75,7 +75,7 @@ public class AnalysisTableViewer extends TableViewer{
 
 	public void createOccuranceColumns(CommonEngineConfiguration commonConfig, Result simulationResult) {
 		disposeOccuranceColumns();
-		if(commonConfig != null){
+		if(commonConfig != null && simulationResult.getStageResults() != null && !simulationResult.getStageResults().isEmpty()){
 			StageResult firstStageResult = simulationResult.getStageResults().get(0);
 			if (commonConfig.isCalculateAbsoluteActionOccurances() && simulationResult.getStageResults()!=null && !simulationResult.getStageResults().isEmpty()) {
 				for(final ActorAction action : firstStageResult.getAbsoluteActionOccurances().keySet()){
