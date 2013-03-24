@@ -13,7 +13,16 @@
                name="appName"
                value="simulationCore">
          </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
       </product>
    </extension>
+
 
 </plugin>
