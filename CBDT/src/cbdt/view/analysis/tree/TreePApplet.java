@@ -27,9 +27,11 @@ public class TreePApplet extends PApplet{
 
 	private NodeCircle infoShowingCircle;
 
-	private CoordinateConverter coordinateConverter;
+	private ZoomConverter coordinateConverter;
 
 	private DataRectangleShower dataRectangleShower;
+
+	private ZoomConverter zoomConverter;
 
 	public TreePApplet() {
 		stageIndexes = new ArrayList<Integer>();
@@ -43,8 +45,9 @@ public class TreePApplet extends PApplet{
 		visualWindow.setMarginTop(0);
 		visualWindow.setWidth(500);
 		visualWindow.setHeight(500);
-		coordinateConverter = new CoordinateConverter(nodeFrame, visualWindow);
+		coordinateConverter = new ZoomConverter(nodeFrame, visualWindow);
 		dataRectangleShower = new DataRectangleShower(this);
+		zoomConverter = new ZoomConverter(nodeFrame, visualWindow);
 	}
 	
 	public void setup() {
@@ -56,39 +59,16 @@ public class TreePApplet extends PApplet{
 		
 		circleShape = createShape(ELLIPSE, 0, 0, radius*2, radius*2);
 		if(rootCircle!=null){
-			rootCircle.setShapeRecursively(circleShape);
-			rootCircle.setRadiusRecursively(radius);
+			NodeCircleVisitor visitor = new NodeCircleVisitor();
+			visitor.setShape(rootCircle, circleShape);
+			visitor.setRadius(rootCircle, radius);
 		}
 		
 		addMouseWheelListener(new MouseWheelListener() { 
 		    public void mouseWheelMoved(MouseWheelEvent mwe) { 
-		      updateZooming(mwe.getWheelRotation(), mwe.getPoint());
+		      zoomConverter.updateZoom(mwe.getWheelRotation(), mwe.getPoint());
+//		      rootCircle.calcPositionRecursively();
 		  }});
-	}
-
-	private void updateZooming(int wheelRotation, Point mousePos) {
-		mousePos = getInDocumentCoordinates(mousePos);
-		
-		if(wheelRotation<0){
-			visualWindow.setWidth((int) (visualWindow.getWidth() * 0.8));
-			visualWindow.setHeight((int) (visualWindow.getHeight() * 0.8));
-			visualWindow.setMarginLeft((int) (visualWindow.getMarginLeft() + (mousePos.x - visualWindow.getMarginLeft()) * 0.2));
-			visualWindow.setMarginTop((int) (visualWindow.getMarginTop() + (mousePos.y - visualWindow.getMarginTop()) * 0.2));
-		}else{
-			visualWindow.setWidth((int) (visualWindow.getWidth() * 1.25));
-			visualWindow.setHeight((int) (visualWindow.getHeight() * 1.25));
-			visualWindow.setMarginLeft((int) (visualWindow.getMarginLeft() - (mousePos.x - visualWindow.getMarginLeft()) * 0.25));
-			visualWindow.setMarginTop((int) (visualWindow.getMarginTop() - (mousePos.y - visualWindow.getMarginTop()) * 0.25));
-		}
-		
-		rootCircle.calcPositionRecursively();
-	}
-
-	private Point getInDocumentCoordinates(Point mousePos) {
-		Point newPoint = new Point();
-		newPoint.x = (int) (((double)(mousePos.x - nodeFrame.getMarginLeft()) / nodeFrame.getWidth() * visualWindow.getWidth()) + visualWindow.getMarginLeft());
-		newPoint.y = (int) (((double)(mousePos.y - nodeFrame.getMarginTop()) / nodeFrame.getHeight() * visualWindow.getHeight()) + visualWindow.getMarginTop());
-		return newPoint;
 	}
 
 	public void draw() {
@@ -101,26 +81,26 @@ public class TreePApplet extends PApplet{
 	
 	public void setTreeModel(NodeShell rootShell){
 		rootCircle = getNodeCircle(rootShell, 0);
-		setStageLengths(rootCircle, 0);
-		rootCircle.calcPositionRecursively();
+//		setStageLengths(rootCircle, 0);
+//		rootCircle.calcPositionRecursively();
 	}
 	
-	private void setStageLengths(NodeCircle nodeCircle, int stage) {
-		nodeCircle.setNumberOfNodesOnStage(stageIndexes.get(stage)+1);
-		for(NodeCircle child : nodeCircle.getChildren()){
-			setStageLengths(child, stage+1);
-		}
-	}
+//	private void setStageLengths(NodeCircle nodeCircle, int stage) {
+//		nodeCircle.setNumberOfNodesOnStage(stageIndexes.get(stage)+1);
+//		for(NodeCircle child : nodeCircle.getChildren()){
+//			setStageLengths(child, stage+1);
+//		}
+//	}
 
 	private NodeCircle getNodeCircle(NodeShell nodeShell, int stage){
 		NodeCircle nodeCircle = new NodeCircle(this, dataRectangleShower, coordinateConverter);
 		nodeCircle.setRepresentedShell(nodeShell);
-		while(stageIndexes.size()<stage+1){
-			stageIndexes.add(new Integer(0));
-		}
-		nodeCircle.setIndexOnStage(stageIndexes.get(stage));
-		stageIndexes.set(stage, stageIndexes.get(stage) +1);
-		nodeCircle.setStagesIndex(stage);
+//		while(stageIndexes.size()<stage+1){
+//			stageIndexes.add(new Integer(0));
+//		}
+//		nodeCircle.setIndexOnStage(stageIndexes.get(stage));
+//		stageIndexes.set(stage, stageIndexes.get(stage) +1);
+//		nodeCircle.setStagesIndex(stage);
 		
 		NodeCircle[] children = new NodeCircle[nodeShell.getChildren().size()];
 		NodeLine[] linesToChildren = new NodeLine[nodeShell.getChildren().size()];
