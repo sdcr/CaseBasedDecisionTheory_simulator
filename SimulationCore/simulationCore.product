@@ -3,7 +3,6 @@
 
 <product name="simulationCore" id="SimulationCore.product" application="org.eclipse.pde.build.Build" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -15,19 +14,16 @@
 
    <windowImages/>
 
-
-   <launcher name="simulationCore2">
+   <launcher name="simulationCore">
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
-
    <vm>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</windows>
    </vm>
-
 
    <plugins>
       <plugin id="CBDT"/>
@@ -47,6 +43,7 @@
    </plugins>
 
    <configurations>
+      <plugin id="CBDT" autoStart="true" startLevel="0" />
       <plugin id="SimulationCore" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
