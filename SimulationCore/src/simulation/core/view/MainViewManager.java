@@ -6,6 +6,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -21,6 +23,9 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 public class MainViewManager {
 
+	private static final String ICON_LOCATION = "/resources/simulation.ico";
+	
+	private static final String WINDOW_TITLE = "Simulation Container";
 	private static final int DEFAULT_HEIGHT = 800;
 	private static final int DEFAULT_WIDTH = 840;
 	
@@ -34,6 +39,10 @@ public class MainViewManager {
 	public MainViewManager(final Controller controller) {
 		this.controller = controller;
 		shell = new Shell(new Display());
+		shell.setText(WINDOW_TITLE);
+		ImageData imageData = new ImageData(getClass().getResourceAsStream(ICON_LOCATION));
+		Image iconImage = new Image(shell.getDisplay(),imageData);
+		shell.setImage(iconImage);
 		shell.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		instantiateViewElements();
 

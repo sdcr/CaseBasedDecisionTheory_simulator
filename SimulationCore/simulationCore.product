@@ -14,11 +14,11 @@
 
    <windowImages/>
 
-   <splash
-      startupProgressRect="5,275,445,15" />
+
    <launcher name="simulationCore">
       <solaris/>
-      <win useIco="false">
+      <win useIco="true">
+         <ico path="/SimulationCore/resources/simulation.ico"/>
          <bmp/>
       </win>
    </launcher>
