@@ -9,7 +9,7 @@ public class NodeLayoutManager {
 	}
 	
 	public int convertToDocumentCoordinatesX(int numberOfNodesOnStage, int indexOnStage){
-		int horizontalStageDist = frame.getWidth() / (numberOfNodesOnStage - 1);
+		int horizontalStageDist = frame.getWidth() / numberOfNodesOnStage;
 		return horizontalStageDist * indexOnStage + horizontalStageDist/2;
 	}
 	

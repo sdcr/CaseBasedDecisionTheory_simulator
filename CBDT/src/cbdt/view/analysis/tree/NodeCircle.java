@@ -12,35 +12,25 @@ public class NodeCircle {
 	
 	private TreePApplet pApplet;
 	private NodeCircle[] children;
-	private NodeLine[] linesTochildren;
+	private NodeLine[] outgoingLines;
 
 	private PShape circleShape;
-	private int radius;
-
-//	private int indexOnStage;
-//	private int NumberOfNodesOnStage;
-//	private int stagesIndex;
-	
-//	private int windowCoordinateX;
-//	private int windowCoordinateY;
+	public static final int radius = 10;
 
 	private int documentCoordinateX;
 	private int documentCoordinateY;
 	
 	private NodeShell representedShell;
 	
-	private DataRectangleShower dataRectangleShower;
-	private ZoomConverter coordinateConverter;
-
-	public NodeCircle(TreePApplet treePApplet, DataRectangleShower dataRectangleShower, ZoomConverter coordinateConverter) {
+	public NodeCircle(TreePApplet treePApplet) {
 		pApplet = treePApplet;
-		this.dataRectangleShower = dataRectangleShower;
-		this.coordinateConverter = coordinateConverter;
+		outgoingLines = new NodeLine[0];
 	}
 	
 	public void draw(){
-		int windowCoordinateX = coordinateConverter.convertToWindowCoordinatesX(documentCoordinateX);
-		int windowCoordinateY = coordinateConverter.convertToWindowCoordinatesY(documentCoordinateY);
+		ZoomConverter zoomConverter = pApplet.getZoomConverter();
+		int windowCoordinateX = zoomConverter.convertToWindowCoordinatesX(documentCoordinateX);
+		int windowCoordinateY = zoomConverter.convertToWindowCoordinatesY(documentCoordinateY);
 
 		if(isMouseInside(windowCoordinateX, windowCoordinateY)){
 			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT_MOUSE_OVER);
@@ -52,24 +42,9 @@ public class NodeCircle {
 		pApplet.translate(windowCoordinateX, windowCoordinateY);
 		pApplet.shape(circleShape);
 		pApplet.popMatrix();
-		
-		for(int i=0; i<children.length; i++){
-			linesTochildren[i].draw();
-			children[i].draw();
-		}
 	}
 
-//	public void calcPositionRecursively() {
-//		windowCoordinateX = coordinateConverter.convertToWindowCoordinatesX(NumberOfNodesOnStage, indexOnStage);
-//		windowCoordinateY = coordinateConverter.convertToWindowCoordinatesY(stagesIndex);
-//		
-//		for(NodeCircle child : children){
-//			child.calcPositionRecursively();
-//		}
-//	}
-
-
-	public void showDataRectangle() {
+	public void showDataRectangle(DataRectangleShower dataRectangleShower) {
 		NodeContentKeepTree content = representedShell.getContent();
 		if(content != null){
 			dataRectangleShower.showDataRectangle(content);
@@ -92,49 +67,13 @@ public class NodeCircle {
 		return false;
 	}
 	
-//	public void setIndexOnStage(int indexOnStage) {
-//		this.indexOnStage = indexOnStage;
-//	}
-//	
-//	public void setNumberOfNodesOnStage(int NumberOfNodesOnStage){
-//		this.NumberOfNodesOnStage = NumberOfNodesOnStage;
-//	}
-//
-//	public void setStagesIndex(int stage) {
-//		this.stagesIndex = stage;
-//	}
-	
-	public int getRadius() {
-		return radius;
+	public NodeLine[] getOutgoingLines() {
+		return outgoingLines;
 	}
 
-	public void setRadius(int radius) {
-		this.radius = radius;
+	public void setOutgoingLines(NodeLine[] outgoingLines) {
+		this.outgoingLines = outgoingLines;
 	}
-
-	public NodeLine[] getLinesTochildren() {
-		return linesTochildren;
-	}
-
-	public void setLinesTochildren(NodeLine[] linesTochildren) {
-		this.linesTochildren = linesTochildren;
-	}
-
-//	public int getWindowCoordinateX() {
-//		return windowCoordinateX;
-//	}
-//
-//	public void setWindowCoordinateX(int windowCoordinateX) {
-//		this.windowCoordinateX = windowCoordinateX;
-//	}
-//
-//	public int getWindowCoordinateY() {
-//		return windowCoordinateY;
-//	}
-//
-//	public void setWindowCoordinateY(int windowCoordinateY) {
-//		this.windowCoordinateY = windowCoordinateY;
-//	}
 
 	public NodeShell getRepresentedShell() {
 		return representedShell;
@@ -148,6 +87,10 @@ public class NodeCircle {
 		this.circleShape = shape;
 	}
 	
+	public PShape getCircleShape() {
+		return circleShape;
+	}
+
 	public int getDocumentCoordinateX() {
 		return documentCoordinateX;
 	}

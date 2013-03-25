@@ -7,5 +7,17 @@
             class="cbdt.CBDTplugin">
       </client>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="SimulationCore.id1"
+            name="Cbdt">
+         <property
+               name="appName"
+               value="Cbdt">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

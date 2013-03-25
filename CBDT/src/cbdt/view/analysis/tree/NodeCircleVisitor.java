@@ -14,24 +14,17 @@ public class NodeCircleVisitor {
 	public void setShape(NodeCircle rootCircle, PShape shape){
 		rootCircle.setShape(shape);
 		for(NodeCircle child : rootCircle.getChildren()){
-			child.setShape(shape);
+			this.setShape(child, shape);
 		}
 	}
 	
-	/**
-	 * Sets the radius of all NodeCircle objects in the subtree starting from the passed NodeCircle.
-	 * 
-	 * @param rootCircle
-	 * @param radius
-	 */
-	public void setRadius(NodeCircle rootCircle, int radius){
-		rootCircle.setRadius(radius);
-		for(NodeCircle child : rootCircle.getChildren()){
-			child.setRadius(radius);
+	public void draw(NodeCircle rootNode){
+		rootNode.draw();
+		for(NodeLine outgoingLine : rootNode.getOutgoingLines()){
+			outgoingLine.draw();
 		}
-	}
-	
-	public void setDocumentCoordinates(NodeLayoutManager layoutManager, NodeCircle rootNode){
-		
+		for(NodeCircle child : rootNode.getChildren()){
+			this.draw(child);
+		}
 	}
 }

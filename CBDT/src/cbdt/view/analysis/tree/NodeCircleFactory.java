@@ -1,53 +1,68 @@
 package cbdt.view.analysis.tree;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
-import cbdt.model.parameters.ActorAction;
 
 public class NodeCircleFactory {
 	
-	private DataRectangleShower dataRectangleShower;
-	private ZoomConverter coordinateConverter;
 	private TreePApplet pApplet;
+	private NodeLayoutManager layoutManager;
+	private Map<Integer, Integer> indexOfNodeOnStageMap;
+	private Map<Integer, Integer> numberOfNodesOnStageMap;
 	
-	public NodeCircleFactory(TreePApplet pApplet, ZoomConverter coordinateConverter, DataRectangleShower dataRectangleShower) {
+	public NodeCircleFactory(TreePApplet pApplet, NodeLayoutManager layoutManager) {
 		this.pApplet = pApplet;
-		this.coordinateConverter = coordinateConverter;
-		this.dataRectangleShower = dataRectangleShower;
+		this.layoutManager = layoutManager;
 	}
 
-	private NodeCircle getNodeCirclesRecursively(NodeShell nodeShell, int stage){
-		NodeCircle nodeCircle = new NodeCircle(pApplet, dataRectangleShower, coordinateConverter);
+	public NodeCircle createNodeCircles(NodeShell rootShell){
+		indexOfNodeOnStageMap = new HashMap<Integer, Integer>();
+		numberOfNodesOnStageMap = new HashMap<Integer, Integer>();
+		calculateStageWidthMap(rootShell, 0);
+		return createNodeCirclesRecursively(rootShell, 0);
+	}
+	
+	private void calculateStageWidthMap(NodeShell rootShell, int indexOfStage) {
+		getNewIndexOnStage(numberOfNodesOnStageMap, indexOfStage, 1);
+		
+		for(NodeShell childShell : rootShell.getChildren()){
+			calculateStageWidthMap(childShell, indexOfStage+1);
+		}
+	}
+
+	private NodeCircle createNodeCirclesRecursively(NodeShell nodeShell, int indexOfStage){
+		NodeCircle nodeCircle = new NodeCircle(pApplet);
 		nodeCircle.setRepresentedShell(nodeShell);
+
+		int newIndexOfNodeOnStage = getNewIndexOnStage(indexOfNodeOnStageMap, indexOfStage, 0);
+		
+		int documentCoordinateX = layoutManager.convertToDocumentCoordinatesX(numberOfNodesOnStageMap.get(indexOfStage), newIndexOfNodeOnStage);
+		int documentCoordinateY = layoutManager.convertToDocumentCoordinatesY(indexOfStage);
+		
+		nodeCircle.setDocumentCoordinateX(documentCoordinateX);
+		nodeCircle.setDocumentCoordinateY(documentCoordinateY);
 		
 		NodeCircle[] children = new NodeCircle[nodeShell.getChildren().size()];
-		NodeLine[] linesToChildren = new NodeLine[nodeShell.getChildren().size()];
-		
-		Map<ActorAction, List<NodeCircle>> actionOccuranceMap = new HashMap<ActorAction, List<NodeCircle>>(); 
 		
 		int i=0;
-		for(NodeShell shell : nodeShell.getChildren()){
-			NodeContentKeepTree childContent = shell.getContent();
-			if(childContent!=null && childContent.getLastAction()!=null)
-//				children[i] = getNodeCircle(shell, stage+1);
-				if(!actionOccuranceMap.containsKey(childContent.getLastAction())){
-//					linesToChildren[i] = new NodeLine(this, nodeCircle, children[i]);
-					List<NodeCircle> sameActionList = new ArrayList<NodeCircle>();
-					sameActionList.add(children[i]);
-					actionOccuranceMap.put(childContent.getLastAction(), sameActionList);
-				}else{
-					actionOccuranceMap.get(childContent.getLastAction()).add(children[i]);
-				}
+		for(NodeShell childShell : nodeShell.getChildren()){
+			children[i] = createNodeCirclesRecursively(childShell, indexOfStage + 1);
 			i++;
 		}
 		
 		nodeCircle.setChildren(children);
-		nodeCircle.setLinesTochildren(linesToChildren);
 		return nodeCircle;
+	}
+
+	private int getNewIndexOnStage(Map<Integer, Integer> stageMap, int indexOfStage, int firstIndexOnStage) {
+		Integer lastIndexOfNodeOnStage = stageMap.get(indexOfStage);
+		int newIndexOfNodeOnStage = firstIndexOnStage;
+		if (lastIndexOfNodeOnStage!=null) {
+			newIndexOfNodeOnStage = lastIndexOfNodeOnStage + 1;
+		}
+		stageMap.put(indexOfStage, newIndexOfNodeOnStage);
+		return newIndexOfNodeOnStage;
 	}
 }

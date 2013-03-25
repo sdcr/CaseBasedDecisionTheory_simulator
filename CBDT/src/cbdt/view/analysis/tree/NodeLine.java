@@ -1,24 +1,22 @@
 package cbdt.view.analysis.tree;
 
-import processing.core.PApplet;
-
 public class NodeLine {
 
 	NodeCircle from;
 	NodeCircle to;
-	private PApplet pApplet;
+	private TreePApplet pApplet;
 	
-	public NodeLine(PApplet pApplet, NodeCircle from, NodeCircle to) {
+	public NodeLine(TreePApplet pApplet, NodeCircle from, NodeCircle to) {
 		this.pApplet = pApplet;
 		this.from = from;
 		this.to = to;
 	}
 	
 	public void draw(){
-//		int x1 = from.getWindowCoordinateX();
-//		int y1 = from.getWindowCoordinateY() + from.getRadius();
-//		int x2 = to.getWindowCoordinateX();
-//		int y2 = to.getWindowCoordinateY() - to.getRadius();
-//		pApplet.line(x1, y1, x2, y2);
+		int x1 = pApplet.getZoomConverter().convertToWindowCoordinatesX(from.getDocumentCoordinateX());
+		int y1 = pApplet.getZoomConverter().convertToWindowCoordinatesY(from.getDocumentCoordinateY()) + NodeCircle.radius;
+		int x2 = pApplet.getZoomConverter().convertToWindowCoordinatesX(to.getDocumentCoordinateX());
+		int y2 = pApplet.getZoomConverter().convertToWindowCoordinatesX(to.getDocumentCoordinateY()) - NodeCircle.radius;
+		pApplet.line(x1, y1, x2, y2);
 	}
 }
