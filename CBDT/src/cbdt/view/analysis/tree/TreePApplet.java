@@ -10,6 +10,10 @@ import processing.core.PShape;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 
 public class TreePApplet extends PApplet{
+	public static final int WIDTH = 800;
+
+	public static final int HEIGHT = 800;
+
 	private static final long serialVersionUID = 1L;
 
 	private NodeCircle rootCircle;
@@ -46,7 +50,7 @@ public class TreePApplet extends PApplet{
 	}
 	
 	public void setup() {
-		size(800, 800, P2D);
+		size(WIDTH, HEIGHT, P2D);
 		background(255);
 
 		circleShape = createShape(ELLIPSE, 0, 0, NodeCircle.radius*2, NodeCircle.radius*2);

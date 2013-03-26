@@ -54,7 +54,6 @@ public class AnalysisPage extends Composite {
 			} else
 				showTreeButton.setEnabled(false);
 			exportResultButton.setEnabled(true);
-//			this.getParent().pack();
 		}
 	}
 
