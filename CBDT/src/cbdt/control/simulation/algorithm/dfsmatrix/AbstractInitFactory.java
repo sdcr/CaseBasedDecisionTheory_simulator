@@ -22,9 +22,11 @@ public abstract class AbstractInitFactory {
 	
 	public abstract Object[] getInitExpectedUtilities();
 	
+//	public abstract Object[][] getInitialRelativeActionOccurances();
+	
 	public abstract ActorActionOutcome[][] getOutcomeMatrix();
 	
-	public BigDecimal[][] getInitialAbsoluteActionOccurances() {
+	public BigDecimal[][] getInitialActionOccurances() {
 		int numberOfActorActions = parameters.getActorActions().size();
 		BigDecimal[][] absoluteActionOccurances = new BigDecimal[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
 		for(int i=0; i<commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++){
@@ -34,7 +36,7 @@ public abstract class AbstractInitFactory {
 		}
 		return absoluteActionOccurances;
 	}
-	
+		
 	protected int getNumberOfOutcomes() {
 		int numOfOutcomes = 0;
 		int maxNumberOfOutcomes = 0;

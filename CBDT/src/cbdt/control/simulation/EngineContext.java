@@ -11,7 +11,6 @@ import cbdt.control.simulation.algorithm.dfsmatrix.DFSMatrixSimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfsmatrix.highprecision.DFSHighPrecMatrixSimulationAlgorithm;
 import cbdt.control.simulation.process.ComputationRunnableWithProgress;
 import cbdt.control.simulation.process.EmptyResultFactory;
-import cbdt.control.simulation.process.PostProcessor;
 import cbdt.control.validators.InvalidActorActionException;
 import cbdt.control.validators.ParameterValidator;
 import cbdt.model.parameters.Parameters;
@@ -57,8 +56,8 @@ public class EngineContext {
 		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(shell);
 		progressDialog.run(true, true, runnable);
 
-		PostProcessor postProcessor = new PostProcessor();
-		postProcessor.postProcess(result, engineConfig, commonConfig);
+//		PostProcessor postProcessor = new PostProcessor();
+//		postProcessor.postProcess(result, engineConfig, commonConfig);
 		
 		return result;
 	}

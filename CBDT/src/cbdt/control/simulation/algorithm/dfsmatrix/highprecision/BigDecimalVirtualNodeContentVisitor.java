@@ -15,15 +15,21 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 	private BigDecimal[] expectedUtilities;
 	private BigDecimalChildNodeContentGenerator childContentGenerator;
 	private BigDecimalNodeContent[][] contentsMatrix;
+	private BigDecimal[][] relativeActionOccurances;
 
 	public BigDecimalVirtualNodeContentVisitor(Parameters parameters,
-			CommonEngineConfiguration commonConfig, BigDecimalNodeContent[][] contentsMatrix,
-			AbstractInitFactory factory, BigDecimal[] emptyExpectedUtilities,
-			BigDecimal[][] absoluteActionOccurances, IProgressMonitor monitor) {
+			CommonEngineConfiguration commonConfig, 
+			BigDecimalNodeContent[][] contentsMatrix,
+			AbstractInitFactory factory, 
+			BigDecimal[] emptyExpectedUtilities,
+			BigDecimal[][] absoluteActionOccurances,  
+			BigDecimal[][] relativeActionOccurances,  
+			IProgressMonitor monitor) {
 		super(parameters, commonConfig, null, factory, null,
-				absoluteActionOccurances, monitor);
+				absoluteActionOccurances, null, monitor);
 		this.contentsMatrix = contentsMatrix;
 		this.expectedUtilities = emptyExpectedUtilities;
+		this.relativeActionOccurances = relativeActionOccurances;
 		childContentGenerator = new BigDecimalChildNodeContentGenerator(outcomeMatrix,
 				new BigDecimal(parameters.getWeightingFactorAlpha()));
 		int numberOfActions = parameters.getActorActions().size();
@@ -49,8 +55,8 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 			for (int i = 0; i < numberOfSelectedActions; i++) {
 				int selectedActionIndex = selectedActionsIndices[i];
 
-				if (leafStage==null && (commonConfig.isCalculateAbsoluteActionOccurances()
-						|| commonConfig.isCalculateRelativeActionOccurances()))
+				if (leafStage==null && commonConfig.isCalculateAbsoluteActionOccurances())
+//						|| commonConfig.isCalculateRelativeActionOccurances()))
 					absoluteActionOccurances[stage][selectedActionIndex] = absoluteActionOccurances[stage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {
@@ -65,6 +71,11 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 								((BigDecimalActorActionOutcome)(outcomeMatrix[selectedActionIndex][outcomeIndex])).utility, 
 								NodeVisitor.mathContext), NodeVisitor.mathContext);
 					}
+					if (leafStage==null && commonConfig.isCalculateRelativeActionOccurances()){
+						relativeActionOccurances[stage][selectedActionIndex] = 
+								relativeActionOccurances[stage][selectedActionIndex].add(childContent.probabilityProduct, NodeVisitor.mathContext);
+					}
+					
 					childIndex++;
 				}
 			}

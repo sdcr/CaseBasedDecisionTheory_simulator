@@ -20,6 +20,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 
 	protected ActionSelector actionSelector;
 	protected BigDecimal[][] absoluteActionOccurances;
+	private Double[][] relativeActionOccurances;
 	private ChildNodeContentGenerator childContentGenerator;
 	protected IProgressMonitor monitor;
 
@@ -29,13 +30,18 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 
 	public VirtualNodeContentVisitor(Parameters parameters,
 			CommonEngineConfiguration commonConfig,
-			NodeContent[][] contentsMatrix, AbstractInitFactory factory,
+			NodeContent[][] contentsMatrix, 
+			AbstractInitFactory factory,
 			Double[] emptyExpectedUtilities,
-			BigDecimal[][] absoluteActionOccurances, IProgressMonitor monitor) {
+			BigDecimal[][] absoluteActionOccurances, 
+			Double[][] relativeActionOccurances, 
+			IProgressMonitor monitor) {
 		this.commonConfig = commonConfig;
 		this.contentsMatrix = contentsMatrix;
 		this.expectedUtilities = emptyExpectedUtilities;
 		this.absoluteActionOccurances = absoluteActionOccurances;
+		this.relativeActionOccurances = relativeActionOccurances;
+		
 		this.monitor = monitor;
 
 		int numberOfActions = parameters.getActorActions().size();
@@ -84,8 +90,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 				int selectedActionIndex = selectedActionsIndices[i];
 
 				if (leafStage == null
-						&& (commonConfig.isCalculateAbsoluteActionOccurances() || commonConfig
-								.isCalculateRelativeActionOccurances()))
+						&& commonConfig.isCalculateAbsoluteActionOccurances()) //|| commonConfig.isCalculateRelativeActionOccurances()))
 					absoluteActionOccurances[stage][selectedActionIndex] = absoluteActionOccurances[stage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {
@@ -99,6 +104,13 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 								* outcomeMatrix[selectedActionIndex][outcomeIndex]
 										.getUtility();
 					}
+					
+					if (leafStage == null
+							&& commonConfig.isCalculateRelativeActionOccurances()) {
+						relativeActionOccurances[stage][selectedActionIndex] = relativeActionOccurances[stage][selectedActionIndex]
+								+ childContent.probabilityProduct;
+					}
+					
 					childIndex++;
 				}
 			}

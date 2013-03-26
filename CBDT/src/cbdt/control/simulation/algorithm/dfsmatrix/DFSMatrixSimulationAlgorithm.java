@@ -15,6 +15,8 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 	protected AbstractEngineConfiguration config;
 	
 	protected BigDecimal[][] absoluteActionOccurances;
+
+	private Double[][] relativeActionOccurances;
 	
 	public BigDecimal[][] getChoosenActionNumbers() {
 		return absoluteActionOccurances;
@@ -23,11 +25,14 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
 		BasicInitFactory factory = new BasicInitFactory(parameters, commonConfig);
-		absoluteActionOccurances = factory.getInitialAbsoluteActionOccurances();
+		absoluteActionOccurances = factory.getInitialActionOccurances();
+		relativeActionOccurances = factory.getInitialRelativeActionOccurances();
 		Double[] expectedUtilities = factory.getInitExpectedUtilities();
 		NodeContent[][] contentsMatrix = factory.getInitialContentsMatrix();
 		
-		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, commonConfig, contentsMatrix, factory, expectedUtilities, absoluteActionOccurances, monitor);
+		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, 
+				commonConfig, contentsMatrix, factory, expectedUtilities, 
+				absoluteActionOccurances, relativeActionOccurances, monitor);
 
 		computeWithVisitor(initResult, visitor);
 		
@@ -41,6 +46,11 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 				absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), absoluteActionOccurances[stage][actionIndex]);
 			}
 			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
+			Map<ActorAction, Double> relativeActionOccurancesMap = new HashMap<ActorAction, Double>();
+			for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
+				relativeActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), relativeActionOccurances[stage][actionIndex]);
+			}
+			stageResult.setRelativeActionOccurances(relativeActionOccurancesMap);
 		}
 	}
 

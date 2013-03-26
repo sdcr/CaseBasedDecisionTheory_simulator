@@ -83,4 +83,16 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 		return outcomeMatrix;
 	}
 
+//	@Override
+//	public BigDecimal[][] getInitialRelativeActionOccurances() {
+//		int numberOfActorActions = parameters.getActorActions().size();
+//		BigDecimal[][] relativeActionOccurances = new BigDecimal[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
+//		for(int i=0; i<commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++){
+//			for (int j=0; j<numberOfActorActions; j++) {
+//				relativeActionOccurances[i][j] = new BigDecimal(0);
+//			}
+//		}
+//		return relativeActionOccurances;
+//	}
+
 }

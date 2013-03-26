@@ -34,10 +34,8 @@ public class EmptyResultFactory {
 			Parameters parameters, List<StageResult> stageResults) {
 		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			BigDecimalStageResult stageResult = new BigDecimalStageResult();
-			stageResult.setStage(i);
 			stageResult.setExpectedBigDecimalUtility(new BigDecimal(0));
-			if(commonConfig.isCalculateRelativeActionOccurances() || commonConfig.isCalculateAbsoluteActionOccurances())
-				stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
+			initStageResult(commonConfig, parameters, i, stageResult);
 			stageResults.add(stageResult);
 		}
 	}
@@ -46,12 +44,19 @@ public class EmptyResultFactory {
 			Parameters parameters, List<StageResult> stageResults) {
 		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			StageResult stageResult = new StageResult();
-			stageResult.setStage(i);
 			stageResult.setExpectedUtility(0);
-			if(commonConfig.isCalculateRelativeActionOccurances() || commonConfig.isCalculateAbsoluteActionOccurances())
-				stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
+			initStageResult(commonConfig, parameters, i, stageResult);
 			stageResults.add(stageResult);
 		}
+	}
+
+	private void initStageResult(CommonEngineConfiguration commonConfig,
+			Parameters parameters, int i, StageResult stageResult) {
+		stageResult.setStage(i);
+		if(commonConfig.isCalculateRelativeActionOccurances())// || commonConfig.isCalculateAbsoluteActionOccurances())
+			stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
+		if(commonConfig.isCalculateRelativeActionOccurances())
+			stageResult.setRelativeActionOccurances(getEmptyRelativeActionOccuranceMap(parameters));
 	}
 	
 	private Map<ActorAction, BigDecimal> getEmptyAbsoluteActionOccuranceMap(Parameters parameters) {
@@ -61,4 +66,14 @@ public class EmptyResultFactory {
 		}
 		return occurancesMap;
 	}
+	
+	private Map<ActorAction, Double> getEmptyRelativeActionOccuranceMap(Parameters parameters) {
+		Map<ActorAction, Double> occurancesMap = new HashMap<ActorAction, Double>();
+		for(ActorAction action : parameters.getActorActions()){
+			occurancesMap.put(action, 0.0);
+		}
+		return occurancesMap;
+	}
+	
+	
 }

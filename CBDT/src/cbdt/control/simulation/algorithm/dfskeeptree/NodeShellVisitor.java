@@ -63,12 +63,25 @@ public class NodeShellVisitor extends NodeVisitor {
 						nodeShell.getContent(), multiActionProbability, outcome);					
 				nodeShell.getChildren().add(new NodeShell(childsContent));
 				childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
+				if(commonConfig.isCalculateRelativeActionOccurances()){
+					increaseRelativeOccurance(childrensStageResult, childsContent.getProbabilityProduct(), selectedAction);
+				}
+					
 			}
-			if(commonConfig.isCalculateAbsoluteActionOccurances() || commonConfig.isCalculateRelativeActionOccurances()) {
+			if(commonConfig.isCalculateAbsoluteActionOccurances()){// || commonConfig.isCalculateRelativeActionOccurances()) {
 				increaseAbsoluteOccurance(childrensStageResult, selectedAction);
 			}
 		}
 		childrensStageResult.setExpectedUtility(childrensStageResult.getExpectedUtility() +childrensExpectedUtilitySum);
+	}
+
+	private void increaseRelativeOccurance(StageResult childrensStageResult,
+			Double childsProbilityProduct, ActorAction lastAction) {
+		Map<ActorAction, Double> relativeActionOccurances = childrensStageResult.getRelativeActionOccurances();
+		Double previousRelativeOccurance = relativeActionOccurances.get(lastAction);
+		if(previousRelativeOccurance==null)
+			previousRelativeOccurance = 0.0;
+		relativeActionOccurances.put(lastAction, previousRelativeOccurance + childsProbilityProduct);
 	}
 
 	private void increaseAbsoluteOccurance(StageResult stageResult, ActorAction selectedAction) {

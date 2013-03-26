@@ -24,18 +24,6 @@ public class ComputationRunnableWithProgress implements IRunnableWithProgress {
 			InterruptedException {
 		algorithm.setMonitor(monitor);
 		algorithm.computeResult(result);
-		
-//		for(int i=0; i<5; i++){
-//			monitor.worked(1);
-////			if(monitor.isCanceled()){
-////				throw new InterruptedException("The computation was cancelled.");
-////			}
-////			if(i==3){
-////				throw new OutOfMemoryError();
-////			}
-//			Thread.sleep(500);
-//		}
-		
 	}
 
 }
