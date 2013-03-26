@@ -1,9 +1,11 @@
-package cbdt.view.analysis.tree;
+package cbdt.view.analysis.tree.treemodel;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.view.analysis.tree.NodeLayoutManager;
+import cbdt.view.analysis.tree.TreePApplet;
 
 public class NodeCircleFactory {
 	

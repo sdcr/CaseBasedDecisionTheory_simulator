@@ -1,8 +1,11 @@
-package cbdt.view.analysis.tree;
+package cbdt.view.analysis.tree.treemodel;
 
 import processing.core.PShape;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.view.analysis.tree.DataRectangleShower;
+import cbdt.view.analysis.tree.TreePApplet;
+import cbdt.view.analysis.tree.ZoomConverter;
 
 public class NodeCircle {
 

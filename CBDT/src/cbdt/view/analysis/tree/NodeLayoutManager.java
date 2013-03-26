@@ -1,5 +1,7 @@
 package cbdt.view.analysis.tree;
 
+import cbdt.view.analysis.tree.treemodel.NodeContext;
+
 public class NodeLayoutManager {
 
 	public NodeContext frame;

@@ -1,5 +1,7 @@
 package cbdt.view.analysis.tree;
 
+import cbdt.view.analysis.tree.treemodel.NodeCircle;
+import cbdt.view.analysis.tree.treemodel.NodeLine;
 import processing.core.PShape;
 
 public class NodeCircleVisitor {

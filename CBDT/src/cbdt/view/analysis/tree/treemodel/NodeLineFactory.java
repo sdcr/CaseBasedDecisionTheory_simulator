@@ -1,4 +1,6 @@
-package cbdt.view.analysis.tree;
+package cbdt.view.analysis.tree.treemodel;
+
+import cbdt.view.analysis.tree.TreePApplet;
 
 public class NodeLineFactory {
 	

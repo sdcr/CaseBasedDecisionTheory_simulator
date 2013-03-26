@@ -1,4 +1,4 @@
-package cbdt.view.analysis.tree;
+package cbdt.view.analysis.tree.treemodel;
 
 public class NodeContext {
 

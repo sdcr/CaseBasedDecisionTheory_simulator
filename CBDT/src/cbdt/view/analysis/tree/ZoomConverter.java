@@ -2,6 +2,8 @@ package cbdt.view.analysis.tree;
 
 import java.awt.Point;
 
+import cbdt.view.analysis.tree.treemodel.NodeContext;
+
 public class ZoomConverter {
 
 	private NodeContext context;

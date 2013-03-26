@@ -8,6 +8,10 @@ import java.util.List;
 import processing.core.PApplet;
 import processing.core.PShape;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.view.analysis.tree.treemodel.NodeCircle;
+import cbdt.view.analysis.tree.treemodel.NodeCircleFactory;
+import cbdt.view.analysis.tree.treemodel.NodeContext;
+import cbdt.view.analysis.tree.treemodel.NodeLineFactory;
 
 public class TreePApplet extends PApplet{
 	public static final int WIDTH = 800;
