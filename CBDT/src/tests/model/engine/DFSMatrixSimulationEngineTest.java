@@ -6,15 +6,15 @@ import java.math.MathContext;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 
 public class DFSMatrixSimulationEngineTest {
 
+	@SuppressWarnings("unused")
 	private Parameters parameters;
 	
+	@SuppressWarnings("unused")
 	private DFSmatrixEngineConfig config;
 
 	@Before

@@ -17,7 +17,6 @@ import org.junit.Test;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
 import cbdt.model.parameters.ActorAction;
-import cbdt.view.analysis.AnalysisPageReference;
 import cbdt.view.analysis.ShowTreeSelectionListener;
 import cbdt.view.analysis.tree.TreePApplet;
 

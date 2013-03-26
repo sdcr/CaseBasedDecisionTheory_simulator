@@ -3,15 +3,15 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
 public class DFSkeepTreeSimulationEngineTest {
 
+	@SuppressWarnings("unused")
 	private Parameters parameters;
 
+	@SuppressWarnings("unused")
 	private DFSkeepTreeEngineConfig config;
 	
 	@Before
