@@ -1,5 +1,8 @@
 package simulation.core.view;
 
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
@@ -16,6 +19,7 @@ public class ForegroundManager implements IForegroundManager{
 	private Composite currentlyInBackgroundsParent;
 	private Composite pluginPane;	
 	private AbstractPluginPageWrapper currentlyInForegroundPage;
+	private TreeViewer viewer;
 
 	public ForegroundManager(Composite foregroundParent) {
 		pluginPane = foregroundParent;
@@ -24,17 +28,25 @@ public class ForegroundManager implements IForegroundManager{
 
 	@Override
 	public void setToForeground(AbstractPluginPageWrapper pageFactory) {
-		if(currentlyInForegroundPage != null)
-			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
-		pageFactory.setParent(pluginPane);
-		currentlyInForegroundPage = pageFactory;
-		pluginPane.pack();
-		pluginPane.setFocus();
+		if(currentlyInForegroundPage != pageFactory){
+			if(currentlyInForegroundPage != null)
+				currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
+			pageFactory.setParent(pluginPane);
+			currentlyInForegroundPage = pageFactory;
+			pluginPane.pack();
+			pluginPane.setFocus();
+			IStructuredSelection selection = new StructuredSelection(pageFactory);
+			viewer.setSelection(selection, true);
+		}
 	}
 
 	@Override
 	public Shell getShell() {
 		return pluginPane.getShell();
+	}
+
+	public void setTreeViewer(TreeViewer viewer) {
+		this.viewer = viewer;
 	}
 	
 }

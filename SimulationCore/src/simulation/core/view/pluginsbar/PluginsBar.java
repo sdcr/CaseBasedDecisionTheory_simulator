@@ -2,6 +2,9 @@ package simulation.core.view.pluginsbar;
 
 import java.util.List;
 
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -9,6 +12,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.TreeItem;
 
 import simulation.core.view.ForegroundManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
@@ -22,6 +26,7 @@ public class PluginsBar extends Composite {
 
 	private TreeViewer viewer;
 	private PluginsBarSelectionChangeListener pluginsBarSelectionChangeListener;
+	private ForegroundManager foregroundManager;
 
 	public PluginsBar(Composite parent, int style) {
 		super(parent, style | SWT.BORDER);
@@ -60,10 +65,12 @@ public class PluginsBar extends Composite {
 	 * @param foregroundManager
 	 */
 	public void setForegroundManager(ForegroundManager foregroundManager){
+		this.foregroundManager = foregroundManager;
 		if(pluginsBarSelectionChangeListener!=null)
 			viewer.removeSelectionChangedListener(pluginsBarSelectionChangeListener);
 		pluginsBarSelectionChangeListener = new PluginsBarSelectionChangeListener(foregroundManager);
 		viewer.addSelectionChangedListener(pluginsBarSelectionChangeListener);
+		foregroundManager.setTreeViewer(viewer);
 	}
 	
 	/**
@@ -72,6 +79,11 @@ public class PluginsBar extends Composite {
 	 */
 	public void update(List<ISimulationPlugin> plugins) {
 		viewer.setInput(plugins);
+		viewer.expandAll();
+		try{
+			foregroundManager.setToForeground(plugins.get(0).getPageFactories().get(0));
+		}catch(Exception e){
+		}
 	}
 
 }
