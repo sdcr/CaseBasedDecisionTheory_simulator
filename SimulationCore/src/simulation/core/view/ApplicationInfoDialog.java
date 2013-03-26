@@ -26,8 +26,8 @@ public class ApplicationInfoDialog extends TitleAreaDialog {
    */
   public void create() {
     super.create();
-    setTitle("SimulationCore");
-    setMessage("Eine Laufzeitumgebung zur Simulation wirtschaftswissenschaflticher Prozesse.");
+    setTitle("Simulation Container");
+    setMessage("A runtime environment for the simulation of economic processes.");
   }
 
   /**
@@ -48,8 +48,8 @@ public class ApplicationInfoDialog extends TitleAreaDialog {
     area.setLayout(gridLayout);
     
     Label textLabel = new Label(area, SWT.NONE);
-    textLabel.setText("Diese Software ist während eines Interdisziplinären Projektes am" +
-    		"\nLehrstuhl für Wirtschaftswissenschaften der TU München entstanden.\n");
+    textLabel.setText("This software was developed as part of an interdisciplinary project" +
+    		"\nat the Chair of Economics at TU München.\n");
     
     GridData textGridData = new GridData();
     textGridData.horizontalSpan = 2;
@@ -58,7 +58,7 @@ public class ApplicationInfoDialog extends TitleAreaDialog {
     textLabel.setLayoutData(textGridData);
     
     Label developer = new Label(area, SWT.NONE);
-    developer.setText("Entwickler:");
+    developer.setText("Developer:");
     
     Label developerName = new Label(area, SWT.NONE);
     developerName.setText("Stephan da Costa Ribeiro");

@@ -37,7 +37,7 @@ public class PluginsBar extends Composite {
 		this.setLayout(gridLayout);
 		
 		Label pluginsBarTitle = new Label(this, SWT.NONE);
-		pluginsBarTitle.setText("Simulatios-Modul Explorer");
+		pluginsBarTitle.setText("Simulation module explorer");
 		createTreeViewer();
 	}
 
