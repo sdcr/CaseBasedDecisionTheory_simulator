@@ -8,10 +8,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.pde.build.Build"
-            name="simulationCore">
+            name="Simulation Container">
          <property
                name="appName"
-               value="simulationCore">
+               value="Simulation Container">
          </property>
          <property
                name="preferenceCustomization"

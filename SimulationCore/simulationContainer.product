@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="simulationCore" id="SimulationCore.product" application="org.eclipse.pde.build.Build" useFeatures="false" includeLaunchers="true">
-
+<product name="Simulation Container" id="SimulationCore.product" application="org.eclipse.pde.build.Build" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -14,7 +13,6 @@
 
    <windowImages/>
 
-
    <launcher name="SimContainer">
       <solaris/>
       <win useIco="true">
@@ -23,11 +21,9 @@
       </win>
    </launcher>
 
-
    <vm>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</windows>
    </vm>
-
 
    <plugins>
       <plugin id="CBDT"/>

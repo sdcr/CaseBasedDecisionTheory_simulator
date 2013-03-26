@@ -18,7 +18,7 @@ public class NodeLine {
 		int x1 = pApplet.getZoomConverter().convertToWindowCoordinatesX(from.getDocumentCoordinateX());
 		int y1 = pApplet.getZoomConverter().convertToWindowCoordinatesY(from.getDocumentCoordinateY()) + NodeCircle.radius;
 		int x2 = pApplet.getZoomConverter().convertToWindowCoordinatesX(to.getDocumentCoordinateX());
-		int y2 = pApplet.getZoomConverter().convertToWindowCoordinatesX(to.getDocumentCoordinateY()) - NodeCircle.radius;
+		int y2 = pApplet.getZoomConverter().convertToWindowCoordinatesY(to.getDocumentCoordinateY()) - NodeCircle.radius;
 		pApplet.line(x1, y1, x2, y2);
 	}
 }
