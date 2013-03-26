@@ -33,11 +33,11 @@ public class ForegroundManager implements IForegroundManager{
 				currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
 			pageFactory.setParent(pluginPane);
 			currentlyInForegroundPage = pageFactory;
-			pluginPane.pack();
-			pluginPane.setFocus();
 			IStructuredSelection selection = new StructuredSelection(pageFactory);
 			viewer.setSelection(selection, true);
 		}
+		pluginPane.pack();
+		pluginPane.setFocus();
 	}
 
 	@Override
