@@ -12,4 +12,4 @@ Require-Bundle: SimulationCore;bundle-version="1.0.0",
  org.eclipse.jface;bundle-version="3.8.101",
  XStreamWrapper;bundle-version="1.0.0",
  org.eclipse.core.runtime;bundle-version="3.8.0",
- ProcessingWrapper;bundle-version="1.0.0"
+ ProcessingWrapper_x86_64;bundle-version="1.0.0"
