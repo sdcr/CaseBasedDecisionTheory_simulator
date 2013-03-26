@@ -56,9 +56,6 @@ public class EngineContext {
 		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(shell);
 		progressDialog.run(true, true, runnable);
 
-//		PostProcessor postProcessor = new PostProcessor();
-//		postProcessor.postProcess(result, engineConfig, commonConfig);
-		
 		return result;
 	}
 
