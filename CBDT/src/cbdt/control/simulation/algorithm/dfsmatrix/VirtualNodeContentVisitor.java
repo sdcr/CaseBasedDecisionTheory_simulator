@@ -48,8 +48,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 		selectedActionsIndices = new int[numberOfActions];
 		actionSelector = new ActionSelector(numberOfActions);
 		outcomeMatrix = factory.getOutcomeMatrix();
-		childContentGenerator = new ChildNodeContentGenerator(outcomeMatrix,
-				parameters.getWeightingFactorAlpha());
+		childContentGenerator = new ChildNodeContentGenerator(parameters, outcomeMatrix);
 	}
 
 	public int calculteNumberOfLeafs(Integer leafStage)

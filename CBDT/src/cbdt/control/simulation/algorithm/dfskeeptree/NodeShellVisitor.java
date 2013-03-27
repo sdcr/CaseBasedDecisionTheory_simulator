@@ -30,7 +30,7 @@ public class NodeShellVisitor extends NodeVisitor {
 		this.result = result;
 		this.monitor = monitor;
 		actionSelector = new ActionSelector(parameters.getActorActions());
-		childContentGenerator = new ChildNodeContentGenerator(parameters.getWeightingFactorAlpha(), factory);
+		childContentGenerator = new ChildNodeContentGenerator(parameters, factory);
 	}
 
 	public void visitRecursively(NodeShell nodeShell, int childrensStage) throws InterruptedException{

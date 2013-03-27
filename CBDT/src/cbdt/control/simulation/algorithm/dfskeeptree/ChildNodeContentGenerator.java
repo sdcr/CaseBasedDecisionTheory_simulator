@@ -2,14 +2,15 @@ package cbdt.control.simulation.algorithm.dfskeeptree;
 
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
+import cbdt.model.parameters.Parameters;
 
 public class ChildNodeContentGenerator {
 
 	private NodeContentKeepTreeFactory factory;
-	private double aspirationLevelDiscountFactor;
+	private AspirationLevelGenerator aspirationLevelGenerator;
 	
-	public ChildNodeContentGenerator(double aspirationLevelDiscountFactor, NodeContentKeepTreeFactory factory) {
-		this.aspirationLevelDiscountFactor = aspirationLevelDiscountFactor;
+	public ChildNodeContentGenerator(Parameters parameters, NodeContentKeepTreeFactory factory) {
+		aspirationLevelGenerator = new AspirationLevelGenerator(parameters);
 		this.factory = factory;
 	}
 	
@@ -24,22 +25,10 @@ public class ChildNodeContentGenerator {
 		childsContent.getSumOfUtilities().put(selectedAction, parentContent.getSumOfUtilities().get(selectedAction) + outcome.getUtility());
 		childsContent.setLastAction(selectedAction);
 		
-		double childsAspirationLevel = computeChildsAspirationLevel(parentContent.getAspirationLevel(), childsContent);
+		double childsAspirationLevel = aspirationLevelGenerator.computeChildsAspirationLevel(parentContent.getAspirationLevel(), childsContent);
 		childsContent.setAspirationLevel(childsAspirationLevel);
 		return childsContent;
 	}
 
-	private double computeChildsAspirationLevel(double parentAspirationLevel, NodeContentKeepTree childsContent) {
-		double maxAverageUtility = Double.NEGATIVE_INFINITY;
-		for(ActorAction existingAction : childsContent.getNumberOfOccurances().keySet()){
-			Integer actionOccurances = childsContent.getNumberOfOccurances().get(existingAction);
-			if(actionOccurances>0){
-				double averageUtility = childsContent.getSumOfUtilities().get(existingAction) / actionOccurances;
-				maxAverageUtility = Math.max(maxAverageUtility, averageUtility);
-			}
-		}				
-		double childsAspirationLevel = parentAspirationLevel * aspirationLevelDiscountFactor
-				+ maxAverageUtility*(1-aspirationLevelDiscountFactor);
-		return childsAspirationLevel;
-	}
+
 }
