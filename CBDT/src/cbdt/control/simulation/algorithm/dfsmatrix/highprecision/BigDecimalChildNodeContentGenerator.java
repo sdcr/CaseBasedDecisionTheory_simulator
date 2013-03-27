@@ -18,7 +18,7 @@ public class BigDecimalChildNodeContentGenerator {
 	}
 	
 	public void computeChildContent(BigDecimalNodeContent parentContent, BigDecimalNodeContent childContent, BigDecimal multiActionProbability,
-			int selectedActionIndex, int outcomeIndex) {
+			int selectedActionIndex, int outcomeIndex, int indexOfChildrensStage) {
 		for(int actionIndex=0; actionIndex< numberOfActorActions; actionIndex++){
 			childContent.numberOfOccurances[actionIndex] = parentContent.numberOfOccurances[actionIndex];
 			childContent.sumOfUtilities[actionIndex] = parentContent.sumOfUtilities[actionIndex];
@@ -30,7 +30,7 @@ public class BigDecimalChildNodeContentGenerator {
 		childContent.probabilityProduct = parentContent.probabilityProduct.multiply(
 				multiActionProbability.multiply(
 						outcomeMatrix[selectedActionIndex][outcomeIndex].probabilty, NodeVisitor.mathContext), NodeVisitor.mathContext);
-		childContent.aspirationLevel = aspirationLevelGenerator.calculateChildsAspirationLevel(parentContent, childContent);
+		childContent.aspirationLevel = aspirationLevelGenerator.calculateChildsAspirationLevel(parentContent, childContent, indexOfChildrensStage);
 	}
 
 

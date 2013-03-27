@@ -63,7 +63,7 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 					BigDecimalNodeContent childContent = contentsMatrix[childrenStage][childIndex];
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
-							selectedActionIndex, outcomeIndex);
+							selectedActionIndex, outcomeIndex, stage);
 
 					if(leafStage==null){
 						childrensExpectedUtilitySum = childrensExpectedUtilitySum.add(

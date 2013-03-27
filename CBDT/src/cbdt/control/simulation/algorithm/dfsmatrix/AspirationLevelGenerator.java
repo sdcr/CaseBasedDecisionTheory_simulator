@@ -13,7 +13,8 @@ public class AspirationLevelGenerator {
 		aspirationLevelDiscountFactor = parameters.getWeightingFactorAlpha();
 	}
 	
-	public double calculateChildsAspirationLevel(NodeContent parentContent, NodeContent childContent) {
+	public double calculateChildsAspirationLevel(NodeContent parentContent, NodeContent childContent, int indexOfChildrensStage) {
+		System.out.println(indexOfChildrensStage);
 		double childsAspirationLevel = parentContent.aspirationLevel * aspirationLevelDiscountFactor
 				+ (computeChildsMaxAverageUtility(childContent) * (1 - aspirationLevelDiscountFactor));
 		return childsAspirationLevel;

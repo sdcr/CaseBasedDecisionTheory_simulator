@@ -10,7 +10,8 @@ public class AspirationLevelGenerator {
 		this.parameters = parameters;
 	}
 	
-	public double computeChildsAspirationLevel(double parentAspirationLevel, NodeContentKeepTree childsContent) {
+	public double computeChildsAspirationLevel(double parentAspirationLevel, int indexOfChildrensStage, NodeContentKeepTree childsContent) {
+		System.out.println(indexOfChildrensStage);
 		double maxAverageUtility = Double.NEGATIVE_INFINITY;
 		for(ActorAction existingAction : childsContent.getNumberOfOccurances().keySet()){
 			Integer actionOccurances = childsContent.getNumberOfOccurances().get(existingAction);

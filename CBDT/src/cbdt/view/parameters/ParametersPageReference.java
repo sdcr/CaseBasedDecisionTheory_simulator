@@ -25,7 +25,7 @@ public class ParametersPageReference extends AbstractPluginPageWrapper {
 
 	@Override
 	public String getName() {
-		return "Parameter Values";
+		return "Parameter values";
 	}
 
 	@Override

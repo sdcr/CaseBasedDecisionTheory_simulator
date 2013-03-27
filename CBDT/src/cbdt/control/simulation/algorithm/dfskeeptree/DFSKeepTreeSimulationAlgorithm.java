@@ -48,7 +48,7 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 			List<NodeShell> childrenShells = new ArrayList<NodeShell>();
 			StageResult childrensStageResult = result.getStageResults().get(monitoredStage);
 			for(NodeShell parentShell : stageNodeShells){
-				nodeShellVisitor.computeChildren(parentShell, childrensStageResult);
+				nodeShellVisitor.computeChildren(parentShell, childrensStageResult, monitoredStage);
 				childrenShells.addAll(parentShell.getChildren());
 			}
 			stageNodeShells = childrenShells;

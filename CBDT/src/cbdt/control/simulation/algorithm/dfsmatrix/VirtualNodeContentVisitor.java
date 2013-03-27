@@ -96,7 +96,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 					NodeContent childContent = contentsMatrix[childrenStage][childIndex];
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
-							selectedActionIndex, outcomeIndex);
+							selectedActionIndex, outcomeIndex, stage);
 
 					if (leafStage == null) {
 						childrensExpectedUtilitySum += childContent.probabilityProduct

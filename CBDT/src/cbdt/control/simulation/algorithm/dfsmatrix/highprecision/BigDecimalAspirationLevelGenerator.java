@@ -16,7 +16,8 @@ public class BigDecimalAspirationLevelGenerator {
 	}
 	
 	public BigDecimal calculateChildsAspirationLevel(BigDecimalNodeContent parentContent,
-			BigDecimalNodeContent childContent) {
+			BigDecimalNodeContent childContent, int indexOfChildrensStage) {
+		System.out.println(indexOfChildrensStage);
 		return parentContent.aspirationLevel.multiply(aspirationLevelDiscountFactor, NodeVisitor.mathContext).add(
 				computeChildsMaxAverageUtility(childContent).multiply(NodeVisitor.big_one.subtract(aspirationLevelDiscountFactor,
 						NodeVisitor.mathContext), NodeVisitor.mathContext), NodeVisitor.mathContext);

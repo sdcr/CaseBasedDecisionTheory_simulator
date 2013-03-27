@@ -15,7 +15,7 @@ public class ChildNodeContentGenerator {
 	}
 	
 	public NodeContentKeepTree computeChildContent(NodeContentKeepTree parentContent,
-			double multiActionProbability, ActorActionOutcome outcome) {
+			double multiActionProbability, ActorActionOutcome outcome, int indexOfChildrensStage) {
 		NodeContentKeepTree childsContent = factory.getCopy(parentContent);
 		
 		ActorAction selectedAction = outcome.getAction();
@@ -25,7 +25,7 @@ public class ChildNodeContentGenerator {
 		childsContent.getSumOfUtilities().put(selectedAction, parentContent.getSumOfUtilities().get(selectedAction) + outcome.getUtility());
 		childsContent.setLastAction(selectedAction);
 		
-		double childsAspirationLevel = aspirationLevelGenerator.computeChildsAspirationLevel(parentContent.getAspirationLevel(), childsContent);
+		double childsAspirationLevel = aspirationLevelGenerator.computeChildsAspirationLevel(parentContent.getAspirationLevel(), indexOfChildrensStage, childsContent);
 		childsContent.setAspirationLevel(childsAspirationLevel);
 		return childsContent;
 	}

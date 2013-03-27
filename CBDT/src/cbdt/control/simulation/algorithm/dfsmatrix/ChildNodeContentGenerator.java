@@ -16,7 +16,7 @@ public class ChildNodeContentGenerator {
 	}
 	
 	public void computeChildContent(NodeContent parentContent, NodeContent childContent, double multiActionProbability,
-			int selectedActionIndex, int outcomeIndex) {
+			int selectedActionIndex, int outcomeIndex, int indexOfChildrensStage) {
 		for(int actionIndex=0; actionIndex< numberOfActorActions; actionIndex++){
 			childContent.numberOfOccurances[actionIndex] = parentContent.numberOfOccurances[actionIndex];
 			childContent.sumOfUtilities[actionIndex] = parentContent.sumOfUtilities[actionIndex];
@@ -26,7 +26,7 @@ public class ChildNodeContentGenerator {
 		childContent.sumOfUtilities[selectedActionIndex] = 
 				childContent.sumOfUtilities[selectedActionIndex] + outcomeMatrix[selectedActionIndex][outcomeIndex].getUtility();
 		childContent.probabilityProduct = parentContent.probabilityProduct * multiActionProbability * outcomeMatrix[selectedActionIndex][outcomeIndex].getProbability();
-		childContent.aspirationLevel = aspirationLevelGenerator.calculateChildsAspirationLevel(parentContent, childContent);
+		childContent.aspirationLevel = aspirationLevelGenerator.calculateChildsAspirationLevel(parentContent, childContent, indexOfChildrensStage);
 	}
 
 
