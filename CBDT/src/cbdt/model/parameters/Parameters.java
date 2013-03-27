@@ -17,13 +17,18 @@ public class Parameters extends Observable {
 
 	private double initialAspirationLevel;
 
-	//TODO implement the sparse increment mechanism
 	/**
 	 * The value with which the aspiration level is increased at a sparse set of
 	 * simulation steps.
 	 */
 	private double aspirationLevelIncrement;
 
+	/**
+	 * Denotes whether the aspiration level increment should be used at sparse 
+	 * points in time instead of weighting the with the previous aspiration level.  
+	 */
+	private boolean usingAspirationLevelIncrement;
+	
 	/**
 	 * A list of ActorActions from which the actor can choose.
 	 */
@@ -135,6 +140,15 @@ public class Parameters extends Observable {
 				.doubleToLongBits(other.weightingFactorAlpha))
 			return false;
 		return true;
+	}
+
+	public boolean isUsingAspirationLevelIncrement() {
+		return usingAspirationLevelIncrement;
+	}
+
+	public void setUsingAspirationLevelIncrement(
+			boolean usingAspirationLevelIncrement) {
+		this.usingAspirationLevelIncrement = usingAspirationLevelIncrement;
 	}
 	
 }
