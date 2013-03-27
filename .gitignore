@@ -4,13 +4,6 @@
 !XStreamWrapper/
 XStreamWrapper/org/*
 XStreamWrapper/com/*
-!ProcessingWrapper/
-ProcessingWrapper/icon/*
-ProcessingWrapper/japplemenubar/*
-ProcessingWrapper/processing/*
-ProcessingWrapper/com/*
-ProcessingWrapper/gluegen/*
-ProcessingWrapper/javax/*
-ProcessingWrapper/jogamp/*
-ProcessingWrapper/jogl/*
-!.gitignore
+!ProcessingWrapp.win32.x86/
+!ProcessingWrapper.win32.x86_64/
+.gitignore

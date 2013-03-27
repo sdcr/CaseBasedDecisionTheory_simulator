@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ProcessingWrapper
 Bundle-SymbolicName: ProcessingWrapper;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.2
 Bundle-ClassPath: .
 Export-Package: com.jogamp.common,
  com.jogamp.common.jvm,
