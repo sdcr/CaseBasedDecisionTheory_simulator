@@ -11,8 +11,8 @@ import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.control.pages.engineconfig.DFSmatrixHighPrecisionConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
-import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.SimpleParameterComposite;
+import cbdt.view.parameters.aspirationlevel.SimpleParameterHintLabelWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 
 public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
@@ -30,11 +30,11 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 
 		requiredDecimalPlacesComposite = new SimpleParameterComposite(
 				parent);
-		requiredDecimalPlacesComposite.setHintLabel(new HintLabelWrapper(
+		requiredDecimalPlacesComposite.setHintLabel(new SimpleParameterHintLabelWrapper(
 				requiredDecimalPlacesComposite));
 		requiredDecimalPlacesComposite
 				.setToolTipText("The value must be a natural number");
-		GridData reqDecPlacesCompositeGridData = new GridData();
+		GridData reqDecPlacesCompositeGridData = (GridData) requiredDecimalPlacesComposite.getLayoutData();
 		reqDecPlacesCompositeGridData.verticalIndent = MARGIN_TOP;
 		requiredDecimalPlacesComposite.setLayoutData(reqDecPlacesCompositeGridData);
 

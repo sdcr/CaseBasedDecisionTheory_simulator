@@ -29,9 +29,9 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 
 	private ActorActionsComposite actorActionsComposite;
 	private AbstractAspirationLevelParameterComposite initialAspirationLevelComposite;
-	private AbstractAspirationLevelParameterComposite aspirationLevelIncrementComposite;
+	private AspirationLevelIncrementComposite aspirationLevelIncrementComposite;
 	private AbstractAspirationLevelParameterComposite aspirationLevelDiscountComposite;
-	private ConfigWidgetsWrapperManager configsComposite;
+	private ConfigWidgetsWrapperManager configsCompositeWrapperManager;
 	private Composite parametersWrapper;
 
 	public ParametersPage(Composite parent, int style,
@@ -58,11 +58,11 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		createParameterLabel("Initial aspiration level:");
 		initialAspirationLevelComposite = new InitialAspirationLevelComposite(
 				parametersWrapper, getController());
-		createParameterLabel("Aspiration level increment:");
-		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(
-				parametersWrapper, getController());
 		createParameterLabel("Aspiration discount factor:");
 		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(
+				parametersWrapper, getController());
+		createParameterLabel("Aspiration level increment:");
+		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(
 				parametersWrapper, getController());
 
 		Composite spacerComposite = new Composite(parametersWrapper, SWT.NONE);
@@ -73,7 +73,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 
 		createEngineConfigTitleLabel();
 
-		configsComposite = new ConfigWidgetsWrapperManager(parametersWrapper,
+		configsCompositeWrapperManager = new ConfigWidgetsWrapperManager(parametersWrapper,
 				getController());
 
 		Button startComputationButton = new Button(this, SWT.PUSH | SWT.END);
@@ -142,6 +142,6 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	}
 
 	public void setConfigChoiceModel(EngineConfigChoice configChoice) {
-		configsComposite.setConfigChoiceModel(configChoice);
+		configsCompositeWrapperManager.setConfigChoiceModel(configChoice);
 	}
 }

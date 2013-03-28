@@ -5,7 +5,6 @@ import java.util.Observer;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.model.parameters.Parameters;
-import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.SimpleParameterComposite;
 
 public abstract class AbstractAspirationLevelParameterComposite extends
@@ -13,9 +12,7 @@ public abstract class AbstractAspirationLevelParameterComposite extends
 
 	public AbstractAspirationLevelParameterComposite(Composite parent) {
 		super(parent);
-		HintLabelWrapper hintLabelWrapper = new HintLabelWrapper(this);
-		hintLabelWrapper.setToolTipText("The value must be a decimal.");
-		this.setHintLabel(hintLabelWrapper);
+		this.setHintLabel(new SimpleParameterHintLabelWrapper(this));
 	}
 
 	public void setParametersModel(Parameters parametersModel) {

@@ -1,9 +1,7 @@
 package cbdt.view.parameters;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -20,16 +18,15 @@ public class SimpleParameterComposite extends Composite {
 	public SimpleParameterComposite(Composite parent) {
 		super(parent, SWT.NONE);
 
-		GridData gridData = new GridData();
-		gridData.widthHint = 200;
-		this.setLayoutData(gridData);
+		SimpleParameterGridDataFactory gridDataFactory = new SimpleParameterGridDataFactory();
+		this.setLayoutData(gridDataFactory.getCompositesGridData());
 
-		this.setLayout(new RowLayout());
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.horizontalSpacing = 0;
+		this.setLayout(gridLayout);
 
 		text = new Text(this, SWT.SINGLE | SWT.BORDER);
-		RowData textRowData = new RowData();
-		textRowData.width = 150;
-		text.setLayoutData(textRowData);
+		text.setLayoutData(gridDataFactory.getTextGridData());
 	}
 
 	public Text getText() {
