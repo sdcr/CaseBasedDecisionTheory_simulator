@@ -151,7 +151,6 @@ public class Parameters extends Observable {
 		this.usingAspirationLevelIncrement = usingAspirationLevelIncrement;
 		setChanged();
 		notifyObservers();
-		System.out.println(this.usingAspirationLevelIncrement+ " "+ this.aspirationLevelIncrement);
 	}
 	
 }
