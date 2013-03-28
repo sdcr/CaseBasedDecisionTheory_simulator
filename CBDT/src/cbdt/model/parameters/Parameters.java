@@ -149,6 +149,9 @@ public class Parameters extends Observable {
 	public void setUsingAspirationLevelIncrement(
 			boolean usingAspirationLevelIncrement) {
 		this.usingAspirationLevelIncrement = usingAspirationLevelIncrement;
+		setChanged();
+		notifyObservers();
+		System.out.println(this.usingAspirationLevelIncrement+ " "+ this.aspirationLevelIncrement);
 	}
 	
 }

@@ -14,12 +14,14 @@ import cbdt.control.validators.DoubleFormatChecker;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameters.SimpleParameterGridDataFactory;
 import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelIncrementModifyListener;
+import cbdt.view.parameters.aspirationlevel.listeners.UseAspirationLevelIncrementSelectionListener;
 
 public class AspirationLevelIncrementComposite extends
 		Composite implements Observer{
 
 	private Text text;
 	private DoubleFormatChecker doubleFormatChecker;
+	private Button useAspirationLevelIncrementButton;
 
 	public AspirationLevelIncrementComposite(Composite parent,
 			ParametersPageController controller) {
@@ -31,8 +33,8 @@ public class AspirationLevelIncrementComposite extends
 		gridLayout.horizontalSpacing = 0;
 		this.setLayout(gridLayout);
 		
-		Button useAspirationLevelIncrement = new Button(this, SWT.CHECK);
-		useAspirationLevelIncrement.setText("increment by");
+		useAspirationLevelIncrementButton = new Button(this, SWT.CHECK);
+		useAspirationLevelIncrementButton.setText("increment by");
 
 		text = new Text(this, SWT.SINGLE | SWT.BORDER);
 		text.setLayoutData(gridDataFactory.getTextGridData());
@@ -43,14 +45,20 @@ public class AspirationLevelIncrementComposite extends
 		text.addModifyListener(
 				new AspirationLevelIncrementModifyListener(controller,
 						hintLabelWrapper, doubleFormatChecker));
+		
+		useAspirationLevelIncrementButton
+			.addSelectionListener(new UseAspirationLevelIncrementSelectionListener(
+				controller, useAspirationLevelIncrementButton));
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Parameters) {
 			Parameters params = (Parameters) o;
-			text.setText(
-					String.valueOf(params.getAspirationLevelIncrement()));
+			boolean usingAspirationLevelIncrement = params.isUsingAspirationLevelIncrement();
+			useAspirationLevelIncrementButton.setSelection(usingAspirationLevelIncrement);
+			text.setEnabled(usingAspirationLevelIncrement);
+			text.setText(String.valueOf(params.getAspirationLevelIncrement()));
 		}
 	}
 	

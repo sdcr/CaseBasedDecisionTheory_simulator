@@ -141,4 +141,8 @@ public class ParametersPageController extends AbstractPageController {
 		configChoice.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
 	}
 
+	public void setUsingAspirationLevelIncrement(boolean selection) {
+		parametersModel.setUsingAspirationLevelIncrement(selection);
+	}
+
 }
