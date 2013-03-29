@@ -113,7 +113,10 @@ public class AnalysisTableViewer extends TableViewer{
 								return stageResult.getRelativeBigDecimalActionOccurances().get(action).toString();
 							}
 							StageResult stageResult = (StageResult) element;
-							return Double.toString(stageResult.getRelativeActionOccurances().get(action));
+							if(stageResult.getStage()!=0)
+								return Double.toString(stageResult.getRelativeActionOccurances().get(action));
+							else
+								return "-";
 						}
 					});
 					relativeOccuranceColumns.add(colRelOccurances);
