@@ -61,6 +61,7 @@ public class AnalysisPage extends Composite {
 		this.config = configChoice.getCurrentlyChoosenConfig();
 		this.simulationResult = simulationResult;
 		tableViewer.createOccuranceColumns(configChoice.getCommonConfig(), simulationResult);
+		tableViewer.createLowestAspirationLevelColumn(configChoice.getCommonConfig(), simulationResult);
 		tableViewer.setInput(simulationResult.getStageResults());
 		tableViewer.resizeTable();
 		updateButtons();

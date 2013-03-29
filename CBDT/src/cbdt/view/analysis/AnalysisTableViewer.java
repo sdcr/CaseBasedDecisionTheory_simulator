@@ -25,6 +25,7 @@ public class AnalysisTableViewer extends TableViewer{
 
 	private List<TableViewerColumn> absoluteOccuranceColumns;
 	private List<TableViewerColumn> relativeOccuranceColumns;
+	private TableViewerColumn lowestAspirationLevelColumn;
 	
 	public AnalysisTableViewer(Composite parent) {
 		super(parent, SWT.MULTI | SWT.H_SCROLL
@@ -121,6 +122,27 @@ public class AnalysisTableViewer extends TableViewer{
 		}
 	}
 
+	public void createLowestAspirationLevelColumn(CommonEngineConfiguration commonConfig, Result simulationResult){
+		if(lowestAspirationLevelColumn != null)
+			lowestAspirationLevelColumn.getColumn().dispose();
+		if(commonConfig.isCalculateLowestAspirationLevels()){
+			lowestAspirationLevelColumn = new TableViewerColumn(this, SWT.NONE);
+			lowestAspirationLevelColumn.getColumn().setText("Lowest asp. level");
+			lowestAspirationLevelColumn.getColumn().setWidth(100);
+			lowestAspirationLevelColumn.setLabelProvider(new ColumnLabelProvider(){
+				@Override
+				public String getText(Object element) {
+					if(element instanceof BigDecimalStageResult){
+						BigDecimalStageResult stageResult = (BigDecimalStageResult) element;
+						return stageResult.getLowestBigDecimalAspirationLevel().toString();
+					}
+					StageResult stageResult = (StageResult) element;
+					return Double.toString(stageResult.getLowestAspirationLevel());
+				}
+			});
+		}
+	}
+	
 	private void disposeOccuranceColumns() {
 		for(TableViewerColumn column : absoluteOccuranceColumns){
 			column.getColumn().dispose();
