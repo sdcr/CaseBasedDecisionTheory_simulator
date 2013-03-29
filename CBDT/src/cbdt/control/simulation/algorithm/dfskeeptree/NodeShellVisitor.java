@@ -66,7 +66,7 @@ public class NodeShellVisitor extends NodeVisitor {
 				if(commonConfig.isCalculateRelativeActionOccurances()){
 					increaseRelativeOccurance(childrensStageResult, childsContent.getProbabilityProduct(), selectedAction);
 				}
-					
+				
 			}
 			if(commonConfig.isCalculateAbsoluteActionOccurances()){// || commonConfig.isCalculateRelativeActionOccurances()) {
 				increaseAbsoluteOccurance(childrensStageResult, selectedAction);
