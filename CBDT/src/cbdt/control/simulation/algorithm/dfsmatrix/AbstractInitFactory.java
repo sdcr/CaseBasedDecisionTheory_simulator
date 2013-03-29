@@ -21,6 +21,8 @@ public abstract class AbstractInitFactory {
 	public abstract INodeContent[][] getInitialContentsMatrix();
 	
 	public abstract Object[] getInitExpectedUtilities();
+
+	public abstract Object[] getInitLowestAspirationLevels();
 	
 //	public abstract Object[][] getInitialRelativeActionOccurances();
 	

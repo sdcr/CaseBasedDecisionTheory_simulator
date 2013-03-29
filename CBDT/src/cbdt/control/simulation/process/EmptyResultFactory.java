@@ -35,6 +35,7 @@ public class EmptyResultFactory {
 		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			BigDecimalStageResult stageResult = new BigDecimalStageResult();
 			stageResult.setExpectedBigDecimalUtility(new BigDecimal(0));
+			stageResult.setLowestBigDecimalAspirationLevel(new BigDecimal(Double.MAX_VALUE));
 			initStageResult(commonConfig, parameters, i, stageResult);
 			stageResults.add(stageResult);
 		}
@@ -45,6 +46,7 @@ public class EmptyResultFactory {
 		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			StageResult stageResult = new StageResult();
 			stageResult.setExpectedUtility(0);
+			stageResult.setLowestAspirationLevel(Double.MAX_VALUE);
 			initStageResult(commonConfig, parameters, i, stageResult);
 			stageResults.add(stageResult);
 		}

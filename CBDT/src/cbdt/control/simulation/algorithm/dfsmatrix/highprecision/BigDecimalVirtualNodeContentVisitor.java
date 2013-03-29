@@ -16,6 +16,7 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 	private BigDecimalChildNodeContentGenerator childContentGenerator;
 	private BigDecimalNodeContent[][] contentsMatrix;
 	private BigDecimal[][] relativeActionOccurances;
+	private BigDecimal[] lowestAspirationLevels;
 
 	public BigDecimalVirtualNodeContentVisitor(Parameters parameters,
 			CommonEngineConfiguration commonConfig, 
@@ -24,12 +25,14 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 			BigDecimal[] emptyExpectedUtilities,
 			BigDecimal[][] absoluteActionOccurances,  
 			BigDecimal[][] relativeActionOccurances,  
-			IProgressMonitor monitor) {
+			IProgressMonitor monitor,
+			BigDecimal[] emptyLowestAspirationLevels) {
 		super(parameters, commonConfig, null, factory, null,
-				absoluteActionOccurances, null, monitor);
+				absoluteActionOccurances, null, monitor, null);
 		this.contentsMatrix = contentsMatrix;
 		this.expectedUtilities = emptyExpectedUtilities;
 		this.relativeActionOccurances = relativeActionOccurances;
+		this.lowestAspirationLevels = emptyLowestAspirationLevels;
 		childContentGenerator = new BigDecimalChildNodeContentGenerator(outcomeMatrix,
 				new BigDecimal(parameters.getWeightingFactorAlpha()), 
 				parameters.isUsingAspirationLevelIncrement(), 
@@ -66,13 +69,14 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
 							selectedActionIndex, outcomeIndex, stage);
-					System.out.println(childContent.aspirationLevel);
 
 					if(leafStage==null){
 						childrensExpectedUtilitySum = childrensExpectedUtilitySum.add(
 								childContent.probabilityProduct.multiply(
 								((BigDecimalActorActionOutcome)(outcomeMatrix[selectedActionIndex][outcomeIndex])).utility, 
 								NodeVisitor.mathContext), NodeVisitor.mathContext);
+						if(commonConfig.isCalculateLowestAspirationLevels())
+							updateLowestAspirationUtilities(childContent.aspirationLevel, stage);
 					}
 					if (leafStage==null && commonConfig.isCalculateRelativeActionOccurances()){
 						relativeActionOccurances[stage][selectedActionIndex] = 
@@ -92,6 +96,13 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 				monitor.worked(1);
 		}
 
+	}
+
+	private void updateLowestAspirationUtilities(BigDecimal aspirationLevel,
+			int stage) {
+		if(lowestAspirationLevels[stage].compareTo(aspirationLevel)==-1){
+			lowestAspirationLevels[stage] = aspirationLevel;
+		}
 	}
 
 	

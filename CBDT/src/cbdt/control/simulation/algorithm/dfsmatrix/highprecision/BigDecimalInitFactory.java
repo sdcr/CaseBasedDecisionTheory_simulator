@@ -65,6 +65,15 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 	}
 
 	@Override
+	public BigDecimal[] getInitLowestAspirationLevels() {
+		BigDecimal[] lowestAspirationLevels = new BigDecimal[commonConfig
+		                                                .getNumberOfRequestedExpectedUtilityValues()];
+		for (int i = 0; i < lowestAspirationLevels.length; i++)
+			lowestAspirationLevels[i] = new BigDecimal(Integer.MAX_VALUE);
+		return lowestAspirationLevels;
+	}
+	
+	@Override
 	public ActorActionOutcome[][] getOutcomeMatrix() {
 		BigDecimalActorActionOutcome[][] outcomeMatrix = new BigDecimalActorActionOutcome[parameters
 				.getActorActions().size()][];

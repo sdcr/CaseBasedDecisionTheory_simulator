@@ -75,8 +75,16 @@ public class BasicInitFactory extends AbstractInitFactory {
 			expectedUtilities[i] = (double) 0;
 		return expectedUtilities;
 	}
+	
+	@Override
+	public Double[] getInitLowestAspirationLevels() {
+		Double[] lowestAspirationLevels = new Double[commonConfig
+		                                        .getNumberOfRequestedExpectedUtilityValues()];
+		for (int i = 0; i < lowestAspirationLevels.length; i++)
+			lowestAspirationLevels[i] = (double) 0;
+		return null;
+	}
 
-//	@Override
 	public Double[][] getInitialRelativeActionOccurances() {
 		int numberOfActorActions = parameters.getActorActions().size();
 		Double[][] relativeActionOccurances = new Double[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];

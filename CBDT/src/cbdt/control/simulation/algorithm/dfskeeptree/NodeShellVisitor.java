@@ -66,7 +66,11 @@ public class NodeShellVisitor extends NodeVisitor {
 				if(commonConfig.isCalculateRelativeActionOccurances()){
 					increaseRelativeOccurance(childrensStageResult, childsContent.getProbabilityProduct(), selectedAction);
 				}
-				
+				if(commonConfig.isCalculateLowestAspirationLevels()){
+					childrensStageResult.setLowestAspirationLevel(Math.min(
+							childrensStageResult.getLowestAspirationLevel(),
+							childsContent.getAspirationLevel()));
+				}
 			}
 			if(commonConfig.isCalculateAbsoluteActionOccurances()){// || commonConfig.isCalculateRelativeActionOccurances()) {
 				increaseAbsoluteOccurance(childrensStageResult, selectedAction);

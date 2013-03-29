@@ -18,11 +18,12 @@ public class DFSHighPrecMatrixSimulationAlgorithm extends DFSMatrixSimulationAlg
 		absoluteActionOccurances = factory.getInitialActionOccurances();
 		BigDecimal[][] relativeActionOccurances = factory.getInitialActionOccurances();
 		BigDecimal[] expectedUtilities = (BigDecimal[])factory.getInitExpectedUtilities();
+		BigDecimal[] lowestAspirationLevels = (BigDecimal[])factory.getInitLowestAspirationLevels();
 		BigDecimalNodeContent[][] contentsMatrix = (BigDecimalNodeContent[][]) factory.getInitialContentsMatrix();
 		
 		BigDecimalVirtualNodeContentVisitor visitor = new BigDecimalVirtualNodeContentVisitor(parameters, 
 				commonConfig, contentsMatrix, factory, expectedUtilities, 
-				absoluteActionOccurances, relativeActionOccurances, monitor);
+				absoluteActionOccurances, relativeActionOccurances, monitor, lowestAspirationLevels);
 
 		computeWithVisitor(initResult, visitor);
 		
@@ -30,6 +31,7 @@ public class DFSHighPrecMatrixSimulationAlgorithm extends DFSMatrixSimulationAlg
 			BigDecimalStageResult stageResult = (BigDecimalStageResult)initResult.getStageResults().get(stage);
 			stageResult.setStage(stage);
 			stageResult.setExpectedBigDecimalUtility(expectedUtilities[stage]);
+			stageResult.setLowestBigDecimalAspirationLevel(lowestAspirationLevels[stage]);
 			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = makeToBigDecimalMap(stage, absoluteActionOccurances);
 			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
 			Map<ActorAction, BigDecimal> relativeActionOccurancesMap = makeToBigDecimalMap(stage, relativeActionOccurances);

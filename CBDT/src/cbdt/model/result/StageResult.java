@@ -15,6 +15,8 @@ public class StageResult {
 	
 	private Map<ActorAction, Double> relativeActionOccurances;
 
+	private double lowestAspirationLevel;
+	
 	public double getExpectedUtility() {
 		return expectedUtility;
 	}
@@ -45,5 +47,13 @@ public class StageResult {
 
 	public void setStage(int stage) {
 		this.stage = stage;
+	}
+
+	public double getLowestAspirationLevel() {
+		return lowestAspirationLevel;
+	}
+
+	public void setLowestAspirationLevel(double lowestAspirationLevel) {
+		this.lowestAspirationLevel = lowestAspirationLevel;
 	}
 }

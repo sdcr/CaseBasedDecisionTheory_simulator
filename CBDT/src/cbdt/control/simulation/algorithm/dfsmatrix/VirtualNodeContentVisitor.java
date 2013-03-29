@@ -27,6 +27,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 	protected Integer leafStage;
 	protected Integer progessStage;
 	protected CommonEngineConfiguration commonConfig;
+	private Double[] lowestAspirationLevels;
 
 	public VirtualNodeContentVisitor(Parameters parameters,
 			CommonEngineConfiguration commonConfig,
@@ -35,7 +36,8 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 			Double[] emptyExpectedUtilities,
 			BigDecimal[][] absoluteActionOccurances, 
 			Double[][] relativeActionOccurances, 
-			IProgressMonitor monitor) {
+			IProgressMonitor monitor,
+			Double[] lowestAspirationLevels) {
 		this.commonConfig = commonConfig;
 		this.contentsMatrix = contentsMatrix;
 		this.expectedUtilities = emptyExpectedUtilities;
@@ -43,6 +45,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 		this.relativeActionOccurances = relativeActionOccurances;
 		
 		this.monitor = monitor;
+		this.lowestAspirationLevels = lowestAspirationLevels;
 
 		int numberOfActions = parameters.getActorActions().size();
 		selectedActionsIndices = new int[numberOfActions];
@@ -102,6 +105,8 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 						childrensExpectedUtilitySum += childContent.probabilityProduct
 								* outcomeMatrix[selectedActionIndex][outcomeIndex]
 										.getUtility();
+						if(commonConfig.isCalculateLowestAspirationLevels())
+							lowestAspirationLevels[stage] = Math.min(lowestAspirationLevels[stage], childContent.getAspirationLevel());
 					}
 					
 					if (leafStage == null

@@ -28,11 +28,12 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 		absoluteActionOccurances = factory.getInitialActionOccurances();
 		relativeActionOccurances = factory.getInitialRelativeActionOccurances();
 		Double[] expectedUtilities = factory.getInitExpectedUtilities();
+		Double[] lowestAspirationLevels = factory.getInitLowestAspirationLevels();
 		NodeContent[][] contentsMatrix = factory.getInitialContentsMatrix();
 		
 		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, 
 				commonConfig, contentsMatrix, factory, expectedUtilities, 
-				absoluteActionOccurances, relativeActionOccurances, monitor);
+				absoluteActionOccurances, relativeActionOccurances, monitor, lowestAspirationLevels);
 
 		computeWithVisitor(initResult, visitor);
 		
@@ -41,6 +42,7 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 			StageResult stageResult = initResult.getStageResults().get(stage);
 			stageResult.setStage(stage);
 			stageResult.setExpectedUtility(expectedUtilities[stage]);
+			stageResult.setLowestAspirationLevel(lowestAspirationLevels[stage]);
 			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = new HashMap<ActorAction, BigDecimal>();
 			for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
 				absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), absoluteActionOccurances[stage][actionIndex]);

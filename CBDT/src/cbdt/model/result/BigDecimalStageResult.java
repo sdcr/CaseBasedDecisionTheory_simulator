@@ -10,6 +10,8 @@ public class BigDecimalStageResult extends StageResult {
 	private BigDecimal expectedBigDecimalUtility;
 	
 	private Map<ActorAction, BigDecimal> relativeBigDecimalActionOccurances;
+	
+	private BigDecimal lowestBigDecimalAspirationLevel;
 
 	public Map<ActorAction, BigDecimal> getRelativeBigDecimalActionOccurances() {
 		return relativeBigDecimalActionOccurances;
@@ -26,6 +28,15 @@ public class BigDecimalStageResult extends StageResult {
 
 	public void setExpectedBigDecimalUtility(BigDecimal expectedBigDecimalUtility) {
 		this.expectedBigDecimalUtility = expectedBigDecimalUtility;
+	}
+
+	public BigDecimal getLowestBigDecimalAspirationLevel() {
+		return lowestBigDecimalAspirationLevel;
+	}
+
+	public void setLowestBigDecimalAspirationLevel(
+			BigDecimal lowestBigDecimalAspirationLevel) {
+		this.lowestBigDecimalAspirationLevel = lowestBigDecimalAspirationLevel;
 	}
 	
 }
