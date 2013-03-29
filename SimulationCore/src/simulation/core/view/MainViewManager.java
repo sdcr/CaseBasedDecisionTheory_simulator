@@ -27,7 +27,7 @@ public class MainViewManager {
 	
 	private static final String WINDOW_TITLE = "Simulation Container";
 	private static final int DEFAULT_HEIGHT = 800;
-	private static final int DEFAULT_WIDTH = 840;
+	private static final int DEFAULT_WIDTH = 860;
 	
 	private PluginsBar pluginsBar;
 	private ForegroundManager foregroundManager;
