@@ -1,4 +1,4 @@
-package simulation.core.view;
+package cbdt.view.menu;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -14,9 +14,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-public class ApplicationInfoDialog extends TitleAreaDialog {
+public class PluginInfoDialog extends TitleAreaDialog {
 
-  public ApplicationInfoDialog(Shell shell) {
+  public PluginInfoDialog(Shell shell) {
     super(shell);
   }
 
@@ -26,8 +26,8 @@ public class ApplicationInfoDialog extends TitleAreaDialog {
    */
   public void create() {
     super.create();
-    setTitle("Simulation Container");
-    setMessage("A runtime environment for the simulation of processes in decision theory.");
+    setTitle("Case-Based Decision Theory");
+    setMessage("A plugin to simulate decision processes according to Case-Based Decision Theory.");
   }
 
   /**

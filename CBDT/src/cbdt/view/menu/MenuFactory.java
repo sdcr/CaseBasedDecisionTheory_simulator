@@ -15,9 +15,20 @@ public class MenuFactory {
 	    cbdtMenuHeader.setText("&CBDT");
 	    cbdtMenuHeader.setMenu(cbdtMenu);
 	    
-	    ParametersMenuFactory parametersMenuFactory = new ParametersMenuFactory();
-	    parametersMenuFactory.createParameterMenuItems(shell.getShell(), cbdtMenu, controller);
-
+		MenuItem saveParameters = new MenuItem(cbdtMenu, SWT.PUSH);
+		saveParameters.setText("&Save parameters");
+		saveParameters.addSelectionListener(new SaveParametersSelectionListener(shell.getShell(), controller));
+		
+		MenuItem openParameters = new MenuItem(cbdtMenu, SWT.PUSH);
+		openParameters.setText("&Open parameters");
+		openParameters.addSelectionListener(new OpenParametersSelectionListener(shell.getShell(), controller));
+	    
+		new MenuItem(cbdtMenu, SWT.SEPARATOR);
+		
+		MenuItem showInfo = new MenuItem(cbdtMenu, SWT.PUSH);
+		showInfo.setText("&Info");
+		showInfo.addSelectionListener(new ShowPluginInfoSelectionListener(shell.getShell()));
+	    
 		return cbdtMenu;
 	}
 
