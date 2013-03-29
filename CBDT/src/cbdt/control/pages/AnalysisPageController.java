@@ -6,6 +6,7 @@ import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageW
 import cbdt.control.persistence.results.IResultsPersistenceManager;
 import cbdt.control.persistence.results.ResultsPersistenceManager;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.result.Result;
 import cbdt.view.analysis.AnalysisPageReference;
@@ -15,7 +16,8 @@ public class AnalysisPageController extends AbstractPageController {
 	private Result simulationResult;
 	private AnalysisPageReference analysisPageReference;
 	private IResultsPersistenceManager resultPersistenceManager;
-	private AbstractEngineConfiguration usedConfig;
+	private AbstractEngineConfiguration usedEngineConfig;
+	private CommonEngineConfiguration commonConfig;
 	
 	public AnalysisPageController() {
 		analysisPageReference = new AnalysisPageReference(this);
@@ -30,13 +32,14 @@ public class AnalysisPageController extends AbstractPageController {
 	public void setSimulationResult(Result simulationResult, EngineConfigChoice configChoice) {
 		this.simulationResult = simulationResult;
 		analysisPageReference.getAnalysisPage().setResultModel(configChoice, simulationResult);
-		usedConfig = configChoice.getCurrentlyChoosenConfig();
+		usedEngineConfig = configChoice.getCurrentlyChoosenConfig();
+		commonConfig = configChoice.getCommonConfig();
 		getMainController().setToForeground(this);
 	}
 
 	public void exportResults(String filepathFromDialog) {
 		try {
-			resultPersistenceManager.saveResultToFile(filepathFromDialog, simulationResult, usedConfig);
+			resultPersistenceManager.saveResultToFile(filepathFromDialog, simulationResult, commonConfig, usedEngineConfig);
 		} catch (IOException e) {
 			getMessageBoxManager().showErrorMessage(e.getMessage());
 			e.printStackTrace();

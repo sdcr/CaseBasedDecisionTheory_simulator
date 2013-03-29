@@ -56,7 +56,7 @@ public class CommonConfigWidgetsWrapper implements Observer {
 
 	private void createSaveActionOccurancesCheckBoxes(Composite parent) {
 		calcActionOcurrancesLabel = new Label(parent, SWT.NONE);
-		calcActionOcurrancesLabel.setText("Save action occurences:");
+		calcActionOcurrancesLabel.setText("Save action occurrences:");
 		GridData labelGridData = new GridData();
 		labelGridData.verticalSpan = 2;
 		labelGridData.verticalAlignment = SWT.BEGINNING;
@@ -64,10 +64,10 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		calcActionOcurrancesLabel.setLayoutData(labelGridData);
 
 		absActionOcurrancesButton = new Button(parent, SWT.CHECK);
-		absActionOcurrancesButton.setText("absolute occurences");
+		absActionOcurrancesButton.setText("absolute occurrences");
 
 		relActionOcurrancesButton = new Button(parent, SWT.CHECK);
-		relActionOcurrancesButton.setText("relative occurences");
+		relActionOcurrancesButton.setText("relative occurrences");
 	}
 
 	private void createRequestedExpectedUtilitiesWidgets(Composite parent) {

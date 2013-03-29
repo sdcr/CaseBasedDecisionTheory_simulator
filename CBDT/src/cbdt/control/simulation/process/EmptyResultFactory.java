@@ -57,7 +57,7 @@ public class EmptyResultFactory {
 	private void initStageResult(CommonEngineConfiguration commonConfig,
 			Parameters parameters, int stage, StageResult stageResult) {
 		stageResult.setStage(stage);
-		if(commonConfig.isCalculateRelativeActionOccurances())// || commonConfig.isCalculateAbsoluteActionOccurances())
+		if(commonConfig.isCalculateAbsoluteActionOccurances())// || commonConfig.isCalculateAbsoluteActionOccurances())
 			stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
 		if(commonConfig.isCalculateRelativeActionOccurances())
 			stageResult.setRelativeActionOccurances(getEmptyRelativeActionOccuranceMap(parameters));
