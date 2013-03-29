@@ -26,21 +26,23 @@ public class ConfigWidgetsWrapperManager implements Observer {
 	private ConfigForegroundManager foregroundManager;
 	private ConfigWidgetsWrapperFactory configWidgetsFactory;
 	private CommonConfigWidgetsWrapper commonWidgets;
+	private ConfigBlockTitleLabelWrapper algoSpecificTitleWrapper;
 	
-	public ConfigWidgetsWrapperManager(Composite parametersPage,
+	public ConfigWidgetsWrapperManager(Composite parametersWrapper,
 			ParametersPageController controller) {
-		this.parametersPage = parametersPage;
+		this.parametersPage = parametersWrapper;
 		this.controller = controller;
 
-		foregroundManager = new ConfigForegroundManager(parametersPage);
 
-		Label parameterLabel = new Label(parametersPage, SWT.NONE);
+		Label parameterLabel = new Label(parametersWrapper, SWT.NONE);
 		parameterLabel.setText("Algorithm:");
-		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
-		commonWidgets = new CommonConfigWidgetsWrapper(parametersPage);
+		availableConfigsCombo = new Combo(parametersWrapper, SWT.READ_ONLY);
+		commonWidgets = new CommonConfigWidgetsWrapper(parametersWrapper);
 		commonWidgets.setController(controller);
-		ConfigBlockTitleLabelWrapper algoSpecificTitleWrapper = new ConfigBlockTitleLabelWrapper(parametersPage);
-		algoSpecificTitleWrapper.getLabel().setText("Algorithm-specific configurations:");
+		algoSpecificTitleWrapper = new ConfigBlockTitleLabelWrapper(parametersWrapper);
+		getAlgoSpecificTitleWrapper().getLabel().setText("Algorithm-specific configurations:");
+
+		foregroundManager = new ConfigForegroundManager(parametersWrapper, algoSpecificTitleWrapper.getLabel());
 	}
 
 	public void setConfigChoiceModel(EngineConfigChoice configChoice) {
@@ -102,4 +104,9 @@ public class ConfigWidgetsWrapperManager implements Observer {
 			}
 		}
 	}
+
+	public ConfigBlockTitleLabelWrapper getAlgoSpecificTitleWrapper() {
+		return algoSpecificTitleWrapper;
+	}
+
 }

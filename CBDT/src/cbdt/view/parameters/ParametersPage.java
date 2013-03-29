@@ -81,6 +81,10 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		startComputationButton.addSelectionListener(new StartComputationSelectionListener(controller));
 	}
 
+	public ConfigWidgetsWrapperManager getConfigsCompositeWrapperManager() {
+		return configsCompositeWrapperManager;
+	}
+
 	private void createEngineConfigTitleLabel() {
 		LabelFactory factory = new LabelFactory();
 		Label configLabel = factory.createTitleLabel(parametersWrapper, "Engine configuration:");

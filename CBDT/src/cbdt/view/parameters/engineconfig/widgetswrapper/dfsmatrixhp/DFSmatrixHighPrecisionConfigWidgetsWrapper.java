@@ -3,6 +3,7 @@ package cbdt.view.parameters.engineconfig.widgetswrapper.dfsmatrixhp;
 import java.util.Observable;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
@@ -12,6 +13,7 @@ import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.view.parameters.SimpleParameterComposite;
 import cbdt.view.parameters.aspirationlevel.SimpleParameterHintLabelWrapper;
+import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 
 public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
@@ -22,6 +24,9 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 
 	public DFSmatrixHighPrecisionConfigWidgetsWrapper(Composite parent) {
 		reqDecimalPlacesLabel = new Label(parent, SWT.NONE);
+		GridData labelLayoutData = new GridData();
+		labelLayoutData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
+		reqDecimalPlacesLabel.setLayoutData(labelLayoutData);
 		reqDecimalPlacesLabel.setText("Precision in decimal places:");
 
 		requiredDecimalPlacesComposite = new SimpleParameterComposite(

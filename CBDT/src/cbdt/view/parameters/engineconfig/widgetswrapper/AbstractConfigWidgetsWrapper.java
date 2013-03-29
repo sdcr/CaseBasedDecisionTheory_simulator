@@ -20,4 +20,7 @@ public abstract class AbstractConfigWidgetsWrapper implements Observer {
 	public abstract void setConfigController(
 			AbstractEngineConfigController configController);
 
+	public boolean hasContentToShow(){
+		return true;
+	}
 }
