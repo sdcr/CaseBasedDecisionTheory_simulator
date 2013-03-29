@@ -19,7 +19,7 @@ public class IndexOfAspirationLevelIncrementStageProvider {
 	private void extendIncreaseIndexSet() {
 		for(int i=0; i<numberOfElementsToExtendSetWith; i++){
 			highestIncreaseStageIndex *= 2;
-			increaseIndexSet.add(highestIncreaseStageIndex);
+			increaseIndexSet.add(highestIncreaseStageIndex-1);
 		}
 	}
 	
