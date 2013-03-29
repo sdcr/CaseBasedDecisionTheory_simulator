@@ -92,6 +92,16 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 		return outcomeMatrix;
 	}
 
+	public BigDecimalSimulationState getInitBigDecimalSimulationState(){
+		BigDecimalSimulationState simState = new BigDecimalSimulationState();
+		simState.absoluteActionOccurances = this.getInitialActionOccurances();
+		simState.relativeActionOccurances = this.getInitialActionOccurances();
+		simState.expectedUtilities = (BigDecimal[]) this.getInitExpectedUtilities();
+		simState.lowestAspirationLevels = this.getInitLowestAspirationLevels();
+		simState.contentsMatrix = (BigDecimalNodeContent[][]) this.getInitialContentsMatrix();
+		return simState;
+	}
+	
 //	@Override
 //	public BigDecimal[][] getInitialRelativeActionOccurances() {
 //		int numberOfActorActions = parameters.getActorActions().size();

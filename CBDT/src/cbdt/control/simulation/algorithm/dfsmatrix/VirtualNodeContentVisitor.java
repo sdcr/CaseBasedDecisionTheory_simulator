@@ -1,7 +1,5 @@
 package cbdt.control.simulation.algorithm.dfsmatrix;
 
-import java.math.BigDecimal;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import cbdt.control.simulation.algorithm.NodeVisitor;
@@ -11,47 +9,35 @@ import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 
 public class VirtualNodeContentVisitor extends NodeVisitor {
 
-	private NodeContent[][] contentsMatrix;
-	private Double[] expectedUtilities;
 	protected int[] selectedActionsIndices;
 	protected ActorActionOutcome[][] outcomeMatrix;
 
 	protected int numberOfLeafs;
 
 	protected ActionSelector actionSelector;
-	protected BigDecimal[][] absoluteActionOccurances;
-	private Double[][] relativeActionOccurances;
 	private ChildNodeContentGenerator childContentGenerator;
 	protected IProgressMonitor monitor;
 
 	protected Integer leafStage;
 	protected Integer progessStage;
 	protected CommonEngineConfiguration commonConfig;
-	private Double[] lowestAspirationLevels;
+	private SimulationState simState;
 
 	public VirtualNodeContentVisitor(Parameters parameters,
-			CommonEngineConfiguration commonConfig,
-			NodeContent[][] contentsMatrix, 
-			AbstractInitFactory factory,
-			Double[] emptyExpectedUtilities,
-			BigDecimal[][] absoluteActionOccurances, 
-			Double[][] relativeActionOccurances, 
-			IProgressMonitor monitor,
-			Double[] lowestAspirationLevels) {
+			CommonEngineConfiguration commonConfig, IProgressMonitor monitor,
+			SimulationState simState) {
 		this.commonConfig = commonConfig;
-		this.contentsMatrix = contentsMatrix;
-		this.expectedUtilities = emptyExpectedUtilities;
-		this.absoluteActionOccurances = absoluteActionOccurances;
-		this.relativeActionOccurances = relativeActionOccurances;
-		
 		this.monitor = monitor;
-		this.lowestAspirationLevels = lowestAspirationLevels;
+		this.simState = simState;
 
 		int numberOfActions = parameters.getActorActions().size();
 		selectedActionsIndices = new int[numberOfActions];
 		actionSelector = new ActionSelector(numberOfActions);
-		outcomeMatrix = factory.getOutcomeMatrix();
-		childContentGenerator = new ChildNodeContentGenerator(parameters, outcomeMatrix);
+		
+		AbstractInitFactory factory = new BasicInitFactory(parameters, commonConfig);
+		outcomeMatrix = factory .getOutcomeMatrix();
+		childContentGenerator = new ChildNodeContentGenerator(parameters,
+				outcomeMatrix);
 	}
 
 	public int calculteNumberOfLeafs(Integer leafStage)
@@ -79,7 +65,7 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 			numberOfLeafs++;
 		else if (stage < commonConfig
 				.getNumberOfRequestedExpectedUtilityValues()) {
-			NodeContent parentContent = contentsMatrix[stage][index];
+			NodeContent parentContent = simState.contentsMatrix[stage][index];
 			actionSelector.computeSelectedActions(selectedActionsIndices,
 					parentContent);
 			int numberOfSelectedActions = getNumberOfSelectedActions();
@@ -93,10 +79,10 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 
 				if (leafStage == null
 						&& commonConfig.isCalculateAbsoluteActionOccurances()) //|| commonConfig.isCalculateRelativeActionOccurances()))
-					absoluteActionOccurances[stage][selectedActionIndex] = absoluteActionOccurances[stage][selectedActionIndex]
+					simState.absoluteActionOccurances[stage][selectedActionIndex] = simState.absoluteActionOccurances[stage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {
-					NodeContent childContent = contentsMatrix[childrenStage][childIndex];
+					NodeContent childContent = simState.contentsMatrix[childrenStage][childIndex];
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
 							selectedActionIndex, outcomeIndex, stage);
@@ -106,20 +92,19 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 								* outcomeMatrix[selectedActionIndex][outcomeIndex]
 										.getUtility();
 						if(commonConfig.isCalculateLowestAspirationLevels())
-							lowestAspirationLevels[stage] = Math.min(lowestAspirationLevels[stage], childContent.getAspirationLevel());
+							simState.lowestAspirationLevels[stage] = Math.min(simState.lowestAspirationLevels[stage], childContent.getAspirationLevel());
+						if (commonConfig.isCalculateRelativeActionOccurances()) {
+							simState.relativeActionOccurances[stage][selectedActionIndex] = simState.relativeActionOccurances[stage][selectedActionIndex]
+									+ childContent.probabilityProduct;
+						}
 					}
 					
-					if (leafStage == null
-							&& commonConfig.isCalculateRelativeActionOccurances()) {
-						relativeActionOccurances[stage][selectedActionIndex] = relativeActionOccurances[stage][selectedActionIndex]
-								+ childContent.probabilityProduct;
-					}
 					
 					childIndex++;
 				}
 			}
 			if (leafStage == null)
-				expectedUtilities[stage] += childrensExpectedUtilitySum;
+				simState.expectedUtilities[stage] += childrensExpectedUtilitySum;
 
 			for (int i = 0; i < childIndex; i++) {
 				visitRecursively(childrenStage, i);

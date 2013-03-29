@@ -11,30 +11,26 @@ import cbdt.model.result.Result;
 
 public class DFSHighPrecMatrixSimulationAlgorithm extends DFSMatrixSimulationAlgorithm {
 
-	
+	private BigDecimalSimulationState simState;
+
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
 		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters, commonConfig);
-		absoluteActionOccurances = factory.getInitialActionOccurances();
-		BigDecimal[][] relativeActionOccurances = factory.getInitialActionOccurances();
-		BigDecimal[] expectedUtilities = (BigDecimal[])factory.getInitExpectedUtilities();
-		BigDecimal[] lowestAspirationLevels = (BigDecimal[])factory.getInitLowestAspirationLevels();
-		BigDecimalNodeContent[][] contentsMatrix = (BigDecimalNodeContent[][]) factory.getInitialContentsMatrix();
+		simState = factory.getInitBigDecimalSimulationState();
 		
 		BigDecimalVirtualNodeContentVisitor visitor = new BigDecimalVirtualNodeContentVisitor(parameters, 
-				commonConfig, contentsMatrix, factory, expectedUtilities, 
-				absoluteActionOccurances, relativeActionOccurances, monitor, lowestAspirationLevels);
+				commonConfig, monitor, simState);
 
 		computeWithVisitor(initResult, visitor);
 		
 		for(int stage=0; stage<initResult.getStageResults().size(); stage++){
 			BigDecimalStageResult stageResult = (BigDecimalStageResult)initResult.getStageResults().get(stage);
 			stageResult.setStage(stage);
-			stageResult.setExpectedBigDecimalUtility(expectedUtilities[stage]);
-			stageResult.setLowestBigDecimalAspirationLevel(lowestAspirationLevels[stage]);
-			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = makeToBigDecimalMap(stage, absoluteActionOccurances);
+			stageResult.setExpectedBigDecimalUtility(simState.expectedUtilities[stage]);
+			stageResult.setLowestBigDecimalAspirationLevel(simState.lowestAspirationLevels[stage]);
+			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = makeToBigDecimalMap(stage, simState.absoluteActionOccurances);
 			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
-			Map<ActorAction, BigDecimal> relativeActionOccurancesMap = makeToBigDecimalMap(stage, relativeActionOccurances);
+			Map<ActorAction, BigDecimal> relativeActionOccurancesMap = makeToBigDecimalMap(stage, simState.relativeActionOccurances);
 			stageResult.setRelativeBigDecimalActionOccurances(relativeActionOccurancesMap);
 		}
 	}

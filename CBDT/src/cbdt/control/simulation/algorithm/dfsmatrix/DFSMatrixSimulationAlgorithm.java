@@ -14,26 +14,19 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 
 	protected AbstractEngineConfiguration config;
 	
-	protected BigDecimal[][] absoluteActionOccurances;
-
-	private Double[][] relativeActionOccurances;
+	private SimulationState simState;
 	
 	public BigDecimal[][] getChoosenActionNumbers() {
-		return absoluteActionOccurances;
+		return simState.absoluteActionOccurances;
 	}
 
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
 		BasicInitFactory factory = new BasicInitFactory(parameters, commonConfig);
-		absoluteActionOccurances = factory.getInitialActionOccurances();
-		relativeActionOccurances = factory.getInitialRelativeActionOccurances();
-		Double[] expectedUtilities = factory.getInitExpectedUtilities();
-		Double[] lowestAspirationLevels = factory.getInitLowestAspirationLevels();
-		NodeContent[][] contentsMatrix = factory.getInitialContentsMatrix();
+		simState = factory.getInitSimulationState();
 		
 		VirtualNodeContentVisitor visitor = new VirtualNodeContentVisitor(parameters, 
-				commonConfig, contentsMatrix, factory, expectedUtilities, 
-				absoluteActionOccurances, relativeActionOccurances, monitor, lowestAspirationLevels);
+				commonConfig, monitor, simState);
 
 		computeWithVisitor(initResult, visitor);
 		
@@ -41,16 +34,16 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 		for(int stage=0; stage<initResult.getStageResults().size(); stage++){
 			StageResult stageResult = initResult.getStageResults().get(stage);
 			stageResult.setStage(stage);
-			stageResult.setExpectedUtility(expectedUtilities[stage]);
-			stageResult.setLowestAspirationLevel(lowestAspirationLevels[stage]);
+			stageResult.setExpectedUtility(simState.expectedUtilities[stage]);
+			stageResult.setLowestAspirationLevel(simState.lowestAspirationLevels[stage]);
 			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = new HashMap<ActorAction, BigDecimal>();
 			for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
-				absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), absoluteActionOccurances[stage][actionIndex]);
+				absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), simState.absoluteActionOccurances[stage][actionIndex]);
 			}
 			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
 			Map<ActorAction, Double> relativeActionOccurancesMap = new HashMap<ActorAction, Double>();
 			for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
-				relativeActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), relativeActionOccurances[stage][actionIndex]);
+				relativeActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), simState.relativeActionOccurances[stage][actionIndex]);
 			}
 			stageResult.setRelativeActionOccurances(relativeActionOccurancesMap);
 		}

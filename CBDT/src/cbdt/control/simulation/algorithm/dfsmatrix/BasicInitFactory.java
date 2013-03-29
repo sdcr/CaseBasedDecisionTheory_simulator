@@ -81,8 +81,8 @@ public class BasicInitFactory extends AbstractInitFactory {
 		Double[] lowestAspirationLevels = new Double[commonConfig
 		                                        .getNumberOfRequestedExpectedUtilityValues()];
 		for (int i = 0; i < lowestAspirationLevels.length; i++)
-			lowestAspirationLevels[i] = (double) 0;
-		return null;
+			lowestAspirationLevels[i] = Double.MAX_VALUE;
+		return lowestAspirationLevels;
 	}
 
 	public Double[][] getInitialRelativeActionOccurances() {
@@ -96,4 +96,13 @@ public class BasicInitFactory extends AbstractInitFactory {
 		return relativeActionOccurances;
 	}
 
+	public SimulationState getInitSimulationState(){
+		SimulationState simState = new SimulationState();
+		simState.absoluteActionOccurances = this.getInitialActionOccurances();
+		simState.relativeActionOccurances = this.getInitialRelativeActionOccurances();
+		simState.expectedUtilities = this.getInitExpectedUtilities();
+		simState.lowestAspirationLevels = this.getInitLowestAspirationLevels();
+		simState.contentsMatrix = this.getInitialContentsMatrix();
+		return simState;
+	}
 }

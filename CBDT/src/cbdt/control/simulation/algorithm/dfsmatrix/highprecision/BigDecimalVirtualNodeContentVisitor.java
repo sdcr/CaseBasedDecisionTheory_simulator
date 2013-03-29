@@ -5,34 +5,23 @@ import java.math.BigDecimal;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import cbdt.control.simulation.algorithm.NodeVisitor;
-import cbdt.control.simulation.algorithm.dfsmatrix.AbstractInitFactory;
 import cbdt.control.simulation.algorithm.dfsmatrix.VirtualNodeContentVisitor;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 
 public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisitor{
 
-	private BigDecimal[] expectedUtilities;
 	private BigDecimalChildNodeContentGenerator childContentGenerator;
-	private BigDecimalNodeContent[][] contentsMatrix;
-	private BigDecimal[][] relativeActionOccurances;
-	private BigDecimal[] lowestAspirationLevels;
+	private BigDecimalSimulationState bigDecimalSimState;
 
 	public BigDecimalVirtualNodeContentVisitor(Parameters parameters,
-			CommonEngineConfiguration commonConfig, 
-			BigDecimalNodeContent[][] contentsMatrix,
-			AbstractInitFactory factory, 
-			BigDecimal[] emptyExpectedUtilities,
-			BigDecimal[][] absoluteActionOccurances,  
-			BigDecimal[][] relativeActionOccurances,  
-			IProgressMonitor monitor,
-			BigDecimal[] emptyLowestAspirationLevels) {
-		super(parameters, commonConfig, null, factory, null,
-				absoluteActionOccurances, null, monitor, null);
-		this.contentsMatrix = contentsMatrix;
-		this.expectedUtilities = emptyExpectedUtilities;
-		this.relativeActionOccurances = relativeActionOccurances;
-		this.lowestAspirationLevels = emptyLowestAspirationLevels;
+			CommonEngineConfiguration commonConfig, IProgressMonitor monitor,
+			BigDecimalSimulationState simState) {
+		super(parameters,commonConfig,monitor,null);
+		bigDecimalSimState = simState;
+		
+		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters, commonConfig);
+		outcomeMatrix = factory.getOutcomeMatrix();
 		childContentGenerator = new BigDecimalChildNodeContentGenerator(outcomeMatrix,
 				new BigDecimal(parameters.getWeightingFactorAlpha()), 
 				parameters.isUsingAspirationLevelIncrement(), 
@@ -48,7 +37,7 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 		if(leafStage!=null && leafStage==stage)
 			numberOfLeafs++;
 		else if (stage < commonConfig.getNumberOfRequestedExpectedUtilityValues()) {
-			BigDecimalNodeContent parentContent = contentsMatrix[stage][index];
+			BigDecimalNodeContent parentContent = bigDecimalSimState.contentsMatrix[stage][index];
 			actionSelector.computeSelectedActions(selectedActionsIndices, parentContent);
 			int numberOfSelectedActions = getNumberOfSelectedActions();
 			
@@ -62,10 +51,10 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 
 				if (leafStage==null && commonConfig.isCalculateAbsoluteActionOccurances())
 //						|| commonConfig.isCalculateRelativeActionOccurances()))
-					absoluteActionOccurances[stage][selectedActionIndex] = absoluteActionOccurances[stage][selectedActionIndex]
+					bigDecimalSimState.absoluteActionOccurances[stage][selectedActionIndex] = bigDecimalSimState.absoluteActionOccurances[stage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {
-					BigDecimalNodeContent childContent = contentsMatrix[childrenStage][childIndex];
+					BigDecimalNodeContent childContent = bigDecimalSimState.contentsMatrix[childrenStage][childIndex];
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
 							selectedActionIndex, outcomeIndex, stage);
@@ -79,15 +68,15 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 							updateLowestAspirationUtilities(childContent.aspirationLevel, stage);
 					}
 					if (leafStage==null && commonConfig.isCalculateRelativeActionOccurances()){
-						relativeActionOccurances[stage][selectedActionIndex] = 
-								relativeActionOccurances[stage][selectedActionIndex].add(childContent.probabilityProduct, NodeVisitor.mathContext);
+						bigDecimalSimState.relativeActionOccurances[stage][selectedActionIndex] = 
+								bigDecimalSimState.relativeActionOccurances[stage][selectedActionIndex].add(childContent.probabilityProduct, NodeVisitor.mathContext);
 					}
 					
 					childIndex++;
 				}
 			}
 			if(leafStage==null)
-				expectedUtilities[stage] = expectedUtilities[stage].add(childrensExpectedUtilitySum, NodeVisitor.mathContext);
+				bigDecimalSimState.expectedUtilities[stage] = bigDecimalSimState.expectedUtilities[stage].add(childrensExpectedUtilitySum, NodeVisitor.mathContext);
 
 			for (int i = 0; i < childIndex; i++) {
 				visitRecursively(childrenStage, i);
@@ -100,8 +89,8 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 
 	private void updateLowestAspirationUtilities(BigDecimal aspirationLevel,
 			int stage) {
-		if(lowestAspirationLevels[stage].compareTo(aspirationLevel)==-1){
-			lowestAspirationLevels[stage] = aspirationLevel;
+		if(bigDecimalSimState.lowestAspirationLevels[stage].compareTo(aspirationLevel)==1){
+			bigDecimalSimState.lowestAspirationLevels[stage] = aspirationLevel;
 		}
 	}
 
