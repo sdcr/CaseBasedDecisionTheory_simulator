@@ -11,10 +11,10 @@ public class BigDecimalChildNodeContentGenerator {
 	private int numberOfActorActions;
 	private BigDecimalAspirationLevelGenerator aspirationLevelGenerator;
 
-	public BigDecimalChildNodeContentGenerator(ActorActionOutcome[][] outcomeMatrix, BigDecimal aspirationLevelDiscount) {
+	public BigDecimalChildNodeContentGenerator(ActorActionOutcome[][] outcomeMatrix, BigDecimal aspirationLevelDiscount, boolean isUsingAspirationLevelIncrement, BigDecimal aspirationLevelIncrement) {
 		this.outcomeMatrix = (BigDecimalActorActionOutcome[][])outcomeMatrix;
 		numberOfActorActions = outcomeMatrix.length;
-		aspirationLevelGenerator = new BigDecimalAspirationLevelGenerator(numberOfActorActions, aspirationLevelDiscount);
+		aspirationLevelGenerator = new BigDecimalAspirationLevelGenerator(numberOfActorActions, aspirationLevelDiscount, isUsingAspirationLevelIncrement, aspirationLevelIncrement);
 	}
 	
 	public void computeChildContent(BigDecimalNodeContent parentContent, BigDecimalNodeContent childContent, BigDecimal multiActionProbability,

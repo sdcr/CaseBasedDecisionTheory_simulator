@@ -31,7 +31,9 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 		this.expectedUtilities = emptyExpectedUtilities;
 		this.relativeActionOccurances = relativeActionOccurances;
 		childContentGenerator = new BigDecimalChildNodeContentGenerator(outcomeMatrix,
-				new BigDecimal(parameters.getWeightingFactorAlpha()));
+				new BigDecimal(parameters.getWeightingFactorAlpha()), 
+				parameters.isUsingAspirationLevelIncrement(), 
+				new BigDecimal(parameters.getAspirationLevelIncrement()));
 		int numberOfActions = parameters.getActorActions().size();
 		actionSelector = new BigDecimalActionSelector(numberOfActions);
 	}
@@ -64,6 +66,7 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
 							selectedActionIndex, outcomeIndex, stage);
+					System.out.println(childContent.aspirationLevel);
 
 					if(leafStage==null){
 						childrensExpectedUtilitySum = childrensExpectedUtilitySum.add(
