@@ -14,7 +14,7 @@ public class MessageBoxManager {
 	
 	public void showErrorMessage(String message){
 		MessageBox box = new MessageBox(shell, SWT.ICON_ERROR);
-		String defaultMessage = "An error occured. ";
+		String defaultMessage = "An error occured: ";
 		if(message != null)
 			defaultMessage = defaultMessage + message;
 		box.setMessage(defaultMessage);

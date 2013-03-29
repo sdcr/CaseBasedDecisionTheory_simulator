@@ -98,6 +98,9 @@ public class ParametersPageController extends AbstractPageController {
 		} catch (FileNotFoundException e) {
 			getMessageBoxManager().showErrorMessage(
 					"The stated file could not be found.");
+		} catch (RuntimeException e){
+			getMessageBoxManager().showErrorMessage(
+					"Loading parameters failed.");
 		}
 	}
 

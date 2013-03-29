@@ -25,12 +25,16 @@ public class ParametersConverter implements Converter {
 		context.convertAnother(params.getInitialAspirationLevel());
 		writer.endNode();
 		
-		writer.startNode("aspirationLevelIncrement");
-		context.convertAnother(params.getAspirationLevelIncrement());
-		writer.endNode();
-
 		writer.startNode("aspirationLevelDiscountFactor");
 		context.convertAnother(params.getWeightingFactorAlpha());
+		writer.endNode();
+
+		writer.startNode("isUsingAspirationLevelIncrement");
+		context.convertAnother(params.isUsingAspirationLevelIncrement());
+		writer.endNode();
+		
+		writer.startNode("aspirationLevelIncrement");
+		context.convertAnother(params.getAspirationLevelIncrement());
 		writer.endNode();
 		
 		writer.startNode("actions");
@@ -48,11 +52,15 @@ public class ParametersConverter implements Converter {
         reader.moveUp();
         
         reader.moveDown();
-        parameters.setAspirationLevelIncrement(Double.parseDouble(reader.getValue()));
-        reader.moveUp();
-        
-        reader.moveDown();
         parameters.setWeightingFactorAlpha(Double.parseDouble(reader.getValue()));
+        reader.moveUp();
+
+        reader.moveDown();
+        parameters.setUsingAspirationLevelIncrement(Boolean.parseBoolean(reader.getValue()));
+        reader.moveUp();
+
+        reader.moveDown();
+        parameters.setAspirationLevelIncrement(Double.parseDouble(reader.getValue()));
         reader.moveUp();
         
         reader.moveDown();
