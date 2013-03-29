@@ -79,32 +79,31 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 
 				if (leafStage == null
 						&& commonConfig.isCalculateAbsoluteActionOccurances()) //|| commonConfig.isCalculateRelativeActionOccurances()))
-					simState.absoluteActionOccurances[stage][selectedActionIndex] = simState.absoluteActionOccurances[stage][selectedActionIndex]
+					simState.absoluteActionOccurances[childrenStage][selectedActionIndex] = simState.absoluteActionOccurances[childrenStage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {
 					NodeContent childContent = simState.contentsMatrix[childrenStage][childIndex];
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
-							selectedActionIndex, outcomeIndex, stage);
+							selectedActionIndex, outcomeIndex, childrenStage);
 
 					if (leafStage == null) {
 						childrensExpectedUtilitySum += childContent.probabilityProduct
 								* outcomeMatrix[selectedActionIndex][outcomeIndex]
 										.getUtility();
 						if(commonConfig.isCalculateLowestAspirationLevels())
-							simState.lowestAspirationLevels[stage] = Math.min(simState.lowestAspirationLevels[stage], childContent.getAspirationLevel());
+							simState.lowestAspirationLevels[childrenStage] = Math.min(simState.lowestAspirationLevels[childrenStage], childContent.getAspirationLevel());
 						if (commonConfig.isCalculateRelativeActionOccurances()) {
-							simState.relativeActionOccurances[stage][selectedActionIndex] = simState.relativeActionOccurances[stage][selectedActionIndex]
+							simState.relativeActionOccurances[childrenStage][selectedActionIndex] = simState.relativeActionOccurances[childrenStage][selectedActionIndex]
 									+ childContent.probabilityProduct;
 						}
 					}
-					
 					
 					childIndex++;
 				}
 			}
 			if (leafStage == null)
-				simState.expectedUtilities[stage] += childrensExpectedUtilitySum;
+				simState.expectedUtilities[childrenStage] += childrensExpectedUtilitySum;
 
 			for (int i = 0; i < childIndex; i++) {
 				visitRecursively(childrenStage, i);

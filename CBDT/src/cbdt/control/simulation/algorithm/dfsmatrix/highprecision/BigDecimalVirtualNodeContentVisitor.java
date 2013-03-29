@@ -51,13 +51,13 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 
 				if (leafStage==null && commonConfig.isCalculateAbsoluteActionOccurances())
 //						|| commonConfig.isCalculateRelativeActionOccurances()))
-					bigDecimalSimState.absoluteActionOccurances[stage][selectedActionIndex] = bigDecimalSimState.absoluteActionOccurances[stage][selectedActionIndex]
+					bigDecimalSimState.absoluteActionOccurances[childrenStage][selectedActionIndex] = bigDecimalSimState.absoluteActionOccurances[childrenStage][selectedActionIndex]
 							.add(big_one, mathContext);
 				for (int outcomeIndex = 0; outcomeIndex < outcomeMatrix[selectedActionIndex].length; outcomeIndex++) {
 					BigDecimalNodeContent childContent = bigDecimalSimState.contentsMatrix[childrenStage][childIndex];
 					childContentGenerator.computeChildContent(parentContent,
 							childContent, multiActionProbability,
-							selectedActionIndex, outcomeIndex, stage);
+							selectedActionIndex, outcomeIndex, childrenStage);
 
 					if(leafStage==null){
 						childrensExpectedUtilitySum = childrensExpectedUtilitySum.add(
@@ -65,18 +65,18 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 								((BigDecimalActorActionOutcome)(outcomeMatrix[selectedActionIndex][outcomeIndex])).utility, 
 								NodeVisitor.mathContext), NodeVisitor.mathContext);
 						if(commonConfig.isCalculateLowestAspirationLevels())
-							updateLowestAspirationUtilities(childContent.aspirationLevel, stage);
+							updateLowestAspirationUtilities(childContent.aspirationLevel, childrenStage);
 					}
 					if (leafStage==null && commonConfig.isCalculateRelativeActionOccurances()){
-						bigDecimalSimState.relativeActionOccurances[stage][selectedActionIndex] = 
-								bigDecimalSimState.relativeActionOccurances[stage][selectedActionIndex].add(childContent.probabilityProduct, NodeVisitor.mathContext);
+						bigDecimalSimState.relativeActionOccurances[childrenStage][selectedActionIndex] = 
+								bigDecimalSimState.relativeActionOccurances[childrenStage][selectedActionIndex].add(childContent.probabilityProduct, NodeVisitor.mathContext);
 					}
 					
 					childIndex++;
 				}
 			}
 			if(leafStage==null)
-				bigDecimalSimState.expectedUtilities[stage] = bigDecimalSimState.expectedUtilities[stage].add(childrensExpectedUtilitySum, NodeVisitor.mathContext);
+				bigDecimalSimState.expectedUtilities[childrenStage] = bigDecimalSimState.expectedUtilities[childrenStage].add(childrensExpectedUtilitySum, NodeVisitor.mathContext);
 
 			for (int i = 0; i < childIndex; i++) {
 				visitRecursively(childrenStage, i);

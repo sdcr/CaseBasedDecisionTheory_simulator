@@ -22,7 +22,6 @@ public class EmptyResultFactory {
 		Result result = new Result();
 		List<StageResult> stageResults = new ArrayList<StageResult>();
 		result.setStageResults(stageResults);
-		
 		if(config instanceof DFSmatrixHighPrecEngineConfig)
 			setBigDecimalStageResults(commonConfig, parameters, stageResults);
 		else
@@ -32,29 +31,32 @@ public class EmptyResultFactory {
 
 	private void setBigDecimalStageResults(CommonEngineConfiguration commonConfig,
 			Parameters parameters, List<StageResult> stageResults) {
-		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
+		for (int i = 0; i <= commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			BigDecimalStageResult stageResult = new BigDecimalStageResult();
 			stageResult.setExpectedBigDecimalUtility(new BigDecimal(0));
 			stageResult.setLowestBigDecimalAspirationLevel(new BigDecimal(Double.MAX_VALUE));
 			initStageResult(commonConfig, parameters, i, stageResult);
 			stageResults.add(stageResult);
 		}
+		((BigDecimalStageResult)stageResults.get(0)).setLowestBigDecimalAspirationLevel(
+				new BigDecimal(parameters.getInitialAspirationLevel()));
 	}
 
 	private void setNonBigDecimalStageResults(CommonEngineConfiguration commonConfig,
 			Parameters parameters, List<StageResult> stageResults) {
-		for (int i = 0; i < commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
+		for (int i = 0; i <= commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			StageResult stageResult = new StageResult();
 			stageResult.setExpectedUtility(0);
 			stageResult.setLowestAspirationLevel(Double.MAX_VALUE);
 			initStageResult(commonConfig, parameters, i, stageResult);
 			stageResults.add(stageResult);
 		}
+		stageResults.get(0).setLowestAspirationLevel(parameters.getInitialAspirationLevel());
 	}
 
 	private void initStageResult(CommonEngineConfiguration commonConfig,
-			Parameters parameters, int i, StageResult stageResult) {
-		stageResult.setStage(i);
+			Parameters parameters, int stage, StageResult stageResult) {
+		stageResult.setStage(stage);
 		if(commonConfig.isCalculateRelativeActionOccurances())// || commonConfig.isCalculateAbsoluteActionOccurances())
 			stageResult.setAbsoluteActionOccurances(getEmptyAbsoluteActionOccuranceMap(parameters));
 		if(commonConfig.isCalculateRelativeActionOccurances())

@@ -57,7 +57,7 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 		int numberOfLeafs = 1;
 		while(stageNumber<15 && numberOfLeafs<15){
 			stageNumber++;
-			if(stageNumber==commonConfig.getNumberOfRequestedExpectedUtilityValues()){
+			if(stageNumber==commonConfig.getNumberOfRequestedExpectedUtilityValues()+1){
 				computeWithProgressShowing = false;
 				break;
 			}
@@ -69,7 +69,7 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 			visitor.visitRecursively(0, 0, stageNumber);
 			monitor.done();
 		}else{
-			visitor.visitRecursively(0, 0, 1);
+			visitor.visitRecursively(0, 0, 0);
 		}
 
 	}

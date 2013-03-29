@@ -58,7 +58,7 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 	@Override
 	public Object[] getInitExpectedUtilities() {
 		BigDecimal[] expectedUtilities = new BigDecimal[commonConfig
-				.getNumberOfRequestedExpectedUtilityValues()];
+				.getNumberOfRequestedExpectedUtilityValues()+1];
 		for (int i = 0; i < expectedUtilities.length; i++)
 			expectedUtilities[i] = new BigDecimal(0);
 		return expectedUtilities;
@@ -67,8 +67,9 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 	@Override
 	public BigDecimal[] getInitLowestAspirationLevels() {
 		BigDecimal[] lowestAspirationLevels = new BigDecimal[commonConfig
-		                                                .getNumberOfRequestedExpectedUtilityValues()];
-		for (int i = 0; i < lowestAspirationLevels.length; i++)
+		                                                .getNumberOfRequestedExpectedUtilityValues()+1];
+		lowestAspirationLevels[0] = new BigDecimal(parameters.getInitialAspirationLevel());
+		for (int i = 1; i < lowestAspirationLevels.length; i++)
 			lowestAspirationLevels[i] = new BigDecimal(Integer.MAX_VALUE);
 		return lowestAspirationLevels;
 	}

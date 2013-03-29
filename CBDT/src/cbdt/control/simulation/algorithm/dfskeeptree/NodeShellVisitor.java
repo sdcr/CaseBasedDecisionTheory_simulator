@@ -36,7 +36,7 @@ public class NodeShellVisitor extends NodeVisitor {
 	public void visitRecursively(NodeShell nodeShell, int childrensStage) throws InterruptedException{
 		if(monitor.isCanceled())
 			throw new InterruptedException();
-		if(childrensStage < commonConfig.getNumberOfRequestedExpectedUtilityValues()) {
+		if(childrensStage <= commonConfig.getNumberOfRequestedExpectedUtilityValues()) {
 			StageResult childrensStageResult = result.getStageResults().get(childrensStage);
 
 			computeChildren(nodeShell, childrensStageResult, childrensStage);
@@ -51,8 +51,8 @@ public class NodeShellVisitor extends NodeVisitor {
 			nodeShell.setChildren(null);
 	}
 	
-	public void computeChildren(NodeShell nodeShell, StageResult childrensStageResult, int intexOfChildrensStage) {
-		List<ActorAction> selectedActions = actionSelector.computeSelectedActions(nodeShell.getContent());
+	public void computeChildren(NodeShell parentNodeShell, StageResult childrensStageResult, int intexOfChildrensStage) {
+		List<ActorAction> selectedActions = actionSelector.computeSelectedActions(parentNodeShell.getContent());
 		double multiActionProbability = 1.0 / selectedActions.size();
 		
 		double childrensExpectedUtilitySum = 0;
@@ -60,8 +60,8 @@ public class NodeShellVisitor extends NodeVisitor {
 		for(ActorAction selectedAction : selectedActions){
 			for(ActorActionOutcome outcome : selectedAction.getActionOutcomes()){
 				NodeContentKeepTree childsContent = childContentGenerator.computeChildContent( 
-						nodeShell.getContent(), multiActionProbability, outcome, intexOfChildrensStage);					
-				nodeShell.getChildren().add(new NodeShell(childsContent));
+						parentNodeShell.getContent(), multiActionProbability, outcome, intexOfChildrensStage);					
+				parentNodeShell.getChildren().add(new NodeShell(childsContent));
 				childrensExpectedUtilitySum += childsContent.getProbabilityProduct() * outcome.getUtility();
 				if(commonConfig.isCalculateRelativeActionOccurances()){
 					increaseRelativeOccurance(childrensStageResult, childsContent.getProbabilityProduct(), selectedAction);

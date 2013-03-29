@@ -30,8 +30,8 @@ public abstract class AbstractInitFactory {
 	
 	public BigDecimal[][] getInitialActionOccurances() {
 		int numberOfActorActions = parameters.getActorActions().size();
-		BigDecimal[][] absoluteActionOccurances = new BigDecimal[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
-		for(int i=0; i<commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++){
+		BigDecimal[][] absoluteActionOccurances = new BigDecimal[commonConfig.getNumberOfRequestedExpectedUtilityValues()+1][numberOfActorActions];
+		for(int i=0; i<absoluteActionOccurances.length; i++){
 			for (int j=0; j<numberOfActorActions; j++) {
 				absoluteActionOccurances[i][j] = new BigDecimal(0);
 			}

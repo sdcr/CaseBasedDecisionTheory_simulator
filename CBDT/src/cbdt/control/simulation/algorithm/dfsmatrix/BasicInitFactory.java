@@ -70,7 +70,7 @@ public class BasicInitFactory extends AbstractInitFactory {
 	@Override
 	public Double[] getInitExpectedUtilities() {
 		Double[] expectedUtilities = new Double[commonConfig
-				.getNumberOfRequestedExpectedUtilityValues()];
+				.getNumberOfRequestedExpectedUtilityValues()+1];
 		for (int i = 0; i < expectedUtilities.length; i++)
 			expectedUtilities[i] = (double) 0;
 		return expectedUtilities;
@@ -79,16 +79,17 @@ public class BasicInitFactory extends AbstractInitFactory {
 	@Override
 	public Double[] getInitLowestAspirationLevels() {
 		Double[] lowestAspirationLevels = new Double[commonConfig
-		                                        .getNumberOfRequestedExpectedUtilityValues()];
-		for (int i = 0; i < lowestAspirationLevels.length; i++)
+		                                        .getNumberOfRequestedExpectedUtilityValues()+1];
+		lowestAspirationLevels[0] = parameters.getInitialAspirationLevel();
+		for (int i = 1; i < lowestAspirationLevels.length; i++)
 			lowestAspirationLevels[i] = Double.MAX_VALUE;
 		return lowestAspirationLevels;
 	}
 
 	public Double[][] getInitialRelativeActionOccurances() {
 		int numberOfActorActions = parameters.getActorActions().size();
-		Double[][] relativeActionOccurances = new Double[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
-		for(int i=0; i<commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++){
+		Double[][] relativeActionOccurances = new Double[commonConfig.getNumberOfRequestedExpectedUtilityValues()+1][numberOfActorActions];
+		for(int i=0; i<relativeActionOccurances.length; i++){
 			for (int j=0; j<numberOfActorActions; j++) {
 				relativeActionOccurances[i][j] = new Double(0);
 			}

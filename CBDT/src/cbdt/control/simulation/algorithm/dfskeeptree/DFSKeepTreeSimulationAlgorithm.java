@@ -41,10 +41,10 @@ public class DFSKeepTreeSimulationAlgorithm extends SimulationAlgorithm {
 			NodeShell rootShell, NodeShellVisitor nodeShellVisitor) {
 		List<NodeShell> stageNodeShells = new ArrayList<NodeShell>();
 		stageNodeShells.add(rootShell);
-		monitoredStage = 0;
+		monitoredStage = 1;
 		
 		while(stageNodeShells.size()<MIN_NUMBER_OF_MONITOR_WORK_UNITS 
-				&& monitoredStage<commonConfig.getNumberOfRequestedExpectedUtilityValues()){
+				&& monitoredStage<=commonConfig.getNumberOfRequestedExpectedUtilityValues()){
 			List<NodeShell> childrenShells = new ArrayList<NodeShell>();
 			StageResult childrensStageResult = result.getStageResults().get(monitoredStage);
 			for(NodeShell parentShell : stageNodeShells){
