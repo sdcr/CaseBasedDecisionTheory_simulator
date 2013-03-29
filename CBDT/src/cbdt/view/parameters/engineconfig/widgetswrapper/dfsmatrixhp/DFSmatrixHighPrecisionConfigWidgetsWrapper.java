@@ -3,7 +3,6 @@ package cbdt.view.parameters.engineconfig.widgetswrapper.dfsmatrixhp;
 import java.util.Observable;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
@@ -24,9 +23,6 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 	public DFSmatrixHighPrecisionConfigWidgetsWrapper(Composite parent) {
 		reqDecimalPlacesLabel = new Label(parent, SWT.NONE);
 		reqDecimalPlacesLabel.setText("Precision in decimal places:");
-		GridData reqDecPlacesLabelGridData = new GridData();
-		reqDecPlacesLabelGridData.verticalIndent = MARGIN_TOP;
-		reqDecimalPlacesLabel.setLayoutData(reqDecPlacesLabelGridData);
 
 		requiredDecimalPlacesComposite = new SimpleParameterComposite(
 				parent);
@@ -34,9 +30,6 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWi
 				requiredDecimalPlacesComposite));
 		requiredDecimalPlacesComposite
 				.setToolTipText("The value must be a natural number");
-		GridData reqDecPlacesCompositeGridData = (GridData) requiredDecimalPlacesComposite.getLayoutData();
-		reqDecPlacesCompositeGridData.verticalIndent = MARGIN_TOP;
-		requiredDecimalPlacesComposite.setLayoutData(reqDecPlacesCompositeGridData);
 
 		integerFormatChecker = new IntegerFormatChecker();
 		requiredDecimalPlacesComposite

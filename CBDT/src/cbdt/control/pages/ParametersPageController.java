@@ -145,4 +145,8 @@ public class ParametersPageController extends AbstractPageController {
 		parametersModel.setUsingAspirationLevelIncrement(selection);
 	}
 
+	public void setCalcLowestAspirationLevels(boolean selection) {
+		configChoice.getCommonConfig().setCalculateLowestAspirationLevels(selection);
+	}
+
 }

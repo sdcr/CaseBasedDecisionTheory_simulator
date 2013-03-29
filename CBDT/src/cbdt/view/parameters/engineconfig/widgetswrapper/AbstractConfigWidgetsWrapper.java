@@ -8,8 +8,6 @@ import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 
 public abstract class AbstractConfigWidgetsWrapper implements Observer {
-
-	protected static final int MARGIN_TOP = 10;
 	
 	public void setEngineConfigModel(AbstractEngineConfiguration config)
 	{

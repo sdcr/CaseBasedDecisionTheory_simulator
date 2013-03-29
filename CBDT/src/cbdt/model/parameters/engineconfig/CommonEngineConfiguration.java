@@ -13,6 +13,19 @@ public class CommonEngineConfiguration extends Observable {
 	
 	private boolean calculateRelativeActionOccurances;
 	
+	private boolean calculateLowestAspirationLevels;
+	
+	public boolean isCalculateLowestAspirationLevels() {
+		return calculateLowestAspirationLevels;
+	}
+
+	public void setCalculateLowestAspirationLevels(
+			boolean calculateLowestAspirationLevels) {
+		this.calculateLowestAspirationLevels = calculateLowestAspirationLevels;
+		setChanged();
+		notifyObservers();
+	}
+
 	public boolean isCalculateAbsoluteActionOccurances() {
 		return calculateAbsoluteActionOccurances;
 	}

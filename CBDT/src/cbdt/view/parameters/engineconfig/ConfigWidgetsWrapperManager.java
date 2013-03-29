@@ -19,14 +19,14 @@ import cbdt.view.parameters.engineconfig.widgetswrapper.ConfigWidgetsWrapperFact
 import cbdt.view.parameters.engineconfig.widgetswrapper.NoWidgetWrapperException;
 
 public class ConfigWidgetsWrapperManager implements Observer {
-
+	
 	private Combo availableConfigsCombo;
 	private Composite parametersPage;
 	private ParametersPageController controller;
 	private ConfigForegroundManager foregroundManager;
 	private ConfigWidgetsWrapperFactory configWidgetsFactory;
 	private CommonConfigWidgetsWrapper commonWidgets;
-
+	
 	public ConfigWidgetsWrapperManager(Composite parametersPage,
 			ParametersPageController controller) {
 		this.parametersPage = parametersPage;
@@ -39,6 +39,8 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
 		commonWidgets = new CommonConfigWidgetsWrapper(parametersPage);
 		commonWidgets.setController(controller);
+		ConfigBlockTitleLabelWrapper algoSpecificTitleWrapper = new ConfigBlockTitleLabelWrapper(parametersPage);
+		algoSpecificTitleWrapper.getLabel().setText("Algorithm-specific configurations:");
 	}
 
 	public void setConfigChoiceModel(EngineConfigChoice configChoice) {

@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Label;
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.control.pages.engineconfig.DFSkeepTreeConfigController;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 
 public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
@@ -28,14 +29,11 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 		GridData labelGridData = new GridData();
 		labelGridData.verticalSpan = 3;
 		labelGridData.verticalAlignment = SWT.BEGINNING;
-		labelGridData.verticalIndent = MARGIN_TOP;
+		labelGridData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
 		saveTreeStructureLabel.setLayoutData(labelGridData);
 		
 		saveTreeButton = new Button(parent, SWT.CHECK);
 		saveTreeButton.setText("keep tree");
-		GridData saveTreeButtonGridData = new GridData();
-		saveTreeButtonGridData.verticalIndent = MARGIN_TOP;
-		saveTreeButton.setLayoutData(saveTreeButtonGridData);
 		
 		saveActionNamesButton = new Button(parent, SWT.CHECK);
 		saveActionNamesButton.setText("action names");
@@ -56,6 +54,9 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrappe
 		if (arg0 instanceof DFSkeepTreeEngineConfig) {
 			DFSkeepTreeEngineConfig config = (DFSkeepTreeEngineConfig) arg0;
 			saveTreeButton.setSelection(config.isSaveTreeStructure());
+			saveActionNamesButton.setEnabled(config.isSaveTreeStructure());
+			saveAspirationLevelsButton.setEnabled(config.isSaveTreeStructure());
+
 			saveActionNamesButton.setSelection(config.isSaveActionNames());
 			saveAspirationLevelsButton.setSelection(config.isSaveAspirationLevels());
 		}

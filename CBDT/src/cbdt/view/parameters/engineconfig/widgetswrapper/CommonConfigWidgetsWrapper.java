@@ -14,7 +14,9 @@ import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.SimpleParameterComposite;
+import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.listener.AbsoluteActionOccurancesSelectionListener;
+import cbdt.view.parameters.engineconfig.widgetswrapper.listener.LowestAspirationLevelsSelectionListener;
 import cbdt.view.parameters.engineconfig.widgetswrapper.listener.RelativeActionOccurancesSelectionListener;
 import cbdt.view.parameters.engineconfig.widgetswrapper.listener.RequestedExpectedUtilityValuesModifyListener;
 
@@ -27,10 +29,29 @@ public class CommonConfigWidgetsWrapper implements Observer {
 	private Label calcActionOcurrancesLabel;
 	private Button absActionOcurrancesButton;
 	private Button relActionOcurrancesButton;
+	private Label aspirationLevelsLabel;
+	private Button lowestAspirationLevelsButton;
 
 	public CommonConfigWidgetsWrapper(Composite parent) {
+		ConfigBlockTitleLabelWrapper algoIndependentTitleWrapper = 
+				new ConfigBlockTitleLabelWrapper(parent);
+		algoIndependentTitleWrapper.getLabel().setText("Algorithm-independent configurations:");
+		
 		createRequestedExpectedUtilitiesWidgets(parent);
 		createSaveActionOccurancesCheckBoxes(parent);
+		createCalcLowestAspirationLevelsCheckBox(parent);
+	}
+
+	private void createCalcLowestAspirationLevelsCheckBox(Composite parent) {
+		aspirationLevelsLabel = new Label(parent, SWT.NONE);
+		aspirationLevelsLabel.setText("Save aspiration levels:");
+
+		GridData labelGridData = new GridData();
+		labelGridData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
+		aspirationLevelsLabel.setLayoutData(labelGridData);
+		
+		lowestAspirationLevelsButton = new Button(parent, SWT.CHECK);
+		lowestAspirationLevelsButton .setText("lowest aspiration levels");
 	}
 
 	private void createSaveActionOccurancesCheckBoxes(Composite parent) {
@@ -39,18 +60,22 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		GridData labelGridData = new GridData();
 		labelGridData.verticalSpan = 2;
 		labelGridData.verticalAlignment = SWT.BEGINNING;
+		labelGridData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
 		calcActionOcurrancesLabel.setLayoutData(labelGridData);
 
 		absActionOcurrancesButton = new Button(parent, SWT.CHECK);
-		absActionOcurrancesButton.setText("absolute numbers");
+		absActionOcurrancesButton.setText("absolute occurances");
 
 		relActionOcurrancesButton = new Button(parent, SWT.CHECK);
-		relActionOcurrancesButton.setText("relative numbers");
+		relActionOcurrancesButton.setText("relative occurances");
 	}
 
 	private void createRequestedExpectedUtilitiesWidgets(Composite parent) {
 		reqValuesLabel = new Label(parent, SWT.NONE);
 		reqValuesLabel.setText("Expected utility values:");
+		GridData labelGridData = new GridData();
+		labelGridData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
+		reqValuesLabel.setLayoutData(labelGridData);
 
 		requiredExpectedUtilitiesComposite = new SimpleParameterComposite(
 				parent);
@@ -80,6 +105,8 @@ public class CommonConfigWidgetsWrapper implements Observer {
 					.isCalculateAbsoluteActionOccurances());
 			relActionOcurrancesButton.setSelection(config
 					.isCalculateRelativeActionOccurances());
+			lowestAspirationLevelsButton.setSelection(config
+					.isCalculateLowestAspirationLevels());
 		}
 	}
 
@@ -94,6 +121,10 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		relActionOcurrancesButton
 				.addSelectionListener(new RelativeActionOccurancesSelectionListener(
 						pageController, relActionOcurrancesButton));
+		lowestAspirationLevelsButton
+				.addSelectionListener(new LowestAspirationLevelsSelectionListener(
+						pageController, lowestAspirationLevelsButton));
+		
 	}
 
 }

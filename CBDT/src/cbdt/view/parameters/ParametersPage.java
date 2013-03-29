@@ -112,6 +112,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = SWT.BEGINNING;
+		gridData.widthHint = 180;
 		actorActionsLabel.setLayoutData(gridData);
 	}
 
