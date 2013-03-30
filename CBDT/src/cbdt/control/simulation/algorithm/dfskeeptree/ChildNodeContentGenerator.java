@@ -23,7 +23,7 @@ public class ChildNodeContentGenerator {
 				* multiActionProbability * outcome.getProbability());
 		childsContent.getNumberOfOccurances().put(selectedAction, parentContent.getNumberOfOccurances().get(selectedAction) + 1);
 		childsContent.getSumOfUtilities().put(selectedAction, parentContent.getSumOfUtilities().get(selectedAction) + outcome.getUtility());
-		childsContent.setLastAction(selectedAction);
+		childsContent.setLastActionOutcome(outcome);
 		
 		double childsAspirationLevel = aspirationLevelGenerator.computeChildsAspirationLevel(parentContent.getAspirationLevel(), indexOfChildrensStage, childsContent);
 		childsContent.setAspirationLevel(childsAspirationLevel);

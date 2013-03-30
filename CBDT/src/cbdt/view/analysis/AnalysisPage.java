@@ -49,7 +49,7 @@ public class AnalysisPage extends Composite {
 				showTreeButton.setEnabled(true);
 				if(showTreeSelectionListener!=null)
 					showTreeButton.removeSelectionListener(showTreeSelectionListener);
-				showTreeSelectionListener = new ShowTreeSelectionListener(simulationResult, this);
+				showTreeSelectionListener = new ShowTreeSelectionListener(simulationResult, (DFSkeepTreeEngineConfig) config, this);
 				showTreeButton.addSelectionListener(showTreeSelectionListener);
 			} else
 				showTreeButton.setEnabled(false);

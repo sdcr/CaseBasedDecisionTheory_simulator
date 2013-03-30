@@ -1,26 +1,35 @@
 package cbdt.view.analysis.tree;
 
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
 public class DataRectangleShower {
 
 	private TreePApplet pApplet;
+	private DFSkeepTreeEngineConfig config;
 	
-	public DataRectangleShower(TreePApplet pApplet) {
+	public DataRectangleShower(TreePApplet pApplet, DFSkeepTreeEngineConfig config) {
 		this.pApplet = pApplet;
+		this.config = config;
 	}
 	
 	public void showDataRectangle(NodeContentKeepTree contentToShow){
 		pApplet.fill(255);
-		pApplet.rect(pApplet.mouseX+10, pApplet.mouseY+10, 150, 50);
+		boolean showLastAction = (contentToShow.getLastActionOutcome()!=null) && config.isSaveActionNames();
 		
-		pApplet.fill(0);
+		int rectangleHeight = 35;
 		int offsetY = 0;			
+		if(showLastAction)
+			offsetY = 30;
+		
+		pApplet.rect(pApplet.mouseX+10, pApplet.mouseY+10, 220, rectangleHeight + offsetY);
+		pApplet.fill(0);
 
-		if(contentToShow.getLastAction() != null){
-			String lastActionName = contentToShow.getLastAction().getActionName();
+		if(showLastAction){
+			String lastActionName = contentToShow.getLastActionOutcome().getAction().getActionName();
 			pApplet.text("Last action: "+lastActionName, pApplet.mouseX+30, pApplet.mouseY+25);
-			offsetY = 15;
+			double lastUtility = contentToShow.getLastActionOutcome().getUtility();
+			pApplet.text("Utility last action: "+lastUtility, pApplet.mouseX+30, pApplet.mouseY+40);
 		}
 
 		double aspLevel = contentToShow.getAspirationLevel();

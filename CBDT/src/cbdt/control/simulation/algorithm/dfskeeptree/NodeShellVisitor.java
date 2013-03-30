@@ -99,7 +99,7 @@ public class NodeShellVisitor extends NodeVisitor {
 			nodeShell.getContent().setNumberOfOccurances(null);
 			nodeShell.getContent().setSumOfUtilities(null);
 			if (!config.isSaveActionNames())
-				nodeShell.getContent().setLastAction(null);
+				nodeShell.getContent().setLastActionOutcome(null);
 		} else {
 			nodeShell.setContent(null);
 		}

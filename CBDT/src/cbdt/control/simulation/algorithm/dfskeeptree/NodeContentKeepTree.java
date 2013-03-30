@@ -3,6 +3,7 @@ package cbdt.control.simulation.algorithm.dfskeeptree;
 import java.util.Map;
 
 import cbdt.model.parameters.ActorAction;
+import cbdt.model.parameters.ActorActionOutcome;
 
 public class NodeContentKeepTree {
 	
@@ -14,7 +15,7 @@ public class NodeContentKeepTree {
 	
 	private double aspirationLevel;
 
-	private ActorAction lastAction;
+	private ActorActionOutcome lastOutcome;
 	
 	public double getProbabilityProduct() {
 		return probabilityProduct;
@@ -48,11 +49,11 @@ public class NodeContentKeepTree {
 		this.aspirationLevel = aspirationLevel;
 	}
 
-	public ActorAction getLastAction() {
-		return lastAction;
+	public ActorActionOutcome getLastActionOutcome() {
+		return lastOutcome;
 	}
 
-	public void setLastAction(ActorAction lastAction) {
-		this.lastAction = lastAction;
+	public void setLastActionOutcome(ActorActionOutcome lastOutcome) {
+		this.lastOutcome = lastOutcome;
 	}
 }

@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysis.tree.TreePApplet;
 
@@ -22,9 +23,11 @@ public class ShowTreeSelectionListener implements SelectionListener {
 	
 	private Result simulationResult;
 	private Composite parent;
+	private DFSkeepTreeEngineConfig config;
 
-	public ShowTreeSelectionListener(Result simulationResult, Composite parent) {
+	public ShowTreeSelectionListener(Result simulationResult, DFSkeepTreeEngineConfig config, Composite parent) {
 		this.simulationResult = simulationResult;
+		this.config = config;
 		this.parent = parent;
 	}
 
@@ -54,7 +57,7 @@ public class ShowTreeSelectionListener implements SelectionListener {
 		
 		TreePApplet treePApplet = new TreePApplet();
 		frame.add(treePApplet);
-		treePApplet.setTreeModel(simulationResult.getRootNode());
+		treePApplet.setTreeModel(simulationResult.getRootNode(), config);
 		treePApplet.init();
 		shell.open();
 		

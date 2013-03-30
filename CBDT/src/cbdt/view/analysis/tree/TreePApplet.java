@@ -8,6 +8,7 @@ import java.util.List;
 import processing.core.PApplet;
 import processing.core.PShape;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.view.analysis.tree.treemodel.NodeCircle;
 import cbdt.view.analysis.tree.treemodel.NodeCircleFactory;
 import cbdt.view.analysis.tree.treemodel.NodeContext;
@@ -48,7 +49,6 @@ public class TreePApplet extends PApplet{
 		visualWindow.setMarginTop(0);
 		visualWindow.setWidth(500);
 		visualWindow.setHeight(500);
-		dataRectangleShower = new DataRectangleShower(this);
 		zoomConverter = new ZoomConverter(nodeFrame, visualWindow);
 		visitor = new NodeCircleVisitor();
 	}
@@ -77,12 +77,13 @@ public class TreePApplet extends PApplet{
 		infoShowingCircle = null;
 	}
 	
-	public void setTreeModel(NodeShell rootShell){
+	public void setTreeModel(NodeShell rootShell, DFSkeepTreeEngineConfig config){
 		NodeLayoutManager layoutManager = new NodeLayoutManager(nodeFrame);
 		NodeCircleFactory factory = new NodeCircleFactory(this, layoutManager);
 		rootCircle = factory.createNodeCircles(rootShell);
 		NodeLineFactory lineFactory = new NodeLineFactory(this);
 		lineFactory.createNodeLinesRecursively(rootCircle);
+		dataRectangleShower = new DataRectangleShower(this, config);
 	}
 
 	public void setInfoShowingCircle(NodeCircle nodeCircle) {
