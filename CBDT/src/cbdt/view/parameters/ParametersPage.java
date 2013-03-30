@@ -55,13 +55,19 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		actorActionsComposite = new ActorActionsComposite(parametersWrapper,
 				SWT.NONE, controller);
 
-		createParameterLabel("Initial aspiration level:");
+		
+		Label initialAspirationLabel = createParameterLabel("Initial aspiration level:");
+		initialAspirationLabel.setToolTipText(InitialAspirationLevelComposite.TOOL_TIP_TEXT);
 		initialAspirationLevelComposite = new InitialAspirationLevelComposite(
 				parametersWrapper, getController());
-		createParameterLabel("Aspiration discount factor:");
+		
+		Label aspirationDiscuntLabel = createParameterLabel("Prev. aspiration weight factor:");
+		aspirationDiscuntLabel.setToolTipText(AspirationLevelDiscountComposite.TOOL_TIP_TEXT);
 		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(
 				parametersWrapper, getController());
-		createParameterLabel("Aspiration level increment:");
+		
+		Label aspirationLevelIncrementLabel = createParameterLabel("Aspiration level increment:");
+		aspirationLevelIncrementLabel.setToolTipText(AspirationLevelIncrementComposite.TOOL_TIP_TEXT);
 		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(
 				parametersWrapper, getController());
 
@@ -110,14 +116,15 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	 * Create a label that is used to denote a parameter which can be entered by
 	 * the user.
 	 */
-	private void createParameterLabel(String labelText) {
-		Label actorActionsLabel = new Label(parametersWrapper, SWT.NONE);
-		actorActionsLabel.setText(labelText);
+	private Label createParameterLabel(String labelText) {
+		Label label = new Label(parametersWrapper, SWT.NONE);
+		label.setText(labelText);
 
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = SWT.BEGINNING;
 		gridData.widthHint = 180;
-		actorActionsLabel.setLayoutData(gridData);
+		label.setLayoutData(gridData);
+		return label;
 	}
 
 	/**

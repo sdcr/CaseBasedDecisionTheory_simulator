@@ -7,7 +7,7 @@ public class ParametersFactory {
 		Parameters defaultParams = new Parameters();
 		defaultParams.setAspirationLevelIncrement(10);
 		defaultParams.setInitialAspirationLevel(100);
-		defaultParams.setWeightingFactorAlpha(0.9);
+		defaultParams.setWeightingFactorAlpha(0.5);
 		defaultParams.addActorAction(getDefaultActorAction());
 		return defaultParams;
 	}

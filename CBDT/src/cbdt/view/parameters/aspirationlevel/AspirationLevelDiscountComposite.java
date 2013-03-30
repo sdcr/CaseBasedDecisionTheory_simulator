@@ -12,6 +12,8 @@ import cbdt.view.parameters.aspirationlevel.listeners.AspirationLevelDiscountMod
 public class AspirationLevelDiscountComposite extends
 		AbstractAspirationLevelParameterComposite {
 
+	public static final String TOOL_TIP_TEXT = "Determines weighting\nbetween prev. asp. level\nand max. aver. utility.";
+	
 	public AspirationLevelDiscountComposite(Composite parent,
 			ParametersPageController controller) {
 		super(parent);

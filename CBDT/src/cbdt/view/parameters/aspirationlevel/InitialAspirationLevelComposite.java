@@ -12,6 +12,8 @@ import cbdt.view.parameters.aspirationlevel.listeners.InitialAspirationLevelModi
 public class InitialAspirationLevelComposite extends
 		AbstractAspirationLevelParameterComposite {
 
+	public static final String TOOL_TIP_TEXT = "Aspiration level before\nany action is taken.";
+	
 	public InitialAspirationLevelComposite(Composite parent,
 			ParametersPageController controller) {
 		super(parent);

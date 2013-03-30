@@ -19,6 +19,8 @@ import cbdt.view.parameters.aspirationlevel.listeners.UseAspirationLevelIncremen
 public class AspirationLevelIncrementComposite extends
 		Composite implements Observer{
 
+	public static final String TOOL_TIP_TEXT = "Applied every stage indexed by a power\nof 2. Supersedes weighting between prev.\nasp. level and max. aver. utility.";
+	
 	private Text text;
 	private DoubleFormatChecker doubleFormatChecker;
 	private Button useAspirationLevelIncrementButton;
