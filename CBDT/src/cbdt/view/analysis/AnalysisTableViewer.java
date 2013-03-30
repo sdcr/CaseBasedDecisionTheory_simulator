@@ -49,7 +49,7 @@ public class AnalysisTableViewer extends TableViewer{
 	private void createStageAndEUColumns() {
 		TableViewerColumn colStage = new TableViewerColumn(this, SWT.NONE);
 		colStage.getColumn().setText("Stage");
-		colStage.getColumn().setWidth(45);
+		colStage.getColumn().pack();
 		colStage.setLabelProvider(new ColumnLabelProvider(){
 			@Override
 			public String getText(Object element) {
@@ -60,7 +60,7 @@ public class AnalysisTableViewer extends TableViewer{
 
 		TableViewerColumn colEU = new TableViewerColumn(this, SWT.NONE);
 		colEU.getColumn().setText("Expected utility");
-		colEU.getColumn().setWidth(95);
+		colEU.getColumn().pack();
 		colEU.setLabelProvider(new ColumnLabelProvider(){
 			@Override
 			public String getText(Object element) {
@@ -82,7 +82,8 @@ public class AnalysisTableViewer extends TableViewer{
 				for(final ActorAction action : firstStageResult.getAbsoluteActionOccurances().keySet()){
 					TableViewerColumn colAbsOccurances = new TableViewerColumn(this, SWT.NONE);
 					colAbsOccurances.getColumn().setText("Abs. occ.: "+action.getActionName());
-					colAbsOccurances.getColumn().setWidth(100);
+					colAbsOccurances.getColumn().pack();
+					colAbsOccurances.getColumn().setResizable(true);
 					colAbsOccurances.setLabelProvider(new ColumnLabelProvider(){
 						@Override
 						public String getText(Object element) {
@@ -104,7 +105,8 @@ public class AnalysisTableViewer extends TableViewer{
 				for(final ActorAction action : actorActions){
 					TableViewerColumn colRelOccurances = new TableViewerColumn(this, SWT.NONE);
 					colRelOccurances.getColumn().setText("Rel. occ.: "+action.getActionName());
-					colRelOccurances.getColumn().setWidth(100);
+					colRelOccurances.getColumn().pack();
+					colRelOccurances.getColumn().setResizable(true);
 					colRelOccurances.setLabelProvider(new ColumnLabelProvider(){
 						@Override
 						public String getText(Object element) {
@@ -131,7 +133,8 @@ public class AnalysisTableViewer extends TableViewer{
 		if(commonConfig.isCalculateLowestAspirationLevels()){
 			lowestAspirationLevelColumn = new TableViewerColumn(this, SWT.NONE);
 			lowestAspirationLevelColumn.getColumn().setText("Lowest asp. level");
-			lowestAspirationLevelColumn.getColumn().setWidth(100);
+			lowestAspirationLevelColumn.getColumn().pack();
+			lowestAspirationLevelColumn.getColumn().setResizable(true);
 			lowestAspirationLevelColumn.setLabelProvider(new ColumnLabelProvider(){
 				@Override
 				public String getText(Object element) {
