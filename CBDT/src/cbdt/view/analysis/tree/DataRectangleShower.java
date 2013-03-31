@@ -17,26 +17,32 @@ public class DataRectangleShower {
 		pApplet.fill(255);
 		boolean showLastAction = (contentToShow.getLastActionOutcome()!=null) && config.isSaveActionNames();
 		
-		int rectangleHeight = 35;
-		int offsetY = 0;			
+		int rectangleHeight = 20;
 		if(showLastAction)
-			offsetY = 30;
+			rectangleHeight += 35;
+		if(config.isSaveAspirationLevels())
+			rectangleHeight += 15;
 		
-		pApplet.rect(pApplet.mouseX+10, pApplet.mouseY+10, 220, rectangleHeight + offsetY);
+		pApplet.rect(pApplet.mouseX+10, pApplet.mouseY+10, 220, rectangleHeight);
 		pApplet.fill(0);
 
+		int offsetY = 0;			
 		if(showLastAction){
 			String lastActionName = contentToShow.getLastActionOutcome().getAction().getActionName();
 			pApplet.text("Last action: "+lastActionName, pApplet.mouseX+30, pApplet.mouseY+25);
 			double lastUtility = contentToShow.getLastActionOutcome().getUtility();
 			pApplet.text("Utility last action: "+lastUtility, pApplet.mouseX+30, pApplet.mouseY+40);
+			offsetY += 30;
 		}
 
-		double aspLevel = contentToShow.getAspirationLevel();
-		pApplet.text("Asp. level: "+aspLevel, pApplet.mouseX+30, pApplet.mouseY+25 + offsetY);
+		if(config.isSaveAspirationLevels()){
+			double aspLevel = contentToShow.getAspirationLevel();
+			pApplet.text("Asp. level: "+aspLevel, pApplet.mouseX+30, pApplet.mouseY+25 + offsetY);
+			offsetY += 15;
+		}
 
 		double probProd = contentToShow.getProbabilityProduct();
-		pApplet.text("Prob.: "+probProd, pApplet.mouseX+30, pApplet.mouseY+40 + offsetY);
+		pApplet.text("Prob.: "+probProd, pApplet.mouseX+30, pApplet.mouseY+25 + offsetY);
 
 	}
 }
