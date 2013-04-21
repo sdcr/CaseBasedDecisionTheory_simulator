@@ -33,7 +33,9 @@ public class ShowTreeSelectionListener implements SelectionListener {
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
+		System.out.println("ShowTreeSelectionListener.widgetSelected(): after entering method");
 		showTreeAnimation();
+		System.out.println("ShowTreeSelectionListener.widgetSelected(): before leaving method");
 	}
 
 	@Override
@@ -55,10 +57,17 @@ public class ShowTreeSelectionListener implements SelectionListener {
 		
 		Frame frame = SWT_AWT.new_Frame(appletComposite);
 		
+		System.out.println("ShowTreeSelectionListener.showTreeAnimation(): before treePApplet creation");
 		TreePApplet treePApplet = new TreePApplet();
+		System.out.println("ShowTreeSelectionListener.showTreeAnimation(): after treePApplet creation");
+		
 		frame.add(treePApplet);
 		treePApplet.setTreeModel(simulationResult.getRootNode(), config);
+
+		System.out.println("ShowTreeSelectionListener.showTreeAnimation(): before treePApplet.init() call");
 		treePApplet.init();
+		System.out.println("ShowTreeSelectionListener.showTreeAnimation(): after treePApplet.init() call");
+
 		shell.open();
 		
 		while(!shell.isDisposed()) {

@@ -11,7 +11,7 @@ public class NodeCircle {
 
 
 	private int DEFAULT_STROKE_WEIGHT = 1;
-	private int DEFAULT_STROKE_WEIGHT_MOUSE_OVER = 5;
+	private int DEFAULT_STROKE_WEIGHT_MOUSE_OVER = 3;
 	
 	private TreePApplet pApplet;
 	private NodeCircle[] children;
@@ -36,14 +36,19 @@ public class NodeCircle {
 		int windowCoordinateY = zoomConverter.convertToWindowCoordinatesY(documentCoordinateY);
 
 		if(isMouseInside(windowCoordinateX, windowCoordinateY)){
-			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT_MOUSE_OVER);
+//			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT_MOUSE_OVER);
+			pApplet.strokeWeight(DEFAULT_STROKE_WEIGHT_MOUSE_OVER);
 			pApplet.setInfoShowingCircle(this);
-		} else
-			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT);
-		
+		} else{
+//			circleShape.setStrokeWeight(DEFAULT_STROKE_WEIGHT);
+			pApplet.strokeWeight(DEFAULT_STROKE_WEIGHT);
+		}
+		pApplet.fill(255);
+			
 		pApplet.pushMatrix();
 		pApplet.translate(windowCoordinateX, windowCoordinateY);
-		pApplet.shape(circleShape);
+//		pApplet.shape(circleShape);
+		pApplet.ellipse(0, 0, NodeCircle.radius*2, NodeCircle.radius*2);
 		pApplet.popMatrix();
 	}
 

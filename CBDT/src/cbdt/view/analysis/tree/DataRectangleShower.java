@@ -5,6 +5,7 @@ import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
 public class DataRectangleShower {
 
+	private static final float DEFAULT_RECTANGLE_WEIGHT = 1;
 	private TreePApplet pApplet;
 	private DFSkeepTreeEngineConfig config;
 	
@@ -23,6 +24,7 @@ public class DataRectangleShower {
 		if(config.isSaveAspirationLevels())
 			rectangleHeight += 15;
 		
+		pApplet.strokeWeight(DEFAULT_RECTANGLE_WEIGHT);
 		pApplet.rect(pApplet.mouseX+10, pApplet.mouseY+10, 220, rectangleHeight);
 		pApplet.fill(0);
 

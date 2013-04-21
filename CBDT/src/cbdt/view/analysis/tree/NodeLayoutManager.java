@@ -7,6 +7,7 @@ public class NodeLayoutManager {
 	public NodeContext frame;
 	
 	public NodeLayoutManager(NodeContext frame) {
+		System.out.println("NodeLayoutManager.Constructor: after entering Constructor");
 		this.frame = frame;
 	}
 	

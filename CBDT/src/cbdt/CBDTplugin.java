@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Menu;
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
+import cbdt.control.LogManager;
 import cbdt.control.MainController;
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.control.pages.ParametersPageController;
@@ -23,6 +24,8 @@ public class CBDTplugin implements ISimulationPlugin {
 	 * Obligatory nullary constructor.
 	 */
 	public CBDTplugin(){
+		LogManager logManager = new LogManager();
+		logManager.initLogging();
 	}
 	
 	@Override
