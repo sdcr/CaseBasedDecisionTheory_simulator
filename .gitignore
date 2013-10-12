@@ -2,8 +2,6 @@
 !SimulationCore/
 !CBDT/
 !XStreamWrapper/
-XStreamWrapper/org/*
-XStreamWrapper/com/*
 !ProcessingWrapp.win32.x86/
 !ProcessingWrapper.win32.x86_64/
 .gitignore
