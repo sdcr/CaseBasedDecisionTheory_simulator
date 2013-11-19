@@ -2,19 +2,29 @@ package cbdt.model.parameters.engineconfig;
 
 import java.util.Observable;
 
-public class CommonSimulationConfiguration extends Observable {
+/**
+ * This class models the configuration parameters which refer to how the simulation results
+ * are to be computed, independent from parameters referring to a specific simulation engine.
+ * For example, it contains the information how many simulation steps are to be performed.
+ * 
+ * @author Stephan da Costa Ribeiro
+ */
+public class CommonConfig extends Observable {
 
 	/**
 	 * The number of expected utilities which should be computed.
 	 */
 	private int numberOfRequestedExpectedUtilityValues;
 
+	//TODO what does it mean again
 	private boolean calculateAbsoluteActionOccurances;
-	
+
+	//TODO what does it mean again
 	private boolean calculateRelativeActionOccurances;
-	
+
+	//TODO what does it mean again
 	private boolean calculateLowestAspirationLevels;
-	
+
 	public boolean isCalculateLowestAspirationLevels() {
 		return calculateLowestAspirationLevels;
 	}

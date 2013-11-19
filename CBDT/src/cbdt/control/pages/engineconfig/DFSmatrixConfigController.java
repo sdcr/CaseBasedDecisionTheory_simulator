@@ -1,11 +1,11 @@
 package cbdt.control.pages.engineconfig;
 
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 
 public class DFSmatrixConfigController implements AbstractEngineConfigController {
 
 	@Override
-	public void setEngineConfigModel(AbstractEngineConfiguration engineConfig) {
+	public void setEngineConfigModel(AbstractEngineConfig engineConfig) {
 		//no changes on the model class done for this configuration anyway
 	}
 

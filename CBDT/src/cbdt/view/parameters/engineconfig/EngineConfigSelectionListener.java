@@ -8,17 +8,17 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
 
 import cbdt.control.pages.ParametersPageController;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 
 public class EngineConfigSelectionListener implements SelectionListener {
 
 	ParametersPageController controller;
 
-	List<AbstractEngineConfiguration> configsList;
+	List<AbstractEngineConfig> configsList;
 
 	public EngineConfigSelectionListener(ParametersPageController controller) {
 		this.controller = controller;
-		configsList = new ArrayList<AbstractEngineConfiguration>();
+		configsList = new ArrayList<AbstractEngineConfig>();
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class EngineConfigSelectionListener implements SelectionListener {
 	public void widgetDefaultSelected(SelectionEvent e) {
 	}
 
-	public void addEngineConfig(AbstractEngineConfiguration config) {
+	public void addEngineConfig(AbstractEngineConfig config) {
 		configsList.add(config);
 	}
 

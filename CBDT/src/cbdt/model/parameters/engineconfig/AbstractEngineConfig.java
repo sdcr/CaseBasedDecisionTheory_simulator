@@ -9,7 +9,7 @@ import java.util.Observable;
  * 
  * @author S-lenovo
  */
-public abstract class AbstractEngineConfiguration extends Observable {
+public abstract class AbstractEngineConfig extends Observable {
 
 	/**
 	 * @return The name of the engine modeled.

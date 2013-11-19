@@ -11,8 +11,8 @@ import org.eclipse.swt.widgets.Label;
 import cbdt.control.pages.ParametersPageController;
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.control.pages.engineconfig.NoEngineConfigControllerException;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.ConfigChoice;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
+import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.CommonConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.ConfigWidgetsWrapperFactory;
@@ -45,7 +45,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		foregroundManager = new ConfigForegroundManager(parametersWrapper, algoSpecificTitleWrapper.getLabel());
 	}
 
-	public void setConfigChoiceModel(ConfigChoice configChoice) {
+	public void setConfigChoiceModel(SimulationConfig configChoice) {
 		configWidgetsFactory = new ConfigWidgetsWrapperFactory();
 
 		EngineConfigSelectionListener comboSelectionListener = new EngineConfigSelectionListener(
@@ -53,7 +53,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 
 		commonWidgets.setEngineConfigModel(configChoice.getCommonSimulationConfig());
 		
-		for (AbstractEngineConfiguration config : configChoice
+		for (AbstractEngineConfig config : configChoice
 				.getAvailableEngineConfigs()) {
 			try {
 				AbstractEngineConfigController configController = controller
@@ -73,8 +73,8 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		availableConfigsCombo.addSelectionListener(comboSelectionListener);
 
 		// find out which config is in currently chosen and put it in foreground
-		AbstractEngineConfiguration currentlyChoosenConfig = configChoice
-				.getCurrentlyChoosenConfig();
+		AbstractEngineConfig currentlyChoosenConfig = configChoice
+				.getCurrentlyEngineChoosenConfig();
 		if (currentlyChoosenConfig != null) {
 			try {
 				foregroundManager.setToForeground(configWidgetsFactory.getConfigComposite(
@@ -93,11 +93,11 @@ public class ConfigWidgetsWrapperManager implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// update which config is in foreground.
-		if (o instanceof ConfigChoice) {
-			ConfigChoice choice = (ConfigChoice) o;
+		if (o instanceof SimulationConfig) {
+			SimulationConfig choice = (SimulationConfig) o;
 			try {
 				foregroundManager.setToForeground(configWidgetsFactory
-						.getConfigComposite(choice.getCurrentlyChoosenConfig(),
+						.getConfigComposite(choice.getCurrentlyEngineChoosenConfig(),
 								parametersPage));
 			} catch (NoWidgetWrapperException e) {
 				e.printStackTrace();

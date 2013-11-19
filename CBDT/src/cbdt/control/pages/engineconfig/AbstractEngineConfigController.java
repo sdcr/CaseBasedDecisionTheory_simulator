@@ -1,9 +1,9 @@
 package cbdt.control.pages.engineconfig;
 
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 
 public interface AbstractEngineConfigController {
 
-	public void setEngineConfigModel(AbstractEngineConfiguration engineConfig);
+	public void setEngineConfigModel(AbstractEngineConfig engineConfig);
 
 }

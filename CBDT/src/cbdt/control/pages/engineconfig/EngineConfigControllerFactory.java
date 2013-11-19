@@ -1,6 +1,6 @@
 package cbdt.control.pages.engineconfig;
 
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
@@ -8,7 +8,7 @@ import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 public class EngineConfigControllerFactory {
 
 	public AbstractEngineConfigController getConfigController(
-			AbstractEngineConfiguration config) throws NoEngineConfigControllerException {
+			AbstractEngineConfig config) throws NoEngineConfigControllerException {
 		if (config instanceof DFSkeepTreeEngineConfig)
 			return new DFSkeepTreeConfigController();
 		if (config instanceof DFSmatrixEngineConfig)

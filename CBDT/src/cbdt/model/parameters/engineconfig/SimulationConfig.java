@@ -6,58 +6,60 @@ import java.util.Observable;
 
 /**
  * This class models the configuration chosen for a simulation.
+ * It encompasses a CommonSimulationConfiguration, the available AbstractEngineConfigurations,
+ * and a reference to the currently chosen engine configuration.
  * @author Stephan da Costa Ribeiro
  */
-public class ConfigChoice extends Observable {
+public class SimulationConfig extends Observable {
 
 	/**
 	 * The configuration data which is set for the simulation, independent from
 	 * the engine used.
 	 */
-	private CommonSimulationConfiguration commonSimConfig;
+	private CommonConfig commonSimConfig;
 
 	/**
 	 * The engine configurations available.
 	 */
-	private List<AbstractEngineConfiguration> availableEngineConfigs;
+	private List<AbstractEngineConfig> availableEngineConfigs;
 
 	/**
 	 * The engine configuration currently chosen by the user. 
 	 * It must be one of the available engine configurations.
 	 */
-	private AbstractEngineConfiguration choosenEngineConfig;
+	private AbstractEngineConfig choosenEngineConfig;
 
-	public CommonSimulationConfiguration getCommonSimulationConfig() {
+	public CommonConfig getCommonSimulationConfig() {
 		return commonSimConfig;
 	}
 	
-	public void setCommonSimulationConfig(CommonSimulationConfiguration commonConfig) {
+	public void setCommonSimulationConfig(CommonConfig commonConfig) {
 		this.commonSimConfig = commonConfig;
 	}
 
 	/**
 	 * Constructor.
 	 */
-	public ConfigChoice() {
-		availableEngineConfigs = new ArrayList<AbstractEngineConfiguration>();
+	public SimulationConfig() {
+		availableEngineConfigs = new ArrayList<AbstractEngineConfig>();
 	}
 
-	public List<AbstractEngineConfiguration> getAvailableEngineConfigs() {
+	public List<AbstractEngineConfig> getAvailableEngineConfigs() {
 		return availableEngineConfigs;
 	}
 
 	public void addAvailableConfigs(
-			List<AbstractEngineConfiguration> additionalConfigs) {
+			List<AbstractEngineConfig> additionalConfigs) {
 		availableEngineConfigs.addAll(additionalConfigs);
 		setChanged();
 		notifyObservers();
 	}
 
-	public AbstractEngineConfiguration getCurrentlyChoosenConfig() {
+	public AbstractEngineConfig getCurrentlyEngineChoosenConfig() {
 		return choosenEngineConfig;
 	}
 
-	public void setCurrentlyChoosenConfig(AbstractEngineConfiguration config) {
+	public void setCurrentlyChoosenEngineConfig(AbstractEngineConfig config) {
 		choosenEngineConfig = config;
 		setChanged();
 		notifyObservers();

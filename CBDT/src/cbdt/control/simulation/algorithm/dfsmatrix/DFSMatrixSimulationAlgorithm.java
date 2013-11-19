@@ -6,13 +6,13 @@ import java.util.Map;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
 public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 
-	protected AbstractEngineConfiguration config;
+	protected AbstractEngineConfig config;
 	
 	private SimulationState simState;
 	
@@ -74,11 +74,11 @@ public class DFSMatrixSimulationAlgorithm extends SimulationAlgorithm {
 
 	}
 
-	public AbstractEngineConfiguration getMatrixConfig() {
+	public AbstractEngineConfig getMatrixConfig() {
 		return config;
 	}
 
-	public void setMatrixConfig(AbstractEngineConfiguration config) {
+	public void setMatrixConfig(AbstractEngineConfig config) {
 		this.config = config;
 	}
 }

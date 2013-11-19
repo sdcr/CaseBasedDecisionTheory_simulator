@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.pages.ParametersPageController;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.ConfigChoice;
+import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.view.LabelFactory;
 import cbdt.view.parameters.actoraction.ActorActionsComposite;
 import cbdt.view.parameters.aspirationlevel.AbstractAspirationLevelParameterComposite;
@@ -153,7 +153,7 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 		aspirationLevelDiscountComposite.setParametersModel(parameters);
 	}
 
-	public void setConfigChoiceModel(ConfigChoice configChoice) {
+	public void setConfigChoiceModel(SimulationConfig configChoice) {
 		configsCompositeWrapperManager.setConfigChoiceModel(configChoice);
 	}
 }

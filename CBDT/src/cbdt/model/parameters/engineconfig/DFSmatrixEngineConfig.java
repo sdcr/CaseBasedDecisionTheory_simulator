@@ -1,6 +1,6 @@
 package cbdt.model.parameters.engineconfig;
 
-public class DFSmatrixEngineConfig extends AbstractEngineConfiguration {
+public class DFSmatrixEngineConfig extends AbstractEngineConfig {
 
 	@Override
 	public String getName() {

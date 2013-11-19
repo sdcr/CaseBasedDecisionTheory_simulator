@@ -2,7 +2,7 @@ package cbdt.view.parameters.engineconfig.widgetswrapper;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
@@ -23,7 +23,7 @@ public class ConfigWidgetsWrapperFactory {
 	 * @throws NoWidgetWrapperException 
 	 */
 	public AbstractConfigWidgetsWrapper getConfigComposite(
-			AbstractEngineConfiguration config, Composite parent) throws NoWidgetWrapperException {
+			AbstractEngineConfig config, Composite parent) throws NoWidgetWrapperException {
 		if (config instanceof DFSkeepTreeEngineConfig) {
 			if (naiveConfigWidgetsWrapper == null)
 				naiveConfigWidgetsWrapper = new DFSkeepTreeConfigWidgetsWrapper(

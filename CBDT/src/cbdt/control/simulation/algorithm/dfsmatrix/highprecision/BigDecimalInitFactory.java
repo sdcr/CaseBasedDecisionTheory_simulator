@@ -7,12 +7,12 @@ import cbdt.control.simulation.algorithm.INodeContent;
 import cbdt.control.simulation.algorithm.dfsmatrix.AbstractInitFactory;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
+import cbdt.model.parameters.engineconfig.CommonConfig;
 
 public class BigDecimalInitFactory extends AbstractInitFactory {
 
 	public BigDecimalInitFactory(Parameters parameters,
-			CommonSimulationConfiguration commonConfig) {
+			CommonConfig commonConfig) {
 		super(parameters, commonConfig);
 	}
 

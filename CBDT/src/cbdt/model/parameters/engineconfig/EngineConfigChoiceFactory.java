@@ -5,18 +5,18 @@ import java.util.List;
 
 public class EngineConfigChoiceFactory {
 
-	public ConfigChoice getDefaultConfigChoice() {
-		ConfigChoice defaultChoice = new ConfigChoice();
+	public SimulationConfig getDefaultConfigChoice() {
+		SimulationConfig defaultChoice = new SimulationConfig();
 
-		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();
+		List<AbstractEngineConfig> configs = new ArrayList<AbstractEngineConfig>();
 		configs.add(new DFSkeepTreeEngineConfig());
 		configs.add(new DFSmatrixEngineConfig());
 		configs.add(new DFSmatrixHighPrecEngineConfig());
 		
 		defaultChoice.addAvailableConfigs(configs);
 
-		defaultChoice.setCurrentlyChoosenConfig(configs.get(0));
-		defaultChoice.setCommonSimulationConfig(new CommonSimulationConfiguration());
+		defaultChoice.setCurrentlyChoosenEngineConfig(configs.get(0));
+		defaultChoice.setCommonSimulationConfig(new CommonConfig());
 
 		return defaultChoice;
 	}

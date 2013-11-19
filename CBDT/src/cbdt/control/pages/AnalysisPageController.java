@@ -5,9 +5,9 @@ import java.io.IOException;
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 import cbdt.control.persistence.results.IResultsPersistenceManager;
 import cbdt.control.persistence.results.ResultsPersistenceManager;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
-import cbdt.model.parameters.engineconfig.ConfigChoice;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
+import cbdt.model.parameters.engineconfig.CommonConfig;
+import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysis.AnalysisPageWrapper;
 
@@ -20,8 +20,8 @@ public class AnalysisPageController extends AbstractPageController {
 	private AnalysisPageWrapper analysisPageWrapper;
 
 	/* Model references */
-	private AbstractEngineConfiguration usedEngineConfig;
-	private CommonSimulationConfiguration usedCommonConfig;
+	private AbstractEngineConfig usedEngineConfig;
+	private CommonConfig usedCommonConfig;
 	private Result simulationResult;
 
 	/**
@@ -48,10 +48,10 @@ public class AnalysisPageController extends AbstractPageController {
 	 * @param simulationResult The result of a simulation.
 	 * @param configChoice The engine configuration used for the simulation.
 	 */
-	public void setSimulationResult(Result simulationResult, ConfigChoice configChoice) {
+	public void setSimulationResult(Result simulationResult, SimulationConfig configChoice) {
 		this.simulationResult = simulationResult;
 		analysisPageWrapper.getAnalysisPage().setResultModel(configChoice, simulationResult);
-		usedEngineConfig = configChoice.getCurrentlyChoosenConfig();
+		usedEngineConfig = configChoice.getCurrentlyEngineChoosenConfig();
 		usedCommonConfig = configChoice.getCommonSimulationConfig();
 		getMainController().setToForeground(this);
 	}

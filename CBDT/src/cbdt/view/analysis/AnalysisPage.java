@@ -6,15 +6,15 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.pages.AnalysisPageController;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
-import cbdt.model.parameters.engineconfig.ConfigChoice;
+import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.model.result.Result;
 import cbdt.view.LabelFactory;
 
 public class AnalysisPage extends Composite {
 
-	private AbstractEngineConfiguration config;
+	private AbstractEngineConfig config;
 	private Result simulationResult;
 	private AnalysisTableViewer tableViewer;
 	private Button showTreeButton;
@@ -57,8 +57,8 @@ public class AnalysisPage extends Composite {
 		}
 	}
 
-	public void setResultModel(ConfigChoice configChoice, Result simulationResult){
-		this.config = configChoice.getCurrentlyChoosenConfig();
+	public void setResultModel(SimulationConfig configChoice, Result simulationResult){
+		this.config = configChoice.getCurrentlyEngineChoosenConfig();
 		this.simulationResult = simulationResult;
 		tableViewer.createOccuranceColumns(configChoice.getCommonSimulationConfig(), simulationResult);
 		tableViewer.createLowestAspirationLevelColumn(configChoice.getCommonSimulationConfig(), simulationResult);

@@ -9,8 +9,8 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.ConfigChoice;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
+import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.model.parameters.engineconfig.EngineConfigChoiceFactory;
 import cbdt.view.parameters.ParametersPageWrapper;
 
@@ -30,7 +30,7 @@ public class ParametersPageController extends AbstractPageController {
 	/**
 	 * The current choice of engine configuration.
 	 */
-	private ConfigChoice configChoice;
+	private SimulationConfig configChoice;
 
 	/**
 	 * The persistence manager to store parameters.
@@ -138,7 +138,7 @@ public class ParametersPageController extends AbstractPageController {
 		}
 	}
 
-	public ConfigChoice getConfigChoiceModel() {
+	public SimulationConfig getConfigChoiceModel() {
 		return configChoice;
 	}
 
@@ -150,8 +150,8 @@ public class ParametersPageController extends AbstractPageController {
 		getMainController().computeCDBTSimulation(parametersModel, configChoice);
 	}
 
-	public void setChoosenEngineConfig(AbstractEngineConfiguration config) {
-		configChoice.setCurrentlyChoosenConfig(config);
+	public void setChoosenEngineConfig(AbstractEngineConfig config) {
+		configChoice.setCurrentlyChoosenEngineConfig(config);
 	}
 
 	public void setCalcAbsActionOccurances(boolean selection) {

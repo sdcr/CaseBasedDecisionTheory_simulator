@@ -10,7 +10,7 @@ import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
+import cbdt.model.parameters.engineconfig.CommonConfig;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
@@ -21,9 +21,9 @@ public class NodeShellVisitor extends NodeVisitor {
 	private ActionSelector actionSelector;
 	private ChildNodeContentGenerator childContentGenerator;
 	private IProgressMonitor monitor;
-	private CommonSimulationConfiguration commonConfig;
+	private CommonConfig commonConfig;
 
-	public NodeShellVisitor(Parameters parameters, DFSkeepTreeEngineConfig config, CommonSimulationConfiguration commonConfig,
+	public NodeShellVisitor(Parameters parameters, DFSkeepTreeEngineConfig config, CommonConfig commonConfig,
 			Result result, NodeContentKeepTreeFactory factory, IProgressMonitor monitor) {
 		this.config = config;
 		this.commonConfig = commonConfig;

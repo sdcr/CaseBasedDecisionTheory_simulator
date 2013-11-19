@@ -1,6 +1,6 @@
 package cbdt.control.pages.engineconfig;
 
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 
 public class DFSmatrixHighPrecisionConfigController implements AbstractEngineConfigController {
@@ -8,7 +8,7 @@ public class DFSmatrixHighPrecisionConfigController implements AbstractEngineCon
 	private DFSmatrixHighPrecEngineConfig config;
 
 	@Override
-	public void setEngineConfigModel(AbstractEngineConfiguration engineConfig) {
+	public void setEngineConfigModel(AbstractEngineConfig engineConfig) {
 		config = (DFSmatrixHighPrecEngineConfig)engineConfig;
 	}
 	

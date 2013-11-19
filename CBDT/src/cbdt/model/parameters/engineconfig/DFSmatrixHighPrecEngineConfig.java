@@ -1,6 +1,6 @@
 package cbdt.model.parameters.engineconfig;
 
-public class DFSmatrixHighPrecEngineConfig extends AbstractEngineConfiguration {
+public class DFSmatrixHighPrecEngineConfig extends AbstractEngineConfig {
 
 	private int numberOfDecimalPlaces;
 	

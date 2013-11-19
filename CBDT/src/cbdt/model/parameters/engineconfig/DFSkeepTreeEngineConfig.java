@@ -1,6 +1,6 @@
 package cbdt.model.parameters.engineconfig;
 
-public class DFSkeepTreeEngineConfig extends AbstractEngineConfiguration {
+public class DFSkeepTreeEngineConfig extends AbstractEngineConfig {
 	
 	private boolean saveTreeStructure;
 	

@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
+import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
+import cbdt.model.parameters.engineconfig.CommonConfig;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.BigDecimalStageResult;
@@ -30,7 +30,7 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 	private List<ActorAction> relOccActorActionsList;
 	
 	@Override
-	public void saveResultToFile(String filepath, Result result, CommonSimulationConfiguration commonConfig, AbstractEngineConfiguration config) throws IOException {
+	public void saveResultToFile(String filepath, Result result, CommonConfig commonConfig, AbstractEngineConfig config) throws IOException {
 		BufferedWriter outWriter = null;
 		outWriter = new BufferedWriter(new FileWriter(filepath));
 		absOccActorActionsList = new ArrayList<ActorAction>();
@@ -48,7 +48,7 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 	}
 
 	private void writeData(BufferedWriter outWriter,
-			List<StageResult> stageResults, CommonSimulationConfiguration commonConfig) throws IOException {
+			List<StageResult> stageResults, CommonConfig commonConfig) throws IOException {
 		for (StageResult stageResult : stageResults) {
 			if(stageResult instanceof BigDecimalStageResult){
 				BigDecimalStageResult bigDecimalStageResult = (BigDecimalStageResult)stageResult;
@@ -95,7 +95,7 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 	}
 
 	private void writeTitleLines(BufferedWriter outWriter,
-			List<StageResult> stageResults, CommonSimulationConfiguration commonConfig) throws IOException {
+			List<StageResult> stageResults, CommonConfig commonConfig) throws IOException {
 		if (stageResults != null && !stageResults.isEmpty()) {
 			outWriter.write("Stage;Expected utility;");
 			if(commonConfig.isCalculateAbsoluteActionOccurances()){
@@ -157,7 +157,7 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 		}
 	}
 
-	private void writeConfigurationDetails(AbstractEngineConfiguration config,
+	private void writeConfigurationDetails(AbstractEngineConfig config,
 			BufferedWriter outWriter) throws IOException {
 		outWriter.write("Used algorithm: ;"+config.getName());
 		outWriter.newLine();
