@@ -16,16 +16,34 @@ import cbdt.view.parameters.ParametersPageWrapper;
 
 public class ParametersPageController extends AbstractPageController {
 
+	/* views */
 	/**
 	 * The wrapper of the associated parameters page.
 	 */
 	private ParametersPageWrapper parametersPageWrapper;
 
+	/* models */
+	/**
+	 * The parameters model as currently displayed in the view.
+	 */
 	private Parameters parametersModel;
+	/**
+	 * The current choice of engine configuration.
+	 */
 	private EngineConfigChoice configChoice;
+
+	/**
+	 * The persistence manager to store parameters.
+	 */
 	private IParametersPersistenceManager parametersPersistenceManager;
+
+	//TODO: wahts this?
 	private EngineConfigControllerFactory configControllerFactory;
 
+	/**
+	 * Constructor.
+	 * TODO' describe the filling of the model references.
+	 */
 	public ParametersPageController() {
 		ParametersFactory factory = new ParametersFactory();
 		parametersModel = factory.getDefaultParameters();
@@ -43,6 +61,10 @@ public class ParametersPageController extends AbstractPageController {
 		return parametersPageWrapper;
 	}
 
+	public Parameters getParametersModel() {
+		return parametersModel;
+	}
+	
 	public ActorAction addDefaultActorActionToModel() {
 		ParametersFactory factory = new ParametersFactory();
 		ActorAction defaultActorAction = factory.getDefaultActorAction();
@@ -52,10 +74,6 @@ public class ParametersPageController extends AbstractPageController {
 
 	public void removeActorActionFromModel(ActorAction actorAction) {
 		parametersModel.removeActorAction(actorAction);
-	}
-
-	public Parameters getParametersModel() {
-		return parametersModel;
 	}
 
 	public ActorActionOutcome addDefaultActorActionOutcomeToModel(
