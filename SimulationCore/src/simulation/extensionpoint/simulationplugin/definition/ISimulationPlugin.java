@@ -34,7 +34,7 @@ public interface ISimulationPlugin {
 	public Menu getMenu(Decorations shell, Menu menuBar, int index);
 	
 	/**
-	 * @return A list of ISimulationPluginPageWrapper, whose contents will be displayed on the 
+	 * @return A list of AbstractPluginPageWrappers, whose wrapped composites will be displayed on the 
 	 * plugin pane of the SimulationCore application.
 	 */
 	public List<AbstractPluginPageWrapper> getPageFactories();
