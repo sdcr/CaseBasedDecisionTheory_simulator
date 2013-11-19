@@ -4,24 +4,24 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 
-import cbdt.control.pages.ParametersPageController;
+import cbdt.control.parameters.config.common.CommonConfigController;
 
 public class AbsoluteActionOccurancesSelectionListener implements
 		SelectionListener {
 
-	private ParametersPageController pageController;
+	private CommonConfigController commonConfigController;
 	private Button absActionOcurrancesButton;
 
 	public AbsoluteActionOccurancesSelectionListener(
-			ParametersPageController pageController,
+			CommonConfigController commonConfigController,
 			Button absActionOcurrancesButton) {
 		this.absActionOcurrancesButton = absActionOcurrancesButton;
-		this.pageController = pageController;
+		this.commonConfigController = commonConfigController;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		pageController.setCalcAbsActionOccurances(absActionOcurrancesButton
+		commonConfigController.setCalcAbsActionOccurances(absActionOcurrancesButton
 				.getSelection());
 	}
 

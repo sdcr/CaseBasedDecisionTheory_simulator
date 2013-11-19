@@ -14,9 +14,9 @@ import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.view.parameters.SimpleParameterComposite;
 import cbdt.view.parameters.aspirationlevel.SimpleParameterHintLabelWrapper;
 import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
-import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
+import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
-public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
+public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractEngineConfigWidgetsWrapper {
 
 	private Label reqDecimalPlacesLabel;
 	private SimpleParameterComposite requiredDecimalPlacesComposite;

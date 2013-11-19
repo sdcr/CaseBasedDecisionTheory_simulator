@@ -5,9 +5,9 @@ import java.util.Observable;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.parameters.config.engine.AbstractEngineConfigController;
-import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
+import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
-public class DFSmatrixConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
+public class DFSmatrixConfigWidgetsWrapper extends AbstractEngineConfigWidgetsWrapper {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {

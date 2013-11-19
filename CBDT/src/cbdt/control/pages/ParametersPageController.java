@@ -2,6 +2,7 @@ package cbdt.control.pages;
 
 import java.io.FileNotFoundException;
 
+import cbdt.control.parameters.config.common.CommonConfigController;
 import cbdt.control.parameters.config.engine.EngineConfigControllerFactory;
 import cbdt.control.persistence.parameters.IParametersPersistenceManager;
 import cbdt.control.persistence.parameters.ParametersPersistenceManager;
@@ -40,6 +41,8 @@ public class ParametersPageController extends AbstractPageController {
 	//TODO: wahts this?
 	private EngineConfigControllerFactory configControllerFactory;
 
+	private CommonConfigController commonConfigController;
+	
 	/**
 	 * Constructor.
 	 * TODO' describe the filling of the model references.
@@ -54,6 +57,8 @@ public class ParametersPageController extends AbstractPageController {
 		simulationConfig = configChoiceFactory.getDefaultSimulationConfig();
 
 		configControllerFactory = new EngineConfigControllerFactory();
+		commonConfigController = new CommonConfigController();
+		commonConfigController.setCommonConfig(simulationConfig.getCommonConfig());
 	}
 
 	@Override
@@ -146,6 +151,10 @@ public class ParametersPageController extends AbstractPageController {
 		return configControllerFactory;
 	}
 
+	public CommonConfigController getCommonConfigController() {
+		return commonConfigController;
+	}
+	
 	public void startComputation() {
 		getMainController().computeCDBTSimulation(parametersModel, simulationConfig);
 	}
@@ -154,24 +163,23 @@ public class ParametersPageController extends AbstractPageController {
 		simulationConfig.setCurrentlyChosenEngineConfig(config);
 	}
 
-	public void setCalcAbsActionOccurances(boolean selection) {
-		simulationConfig.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
-	}
-
-	public void setCalcRelActionOccurances(boolean selection) {
-		simulationConfig.getCommonConfig().setCalculateRelativeActionOccurances(selection);
-	}
-
-	public void setRequestedNumberOfExpectedUtilities(int numOfRequestedValues) {
-		simulationConfig.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
-	}
+//	public void setCalcAbsActionOccurances(boolean selection) {
+//		simulationConfig.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
+//	}
+//
+//	public void setCalcRelActionOccurances(boolean selection) {
+//		simulationConfig.getCommonConfig().setCalculateRelativeActionOccurances(selection);
+//	}
+//
+//	public void setRequestedNumberOfExpectedUtilities(int numOfRequestedValues) {
+//		simulationConfig.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
+//	}
+//
+//	public void setCalcLowestAspirationLevels(boolean selection) {
+//		simulationConfig.getCommonConfig().setCalculateLowestAspirationLevels(selection);
+//	}
 
 	public void setUsingAspirationLevelIncrement(boolean selection) {
 		parametersModel.setUsingAspirationLevelIncrement(selection);
 	}
-
-	public void setCalcLowestAspirationLevels(boolean selection) {
-		simulationConfig.getCommonConfig().setCalculateLowestAspirationLevels(selection);
-	}
-
 }

@@ -5,13 +5,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
+import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
 public class ConfigForegroundManager {
 
 	private Composite currentlyInBackgroundsParent;
 	private Composite parametersPage;
-	private AbstractConfigWidgetsWrapper currentlyInForegroundPage;
+	private AbstractEngineConfigWidgetsWrapper currentlyInForegroundPage;
 	private Label algoSpecificTitleLabel;
 
 	public ConfigForegroundManager(Composite foregroundParent, Label algoSpecificTitleLabel) {
@@ -21,7 +21,7 @@ public class ConfigForegroundManager {
 	}
 
 	public void setToForeground(
-			AbstractConfigWidgetsWrapper configWidgetsWrapper) {
+			AbstractEngineConfigWidgetsWrapper configWidgetsWrapper) {
 		if (currentlyInForegroundPage != null){
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
 		}
@@ -33,7 +33,7 @@ public class ConfigForegroundManager {
 		parametersPage.getParent().getParent().getParent().pack();
 	}
 
-	public void setToBackground(AbstractConfigWidgetsWrapper configComposite) {
+	public void setToBackground(AbstractEngineConfigWidgetsWrapper configComposite) {
 		configComposite.setParent(currentlyInBackgroundsParent);
 	}
 

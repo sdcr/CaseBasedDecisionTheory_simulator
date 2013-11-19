@@ -12,9 +12,9 @@ import cbdt.control.parameters.config.engine.AbstractEngineConfigController;
 import cbdt.control.parameters.config.engine.DFSkeepTreeConfigController;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
-import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
+import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
-public class DFSkeepTreeConfigWidgetsWrapper extends AbstractConfigWidgetsWrapper {
+public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgetsWrapper {
 
 	private static final int INNER_CHECKBOX_MARGIN_LEFT = 20;
 	

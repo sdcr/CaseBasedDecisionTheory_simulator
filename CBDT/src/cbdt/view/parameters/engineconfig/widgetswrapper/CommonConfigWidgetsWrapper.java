@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.pages.ParametersPageController;
+import cbdt.control.parameters.config.common.CommonConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.parameters.engineconfig.CommonConfig;
 import cbdt.view.HintLabelWrapper;
@@ -89,7 +89,7 @@ public class CommonConfigWidgetsWrapper implements Observer {
 				.setNumberFormatChecker(integerFormatChecker);
 	}
 
-	public void setEngineConfigModel(CommonConfig config) {
+	public void setCommonConfigModel(CommonConfig config) {
 		config.addObserver(this);
 		update(config, null);
 	}
@@ -110,20 +110,20 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		}
 	}
 
-	public void setController(ParametersPageController pageController) {
+	public void setCommonConfigController(CommonConfigController commonConfigController) {
 		requiredExpectedUtilitiesComposite.getText().addModifyListener(
 				new RequestedExpectedUtilityValuesModifyListener(
-						pageController, requiredExpectedUtilitiesComposite
+						commonConfigController, requiredExpectedUtilitiesComposite
 								.getHintLabel(), integerFormatChecker));
 		absActionOcurrancesButton
 				.addSelectionListener(new AbsoluteActionOccurancesSelectionListener(
-						pageController, absActionOcurrancesButton));
+						commonConfigController, absActionOcurrancesButton));
 		relActionOcurrancesButton
 				.addSelectionListener(new RelativeActionOccurancesSelectionListener(
-						pageController, relActionOcurrancesButton));
+						commonConfigController, relActionOcurrancesButton));
 		lowestAspirationLevelsButton
 				.addSelectionListener(new LowestAspirationLevelsSelectionListener(
-						pageController, lowestAspirationLevelsButton));
+						commonConfigController, lowestAspirationLevelsButton));
 		
 	}
 

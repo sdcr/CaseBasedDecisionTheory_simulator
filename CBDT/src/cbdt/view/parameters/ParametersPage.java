@@ -154,6 +154,6 @@ public class ParametersPage extends AbstractControllerAccessComposite {
 	}
 
 	public void setConfigChoiceModel(SimulationConfig configChoice) {
-		configsCompositeWrapperManager.setConfigChoiceModel(configChoice);
+		configsCompositeWrapperManager.setSimulationConfigModel(configChoice);
 	}
 }

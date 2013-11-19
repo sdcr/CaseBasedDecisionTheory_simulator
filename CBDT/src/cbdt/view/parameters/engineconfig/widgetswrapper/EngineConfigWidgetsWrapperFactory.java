@@ -10,7 +10,7 @@ import cbdt.view.parameters.engineconfig.widgetswrapper.dfskeeptree.DFSkeepTreeC
 import cbdt.view.parameters.engineconfig.widgetswrapper.dfsmatrix.DFSmatrixConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.dfsmatrixhp.DFSmatrixHighPrecisionConfigWidgetsWrapper;
 
-public class ConfigWidgetsWrapperFactory {
+public class EngineConfigWidgetsWrapperFactory {
 
 	private DFSkeepTreeConfigWidgetsWrapper naiveConfigWidgetsWrapper;
 	private DFSmatrixConfigWidgetsWrapper matrixConfigWidgetsWrapper;
@@ -22,7 +22,7 @@ public class ConfigWidgetsWrapperFactory {
 	 * @return The configComposite belonging to the config.
 	 * @throws NoWidgetWrapperException 
 	 */
-	public AbstractConfigWidgetsWrapper getConfigComposite(
+	public AbstractEngineConfigWidgetsWrapper getEngineConfigWidgetWrapper(
 			AbstractEngineConfig config, Composite parent) throws NoWidgetWrapperException {
 		if (config instanceof DFSkeepTreeEngineConfig) {
 			if (naiveConfigWidgetsWrapper == null)
