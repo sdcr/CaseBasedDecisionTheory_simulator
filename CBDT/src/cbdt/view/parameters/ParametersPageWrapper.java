@@ -14,12 +14,12 @@ import cbdt.view.CBDTHeaderComposite;
  * 
  * @author S-lenovo
  */
-public class ParametersPageReference extends AbstractPluginPageWrapper {
+public class ParametersPageWrapper extends AbstractPluginPageWrapper {
 
 	private ParametersPage parameterComposite;
 	private ParametersPageController controller;
 
-	public ParametersPageReference(ParametersPageController controller) {
+	public ParametersPageWrapper(ParametersPageController controller) {
 		this.controller = controller;
 	}
 

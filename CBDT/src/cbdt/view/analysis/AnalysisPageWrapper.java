@@ -7,12 +7,12 @@ import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageW
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.view.CBDTHeaderComposite;
 
-public class AnalysisPageReference extends AbstractPluginPageWrapper{
+public class AnalysisPageWrapper extends AbstractPluginPageWrapper{
 
 	private AnalysisPage analysisPage;
 	private AnalysisPageController controller;
 	
-	public AnalysisPageReference(AnalysisPageController controller) {
+	public AnalysisPageWrapper(AnalysisPageController controller) {
 		this.controller = controller;
 	}
 

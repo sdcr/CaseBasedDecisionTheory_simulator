@@ -12,20 +12,24 @@ import cbdt.model.parameters.ParametersFactory;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.parameters.engineconfig.EngineConfigChoiceFactory;
-import cbdt.view.parameters.ParametersPageReference;
+import cbdt.view.parameters.ParametersPageWrapper;
 
 public class ParametersPageController extends AbstractPageController {
 
+	/**
+	 * The wrapper of the associated parameters page.
+	 */
+	private ParametersPageWrapper parametersPageWrapper;
+
 	private Parameters parametersModel;
 	private EngineConfigChoice configChoice;
-	private ParametersPageReference parametersPageReference;
 	private IParametersPersistenceManager parametersPersistenceManager;
 	private EngineConfigControllerFactory configControllerFactory;
 
 	public ParametersPageController() {
 		ParametersFactory factory = new ParametersFactory();
 		parametersModel = factory.getDefaultParameters();
-		parametersPageReference = new ParametersPageReference(this);
+		parametersPageWrapper = new ParametersPageWrapper(this);
 		parametersPersistenceManager = new ParametersPersistenceManager();
 
 		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
@@ -35,8 +39,8 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	@Override
-	public ParametersPageReference getPageWrapper() {
-		return parametersPageReference;
+	public ParametersPageWrapper getPageWrapper() {
+		return parametersPageWrapper;
 	}
 
 	public ActorAction addDefaultActorActionToModel() {
@@ -60,7 +64,7 @@ public class ParametersPageController extends AbstractPageController {
 		ActorActionOutcome defaultOutcome = factory
 				.getDefaultActorActionOutcome();
 		actorAction.addActionOutcome(defaultOutcome);
-		parametersPageReference.getParametersPage().setFocus();
+		parametersPageWrapper.getParametersPage().setFocus();
 		return defaultOutcome;
 	}
 
@@ -93,7 +97,7 @@ public class ParametersPageController extends AbstractPageController {
 			parametersModel = parametersPersistenceManager
 					.getParametersFromFile(filepath);
 			goToForeground();
-			parametersPageReference.getParametersPage().setParametersModel(
+			parametersPageWrapper.getParametersPage().setParametersModel(
 					parametersModel);
 		} catch (FileNotFoundException e) {
 			getMessageBoxManager().showErrorMessage(

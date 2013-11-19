@@ -9,37 +9,62 @@ import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
 import cbdt.model.parameters.engineconfig.EngineConfigChoice;
 import cbdt.model.result.Result;
-import cbdt.view.analysis.AnalysisPageReference;
+import cbdt.view.analysis.AnalysisPageWrapper;
 
 public class AnalysisPageController extends AbstractPageController {
 
-	private Result simulationResult;
-	private AnalysisPageReference analysisPageReference;
-	private IResultsPersistenceManager resultPersistenceManager;
+	/* view references */
+	/**
+	 * The wrapper of the associated analysis page.
+	 */
+	private AnalysisPageWrapper analysisPageWrapper;
+
+	/* Model references */
 	private AbstractEngineConfiguration usedEngineConfig;
-	private CommonEngineConfiguration commonConfig;
+	private CommonEngineConfiguration usedCommonConfig;
+	private Result simulationResult;
+
+	/**
+	 * The persistence manager for simulation results.
+	 */
+	private IResultsPersistenceManager resultPersistenceManager;
 	
+	/**
+	 * Constructor.
+	 */
 	public AnalysisPageController() {
-		analysisPageReference = new AnalysisPageReference(this);
+		analysisPageWrapper = new AnalysisPageWrapper(this);
 		resultPersistenceManager = new ResultsPersistenceManager();
 	}
 	
 	@Override
 	public AbstractPluginPageWrapper getPageWrapper() {
-		return analysisPageReference;
+		return analysisPageWrapper;
 	}
 
+	/**
+	 * Fills the analysis page with simulation results and the engine config choice data,
+	 * and puts it in foreground.
+	 * @param simulationResult The result of a simulation.
+	 * @param configChoice The engine configuration used for the simulation.
+	 */
 	public void setSimulationResult(Result simulationResult, EngineConfigChoice configChoice) {
 		this.simulationResult = simulationResult;
-		analysisPageReference.getAnalysisPage().setResultModel(configChoice, simulationResult);
+		analysisPageWrapper.getAnalysisPage().setResultModel(configChoice, simulationResult);
 		usedEngineConfig = configChoice.getCurrentlyChoosenConfig();
-		commonConfig = configChoice.getCommonConfig();
+		usedCommonConfig = configChoice.getCommonConfig();
 		getMainController().setToForeground(this);
 	}
 
-	public void exportResults(String filepathFromDialog) {
+	/**
+	 * Exports the currently hold simulation results, as well as the used common 
+	 * simulation configuration, and the engine configuration. The filepath under which to export 
+	 * these data.
+	 * @param filepath
+	 */
+	public void exportResults(String filepath) {
 		try {
-			resultPersistenceManager.saveResultToFile(filepathFromDialog, simulationResult, commonConfig, usedEngineConfig);
+			resultPersistenceManager.saveResultToFile(filepath, simulationResult, usedCommonConfig, usedEngineConfig);
 		} catch (IOException e) {
 			getMessageBoxManager().showErrorMessage(e.getMessage());
 			e.printStackTrace();
