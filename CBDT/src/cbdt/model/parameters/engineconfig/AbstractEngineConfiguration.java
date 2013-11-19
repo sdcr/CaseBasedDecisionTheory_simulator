@@ -3,18 +3,16 @@ package cbdt.model.parameters.engineconfig;
 import java.util.Observable;
 
 /**
- * The objects the subclasses of AstractConfiguration hold the information which
- * determines how the engine computes the simulation result. This class is part
- * of an implementation of the strategy pattern. Its subclasses, together with
- * EngineConfigchoice form the policy upon which the appropriate simulation
- * algorithm is chosen.
+ * The subclasses of this class model the configuration
+ * how the simulation is computed. 
+ * This class is part of a strategy pattern. 
  * 
  * @author S-lenovo
  */
 public abstract class AbstractEngineConfiguration extends Observable {
 
-	
+	/**
+	 * @return The name of the engine modeled.
+	 */
 	public abstract String getName();
-
-
 }
