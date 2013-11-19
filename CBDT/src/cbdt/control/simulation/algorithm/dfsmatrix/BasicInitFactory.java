@@ -4,12 +4,12 @@ import java.util.List;
 
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 
 public class BasicInitFactory extends AbstractInitFactory {
 
 	public BasicInitFactory(Parameters parameters,
-			CommonEngineConfiguration commonConfig) {
+			CommonSimulationConfiguration commonConfig) {
 		super(parameters, commonConfig);
 	}
 

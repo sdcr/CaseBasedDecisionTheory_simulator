@@ -7,7 +7,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.control.simulation.algorithm.dfsmatrix.VirtualNodeContentVisitor;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 
 public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisitor{
 
@@ -15,7 +15,7 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 	private BigDecimalSimulationState bigDecimalSimState;
 
 	public BigDecimalVirtualNodeContentVisitor(Parameters parameters,
-			CommonEngineConfiguration commonConfig, IProgressMonitor monitor,
+			CommonSimulationConfiguration commonConfig, IProgressMonitor monitor,
 			BigDecimalSimulationState simState) {
 		super(parameters,commonConfig,monitor,null);
 		bigDecimalSimState = simState;

@@ -15,7 +15,7 @@ import cbdt.control.validators.InvalidActorActionException;
 import cbdt.control.validators.ParameterValidator;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
@@ -32,13 +32,13 @@ public class EngineContext {
 
 	private AbstractEngineConfiguration engineConfig;
 	
-	private CommonEngineConfiguration commonConfig;
+	private CommonSimulationConfiguration commonConfig;
 	
 	public EngineContext(Shell shell) {
 		this.shell = shell;
 	}
 
-	public void setEngineConfig(AbstractEngineConfiguration engineConfig, CommonEngineConfiguration commonConfig){
+	public void setEngineConfig(AbstractEngineConfiguration engineConfig, CommonSimulationConfiguration commonConfig){
 		this.engineConfig = engineConfig;
 		this.commonConfig = commonConfig;
 	}

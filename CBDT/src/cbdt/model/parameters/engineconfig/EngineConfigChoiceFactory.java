@@ -5,8 +5,8 @@ import java.util.List;
 
 public class EngineConfigChoiceFactory {
 
-	public EngineConfigChoice getDefaultConfigChoice() {
-		EngineConfigChoice defaultChoice = new EngineConfigChoice();
+	public ConfigChoice getDefaultConfigChoice() {
+		ConfigChoice defaultChoice = new ConfigChoice();
 
 		List<AbstractEngineConfiguration> configs = new ArrayList<AbstractEngineConfiguration>();
 		configs.add(new DFSkeepTreeEngineConfig());
@@ -16,7 +16,7 @@ public class EngineConfigChoiceFactory {
 		defaultChoice.addAvailableConfigs(configs);
 
 		defaultChoice.setCurrentlyChoosenConfig(configs.get(0));
-		defaultChoice.setCommonConfig(new CommonEngineConfiguration());
+		defaultChoice.setCommonSimulationConfig(new CommonSimulationConfiguration());
 
 		return defaultChoice;
 	}

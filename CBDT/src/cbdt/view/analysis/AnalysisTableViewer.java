@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
@@ -74,7 +74,7 @@ public class AnalysisTableViewer extends TableViewer{
 		});
 	}
 
-	public void createOccuranceColumns(CommonEngineConfiguration commonConfig, Result simulationResult) {
+	public void createOccuranceColumns(CommonSimulationConfiguration commonConfig, Result simulationResult) {
 		disposeOccuranceColumns();
 		if(commonConfig != null && simulationResult.getStageResults() != null && !simulationResult.getStageResults().isEmpty()){
 			StageResult firstStageResult = simulationResult.getStageResults().get(0);
@@ -127,7 +127,7 @@ public class AnalysisTableViewer extends TableViewer{
 		}
 	}
 
-	public void createLowestAspirationLevelColumn(CommonEngineConfiguration commonConfig, Result simulationResult){
+	public void createLowestAspirationLevelColumn(CommonSimulationConfiguration commonConfig, Result simulationResult){
 		if(lowestAspirationLevelColumn != null)
 			lowestAspirationLevelColumn.getColumn().dispose();
 		if(commonConfig.isCalculateLowestAspirationLevels()){

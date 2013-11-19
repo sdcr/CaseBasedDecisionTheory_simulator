@@ -10,7 +10,7 @@ import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.EngineConfigChoice;
+import cbdt.model.parameters.engineconfig.ConfigChoice;
 import cbdt.model.parameters.engineconfig.EngineConfigChoiceFactory;
 import cbdt.view.parameters.ParametersPageWrapper;
 
@@ -30,7 +30,7 @@ public class ParametersPageController extends AbstractPageController {
 	/**
 	 * The current choice of engine configuration.
 	 */
-	private EngineConfigChoice configChoice;
+	private ConfigChoice configChoice;
 
 	/**
 	 * The persistence manager to store parameters.
@@ -138,7 +138,7 @@ public class ParametersPageController extends AbstractPageController {
 		}
 	}
 
-	public EngineConfigChoice getConfigChoiceModel() {
+	public ConfigChoice getConfigChoiceModel() {
 		return configChoice;
 	}
 
@@ -150,20 +150,20 @@ public class ParametersPageController extends AbstractPageController {
 		getMainController().computeCDBTSimulation(parametersModel, configChoice);
 	}
 
-	public void setChoosenConfig(AbstractEngineConfiguration config) {
+	public void setChoosenEngineConfig(AbstractEngineConfiguration config) {
 		configChoice.setCurrentlyChoosenConfig(config);
 	}
 
 	public void setCalcAbsActionOccurances(boolean selection) {
-		configChoice.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
+		configChoice.getCommonSimulationConfig().setCalculateAbsoluteActionOccurances(selection);
 	}
 
 	public void setCalcRelActionOccurances(boolean selection) {
-		configChoice.getCommonConfig().setCalculateRelativeActionOccurances(selection);
+		configChoice.getCommonSimulationConfig().setCalculateRelativeActionOccurances(selection);
 	}
 
 	public void setRequestedNumberOfExpectedUtilities(int numOfRequestedValues) {
-		configChoice.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
+		configChoice.getCommonSimulationConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
 	}
 
 	public void setUsingAspirationLevelIncrement(boolean selection) {
@@ -171,7 +171,7 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public void setCalcLowestAspirationLevels(boolean selection) {
-		configChoice.getCommonConfig().setCalculateLowestAspirationLevels(selection);
+		configChoice.getCommonSimulationConfig().setCalculateLowestAspirationLevels(selection);
 	}
 
 }

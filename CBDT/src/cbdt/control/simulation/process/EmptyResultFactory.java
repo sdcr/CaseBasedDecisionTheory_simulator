@@ -9,7 +9,7 @@ import java.util.Map;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
@@ -18,7 +18,7 @@ import cbdt.model.result.StageResult;
 public class EmptyResultFactory {
 
 	public Result getEmptyResult(AbstractEngineConfiguration config, 
-			CommonEngineConfiguration commonConfig, Parameters parameters) {
+			CommonSimulationConfiguration commonConfig, Parameters parameters) {
 		Result result = new Result();
 		List<StageResult> stageResults = new ArrayList<StageResult>();
 		result.setStageResults(stageResults);
@@ -29,7 +29,7 @@ public class EmptyResultFactory {
 		return result;
 	}
 
-	private void setBigDecimalStageResults(CommonEngineConfiguration commonConfig,
+	private void setBigDecimalStageResults(CommonSimulationConfiguration commonConfig,
 			Parameters parameters, List<StageResult> stageResults) {
 		for (int i = 0; i <= commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			BigDecimalStageResult stageResult = new BigDecimalStageResult();
@@ -42,7 +42,7 @@ public class EmptyResultFactory {
 				new BigDecimal(parameters.getInitialAspirationLevel()));
 	}
 
-	private void setNonBigDecimalStageResults(CommonEngineConfiguration commonConfig,
+	private void setNonBigDecimalStageResults(CommonSimulationConfiguration commonConfig,
 			Parameters parameters, List<StageResult> stageResults) {
 		for (int i = 0; i <= commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++) {
 			StageResult stageResult = new StageResult();
@@ -54,7 +54,7 @@ public class EmptyResultFactory {
 		stageResults.get(0).setLowestAspirationLevel(parameters.getInitialAspirationLevel());
 	}
 
-	private void initStageResult(CommonEngineConfiguration commonConfig,
+	private void initStageResult(CommonSimulationConfiguration commonConfig,
 			Parameters parameters, int stage, StageResult stageResult) {
 		stageResult.setStage(stage);
 		if(commonConfig.isCalculateAbsoluteActionOccurances())// || commonConfig.isCalculateAbsoluteActionOccurances())

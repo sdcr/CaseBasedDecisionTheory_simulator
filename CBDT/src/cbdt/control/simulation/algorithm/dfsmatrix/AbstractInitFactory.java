@@ -6,14 +6,14 @@ import cbdt.control.simulation.algorithm.INodeContent;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 
 public abstract class AbstractInitFactory {
 
 	protected Parameters parameters;
-	protected CommonEngineConfiguration commonConfig;
+	protected CommonSimulationConfiguration commonConfig;
 	
-	public AbstractInitFactory(Parameters parameters, CommonEngineConfiguration commonConfig) {
+	public AbstractInitFactory(Parameters parameters, CommonSimulationConfiguration commonConfig) {
 		this.parameters = parameters;
 		this.commonConfig = commonConfig;
 	}

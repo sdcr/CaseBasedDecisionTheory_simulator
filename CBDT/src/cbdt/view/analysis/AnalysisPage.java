@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import cbdt.control.pages.AnalysisPageController;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
-import cbdt.model.parameters.engineconfig.EngineConfigChoice;
+import cbdt.model.parameters.engineconfig.ConfigChoice;
 import cbdt.model.result.Result;
 import cbdt.view.LabelFactory;
 
@@ -57,11 +57,11 @@ public class AnalysisPage extends Composite {
 		}
 	}
 
-	public void setResultModel(EngineConfigChoice configChoice, Result simulationResult){
+	public void setResultModel(ConfigChoice configChoice, Result simulationResult){
 		this.config = configChoice.getCurrentlyChoosenConfig();
 		this.simulationResult = simulationResult;
-		tableViewer.createOccuranceColumns(configChoice.getCommonConfig(), simulationResult);
-		tableViewer.createLowestAspirationLevelColumn(configChoice.getCommonConfig(), simulationResult);
+		tableViewer.createOccuranceColumns(configChoice.getCommonSimulationConfig(), simulationResult);
+		tableViewer.createLowestAspirationLevelColumn(configChoice.getCommonSimulationConfig(), simulationResult);
 		tableViewer.setInput(simulationResult.getStageResults());
 		tableViewer.resizeTable();
 		updateButtons();

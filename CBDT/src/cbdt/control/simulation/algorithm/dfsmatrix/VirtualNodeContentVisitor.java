@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 
 public class VirtualNodeContentVisitor extends NodeVisitor {
 
@@ -20,11 +20,11 @@ public class VirtualNodeContentVisitor extends NodeVisitor {
 
 	protected Integer leafStage;
 	protected Integer progessStage;
-	protected CommonEngineConfiguration commonConfig;
+	protected CommonSimulationConfiguration commonConfig;
 	private SimulationState simState;
 
 	public VirtualNodeContentVisitor(Parameters parameters,
-			CommonEngineConfiguration commonConfig, IProgressMonitor monitor,
+			CommonSimulationConfiguration commonConfig, IProgressMonitor monitor,
 			SimulationState simState) {
 		this.commonConfig = commonConfig;
 		this.monitor = monitor;

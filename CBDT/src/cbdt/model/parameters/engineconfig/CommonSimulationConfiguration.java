@@ -2,7 +2,7 @@ package cbdt.model.parameters.engineconfig;
 
 import java.util.Observable;
 
-public class CommonEngineConfiguration extends Observable {
+public class CommonSimulationConfiguration extends Observable {
 
 	/**
 	 * The number of expected utilities which should be computed.

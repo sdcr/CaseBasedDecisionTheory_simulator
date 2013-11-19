@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.pages.ParametersPageController;
 import cbdt.control.validators.IntegerFormatChecker;
-import cbdt.model.parameters.engineconfig.CommonEngineConfiguration;
+import cbdt.model.parameters.engineconfig.CommonSimulationConfiguration;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameters.SimpleParameterComposite;
 import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
@@ -89,15 +89,15 @@ public class CommonConfigWidgetsWrapper implements Observer {
 				.setNumberFormatChecker(integerFormatChecker);
 	}
 
-	public void setEngineConfigModel(CommonEngineConfiguration config) {
+	public void setEngineConfigModel(CommonSimulationConfiguration config) {
 		config.addObserver(this);
 		update(config, null);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof CommonEngineConfiguration) {
-			CommonEngineConfiguration config = (CommonEngineConfiguration) arg0;
+		if (arg0 instanceof CommonSimulationConfiguration) {
+			CommonSimulationConfiguration config = (CommonSimulationConfiguration) arg0;
 			requiredExpectedUtilitiesComposite.getText().setText(
 					String.valueOf(config
 							.getNumberOfRequestedExpectedUtilityValues()));

@@ -12,7 +12,7 @@ import cbdt.control.pages.ParametersPageController;
 import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
 import cbdt.control.pages.engineconfig.NoEngineConfigControllerException;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfiguration;
-import cbdt.model.parameters.engineconfig.EngineConfigChoice;
+import cbdt.model.parameters.engineconfig.ConfigChoice;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.CommonConfigWidgetsWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.ConfigWidgetsWrapperFactory;
@@ -45,13 +45,13 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		foregroundManager = new ConfigForegroundManager(parametersWrapper, algoSpecificTitleWrapper.getLabel());
 	}
 
-	public void setConfigChoiceModel(EngineConfigChoice configChoice) {
+	public void setConfigChoiceModel(ConfigChoice configChoice) {
 		configWidgetsFactory = new ConfigWidgetsWrapperFactory();
 
 		EngineConfigSelectionListener comboSelectionListener = new EngineConfigSelectionListener(
 				controller);
 
-		commonWidgets.setEngineConfigModel(configChoice.getCommonConfig());
+		commonWidgets.setEngineConfigModel(configChoice.getCommonSimulationConfig());
 		
 		for (AbstractEngineConfiguration config : configChoice
 				.getAvailableEngineConfigs()) {
@@ -93,8 +93,8 @@ public class ConfigWidgetsWrapperManager implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// update which config is in foreground.
-		if (o instanceof EngineConfigChoice) {
-			EngineConfigChoice choice = (EngineConfigChoice) o;
+		if (o instanceof ConfigChoice) {
+			ConfigChoice choice = (ConfigChoice) o;
 			try {
 				foregroundManager.setToForeground(configWidgetsFactory
 						.getConfigComposite(choice.getCurrentlyChoosenConfig(),
