@@ -51,7 +51,7 @@ public class ParametersPageController extends AbstractPageController {
 		parametersPersistenceManager = new ParametersPersistenceManager();
 
 		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
-		configChoice = configChoiceFactory.getDefaultConfigChoice();
+		configChoice = configChoiceFactory.getDefaultSimulationConfig();
 
 		configControllerFactory = new EngineConfigControllerFactory();
 	}
@@ -151,19 +151,19 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public void setChoosenEngineConfig(AbstractEngineConfig config) {
-		configChoice.setCurrentlyChoosenEngineConfig(config);
+		configChoice.setCurrentlyChosenEngineConfig(config);
 	}
 
 	public void setCalcAbsActionOccurances(boolean selection) {
-		configChoice.getCommonSimulationConfig().setCalculateAbsoluteActionOccurances(selection);
+		configChoice.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
 	}
 
 	public void setCalcRelActionOccurances(boolean selection) {
-		configChoice.getCommonSimulationConfig().setCalculateRelativeActionOccurances(selection);
+		configChoice.getCommonConfig().setCalculateRelativeActionOccurances(selection);
 	}
 
 	public void setRequestedNumberOfExpectedUtilities(int numOfRequestedValues) {
-		configChoice.getCommonSimulationConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
+		configChoice.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
 	}
 
 	public void setUsingAspirationLevelIncrement(boolean selection) {
@@ -171,7 +171,7 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public void setCalcLowestAspirationLevels(boolean selection) {
-		configChoice.getCommonSimulationConfig().setCalculateLowestAspirationLevels(selection);
+		configChoice.getCommonConfig().setCalculateLowestAspirationLevels(selection);
 	}
 
 }

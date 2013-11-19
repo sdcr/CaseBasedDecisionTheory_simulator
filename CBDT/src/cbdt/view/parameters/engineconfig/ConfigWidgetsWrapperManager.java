@@ -51,7 +51,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		EngineConfigSelectionListener comboSelectionListener = new EngineConfigSelectionListener(
 				controller);
 
-		commonWidgets.setEngineConfigModel(configChoice.getCommonSimulationConfig());
+		commonWidgets.setEngineConfigModel(configChoice.getCommonConfig());
 		
 		for (AbstractEngineConfig config : configChoice
 				.getAvailableEngineConfigs()) {
@@ -74,7 +74,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 
 		// find out which config is in currently chosen and put it in foreground
 		AbstractEngineConfig currentlyChoosenConfig = configChoice
-				.getCurrentlyEngineChoosenConfig();
+				.getCurrentlyChosenEngineConfig();
 		if (currentlyChoosenConfig != null) {
 			try {
 				foregroundManager.setToForeground(configWidgetsFactory.getConfigComposite(
@@ -97,7 +97,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 			SimulationConfig choice = (SimulationConfig) o;
 			try {
 				foregroundManager.setToForeground(configWidgetsFactory
-						.getConfigComposite(choice.getCurrentlyEngineChoosenConfig(),
+						.getConfigComposite(choice.getCurrentlyChosenEngineConfig(),
 								parametersPage));
 			} catch (NoWidgetWrapperException e) {
 				e.printStackTrace();

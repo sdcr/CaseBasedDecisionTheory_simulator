@@ -6,7 +6,7 @@ import java.util.Observable;
 
 /**
  * This class models the configuration chosen for a simulation.
- * It encompasses a CommonSimulationConfiguration, the available AbstractEngineConfigurations,
+ * It encompasses a CommonConfig, the available AbstractEngineConfigs,
  * and a reference to the currently chosen engine configuration.
  * @author Stephan da Costa Ribeiro
  */
@@ -16,7 +16,7 @@ public class SimulationConfig extends Observable {
 	 * The configuration data which is set for the simulation, independent from
 	 * the engine used.
 	 */
-	private CommonConfig commonSimConfig;
+	private CommonConfig commonConfig;
 
 	/**
 	 * The engine configurations available.
@@ -29,14 +29,6 @@ public class SimulationConfig extends Observable {
 	 */
 	private AbstractEngineConfig choosenEngineConfig;
 
-	public CommonConfig getCommonSimulationConfig() {
-		return commonSimConfig;
-	}
-	
-	public void setCommonSimulationConfig(CommonConfig commonConfig) {
-		this.commonSimConfig = commonConfig;
-	}
-
 	/**
 	 * Constructor.
 	 */
@@ -44,22 +36,34 @@ public class SimulationConfig extends Observable {
 		availableEngineConfigs = new ArrayList<AbstractEngineConfig>();
 	}
 
+	public CommonConfig getCommonConfig() {
+		return commonConfig;
+	}	
+	
+	public void setCommonConfig(CommonConfig commonConfig) {
+		this.commonConfig = commonConfig;
+	}
+
 	public List<AbstractEngineConfig> getAvailableEngineConfigs() {
 		return availableEngineConfigs;
 	}
 
-	public void addAvailableConfigs(
+	public void addAvailableEngineConfigs(
 			List<AbstractEngineConfig> additionalConfigs) {
 		availableEngineConfigs.addAll(additionalConfigs);
 		setChanged();
 		notifyObservers();
 	}
 
-	public AbstractEngineConfig getCurrentlyEngineChoosenConfig() {
+	public AbstractEngineConfig getCurrentlyChosenEngineConfig() {
 		return choosenEngineConfig;
 	}
 
-	public void setCurrentlyChoosenEngineConfig(AbstractEngineConfig config) {
+	/**
+	 * Sets the currently chosen engine configuration.
+	 * @param config Should be one of the available engine config objects.
+	 */
+	public void setCurrentlyChosenEngineConfig(AbstractEngineConfig config) {
 		choosenEngineConfig = config;
 		setChanged();
 		notifyObservers();

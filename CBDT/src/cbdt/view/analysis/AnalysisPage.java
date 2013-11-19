@@ -58,10 +58,10 @@ public class AnalysisPage extends Composite {
 	}
 
 	public void setResultModel(SimulationConfig configChoice, Result simulationResult){
-		this.config = configChoice.getCurrentlyEngineChoosenConfig();
+		this.config = configChoice.getCurrentlyChosenEngineConfig();
 		this.simulationResult = simulationResult;
-		tableViewer.createOccuranceColumns(configChoice.getCommonSimulationConfig(), simulationResult);
-		tableViewer.createLowestAspirationLevelColumn(configChoice.getCommonSimulationConfig(), simulationResult);
+		tableViewer.createOccuranceColumns(configChoice.getCommonConfig(), simulationResult);
+		tableViewer.createLowestAspirationLevelColumn(configChoice.getCommonConfig(), simulationResult);
 		tableViewer.setInput(simulationResult.getStageResults());
 		tableViewer.resizeTable();
 		updateButtons();

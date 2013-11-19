@@ -36,7 +36,7 @@ public class MainController {
 	}
 
 	public void computeCDBTSimulation(Parameters parameters, SimulationConfig configChoice) {
-		simulationEngine.setEngineConfig(configChoice.getCurrentlyEngineChoosenConfig(), configChoice.getCommonSimulationConfig());
+		simulationEngine.setEngineConfig(configChoice.getCurrentlyChosenEngineConfig(), configChoice.getCommonConfig());
 		try {
 			Result result = simulationEngine.performSimulation(parameters);
 			setToForeground(analysisController);
