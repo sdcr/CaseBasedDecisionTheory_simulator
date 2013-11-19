@@ -2,9 +2,9 @@ package cbdt.control.simulation.algorithm.dfsmatrix;
 
 import java.util.List;
 
+import cbdt.model.config.CommonConfig;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonConfig;
 
 public class BasicInitFactory extends AbstractInitFactory {
 

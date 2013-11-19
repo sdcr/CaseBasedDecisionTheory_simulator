@@ -3,8 +3,8 @@ package tests.model.engine;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.model.config.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 
 public class DFSkeepTreeSimulationEngineTest {
 

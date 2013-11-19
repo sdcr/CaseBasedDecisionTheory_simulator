@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
-import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
+import cbdt.model.config.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 

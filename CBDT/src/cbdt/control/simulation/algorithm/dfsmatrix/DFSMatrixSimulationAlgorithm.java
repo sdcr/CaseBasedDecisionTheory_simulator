@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cbdt.control.simulation.algorithm.SimulationAlgorithm;
+import cbdt.model.config.AbstractEngineConfig;
 import cbdt.model.parameters.ActorAction;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 

@@ -7,11 +7,11 @@ import java.util.Map;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import cbdt.control.simulation.algorithm.NodeVisitor;
+import cbdt.model.config.CommonConfig;
+import cbdt.model.config.DFSkeepTreeEngineConfig;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonConfig;
-import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 

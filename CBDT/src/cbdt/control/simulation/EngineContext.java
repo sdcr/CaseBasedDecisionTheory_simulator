@@ -13,12 +13,12 @@ import cbdt.control.simulation.process.ComputationRunnableWithProgress;
 import cbdt.control.simulation.process.EmptyResultFactory;
 import cbdt.control.validators.InvalidActorActionException;
 import cbdt.control.validators.ParameterValidator;
+import cbdt.model.config.AbstractEngineConfig;
+import cbdt.model.config.CommonConfig;
+import cbdt.model.config.DFSkeepTreeEngineConfig;
+import cbdt.model.config.DFSmatrixEngineConfig;
+import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
-import cbdt.model.parameters.engineconfig.CommonConfig;
-import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
-import cbdt.model.parameters.engineconfig.DFSmatrixEngineConfig;
-import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.result.Result;
 
 /**

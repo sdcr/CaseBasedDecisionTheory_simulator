@@ -5,9 +5,9 @@ import java.util.List;
 
 import cbdt.control.simulation.algorithm.INodeContent;
 import cbdt.control.simulation.algorithm.dfsmatrix.AbstractInitFactory;
+import cbdt.model.config.CommonConfig;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonConfig;
 
 public class BigDecimalInitFactory extends AbstractInitFactory {
 

@@ -11,8 +11,8 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.control.LogManager;
 import cbdt.control.MainController;
-import cbdt.control.pages.AnalysisPageController;
-import cbdt.control.pages.ParametersPageController;
+import cbdt.control.analysispage.AnalysisPageController;
+import cbdt.control.parameterspage.ParametersConfigPageController;
 import cbdt.view.menu.MenuFactory;
 
 /**
@@ -27,7 +27,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	/**
 	 * The controller of the parameters page.
 	 */
-	private ParametersPageController parametersController;
+	private ParametersConfigPageController parametersController;
 
 	/**
 	 * The controller of the analysis page.
@@ -44,7 +44,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	
 	@Override
 	public void setForegroundManager(IForegroundManager foregroundManager) {
-		parametersController = new ParametersPageController();
+		parametersController = new ParametersConfigPageController();
 		analysisController = new AnalysisPageController();
 		MainController mainController = new MainController(analysisController, parametersController, foregroundManager);
 		parametersController.setMainController(mainController);

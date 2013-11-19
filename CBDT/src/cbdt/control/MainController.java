@@ -3,13 +3,12 @@ package cbdt.control;
 import java.lang.reflect.InvocationTargetException;
 
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
-import cbdt.control.pages.AbstractPageController;
-import cbdt.control.pages.AnalysisPageController;
-import cbdt.control.pages.ParametersPageController;
+import cbdt.control.analysispage.AnalysisPageController;
+import cbdt.control.parameterspage.ParametersConfigPageController;
 import cbdt.control.simulation.EngineContext;
 import cbdt.control.validators.InvalidActorActionException;
+import cbdt.model.config.SimulationConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.model.result.Result;
 import cbdt.view.MessageBoxManager;
 
@@ -18,14 +17,14 @@ public class MainController {
 	private EngineContext simulationEngine;
 
 	@SuppressWarnings("unused")
-	private ParametersPageController parametersController;
+	private ParametersConfigPageController parametersController;
 	private AnalysisPageController analysisController;
 
 	private MessageBoxManager messageBoxManager;
 	private IForegroundManager foregroundManager;
 
 	public MainController(AnalysisPageController analysisController,
-			ParametersPageController parametersController,
+			ParametersConfigPageController parametersController,
 			IForegroundManager foregroundManager) {
 		this.analysisController = analysisController;
 		this.parametersController = parametersController;

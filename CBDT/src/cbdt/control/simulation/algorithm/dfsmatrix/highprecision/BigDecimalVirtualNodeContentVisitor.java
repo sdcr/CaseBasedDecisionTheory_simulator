@@ -6,8 +6,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import cbdt.control.simulation.algorithm.NodeVisitor;
 import cbdt.control.simulation.algorithm.dfsmatrix.VirtualNodeContentVisitor;
+import cbdt.model.config.CommonConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.CommonConfig;
 
 public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisitor{
 

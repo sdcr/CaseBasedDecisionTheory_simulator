@@ -4,13 +4,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.control.pages.ParametersPageController;
+import cbdt.control.parameterspage.parameters.ParametersController;
 
 public class OpenParametersSelectionListener extends OpenFileDialogSelectionListener {
 
-	private ParametersPageController controller;
+	private ParametersController controller;
 
-	public OpenParametersSelectionListener(Shell shell, ParametersPageController controller) {
+	public OpenParametersSelectionListener(Shell shell, ParametersController controller) {
 		super(shell);
 		this.controller = controller;
 	}

@@ -4,27 +4,27 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.control.pages.ParametersPageController;
+import cbdt.control.parameterspage.parameters.ParametersController;
 
 public class SaveParametersSelectionListener extends OpenFileDialogSelectionListener {
 
-	private ParametersPageController controller;
+	private ParametersController parametersController;
 
-	public SaveParametersSelectionListener(Shell shell, ParametersPageController controller) {
+	public SaveParametersSelectionListener(Shell shell, ParametersController controller) {
 		super(shell);
-		this.controller = controller;
+		this.parametersController = controller;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		controller.goToForeground();
-		if(controller.getPageWrapper().getParametersPage().hasValidAspirationLevelParameters()){
+		parametersController.getParametersConfigPageController().goToForeground();
+		if(parametersController.getParametersConfigPageController().getPageWrapper().getParametersPage().hasValidAspirationLevelParameters()){
 			String[] filterExt = { "*.xml", "*.*" };
 			String filepathFromDialog = this.getFilepathFromDialog(SWT.SAVE, "Save parameters", filterExt);
 			if(filepathFromDialog != null)
-				controller.saveParametersToFile(filepathFromDialog);
+				parametersController.saveParametersToFile(filepathFromDialog);
 		} else {
-			controller.getMessageBoxManager().showInfoMessage("At least one aspiration level parameter has an invalid value.");
+			parametersController.getParametersConfigPageController().getMessageBoxManager().showInfoMessage("At least one aspiration level parameter has an invalid value.");
 		}
 	}
 

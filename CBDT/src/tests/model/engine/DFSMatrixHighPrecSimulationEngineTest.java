@@ -6,8 +6,8 @@ import java.math.MathContext;
 import org.junit.Before;
 import org.junit.Test;
 
+import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 
 public class DFSMatrixHighPrecSimulationEngineTest {
 
