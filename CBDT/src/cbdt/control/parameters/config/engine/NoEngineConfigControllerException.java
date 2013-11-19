@@ -1,4 +1,4 @@
-package cbdt.control.pages.engineconfig;
+package cbdt.control.parameters.config.engine;
 
 public class NoEngineConfigControllerException extends Exception {
 

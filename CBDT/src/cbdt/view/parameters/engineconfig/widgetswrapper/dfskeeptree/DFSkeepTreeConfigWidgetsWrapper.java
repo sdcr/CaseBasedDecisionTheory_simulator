@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
-import cbdt.control.pages.engineconfig.DFSkeepTreeConfigController;
+import cbdt.control.parameters.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameters.config.engine.DFSkeepTreeConfigController;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;
 import cbdt.view.parameters.engineconfig.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;

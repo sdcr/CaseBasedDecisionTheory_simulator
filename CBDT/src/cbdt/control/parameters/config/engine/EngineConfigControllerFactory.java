@@ -1,4 +1,4 @@
-package cbdt.control.pages.engineconfig;
+package cbdt.control.parameters.config.engine;
 
 import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.parameters.engineconfig.DFSkeepTreeEngineConfig;

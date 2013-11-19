@@ -4,7 +4,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Text;
 
-import cbdt.control.pages.engineconfig.DFSmatrixHighPrecisionConfigController;
+import cbdt.control.parameters.config.engine.DFSmatrixHighPrecisionConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.view.HintLabelWrapper;
 

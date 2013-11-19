@@ -2,7 +2,7 @@ package cbdt.control.pages;
 
 import java.io.FileNotFoundException;
 
-import cbdt.control.pages.engineconfig.EngineConfigControllerFactory;
+import cbdt.control.parameters.config.engine.EngineConfigControllerFactory;
 import cbdt.control.persistence.parameters.IParametersPersistenceManager;
 import cbdt.control.persistence.parameters.ParametersPersistenceManager;
 import cbdt.model.parameters.ActorAction;
@@ -30,7 +30,7 @@ public class ParametersPageController extends AbstractPageController {
 	/**
 	 * The current choice of engine configuration.
 	 */
-	private SimulationConfig configChoice;
+	private SimulationConfig simulationConfig;
 
 	/**
 	 * The persistence manager to store parameters.
@@ -51,7 +51,7 @@ public class ParametersPageController extends AbstractPageController {
 		parametersPersistenceManager = new ParametersPersistenceManager();
 
 		EngineConfigChoiceFactory configChoiceFactory = new EngineConfigChoiceFactory();
-		configChoice = configChoiceFactory.getDefaultSimulationConfig();
+		simulationConfig = configChoiceFactory.getDefaultSimulationConfig();
 
 		configControllerFactory = new EngineConfigControllerFactory();
 	}
@@ -139,7 +139,7 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public SimulationConfig getConfigChoiceModel() {
-		return configChoice;
+		return simulationConfig;
 	}
 
 	public EngineConfigControllerFactory getConfigControllerFactory() {
@@ -147,23 +147,23 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public void startComputation() {
-		getMainController().computeCDBTSimulation(parametersModel, configChoice);
+		getMainController().computeCDBTSimulation(parametersModel, simulationConfig);
 	}
 
 	public void setChoosenEngineConfig(AbstractEngineConfig config) {
-		configChoice.setCurrentlyChosenEngineConfig(config);
+		simulationConfig.setCurrentlyChosenEngineConfig(config);
 	}
 
 	public void setCalcAbsActionOccurances(boolean selection) {
-		configChoice.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
+		simulationConfig.getCommonConfig().setCalculateAbsoluteActionOccurances(selection);
 	}
 
 	public void setCalcRelActionOccurances(boolean selection) {
-		configChoice.getCommonConfig().setCalculateRelativeActionOccurances(selection);
+		simulationConfig.getCommonConfig().setCalculateRelativeActionOccurances(selection);
 	}
 
 	public void setRequestedNumberOfExpectedUtilities(int numOfRequestedValues) {
-		configChoice.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
+		simulationConfig.getCommonConfig().setNumberOfRequestedExpectedUtilityValues(numOfRequestedValues);
 	}
 
 	public void setUsingAspirationLevelIncrement(boolean selection) {
@@ -171,7 +171,7 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	public void setCalcLowestAspirationLevels(boolean selection) {
-		configChoice.getCommonConfig().setCalculateLowestAspirationLevels(selection);
+		simulationConfig.getCommonConfig().setCalculateLowestAspirationLevels(selection);
 	}
 
 }

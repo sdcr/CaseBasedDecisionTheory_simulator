@@ -9,8 +9,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.pages.ParametersPageController;
-import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
-import cbdt.control.pages.engineconfig.NoEngineConfigControllerException;
+import cbdt.control.parameters.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameters.config.engine.NoEngineConfigControllerException;
 import cbdt.model.parameters.engineconfig.AbstractEngineConfig;
 import cbdt.model.parameters.engineconfig.SimulationConfig;
 import cbdt.view.parameters.engineconfig.widgetswrapper.AbstractConfigWidgetsWrapper;

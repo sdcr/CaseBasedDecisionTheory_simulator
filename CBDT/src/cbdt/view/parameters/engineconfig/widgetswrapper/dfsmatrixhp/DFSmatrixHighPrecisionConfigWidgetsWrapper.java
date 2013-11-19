@@ -7,8 +7,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.pages.engineconfig.AbstractEngineConfigController;
-import cbdt.control.pages.engineconfig.DFSmatrixHighPrecisionConfigController;
+import cbdt.control.parameters.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameters.config.engine.DFSmatrixHighPrecisionConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.parameters.engineconfig.DFSmatrixHighPrecEngineConfig;
 import cbdt.view.parameters.SimpleParameterComposite;

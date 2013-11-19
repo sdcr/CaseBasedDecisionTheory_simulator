@@ -4,7 +4,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 
-import cbdt.control.pages.engineconfig.DFSkeepTreeConfigController;
+import cbdt.control.parameters.config.engine.DFSkeepTreeConfigController;
 
 public class SaveTreeSelectionListener implements SelectionListener {
 
