@@ -43,13 +43,13 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
-	public List<AbstractPluginPageWrapper> getPageFactories() {
-		List<AbstractPluginPageWrapper> pageReference = new ArrayList<AbstractPluginPageWrapper>();
+	public List<AbstractPluginPageWrapper> getPageWrappers() {
+		List<AbstractPluginPageWrapper> pageWrappers = new ArrayList<AbstractPluginPageWrapper>();
 		
-		pageReference.add(parametersController.getPageReference());		
-		pageReference.add(analysisController.getPageReference());
+		pageWrappers.add(parametersController.getPageReference());		
+		pageWrappers.add(analysisController.getPageReference());
 		
-		return pageReference;
+		return pageWrappers;
 	}
 
 	@Override

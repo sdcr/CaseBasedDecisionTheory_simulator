@@ -77,7 +77,7 @@ public class PluginsBar extends Composite {
 		viewer.setInput(plugins);
 		viewer.expandAll();
 		try{
-			foregroundManager.setToForeground(plugins.get(0).getPageFactories().get(0));
+			foregroundManager.setToForeground(plugins.get(0).getPageWrappers().get(0));
 		}catch(Exception e){
 		}
 	}

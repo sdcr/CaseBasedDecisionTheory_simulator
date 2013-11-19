@@ -37,5 +37,5 @@ public interface ISimulationPlugin {
 	 * @return A list of AbstractPluginPageWrappers, whose wrapped composites will be displayed on the 
 	 * plugin pane of the SimulationCore application.
 	 */
-	public List<AbstractPluginPageWrapper> getPageFactories();
+	public List<AbstractPluginPageWrapper> getPageWrappers();
 }
