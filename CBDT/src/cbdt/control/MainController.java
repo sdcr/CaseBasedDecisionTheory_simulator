@@ -61,7 +61,7 @@ public class MainController {
 	}
 
 	public void setToForeground(AbstractPageController pageController) {
-		foregroundManager.setToForeground(pageController.getPageReference());
+		foregroundManager.setToForeground(pageController.getPageWrapper());
 	}
 
 	public MessageBoxManager getMessageBoxManager() {

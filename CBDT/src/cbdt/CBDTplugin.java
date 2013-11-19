@@ -15,13 +15,27 @@ import cbdt.control.pages.AnalysisPageController;
 import cbdt.control.pages.ParametersPageController;
 import cbdt.view.menu.MenuFactory;
 
+/**
+ * The main class defining the CBDT simulation plugin.
+ * It forms the connection point between the simulation frame, and manages the 
+ * controllers for the different pages.
+ * It is also responsible for the instantiation of the different parts of the plugin.
+ * @author Stephan da Costa Ribeiro
+ */
 public class CBDTplugin implements ISimulationPlugin {
 
+	/**
+	 * The controller of the parameters page.
+	 */
 	private ParametersPageController parametersController;
+
+	/**
+	 * The controller of the analysis page.
+	 */
 	private AnalysisPageController analysisController;
 
 	/**
-	 * Obligatory nullary constructor.
+	 * Obligatory nullary constructor. Instantiates a log manager.
 	 */
 	public CBDTplugin(){
 		LogManager logManager = new LogManager();
@@ -46,8 +60,8 @@ public class CBDTplugin implements ISimulationPlugin {
 	public List<AbstractPluginPageWrapper> getPageWrappers() {
 		List<AbstractPluginPageWrapper> pageWrappers = new ArrayList<AbstractPluginPageWrapper>();
 		
-		pageWrappers.add(parametersController.getPageReference());		
-		pageWrappers.add(analysisController.getPageReference());
+		pageWrappers.add(parametersController.getPageWrapper());		
+		pageWrappers.add(analysisController.getPageWrapper());
 		
 		return pageWrappers;
 	}

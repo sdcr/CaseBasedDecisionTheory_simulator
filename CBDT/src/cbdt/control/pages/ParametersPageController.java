@@ -35,7 +35,7 @@ public class ParametersPageController extends AbstractPageController {
 	}
 
 	@Override
-	public ParametersPageReference getPageReference() {
+	public ParametersPageReference getPageWrapper() {
 		return parametersPageReference;
 	}
 

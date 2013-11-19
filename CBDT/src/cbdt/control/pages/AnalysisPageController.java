@@ -25,7 +25,7 @@ public class AnalysisPageController extends AbstractPageController {
 	}
 	
 	@Override
-	public AbstractPluginPageWrapper getPageReference() {
+	public AbstractPluginPageWrapper getPageWrapper() {
 		return analysisPageReference;
 	}
 
