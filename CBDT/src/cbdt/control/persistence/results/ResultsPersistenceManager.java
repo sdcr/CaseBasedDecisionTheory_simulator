@@ -18,6 +18,13 @@ import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
+//YELLOW
+/**
+ * A manager which is able to store results and configs to file as CSV.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class ResultsPersistenceManager implements IResultsPersistenceManager {
 
 	private Map<ActorAction, BigDecimal> firstAbsOccurances;
@@ -28,9 +35,11 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 
 	private List<ActorAction> absOccActorActionsList;
 	private List<ActorAction> relOccActorActionsList;
-	
+
 	@Override
-	public void saveResultToFile(String filepath, Result result, CommonConfig commonConfig, AbstractEngineConfig config) throws IOException {
+	public void saveResultToFile(String filepath, Result result,
+			CommonConfig commonConfig, AbstractEngineConfig config)
+			throws IOException {
 		BufferedWriter outWriter = null;
 		outWriter = new BufferedWriter(new FileWriter(filepath));
 		absOccActorActionsList = new ArrayList<ActorAction>();
@@ -41,51 +50,64 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 		outWriter.newLine();
 
 		writeData(outWriter, stageResults, commonConfig);
-		
+
 		outWriter.newLine();
 		writeConfigurationDetails(config, outWriter);
 		outWriter.close();
 	}
 
+	/**
+	 * TODO
+	 * 
+	 * @param outWriter
+	 * @param stageResults
+	 * @param commonConfig
+	 * @throws IOException
+	 */
 	private void writeData(BufferedWriter outWriter,
-			List<StageResult> stageResults, CommonConfig commonConfig) throws IOException {
+			List<StageResult> stageResults, CommonConfig commonConfig)
+			throws IOException {
 		for (StageResult stageResult : stageResults) {
-			if(stageResult instanceof BigDecimalStageResult){
-				BigDecimalStageResult bigDecimalStageResult = (BigDecimalStageResult)stageResult;
+			if (stageResult instanceof BigDecimalStageResult) {
+				BigDecimalStageResult bigDecimalStageResult = (BigDecimalStageResult) stageResult;
 				outWriter.write(bigDecimalStageResult.getStage() + ";"
-						+ bigDecimalStageResult.getExpectedBigDecimalUtility()+ ";");
-			}else{
+						+ bigDecimalStageResult.getExpectedBigDecimalUtility()
+						+ ";");
+			} else {
 				outWriter.write(stageResult.getStage() + ";"
 						+ stageResult.getExpectedUtility() + ";");
 			}
 			if (commonConfig.isCalculateAbsoluteActionOccurances()) {
 				for (ActorAction action : absOccActorActionsList) {
-					outWriter.write(stageResult
-							.getAbsoluteActionOccurances().get(action) + ";");
+					outWriter.write(stageResult.getAbsoluteActionOccurances()
+							.get(action) + ";");
 				}
 			}
 			if (commonConfig.isCalculateRelativeActionOccurances()) {
 				if (firstRelDoubleOccurances != null) {
 					for (ActorAction action : relOccActorActionsList) {
 						outWriter.write(stageResult
-								.getRelativeActionOccurances().get(action) + ";");
+								.getRelativeActionOccurances().get(action)
+								+ ";");
 					}
-				}else
-					if(firstRelBigDecimalOccurances != null){
-						for (ActorAction action : relOccActorActionsList) {
-							outWriter.write(((BigDecimalStageResult)stageResult)
-									.getRelativeBigDecimalActionOccurances().get(action) + ";");
-						}
+				} else if (firstRelBigDecimalOccurances != null) {
+					for (ActorAction action : relOccActorActionsList) {
+						outWriter.write(((BigDecimalStageResult) stageResult)
+								.getRelativeBigDecimalActionOccurances().get(
+										action)
+								+ ";");
 					}
+				}
 			}
-			
-			
-			if(commonConfig.isCalculateLowestAspirationLevels()){
-				if(firstDoubleLowestAspLevels != null) {
-					outWriter.write(stageResult.getLowestAspirationLevel()+";");
-				}else{
-					if(firstBigDecimalLowestAspLevels != null){
-						outWriter.write(((BigDecimalStageResult)stageResult).getLowestBigDecimalAspirationLevel() + ";");
+
+			if (commonConfig.isCalculateLowestAspirationLevels()) {
+				if (firstDoubleLowestAspLevels != null) {
+					outWriter.write(stageResult.getLowestAspirationLevel()
+							+ ";");
+				} else {
+					if (firstBigDecimalLowestAspLevels != null) {
+						outWriter.write(((BigDecimalStageResult) stageResult)
+								.getLowestBigDecimalAspirationLevel() + ";");
 					}
 				}
 			}
@@ -95,33 +117,41 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 	}
 
 	private void writeTitleLines(BufferedWriter outWriter,
-			List<StageResult> stageResults, CommonConfig commonConfig) throws IOException {
+			List<StageResult> stageResults, CommonConfig commonConfig)
+			throws IOException {
 		if (stageResults != null && !stageResults.isEmpty()) {
 			outWriter.write("Stage;Expected utility;");
-			if(commonConfig.isCalculateAbsoluteActionOccurances()){
+			if (commonConfig.isCalculateAbsoluteActionOccurances()) {
 				outWriter.write("Absolute occurrences");
-				firstAbsOccurances = stageResults.get(0).getAbsoluteActionOccurances();
+				firstAbsOccurances = stageResults.get(0)
+						.getAbsoluteActionOccurances();
 				writeDelimiters(firstAbsOccurances.keySet().size(), outWriter);
 			}
-			if(commonConfig.isCalculateRelativeActionOccurances()){
+			if (commonConfig.isCalculateRelativeActionOccurances()) {
 				outWriter.write("Relative occurrences");
-				if(stageResults.get(0) instanceof BigDecimalStageResult){
-					firstRelBigDecimalOccurances = ((BigDecimalStageResult)stageResults.get(0)).getRelativeBigDecimalActionOccurances();
-					writeDelimiters(firstRelBigDecimalOccurances.keySet().size(), outWriter);
-				}else{
-					firstRelDoubleOccurances = stageResults.get(0).getRelativeActionOccurances();
-					writeDelimiters(firstRelDoubleOccurances.keySet().size(), outWriter);
+				if (stageResults.get(0) instanceof BigDecimalStageResult) {
+					firstRelBigDecimalOccurances = ((BigDecimalStageResult) stageResults
+							.get(0)).getRelativeBigDecimalActionOccurances();
+					writeDelimiters(firstRelBigDecimalOccurances.keySet()
+							.size(), outWriter);
+				} else {
+					firstRelDoubleOccurances = stageResults.get(0)
+							.getRelativeActionOccurances();
+					writeDelimiters(firstRelDoubleOccurances.keySet().size(),
+							outWriter);
 				}
 			}
-			if(commonConfig.isCalculateLowestAspirationLevels()){
+			if (commonConfig.isCalculateLowestAspirationLevels()) {
 				outWriter.write("Lowest aspiration levels");
-				if(stageResults.get(0) instanceof BigDecimalStageResult){
-					firstBigDecimalLowestAspLevels = ((BigDecimalStageResult)stageResults.get(0)).getLowestBigDecimalAspirationLevel();
-				}else{
-					firstDoubleLowestAspLevels = stageResults.get(0).getLowestAspirationLevel();
+				if (stageResults.get(0) instanceof BigDecimalStageResult) {
+					firstBigDecimalLowestAspLevels = ((BigDecimalStageResult) stageResults
+							.get(0)).getLowestBigDecimalAspirationLevel();
+				} else {
+					firstDoubleLowestAspLevels = stageResults.get(0)
+							.getLowestAspirationLevel();
 				}
 			}
-			
+
 			outWriter.newLine();
 			outWriter.write(";;");
 
@@ -132,44 +162,51 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 					absOccActorActionsList.add(action);
 				}
 			}
-			if (commonConfig.isCalculateRelativeActionOccurances()){
+			if (commonConfig.isCalculateRelativeActionOccurances()) {
 				Set<ActorAction> actorActions = null;
 				if (firstRelDoubleOccurances != null)
 					actorActions = firstRelDoubleOccurances.keySet();
-				else if (firstRelBigDecimalOccurances != null) 
+				else if (firstRelBigDecimalOccurances != null)
 					actorActions = firstRelBigDecimalOccurances.keySet();
-				if(actorActions != null){
+				if (actorActions != null) {
 					for (ActorAction action : actorActions) {
-						outWriter.write(action.getActionName()+ ";");
+						outWriter.write(action.getActionName() + ";");
 						relOccActorActionsList.add(action);
 					}
 				}
 			}
-			if(commonConfig.isCalculateLowestAspirationLevels()){
+			if (commonConfig.isCalculateLowestAspirationLevels()) {
 				outWriter.write(";");
 			}
 		}
 	}
 
-	private void writeDelimiters(int number, BufferedWriter outWriter) throws IOException{
-		for(int i=0; i<number; i++){
+	private void writeDelimiters(int number, BufferedWriter outWriter)
+			throws IOException {
+		for (int i = 0; i < number; i++) {
 			outWriter.write(";");
 		}
 	}
 
 	private void writeConfigurationDetails(AbstractEngineConfig config,
 			BufferedWriter outWriter) throws IOException {
-		outWriter.write("Used algorithm: ;"+config.getName());
+		outWriter.write("Used algorithm: ;" + config.getName());
 		outWriter.newLine();
-		if(config instanceof DFSkeepTreeEngineConfig){
-			outWriter.write("Keeping tree in memory:;"+((DFSkeepTreeEngineConfig)config).isSaveTreeStructure());
+		if (config instanceof DFSkeepTreeEngineConfig) {
+			outWriter.write("Keeping tree in memory:;"
+					+ ((DFSkeepTreeEngineConfig) config).isSaveTreeStructure());
 			outWriter.newLine();
-			outWriter.write("Keeping action names:;"+((DFSkeepTreeEngineConfig)config).isSaveActionNames());
+			outWriter.write("Keeping action names:;"
+					+ ((DFSkeepTreeEngineConfig) config).isSaveActionNames());
 			outWriter.newLine();
-			outWriter.write("Keeping aspiration levels:;"+((DFSkeepTreeEngineConfig)config).isSaveAspirationLevels());
+			outWriter.write("Keeping aspiration levels:;"
+					+ ((DFSkeepTreeEngineConfig) config)
+							.isSaveAspirationLevels());
 		}
-		if(config instanceof DFSmatrixHighPrecEngineConfig){
-			outWriter.write("Precision decimal places:;"+((DFSmatrixHighPrecEngineConfig)config).getNumberOfDecimalPlaces());
+		if (config instanceof DFSmatrixHighPrecEngineConfig) {
+			outWriter.write("Precision decimal places:;"
+					+ ((DFSmatrixHighPrecEngineConfig) config)
+							.getNumberOfDecimalPlaces());
 		}
 	}
 

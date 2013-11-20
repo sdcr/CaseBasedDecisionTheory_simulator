@@ -11,36 +11,45 @@ import cbdt.model.parameters.Parameters;
 
 import com.thoughtworks.xstream.XStream;
 
-public class ParametersPersistenceManager implements IParametersPersistenceManager {
+//GREEN
+/**
+ * A IParametersPersistenceManager which uses XML to store Parameter objects.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
+public class ParametersPersistenceManager implements
+		IParametersPersistenceManager {
 
 	public static final String PARAMETERS_NODE_NAME = "parameters";
 	public static final String ACTOR_ACTION_OUTCOME_NODE_NAME = "actionOutcome";
 	public static final String ACTOR_ACTION_NODE_NAME = "actorAction";
-	
+
 	private XStream xStream;
-	
+
 	public ParametersPersistenceManager() {
 		xStream = new XStream();
 		xStream.setClassLoader(getClass().getClassLoader());
-		
+
 		xStream.registerConverter(new ParametersConverter());
 		xStream.alias(PARAMETERS_NODE_NAME, Parameters.class);
 		xStream.registerConverter(new ActorActionConverter());
-		xStream.alias(ACTOR_ACTION_NODE_NAME, ActorAction.class);		
+		xStream.alias(ACTOR_ACTION_NODE_NAME, ActorAction.class);
 		xStream.registerConverter(new ActorActionOutcomeConverter());
 		xStream.alias(ACTOR_ACTION_OUTCOME_NODE_NAME, ActorActionOutcome.class);
 	}
-	
+
 	@Override
-	public Parameters getParametersFromFile(String filepath) throws FileNotFoundException{
+	public Parameters getParametersFromFile(String filepath)
+			throws FileNotFoundException {
 		File file = new File(filepath);
-		if(!file.exists())
+		if (!file.exists())
 			throw new FileNotFoundException();
 		return (Parameters) xStream.fromXML(file);
 	}
-	
+
 	@Override
-	public void saveParametersToFile(String filepath, Parameters parameters){
+	public void saveParametersToFile(String filepath, Parameters parameters) {
 		FileOutputStream outStream = null;
 		try {
 			outStream = new FileOutputStream(new File(filepath));
@@ -54,12 +63,12 @@ public class ParametersPersistenceManager implements IParametersPersistenceManag
 			e.printStackTrace();
 		}
 	}
-	
-	public String convertToXML(Parameters params){
+
+	public String convertToXML(Parameters params) {
 		return xStream.toXML(params);
 	}
-	
-	public Parameters parseXML(String parametersXML){
-		return (Parameters)xStream.fromXML(parametersXML);
+
+	public Parameters parseXML(String parametersXML) {
+		return (Parameters) xStream.fromXML(parametersXML);
 	}
 }

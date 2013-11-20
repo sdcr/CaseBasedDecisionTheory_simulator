@@ -9,6 +9,12 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
+//GREEN
+/**
+ * A converter which converts Parameter objects to and from XML.
+ * @author Stephan da Costa Ribeiro
+ *
+ */
 public class ParametersConverter implements Converter {
 
 	@SuppressWarnings("rawtypes")
