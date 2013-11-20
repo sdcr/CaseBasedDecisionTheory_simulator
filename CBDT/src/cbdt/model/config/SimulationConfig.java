@@ -1,5 +1,6 @@
 package cbdt.model.config;
 
+//GREEN
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -8,16 +9,17 @@ import cbdt.model.config.common.CommonConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
 
 /**
- * This class models the configuration chosen for a simulation.
- * It encompasses a CommonConfig, the available AbstractEngineConfigs,
- * and a reference to the currently chosen engine configuration.
+ * This class models the configuration for a simulation. It encompasses a
+ * CommonConfig, the available AbstractEngineConfigs, and a reference to the
+ * currently chosen engine configuration.
+ * 
  * @author Stephan da Costa Ribeiro
  */
 public class SimulationConfig extends Observable {
 
 	/**
-	 * The configuration data which is set for the simulation, independent from
-	 * the engine used.
+	 * The common config data which is set for the simulation. It is independent
+	 * from the engine used.
 	 */
 	private CommonConfig commonConfig;
 
@@ -27,8 +29,8 @@ public class SimulationConfig extends Observable {
 	private List<AbstractEngineConfig> availableEngineConfigs;
 
 	/**
-	 * The engine configuration currently chosen by the user. 
-	 * It must be one of the available engine configurations.
+	 * The engine configuration currently chosen by the user. It must be one of
+	 * the available engine configurations.
 	 */
 	private AbstractEngineConfig choosenEngineConfig;
 
@@ -41,8 +43,8 @@ public class SimulationConfig extends Observable {
 
 	public CommonConfig getCommonConfig() {
 		return commonConfig;
-	}	
-	
+	}
+
 	public void setCommonConfig(CommonConfig commonConfig) {
 		this.commonConfig = commonConfig;
 	}
@@ -64,7 +66,9 @@ public class SimulationConfig extends Observable {
 
 	/**
 	 * Sets the currently chosen engine configuration.
-	 * @param config Should be one of the available engine config objects.
+	 * 
+	 * @param config
+	 *            Should be one of the available engine config objects.
 	 */
 	public void setCurrentlyChosenEngineConfig(AbstractEngineConfig config) {
 		choosenEngineConfig = config;

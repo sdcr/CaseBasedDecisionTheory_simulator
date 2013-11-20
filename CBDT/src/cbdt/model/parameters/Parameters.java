@@ -4,10 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-
-
+//YELLOW
+/**
+ * The class modeling the parameters with which a simulation should be
+ * performed. This model class is to be distinguished from classes modeling
+ * configurations. In contrast to config model classes, Parameters contains data
+ * which are prescribed by the mathematical theory of CBDT.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class Parameters extends Observable {
-
 
 	/**
 	 * The weighting factor with which the old aspiration level is calculated
@@ -15,6 +22,9 @@ public class Parameters extends Observable {
 	 */
 	private double weightingFactorAlpha;
 
+	/**
+	 * The aspiration level at the beginning of the simulation.
+	 */
 	private double initialAspirationLevel;
 
 	/**
@@ -24,11 +34,12 @@ public class Parameters extends Observable {
 	private double aspirationLevelIncrement;
 
 	/**
-	 * Denotes whether the aspiration level increment should be used at sparse 
-	 * points in time instead of weighting the with the previous aspiration level.  
+	 * Denotes whether the aspiration level increment should be used at sparse
+	 * points in time instead of weighting the with the previous aspiration
+	 * level.
 	 */
 	private boolean usingAspirationLevelIncrement;
-	
+
 	/**
 	 * A list of ActorActions from which the actor can choose.
 	 */
@@ -70,10 +81,10 @@ public class Parameters extends Observable {
 	public void setInitialAspirationLevel(double initialAspirationLevel) {
 		this.initialAspirationLevel = initialAspirationLevel;
 	}
-	
+
 	/**
-	 * @return The value with which the aspiration level is increased at a sparse set of
-	 * simulation steps.
+	 * @return The value with which the aspiration level is increased at a
+	 *         sparse set of simulation steps.
 	 */
 	public double getAspirationLevelIncrement() {
 		return aspirationLevelIncrement;
@@ -93,9 +104,10 @@ public class Parameters extends Observable {
 
 	/**
 	 * Adds an ActorAcion object to the model.
+	 * 
 	 * @param actorAction
 	 */
-	public void addActorAction(ActorAction actorAction){
+	public void addActorAction(ActorAction actorAction) {
 		this.actorActions.add(actorAction);
 		setChanged();
 		notifyObservers(actorActions);
@@ -103,15 +115,16 @@ public class Parameters extends Observable {
 
 	/**
 	 * Removes an ActorAction object from the model.
+	 * 
 	 * @param actorAction
 	 */
-	public void removeActorAction(ActorAction actorAction){
+	public void removeActorAction(ActorAction actorAction) {
 		this.actorActions.remove(actorAction);
 		setChanged();
 		notifyObservers();
 	}
-	
-	//TODO: update to accommodate for number of expected utilities.
+
+	// TODO: update to accommodate for number of expected utilities.
 	public boolean equals(Parameters obj) {
 		if (this == obj)
 			return true;
@@ -124,10 +137,10 @@ public class Parameters extends Observable {
 			if (other.actorActions != null)
 				return false;
 		} else {
-			if(actorActions.size() != other.actorActions.size())
+			if (actorActions.size() != other.actorActions.size())
 				return false;
-			for(int i=0; i<actorActions.size(); i++)
-				if(!actorActions.get(i).equals(other.actorActions.get(i)))
+			for (int i = 0; i < actorActions.size(); i++)
+				if (!actorActions.get(i).equals(other.actorActions.get(i)))
 					return false;
 		}
 		if (Double.doubleToLongBits(aspirationLevelIncrement) != Double
@@ -152,5 +165,5 @@ public class Parameters extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 }

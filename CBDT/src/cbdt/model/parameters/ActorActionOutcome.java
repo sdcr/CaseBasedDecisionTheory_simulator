@@ -2,29 +2,33 @@ package cbdt.model.parameters;
 
 import java.util.Observable;
 
+//GREEN
 /**
- * An ActorActionOutcome belongs to an ActorAction. The ActorActionOutcome 
- * models one outcome that is possible, when the actor chooses the respective 
+ * An ActorActionOutcome belongs to an ActorAction. The ActorActionOutcome
+ * models one outcome that is possible, when the actor chooses the respective
  * action.
+ * 
  * @author S
  */
 public class ActorActionOutcome extends Observable {
 
 	/** The ActorAction this ActorActionOutcome belongs to. */
 	private ActorAction action;
-	
-	/** The probability with which this outcome occurs if the 
-	 * action this outcome belongs to is chosen by the actor. */
+
+	/**
+	 * The probability with which this outcome occurs if the action this outcome
+	 * belongs to is chosen by the actor.
+	 */
 	private double probability;
-	
+
 	/** The utility incurred by the actor if this outcome occurs. */
 	private double utility;
-	
+
 	public ActorActionOutcome(double probability, double utility) {
 		this.probability = probability;
 		this.utility = utility;
 	}
-	
+
 	/**
 	 * @return The utility incurred by the actor if this outcome occurs.
 	 */
@@ -39,8 +43,8 @@ public class ActorActionOutcome extends Observable {
 	}
 
 	/**
-	 * @return The probability with which this outcome occurs if the 
-	 * action this outcome belongs to is chosen by the actor.
+	 * @return The probability with which this outcome occurs if the action this
+	 *         outcome belongs to is chosen by the actor.
 	 */
 	public double getProbability() {
 		return probability;
@@ -64,12 +68,13 @@ public class ActorActionOutcome extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	@Override
 	public String toString() {
-		return "(ActorActionOutcome; probability: "+probability+", utility: "+utility+")";
+		return "(ActorActionOutcome; probability: " + probability
+				+ ", utility: " + utility + ")";
 	}
-	
+
 	public boolean equals(ActorActionOutcome obj) {
 		if (this == obj)
 			return true;

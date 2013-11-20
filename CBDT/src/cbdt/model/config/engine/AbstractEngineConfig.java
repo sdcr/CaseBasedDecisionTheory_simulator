@@ -3,9 +3,10 @@ package cbdt.model.config.engine;
 import java.util.Observable;
 
 /**
- * The subclasses of this class model the configuration
- * how the simulation is computed. This class is part of a strategy 
- * pattern to select the algorithm for simulation computation. 
+ * The subclasses of this class model the enigne configuration how the
+ * simulation is computed. This class is part of a strategy pattern. According
+ * to the implementing class the algorithm for simulation computation is to be
+ * selected.
  * 
  * @author S-lenovo
  */

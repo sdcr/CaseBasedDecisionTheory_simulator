@@ -1,5 +1,6 @@
 package cbdt.model.config;
 
+//GREEN
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,21 @@ import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.model.config.engine.DFSmatrixEngineConfig;
 import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 
+/**
+ * A factory class which is able to produce a dfault SimulationConfig object.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class SimulationConfigFactory {
 
+	/**
+	 * Just instantiates a SimulationConfig object, as well as the three
+	 * available engine configs and a common config object. The SimulatonConfig
+	 * object is associated with these objects.
+	 * 
+	 * @return A default Simulation config object.
+	 */
 	public SimulationConfig getDefaultSimulationConfig() {
 		SimulationConfig defaultSimConfig = new SimulationConfig();
 
@@ -20,7 +34,8 @@ public class SimulationConfigFactory {
 		availableEngineConfigs.add(new DFSmatrixHighPrecEngineConfig());
 		defaultSimConfig.addAvailableEngineConfigs(availableEngineConfigs);
 
-		defaultSimConfig.setCurrentlyChosenEngineConfig(availableEngineConfigs.get(0));
+		defaultSimConfig.setCurrentlyChosenEngineConfig(availableEngineConfigs
+				.get(0));
 		defaultSimConfig.setCommonConfig(new CommonConfig());
 		return defaultSimConfig;
 	}

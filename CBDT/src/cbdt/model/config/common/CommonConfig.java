@@ -2,6 +2,7 @@ package cbdt.model.config.common;
 
 import java.util.Observable;
 
+//YELLOW
 /**
  * This class models the configuration parameters which refer to how the simulation results
  * are to be computed, independent from parameters referring to a specific simulation engine.

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+//GREEN
 /**
  * ActorAction models one action alternative, the actor has under the CBDT
  * model. It consists of several ActorActionOutcomes.
  * 
  * @author S
  */
-public class ActorAction extends Observable{
-
+public class ActorAction extends Observable {
 
 	private String actionName;
 
@@ -64,8 +64,8 @@ public class ActorAction extends Observable{
 
 	/**
 	 * @param actionOutcome
-	 *            An ActorActionOutcome which can occur if this action
-	 *            is chosen by the actor.
+	 *            An ActorActionOutcome which can occur if this action is chosen
+	 *            by the actor.
 	 */
 	public void addActionOutcome(ActorActionOutcome actionOutcome) {
 		actionOutcome.setAction(this);
@@ -76,14 +76,15 @@ public class ActorAction extends Observable{
 
 	/**
 	 * @param actionOutcome
-	 * 			The ActorActionOutcome which is to be removed from this ActorAction.
+	 *            The ActorActionOutcome which is to be removed from this
+	 *            ActorAction.
 	 */
-	public void removeActionOutcome(ActorActionOutcome actionOutcome){
+	public void removeActionOutcome(ActorActionOutcome actionOutcome) {
 		this.actionOutcomes.remove(actionOutcome);
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public boolean equals(ActorAction obj) {
 		if (this == obj)
 			return true;
@@ -101,17 +102,18 @@ public class ActorAction extends Observable{
 			if (other.actionOutcomes != null)
 				return false;
 		} else {
-			if(actionOutcomes.size() != other.actionOutcomes.size())
+			if (actionOutcomes.size() != other.actionOutcomes.size())
 				return false;
-			for(int i=0; i<actionOutcomes.size(); i++)
-				if(!actionOutcomes.get(i).equals(other.actionOutcomes.get(i)))
+			for (int i = 0; i < actionOutcomes.size(); i++)
+				if (!actionOutcomes.get(i).equals(other.actionOutcomes.get(i)))
 					return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "[actionName: "+actionName+", outcomes: "+actionOutcomes+"]";
+		return "[actionName: " + actionName + ", outcomes: " + actionOutcomes
+				+ "]";
 	}
 }
