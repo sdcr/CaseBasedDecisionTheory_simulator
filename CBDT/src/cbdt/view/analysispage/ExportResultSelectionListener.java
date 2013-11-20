@@ -5,7 +5,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import cbdt.control.analysispage.AnalysisPageController;
-import cbdt.view.menu.OpenFileDialogSelectionListener;
+import cbdt.view.menu.listeners.OpenFileDialogSelectionListener;
 
 public class ExportResultSelectionListener extends OpenFileDialogSelectionListener {
 

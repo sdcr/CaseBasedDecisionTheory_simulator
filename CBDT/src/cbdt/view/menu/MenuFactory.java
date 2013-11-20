@@ -6,6 +6,9 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import cbdt.control.MainController;
+import cbdt.view.menu.listeners.OpenParametersSelectionListener;
+import cbdt.view.menu.listeners.SaveParametersSelectionListener;
+import cbdt.view.menu.listeners.ShowPluginInfoSelectionListener;
 
 public class MenuFactory {
 

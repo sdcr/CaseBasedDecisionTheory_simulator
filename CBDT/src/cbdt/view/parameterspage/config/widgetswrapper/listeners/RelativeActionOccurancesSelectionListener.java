@@ -1,4 +1,4 @@
-package cbdt.view.parameterspage.config.widgetswrapper.listener;
+package cbdt.view.parameterspage.config.widgetswrapper.listeners;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -6,22 +6,22 @@ import org.eclipse.swt.widgets.Button;
 
 import cbdt.control.parameterspage.config.common.CommonConfigController;
 
-public class AbsoluteActionOccurancesSelectionListener implements
+public class RelativeActionOccurancesSelectionListener implements
 		SelectionListener {
 
 	private CommonConfigController commonConfigController;
-	private Button absActionOcurrancesButton;
+	private Button relActionOcurrancesButton;
 
-	public AbsoluteActionOccurancesSelectionListener(
+	public RelativeActionOccurancesSelectionListener(
 			CommonConfigController commonConfigController,
-			Button absActionOcurrancesButton) {
-		this.absActionOcurrancesButton = absActionOcurrancesButton;
+			Button relActionOcurrancesButton) {
 		this.commonConfigController = commonConfigController;
+		this.relActionOcurrancesButton = relActionOcurrancesButton;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		commonConfigController.setCalcAbsActionOccurances(absActionOcurrancesButton
+		commonConfigController.setCalcRelActionOccurances(relActionOcurrancesButton
 				.getSelection());
 	}
 

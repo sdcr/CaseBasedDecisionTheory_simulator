@@ -1,4 +1,4 @@
-package cbdt.view.parameterspage.config.widgetswrapper.listener;
+package cbdt.view.parameterspage.config.widgetswrapper.listeners;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;

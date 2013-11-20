@@ -1,4 +1,4 @@
-package cbdt.view.menu;
+package cbdt.view.menu.listeners;
 
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.FileDialog;

@@ -1,8 +1,10 @@
-package cbdt.view.menu;
+package cbdt.view.menu.listeners;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Shell;
+
+import cbdt.view.menu.PluginInfoDialog;
 
 public class ShowPluginInfoSelectionListener implements SelectionListener {
 

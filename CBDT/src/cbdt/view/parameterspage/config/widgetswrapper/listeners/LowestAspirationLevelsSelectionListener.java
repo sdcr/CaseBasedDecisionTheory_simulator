@@ -1,4 +1,4 @@
-package cbdt.view.parameterspage.config.widgetswrapper.listener;
+package cbdt.view.parameterspage.config.widgetswrapper.listeners;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
