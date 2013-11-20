@@ -1,7 +1,7 @@
 package cbdt.control.parameterspage.config.engine;
 
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 
 public class DFSmatrixHighPrecisionConfigController implements IEngineConfigController {
 

@@ -1,7 +1,7 @@
 package cbdt.control.parameterspage.config.engine;
 
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 
 public class DFSkeepTreeConfigController implements IEngineConfigController {
 

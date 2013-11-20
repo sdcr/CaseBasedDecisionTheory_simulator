@@ -1,4 +1,4 @@
-package cbdt.model.config;
+package cbdt.model.config.engine;
 
 public class DFSmatrixHighPrecEngineConfig extends AbstractEngineConfig {
 

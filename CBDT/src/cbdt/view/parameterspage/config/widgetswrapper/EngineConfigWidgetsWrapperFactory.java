@@ -2,10 +2,10 @@ package cbdt.view.parameterspage.config.widgetswrapper;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
-import cbdt.model.config.DFSmatrixEngineConfig;
-import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSmatrixEngineConfig;
+import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 import cbdt.view.parameterspage.config.widgetswrapper.dfskeeptree.DFSkeepTreeConfigWidgetsWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.dfsmatrix.DFSmatrixConfigWidgetsWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.dfsmatrixhp.DFSmatrixHighPrecisionConfigWidgetsWrapper;

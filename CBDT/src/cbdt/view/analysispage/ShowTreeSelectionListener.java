@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.model.config.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysispage.tree.TreePApplet;
 

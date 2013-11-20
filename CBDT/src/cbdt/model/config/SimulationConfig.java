@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import cbdt.model.config.common.CommonConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+
 /**
  * This class models the configuration chosen for a simulation.
  * It encompasses a CommonConfig, the available AbstractEngineConfigs,

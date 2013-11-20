@@ -2,8 +2,8 @@ package cbdt.control.persistence.results;
 
 import java.io.IOException;
 
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.model.result.Result;
 
 //GREEN

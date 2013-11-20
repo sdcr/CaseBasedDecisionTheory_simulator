@@ -6,7 +6,7 @@ import java.math.MathContext;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.model.config.DFSmatrixEngineConfig;
+import cbdt.model.config.engine.DFSmatrixEngineConfig;
 import cbdt.model.parameters.Parameters;
 
 public class DFSMatrixSimulationEngineTest {

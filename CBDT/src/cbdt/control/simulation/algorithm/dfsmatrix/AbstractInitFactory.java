@@ -3,7 +3,7 @@ package cbdt.control.simulation.algorithm.dfsmatrix;
 import java.math.BigDecimal;
 
 import cbdt.control.simulation.algorithm.INodeContent;
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;

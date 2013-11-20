@@ -1,7 +1,7 @@
 package cbdt.control.parameterspage.config.engine;
 
 //GREEN
-import cbdt.model.config.AbstractEngineConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
 
 /**
  * Every AbstractEngineConfig has its own AbstractEngineConfigController. 

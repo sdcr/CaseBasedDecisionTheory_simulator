@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.parameterspage.config.common.CommonConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
 import cbdt.view.HintLabelWrapper;
 import cbdt.view.parameterspage.config.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.listener.AbsoluteActionOccurancesSelectionListener;

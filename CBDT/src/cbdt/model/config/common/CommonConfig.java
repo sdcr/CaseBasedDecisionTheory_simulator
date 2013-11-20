@@ -1,4 +1,4 @@
-package cbdt.model.config;
+package cbdt.model.config.common;
 
 import java.util.Observable;
 

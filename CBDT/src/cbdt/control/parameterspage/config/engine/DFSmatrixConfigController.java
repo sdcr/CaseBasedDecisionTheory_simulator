@@ -1,6 +1,6 @@
 package cbdt.control.parameterspage.config.engine;
 
-import cbdt.model.config.AbstractEngineConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
 
 public class DFSmatrixConfigController implements IEngineConfigController {
 

@@ -15,7 +15,7 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;

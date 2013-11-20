@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.config.engine.DFSmatrixHighPrecisionConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
-import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
+import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 import cbdt.view.parameterspage.config.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 import cbdt.view.parameterspage.parameters.SimpleParameterComposite;

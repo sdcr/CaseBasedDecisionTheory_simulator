@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.CommonConfig;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
-import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
+import cbdt.model.config.common.CommonConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 import cbdt.model.parameters.ActorAction;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;

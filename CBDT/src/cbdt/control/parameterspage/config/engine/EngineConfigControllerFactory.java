@@ -1,9 +1,9 @@
 package cbdt.control.parameterspage.config.engine;
 
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
-import cbdt.model.config.DFSmatrixEngineConfig;
-import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSmatrixEngineConfig;
+import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 
 /**
  * This factory class can produce an engine config controller according to a

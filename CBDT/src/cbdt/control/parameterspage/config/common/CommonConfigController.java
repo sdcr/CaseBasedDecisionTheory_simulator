@@ -1,6 +1,6 @@
 package cbdt.control.parameterspage.config.common;
 
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
 
 /**
  * The controller which handles all requests to changes in the CommonConfig

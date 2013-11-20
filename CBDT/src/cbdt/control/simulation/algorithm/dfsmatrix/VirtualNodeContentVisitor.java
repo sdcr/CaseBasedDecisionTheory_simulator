@@ -3,7 +3,7 @@ package cbdt.control.simulation.algorithm.dfsmatrix;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import cbdt.control.simulation.algorithm.NodeVisitor;
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 

@@ -8,7 +8,7 @@ import java.util.List;
 import processing.core.PApplet;
 import processing.core.PShape;
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.view.analysispage.tree.treemodel.NodeCircle;
 import cbdt.view.analysispage.tree.treemodel.NodeCircleFactory;
 import cbdt.view.analysispage.tree.treemodel.NodeContext;

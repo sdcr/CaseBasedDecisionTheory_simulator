@@ -6,9 +6,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import cbdt.control.analysispage.AnalysisPageController;
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
 import cbdt.model.config.SimulationConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.LabelFactory;
 

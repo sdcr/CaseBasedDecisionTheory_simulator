@@ -2,7 +2,7 @@ package cbdt.control.simulation.algorithm;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import cbdt.model.config.CommonConfig;
+import cbdt.model.config.common.CommonConfig;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.result.Result;
 

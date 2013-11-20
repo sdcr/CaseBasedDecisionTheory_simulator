@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.config.engine.DFSkeepTreeConfigController;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.view.parameterspage.config.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 

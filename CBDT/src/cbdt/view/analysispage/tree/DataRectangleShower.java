@@ -1,7 +1,7 @@
 package cbdt.view.analysispage.tree;
 
 import cbdt.control.simulation.algorithm.dfskeeptree.NodeContentKeepTree;
-import cbdt.model.config.DFSkeepTreeEngineConfig;
+import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 
 public class DataRectangleShower {
 

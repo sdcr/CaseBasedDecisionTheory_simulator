@@ -6,9 +6,9 @@ import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageW
 import cbdt.control.AbstractPageController;
 import cbdt.control.persistence.results.IResultsPersistenceManager;
 import cbdt.control.persistence.results.ResultsPersistenceManager;
-import cbdt.model.config.AbstractEngineConfig;
-import cbdt.model.config.CommonConfig;
 import cbdt.model.config.SimulationConfig;
+import cbdt.model.config.common.CommonConfig;
+import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysispage.AnalysisPageWrapper;
 
