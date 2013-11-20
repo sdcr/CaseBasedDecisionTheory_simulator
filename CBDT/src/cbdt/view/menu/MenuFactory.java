@@ -5,12 +5,12 @@ import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
-import cbdt.control.parameterspage.ParametersConfigPageController;
+import cbdt.control.MainController;
 
 public class MenuFactory {
 
 	public Menu getMenu(Decorations shell, Menu menuBar, int index,
-			ParametersConfigPageController controller) {
+			MainController mainController) {
 		Menu cbdtMenu = new Menu(shell, SWT.DROP_DOWN);
 		MenuItem cbdtMenuHeader = new MenuItem(menuBar, SWT.CASCADE, index);
 		cbdtMenuHeader.setText("&CBDT");
@@ -20,13 +20,13 @@ public class MenuFactory {
 		saveParameters.setText("&Save parameters");
 		saveParameters
 				.addSelectionListener(new SaveParametersSelectionListener(shell
-						.getShell(), controller.getParametersController()));
+						.getShell(), mainController.getParametersConfigPageController().getParametersController()));
 
 		MenuItem openParameters = new MenuItem(cbdtMenu, SWT.PUSH);
 		openParameters.setText("&Open parameters");
 		openParameters
 				.addSelectionListener(new OpenParametersSelectionListener(shell
-						.getShell(), controller.getParametersController()));
+						.getShell(), mainController.getParametersConfigPageController().getParametersController()));
 
 		new MenuItem(cbdtMenu, SWT.SEPARATOR);
 

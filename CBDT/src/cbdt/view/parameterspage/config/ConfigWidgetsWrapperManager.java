@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import cbdt.control.parameterspage.ParametersConfigPageController;
-import cbdt.control.parameterspage.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.config.engine.NoEngineConfigControllerException;
 import cbdt.model.config.AbstractEngineConfig;
 import cbdt.model.config.SimulationConfig;
@@ -55,7 +55,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		for (AbstractEngineConfig engineConfig : simConfig
 				.getAvailableEngineConfigs()) {
 			try {
-				AbstractEngineConfigController configController = controller
+				IEngineConfigController configController = controller
 						.getConfigControllerFactory().getConfigController(engineConfig);
 				configController.setEngineConfigModel(engineConfig);
 				AbstractEngineConfigWidgetsWrapper engineConfigWidgetsWrapper = engineConfigWidgestWrapperFactory

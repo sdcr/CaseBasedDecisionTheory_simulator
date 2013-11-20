@@ -11,44 +11,36 @@ import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 import simulation.extensionpoint.simulationplugin.resources.IForegroundManager;
 import cbdt.control.LogManager;
 import cbdt.control.MainController;
-import cbdt.control.analysispage.AnalysisPageController;
-import cbdt.control.parameterspage.ParametersConfigPageController;
 import cbdt.view.menu.MenuFactory;
 
+//YELLOW
 /**
- * The main class defining the CBDT simulation plugin.
- * It forms the connection point between the simulation frame, and manages the 
- * controllers for the different pages.
- * It is also responsible for the instantiation of the different parts of the plugin.
+ * The main class defining the CBDT simulation plugin. It forms the connection
+ * point between the simulation frame, and instantiates the MainController.
+ * 
  * @author Stephan da Costa Ribeiro
  */
 public class CBDTplugin implements ISimulationPlugin {
 
 	/**
-	 * The controller of the parameters page.
+	 * The main controller of the plugin.
 	 */
-	private ParametersConfigPageController parametersController;
-
-	/**
-	 * The controller of the analysis page.
-	 */
-	private AnalysisPageController analysisController;
+	private MainController mainController;
 
 	/**
 	 * Obligatory nullary constructor. Instantiates a log manager.
 	 */
-	public CBDTplugin(){
+	public CBDTplugin() {
 		LogManager logManager = new LogManager();
 		logManager.initLogging();
 	}
-	
+
 	@Override
+	/**
+	 * must be called before getPageWrappers().
+	 */
 	public void setForegroundManager(IForegroundManager foregroundManager) {
-		parametersController = new ParametersConfigPageController();
-		analysisController = new AnalysisPageController();
-		MainController mainController = new MainController(analysisController, parametersController, foregroundManager);
-		parametersController.setMainController(mainController);
-		analysisController.setMainController(mainController);
+		mainController = new MainController(foregroundManager);
 	}
 
 	@Override
@@ -57,20 +49,27 @@ public class CBDTplugin implements ISimulationPlugin {
 	}
 
 	@Override
+	/**
+	 * setForegroundManager(IForegroundManager foregroundManager) must be called before this method is called.
+	 */
 	public List<AbstractPluginPageWrapper> getPageWrappers() {
+		/*
+		 * possible problem: mainController may be null. maybe instantiate in
+		 * constructor
+		 */
 		List<AbstractPluginPageWrapper> pageWrappers = new ArrayList<AbstractPluginPageWrapper>();
-		
-		pageWrappers.add(parametersController.getPageWrapper());		
-		pageWrappers.add(analysisController.getPageWrapper());
-		
+		pageWrappers.add(mainController.getParametersConfigPageController()
+				.getPageWrapper());
+		pageWrappers.add(mainController.getAnalysisPageController()
+				.getPageWrapper());
+
 		return pageWrappers;
 	}
 
 	@Override
 	public Menu getMenu(Decorations shell, Menu menuBar, int index) {
 		MenuFactory menuFactory = new MenuFactory();
-		return menuFactory.getMenu(shell, menuBar, index, parametersController);
+		return menuFactory.getMenu(shell, menuBar, index, mainController);
 	}
-
 
 }

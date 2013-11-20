@@ -7,7 +7,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.parameterspage.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.config.engine.DFSmatrixHighPrecisionConfigController;
 import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.model.config.DFSmatrixHighPrecEngineConfig;
@@ -57,7 +57,7 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractEngineCo
 	}
 
 	@Override
-	public void setConfigController(AbstractEngineConfigController configController) {
+	public void setConfigController(IEngineConfigController configController) {
 		DFSmatrixHighPrecisionConfigController customController = 
 				(DFSmatrixHighPrecisionConfigController)configController;
 		requiredDecimalPlacesComposite.getText().addModifyListener(

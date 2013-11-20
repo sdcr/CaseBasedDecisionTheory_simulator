@@ -38,7 +38,7 @@ public class ParametersConfigPageWrapper extends AbstractPluginPageWrapper {
 		parametersConfigPageComposite.setParametersModel(parametersConfigPageController.
 				getParametersController().getParametersModel());
 		parametersConfigPageComposite.setSimulationConfigModel(parametersConfigPageController
-				.getSimulationConfigModel());
+				.getSimulationConfig());
 
 		cbdtHeaderComposite.layout();
 		return cbdtHeaderComposite;

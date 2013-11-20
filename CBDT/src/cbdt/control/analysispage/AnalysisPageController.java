@@ -12,6 +12,7 @@ import cbdt.model.config.SimulationConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysispage.AnalysisPageWrapper;
 
+//YELLOW
 public class AnalysisPageController extends AbstractPageController {
 
 	/* view references */
@@ -47,13 +48,13 @@ public class AnalysisPageController extends AbstractPageController {
 	 * Fills the analysis page with simulation results and the engine config choice data,
 	 * and puts it in foreground.
 	 * @param simulationResult The result of a simulation.
-	 * @param configChoice The engine configuration used for the simulation.
+	 * @param simulationConfig The engine configuration used for the simulation.
 	 */
-	public void setSimulationResult(Result simulationResult, SimulationConfig configChoice) {
+	public void setSimulationResult(Result simulationResult, SimulationConfig simulationConfig) {
 		this.simulationResult = simulationResult;
-		analysisPageWrapper.getAnalysisPage().setResultModel(configChoice, simulationResult);
-		usedEngineConfig = configChoice.getCurrentlyChosenEngineConfig();
-		usedCommonConfig = configChoice.getCommonConfig();
+		analysisPageWrapper.getAnalysisPage().setResultModel(simulationConfig, simulationResult);
+		usedEngineConfig = simulationConfig.getCurrentlyChosenEngineConfig();
+		usedCommonConfig = simulationConfig.getCommonConfig();
 		getMainController().setToForeground(this);
 	}
 
@@ -67,7 +68,7 @@ public class AnalysisPageController extends AbstractPageController {
 		try {
 			resultPersistenceManager.saveResultToFile(filepath, simulationResult, usedCommonConfig, usedEngineConfig);
 		} catch (IOException e) {
-			getMessageBoxManager().showErrorMessage(e.getMessage());
+			getMainController().getMessageBoxManager().showErrorMessage(e.getMessage());
 			e.printStackTrace();
 		}
 	}

@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import cbdt.control.parameterspage.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.config.engine.DFSkeepTreeConfigController;
 import cbdt.model.config.DFSkeepTreeEngineConfig;
 import cbdt.view.parameterspage.config.ConfigBlockTitleLabelWrapper;
@@ -73,7 +73,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgets
 
 	@Override
 	public void setConfigController(
-			AbstractEngineConfigController configController) {
+			IEngineConfigController configController) {
 //		super.setControllers(pageController, configController);
 		DFSkeepTreeConfigController customConfigController = (DFSkeepTreeConfigController) configController; 
 		saveTreeButton.addSelectionListener(new SaveTreeSelectionListener(customConfigController, saveTreeButton));

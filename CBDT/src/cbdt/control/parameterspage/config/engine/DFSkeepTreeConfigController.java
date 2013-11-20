@@ -3,10 +3,11 @@ package cbdt.control.parameterspage.config.engine;
 import cbdt.model.config.AbstractEngineConfig;
 import cbdt.model.config.DFSkeepTreeEngineConfig;
 
-public class DFSkeepTreeConfigController implements AbstractEngineConfigController {
+public class DFSkeepTreeConfigController implements IEngineConfigController {
 
 	private DFSkeepTreeEngineConfig config;
 
+	@Override
 	public void setEngineConfigModel(AbstractEngineConfig engineConfig) {
 		config = (DFSkeepTreeEngineConfig) engineConfig;
 	}

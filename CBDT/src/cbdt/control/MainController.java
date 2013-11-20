@@ -12,53 +12,86 @@ import cbdt.model.parameters.Parameters;
 import cbdt.model.result.Result;
 import cbdt.view.MessageBoxManager;
 
+//YELLOW
 public class MainController {
 
 	private EngineContext simulationEngine;
 
-	@SuppressWarnings("unused")
-	private ParametersConfigPageController parametersController;
-	private AnalysisPageController analysisController;
+	/**
+	 * The page controller for the parameters-config page.
+	 */
+	private ParametersConfigPageController parametersConfigPageController;
 
+	/**
+	 * The page controller for the analysis page.
+	 */
+	private AnalysisPageController analysisPageController;
+
+	/**
+	 * The manager for messages to the user via dialogs.
+	 */
 	private MessageBoxManager messageBoxManager;
+
+	/**
+	 * The manager in charge of putting a page into the foreground.
+	 */
 	private IForegroundManager foregroundManager;
 
-	public MainController(AnalysisPageController analysisController,
-			ParametersConfigPageController parametersController,
-			IForegroundManager foregroundManager) {
-		this.analysisController = analysisController;
-		this.parametersController = parametersController;
+	/**
+	 * The constructor. It initializes the controllers of the pages, the
+	 * MessageBoxManager and the Engine Context.
+	 * 
+	 * @param foregroundManager
+	 *            The IForegroundManager as given by the simulation frame.
+	 */
+	public MainController(IForegroundManager foregroundManager) {
 		this.foregroundManager = foregroundManager;
+
+		this.parametersConfigPageController = new ParametersConfigPageController();
+		parametersConfigPageController.setMainController(this);
+		this.analysisPageController = new AnalysisPageController();
+		analysisPageController.setMainController(this);
 
 		messageBoxManager = new MessageBoxManager(foregroundManager.getShell());
 		simulationEngine = new EngineContext(foregroundManager.getShell());
 	}
 
-	public void computeCDBTSimulation(Parameters parameters, SimulationConfig configChoice) {
-		simulationEngine.setEngineConfig(configChoice.getCurrentlyChosenEngineConfig(), configChoice.getCommonConfig());
+	// TODO write javadoc
+	public void computeCDBTSimulation(Parameters parameters,
+			SimulationConfig configChoice) {
+		simulationEngine.setEngineConfig(
+				configChoice.getCurrentlyChosenEngineConfig(),
+				configChoice.getCommonConfig());
 		try {
 			Result result = simulationEngine.performSimulation(parameters);
-			setToForeground(analysisController);
-			analysisController.setSimulationResult(result, configChoice);
+			setToForeground(analysisPageController);
+			analysisPageController.setSimulationResult(result, configChoice);
 		} catch (InterruptedException e) {
 			messageBoxManager.showInfoMessage("Computation aborted.");
 			System.gc();
 		} catch (InvocationTargetException e) {
-			if(e.getCause() instanceof OutOfMemoryError){
-				messageBoxManager.showErrorMessage("OutOfMemoryError: "+e.getCause().getMessage());
+			if (e.getCause() instanceof OutOfMemoryError) {
+				messageBoxManager.showErrorMessage("OutOfMemoryError: "
+						+ e.getCause().getMessage());
 			} else {
-				messageBoxManager.showErrorMessage("An unknown error occured error.");
+				messageBoxManager
+						.showErrorMessage("An unknown error occured error.");
 			}
 			e.printStackTrace();
 		} catch (InvalidActorActionException e) {
 			messageBoxManager.showErrorMessage(e.getMessage());
 			e.printStackTrace();
-		} catch (RuntimeException e){
+		} catch (RuntimeException e) {
 			messageBoxManager.showErrorMessage(e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Put the page managed by the pageController in foreground.
+	 * 
+	 * @param pageController
+	 */
 	public void setToForeground(AbstractPageController pageController) {
 		foregroundManager.setToForeground(pageController.getPageWrapper());
 	}
@@ -66,4 +99,13 @@ public class MainController {
 	public MessageBoxManager getMessageBoxManager() {
 		return messageBoxManager;
 	}
+
+	public ParametersConfigPageController getParametersConfigPageController() {
+		return parametersConfigPageController;
+	}
+
+	public AnalysisPageController getAnalysisPageController() {
+		return analysisPageController;
+	}
+
 }

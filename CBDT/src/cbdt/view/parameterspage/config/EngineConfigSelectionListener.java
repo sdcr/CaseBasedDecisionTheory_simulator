@@ -24,7 +24,7 @@ public class EngineConfigSelectionListener implements SelectionListener {
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		Combo comboBox = (Combo) e.getSource();
-		controller.setChoosenEngineConfig(configsList.get(comboBox
+		controller.setCurrentlyChosenEngineConfig(configsList.get(comboBox
 				.getSelectionIndex()));
 	}
 

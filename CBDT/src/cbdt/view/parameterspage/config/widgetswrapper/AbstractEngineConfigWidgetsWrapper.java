@@ -4,7 +4,7 @@ import java.util.Observer;
 
 import org.eclipse.swt.widgets.Composite;
 
-import cbdt.control.parameterspage.config.engine.AbstractEngineConfigController;
+import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.model.config.AbstractEngineConfig;
 
 public abstract class AbstractEngineConfigWidgetsWrapper implements Observer {
@@ -12,7 +12,7 @@ public abstract class AbstractEngineConfigWidgetsWrapper implements Observer {
 	public abstract void setParent(Composite parent);
 
 	public abstract void setConfigController(
-			AbstractEngineConfigController configController);
+			IEngineConfigController configController);
 	
 	public void setEngineConfigModel(AbstractEngineConfig config)
 	{
