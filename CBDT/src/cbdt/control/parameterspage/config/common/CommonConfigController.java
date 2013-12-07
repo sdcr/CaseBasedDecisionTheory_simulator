@@ -3,11 +3,10 @@ package cbdt.control.parameterspage.config.common;
 import cbdt.model.config.common.CommonConfig;
 
 /**
- * The controller which handles all requests to changes in the CommonConfig
+ * The controller which handles all requests to change the CommonConfig
  * model object.
  * 
  * @author Stephan da Costa Ribeiro
- * 
  */
 public class CommonConfigController {
 
@@ -16,6 +15,10 @@ public class CommonConfigController {
 	 */
 	private CommonConfig commonConfig;
 
+	/**
+	 * Set the {@link CommonConfig} object.
+	 * @param commonConfig
+	 */
 	public void setCommonConfig(CommonConfig commonConfig) {
 		this.commonConfig = commonConfig;
 	}

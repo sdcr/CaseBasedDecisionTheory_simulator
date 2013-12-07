@@ -12,20 +12,19 @@ import cbdt.view.parameterspage.parameters.ParametersConfigPageWrapper;
 //YELLOW
 //maybe create a dedicated simulationController.
 /**
- * The controller of the parameters/config page. All requests to change the
+ * The controller of the parameters-config page. All requests to change the
  * parameters, the common config, or the engine configs are outsourced to
- * respective dedicated controllers. Only the requests to the SimulationConfig
- * model object are handled directly. (Which amounts only to a request to change
- * the currently chosen engine config.)
+ * respective dedicated controllers. Other requests are handled directly,
+ * for example by directly changing the SimulationConfig object, or by
+ * forwarding the requests to the MainController.
  * 
  * @author Stephan da Costa Ribeiro
- * 
  */
 public class ParametersConfigPageController extends AbstractPageController {
 
 	/* views */
 	/**
-	 * The wrapper of the associated parameters page.
+	 * The wrapper of the associated parameters-config page.
 	 */
 	private ParametersConfigPageWrapper parametersConfigPageWrapper;
 
@@ -80,27 +79,47 @@ public class ParametersConfigPageController extends AbstractPageController {
 		return parametersConfigPageWrapper;
 	}
 
+	/**
+	 * @return the {@link EngineConfigControllerFactory}
+	 */
 	public EngineConfigControllerFactory getConfigControllerFactory() {
 		return configControllerFactory;
 	}
 
+	/**
+	 * @return {@link CommonConfigController}
+	 */
 	public CommonConfigController getCommonConfigController() {
 		return commonConfigController;
 	}
 
+	/**
+	 * @return the {@link ParametersController}
+	 */
 	public ParametersController getParametersController() {
 		return parametersController;
 	}
 
+	/**
+	 * Initiates a request to start the computation of the
+	 * CBDT simulation with the currently entered parameters.
+	 */
 	public void startComputation() {
 		getMainController().computeCDBTSimulation(
 				parametersController.getParametersModel(), simulationConfig);
 	}
 	
+	/**
+	 * @return the {@link SimulationConfig}
+	 */
 	public SimulationConfig getSimulationConfig() {
 		return simulationConfig;
 	}
 	
+	/**
+	 * Sets the chosen engine configuration.
+	 * @param config
+	 */
 	public void setCurrentlyChosenEngineConfig(AbstractEngineConfig config) {
 		simulationConfig.setCurrentlyChosenEngineConfig(config);
 	}

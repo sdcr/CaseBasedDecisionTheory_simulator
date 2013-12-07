@@ -16,6 +16,14 @@ import cbdt.model.result.Result;
  */
 public interface IResultsPersistenceManager {
 
+	/**
+	 * Saves results to a file.
+	 * @param filepath
+	 * @param result
+	 * @param commonConfig
+	 * @param engineConfig
+	 * @throws IOException
+	 */
 	public void saveResultToFile(String filepath, Result result,
 			CommonConfig commonConfig, AbstractEngineConfig engineConfig)
 			throws IOException;

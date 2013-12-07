@@ -13,6 +13,15 @@ import cbdt.model.result.Result;
 import cbdt.view.MessageBoxManager;
 
 //YELLOW
+/**
+ * The controller of the CBDT plugin, within the MVC architecture of the plugin.
+ * It is responsible of instantiating the controllers for the individual view pages,
+ * the MessageBoxManager, and the EngineContext.
+ * It accepts requests which connect the major components of the plugin. For example, 
+ * requests to start the simulation computation.
+ * 
+ * @author Stephan da Costa Ribeiro
+ */
 public class MainController {
 
 	private EngineContext simulationEngine;
@@ -96,14 +105,23 @@ public class MainController {
 		foregroundManager.setToForeground(pageController.getPageWrapper());
 	}
 
+	/**
+	 * @return the MessageBoxManager
+	 */
 	public MessageBoxManager getMessageBoxManager() {
 		return messageBoxManager;
 	}
 
+	/**
+	 * @return the ParametersConfigPageController
+	 */
 	public ParametersConfigPageController getParametersConfigPageController() {
 		return parametersConfigPageController;
 	}
 
+	/**
+	 * @return the AnalysisPageController
+	 */
 	public AnalysisPageController getAnalysisPageController() {
 		return analysisPageController;
 	}

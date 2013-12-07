@@ -4,11 +4,11 @@ package cbdt.control.parameterspage.config.engine;
 import cbdt.model.config.engine.AbstractEngineConfig;
 
 /**
- * Every AbstractEngineConfig has its own AbstractEngineConfigController. 
- * It is supposed to receive any requests by the views to change the state of the object modeling
- * the respective AbstractEngineConfig.
+ * Every AbstractEngineConfig has its own IEngineConfigController. All classes
+ * implementing this class are supposed to receive any requests by the views to
+ * change the state of the respective AbstractEngineConfig.
+ * 
  * @author Stephan da Costa Ribeiro
- *
  */
 public interface IEngineConfigController {
 

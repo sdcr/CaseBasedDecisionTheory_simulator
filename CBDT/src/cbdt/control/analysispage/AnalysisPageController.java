@@ -13,6 +13,12 @@ import cbdt.model.result.Result;
 import cbdt.view.analysispage.AnalysisPageWrapper;
 
 //YELLOW
+/**
+ * The controller for the anaylsis page. It handles all the requests, which are fired
+ * by user interaction with the GUI.
+ * 
+ * @author Stephan da Costa Ribeiro
+ */
 public class AnalysisPageController extends AbstractPageController {
 
 	/* view references */

@@ -13,7 +13,7 @@ import cbdt.model.parameters.ParametersFactory;
 
 /**
  * The ParametersController handles all requests which demand changes in the
- * PArameters model object. It also handles requests to store and load parameter
+ * Parameters model object. It also handles requests to store and load parameter
  * from files.
  * 
  * @author Stephan da Costa Ribeiro
@@ -88,7 +88,7 @@ public class ParametersController {
 				.getDefaultActorActionOutcome();
 		actorAction.addActionOutcome(defaultOutcome);
 
-		// TODO maybe do this in some listener or sth.
+		// maybe do this in some listener or sth.
 		parametersConfigPageController.getPageWrapper().getParametersPage()
 				.setFocus();
 		return defaultOutcome;

@@ -57,7 +57,7 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 	}
 
 	/**
-	 * TODO
+	 * Write results data as well as the common config to a {@link BufferedWriter}.
 	 * 
 	 * @param outWriter
 	 * @param stageResults

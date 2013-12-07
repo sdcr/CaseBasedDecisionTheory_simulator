@@ -24,12 +24,16 @@ public abstract class AbstractPageController {
 	 */
 	public abstract AbstractPluginPageWrapper getPageWrapper();
 
+	/**
+	 * Sets the reference to the main controller of the plugin.
+	 * @param mainController
+	 */
 	public void setMainController(MainController mainController) {
 		this.mainController = mainController;
 	}
 
 	/**
-	 * @return The MainController this AbstractPageController is associated
+	 * @return The {@link MainController} this AbstractPageController is associated
 	 *         with.
 	 */
 	public MainController getMainController() {
