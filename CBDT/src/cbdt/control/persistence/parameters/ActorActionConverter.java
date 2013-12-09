@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 //GREEN
 /**
- * Converts ActorAction objects to and from XML.
+ * Converts {@link ActorAction} objects to and from XML.
  * 
  * @author Stephan da Costa Ribeiro
  * 

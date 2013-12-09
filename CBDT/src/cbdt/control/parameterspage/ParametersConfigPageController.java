@@ -1,22 +1,27 @@
 package cbdt.control.parameterspage;
 
 import cbdt.control.AbstractPageController;
+import cbdt.control.MainController;
 import cbdt.control.parameterspage.config.common.CommonConfigController;
 import cbdt.control.parameterspage.config.engine.EngineConfigControllerFactory;
+import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.parameters.ParametersController;
 import cbdt.model.config.SimulationConfig;
 import cbdt.model.config.SimulationConfigFactory;
+import cbdt.model.config.common.CommonConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
+import cbdt.model.parameters.Parameters;
 import cbdt.view.parameterspage.parameters.ParametersConfigPageWrapper;
 
 //YELLOW
 //maybe create a dedicated simulationController.
 /**
- * The controller of the parameters-config page. All requests to change the
- * parameters, the common config, or the engine configs are outsourced to
- * respective dedicated controllers. Other requests are handled directly,
- * for example by directly changing the SimulationConfig object, or by
- * forwarding the requests to the MainController.
+ * The controller of the parameters-config page. All handling of requests to
+ * change the {@link Parameters}, the {@link CommonConfig}, or the
+ * {@link AbstractEngineConfig}s are outsourced to respective dedicated
+ * controllers. Other requests are handled directly, for example by directly
+ * changing the {@link SimulationConfig} object, or by forwarding the requests
+ * to the {@link MainController}.
  * 
  * @author Stephan da Costa Ribeiro
  */
@@ -35,14 +40,13 @@ public class ParametersConfigPageController extends AbstractPageController {
 	private ParametersController parametersController;
 
 	/**
-	 * A factory instantiating controllers which handle the changing of config
-	 * parameters which refer to a certain engine config.
+	 * A factory instantiating {@link IEngineConfigController} objects which
+	 * handle requests to change their respective {@link AbstractEngineConfig}s.
 	 */
 	private EngineConfigControllerFactory configControllerFactory;
 
 	/**
-	 * The controller handling request to change config parameters which refer
-	 * to the CommonConfig.
+	 * The controller which handles requests to change the {@link CommonConfig}.
 	 */
 	private CommonConfigController commonConfigController;
 
@@ -50,9 +54,9 @@ public class ParametersConfigPageController extends AbstractPageController {
 	private SimulationConfig simulationConfig;
 
 	/**
-	 * Constructor. Instantiates the ParametersPageWrapper, the controllers to
-	 * which request handling is outsourced and sets the simmulationConfig to
-	 * default.
+	 * Constructor. Instantiates the {@link ParametersConfigPageWrapper}, the
+	 * controllers to which request handling is outsourced and sets the
+	 * {@link SimulationConfig} to default.
 	 */
 	public ParametersConfigPageController() {
 		// create parameters page wrapper (view)
@@ -80,14 +84,14 @@ public class ParametersConfigPageController extends AbstractPageController {
 	}
 
 	/**
-	 * @return the {@link EngineConfigControllerFactory}
+	 * @return the {@link EngineConfigControllerFactory}.
 	 */
 	public EngineConfigControllerFactory getConfigControllerFactory() {
 		return configControllerFactory;
 	}
 
 	/**
-	 * @return {@link CommonConfigController}
+	 * @return the {@link CommonConfigController}
 	 */
 	public CommonConfigController getCommonConfigController() {
 		return commonConfigController;
@@ -101,24 +105,28 @@ public class ParametersConfigPageController extends AbstractPageController {
 	}
 
 	/**
-	 * Initiates a request to start the computation of the
-	 * CBDT simulation with the currently entered parameters.
+	 * Initiates a request to the {@link MainController} to start the
+	 * computation of the CBDT simulation with the currently entered parameters.
 	 */
 	public void startComputation() {
 		getMainController().computeCDBTSimulation(
 				parametersController.getParametersModel(), simulationConfig);
 	}
-	
+
 	/**
 	 * @return the {@link SimulationConfig}
 	 */
 	public SimulationConfig getSimulationConfig() {
 		return simulationConfig;
 	}
-	
+
 	/**
 	 * Sets the chosen engine configuration.
+	 * 
 	 * @param config
+	 *            An object extending {@link AbstractEngineConfig}. It must be
+	 *            one of the objects set as available
+	 *            {@link AbstractEngineConfig}s in the {@link SimulationConfig}.
 	 */
 	public void setCurrentlyChosenEngineConfig(AbstractEngineConfig config) {
 		simulationConfig.setCurrentlyChosenEngineConfig(config);

@@ -14,11 +14,18 @@ import cbdt.view.MessageBoxManager;
 
 //YELLOW
 /**
- * The controller of the CBDT plugin, within the MVC architecture of the plugin.
- * It is responsible of instantiating the controllers for the individual view pages,
- * the MessageBoxManager, and the EngineContext.
- * It accepts requests which connect the major components of the plugin. For example, 
- * requests to start the simulation computation.
+ * The main controller of the CBDT plugin, within the MVC architecture of the
+ * plugin. <br>
+ * <br>
+ * 
+ * It is responsible for instantiating the subclasses of
+ * {@link AbstractPageController} (the controllers for the individual view
+ * pages), the {@link MessageBoxManager}, and the {@link EngineContext}. It
+ * accepts requests which go beyond the borders of the major components of the
+ * plugin. <br>
+ * That is, requests between view pages, from view pages to the
+ * {@link MessageBoxManager} or to the {@link EngineContext} to start the
+ * simulation computation.
  * 
  * @author Stephan da Costa Ribeiro
  */

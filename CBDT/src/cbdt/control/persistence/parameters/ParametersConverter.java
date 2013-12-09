@@ -36,7 +36,7 @@ public class ParametersConverter implements Converter {
 		writer.endNode();
 
 		writer.startNode("isUsingAspirationLevelIncrement");
-		context.convertAnother(params.isUsingAspirationLevelIncrement());
+		context.convertAnother(params.isIcrementingAspirationLevelSparsely());
 		writer.endNode();
 		
 		writer.startNode("aspirationLevelIncrement");
@@ -62,7 +62,7 @@ public class ParametersConverter implements Converter {
         reader.moveUp();
 
         reader.moveDown();
-        parameters.setUsingAspirationLevelIncrement(Boolean.parseBoolean(reader.getValue()));
+        parameters.setIncrementAspirationLevelSparsely(Boolean.parseBoolean(reader.getValue()));
         reader.moveUp();
 
         reader.moveDown();

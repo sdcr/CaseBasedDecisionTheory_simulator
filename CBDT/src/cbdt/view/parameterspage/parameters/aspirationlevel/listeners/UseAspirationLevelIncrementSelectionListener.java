@@ -21,7 +21,7 @@ public class UseAspirationLevelIncrementSelectionListener implements
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		parametersController.setUsingAspirationLevelIncrement(useAspirationLevelIncrementButton
+		parametersController.setIncrementAspirationLevelSparsely(useAspirationLevelIncrementButton
 				.getSelection());
 	}
 

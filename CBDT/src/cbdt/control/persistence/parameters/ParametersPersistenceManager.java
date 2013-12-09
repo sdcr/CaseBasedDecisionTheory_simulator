@@ -13,7 +13,8 @@ import com.thoughtworks.xstream.XStream;
 
 //GREEN
 /**
- * A IParametersPersistenceManager which uses XML to store Parameter objects.
+ * A {@link IParametersPersistenceManager} which uses XML to store
+ * {@link Parameters} objects.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -64,10 +65,22 @@ public class ParametersPersistenceManager implements
 		}
 	}
 
+	/**
+	 * Convert a {@link Parameters} object to a XML String.
+	 * 
+	 * @param params
+	 * @return
+	 */
 	public String convertToXML(Parameters params) {
 		return xStream.toXML(params);
 	}
 
+	/**
+	 * Parse a XML String and return the encoded {@link Parameters} object.
+	 * 
+	 * @param parametersXML
+	 * @return
+	 */
 	public Parameters parseXML(String parametersXML) {
 		return (Parameters) xStream.fromXML(parametersXML);
 	}

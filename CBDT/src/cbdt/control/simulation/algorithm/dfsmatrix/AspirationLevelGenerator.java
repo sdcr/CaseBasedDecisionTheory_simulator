@@ -21,7 +21,7 @@ public class AspirationLevelGenerator {
 	}
 	
 	public double calculateChildsAspirationLevel(NodeContent parentContent, NodeContent childContent, int indexOfChildrensStage) {
-		if(parameters.isUsingAspirationLevelIncrement() && increaseAspirationLevelProvider.isStageToIncreaseAspirationLevel(indexOfChildrensStage))
+		if(parameters.isIcrementingAspirationLevelSparsely() && increaseAspirationLevelProvider.isStageToIncreaseAspirationLevel(indexOfChildrensStage))
 			return computeChildsMaxAverageUtility(childContent) + parameters.getAspirationLevelIncrement();
 		else
 			return computeDiscountedAspirationLevel(parentContent.getAspirationLevel(), childContent);

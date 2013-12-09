@@ -6,8 +6,8 @@ import cbdt.model.config.engine.DFSmatrixEngineConfig;
 import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 
 /**
- * This factory class can produce an engine config controller according to a
- * engine config object.
+ * This factory class produces the appropriate {@link IEngineConfigController}
+ * for an {@link AbstractEngineConfig} object.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -15,15 +15,14 @@ import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 public class EngineConfigControllerFactory {
 
 	/**
-	 * 
 	 * @param config
-	 *            The engine config object for which a controller shall be
-	 *            produced.
-	 * @return The engine config controller which can handle the passed config
-	 *         object.
+	 *            The {@link AbstractEngineConfig} object for which a controller
+	 *            shall be produced.
+	 * @return The {@link IEngineConfigController} which can handle requests for
+	 *         the passed config object.
 	 * @throws NoEngineConfigControllerException
-	 *             Is thrown, when there is no enginge config controller for the
-	 *             passed object.
+	 *             Is thrown, when there is no {@link IEngineConfigController}
+	 *             for the passed object.
 	 */
 	public IEngineConfigController getConfigController(
 			AbstractEngineConfig config)

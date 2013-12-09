@@ -20,7 +20,8 @@ import cbdt.model.result.StageResult;
 
 //YELLOW
 /**
- * A manager which is able to store results and configs to file as CSV.
+ * A manager which is able to store {@link Result}s and config objects to file
+ * as CSV.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -57,7 +58,8 @@ public class ResultsPersistenceManager implements IResultsPersistenceManager {
 	}
 
 	/**
-	 * Write results data as well as the common config to a {@link BufferedWriter}.
+	 * Write results data as well as the common config to a
+	 * {@link BufferedWriter}.
 	 * 
 	 * @param outWriter
 	 * @param stageResults

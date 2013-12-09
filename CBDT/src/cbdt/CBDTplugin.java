@@ -16,7 +16,8 @@ import cbdt.view.menu.MenuFactory;
 //YELLOW
 /**
  * The main class defining the CBDT simulation plugin. It forms the connection
- * point between the simulation frame, and instantiates the MainController.
+ * point between the simulation frame, and instantiates the
+ * {@link MainController}.
  * 
  * @author Stephan da Costa Ribeiro
  */
@@ -28,7 +29,7 @@ public class CBDTplugin implements ISimulationPlugin {
 	private MainController mainController;
 
 	/**
-	 * Obligatory nullary constructor. Instantiates a log manager.
+	 * Obligatory nullary constructor. Instantiates a {@link LogManager}.
 	 */
 	public CBDTplugin() {
 		LogManager logManager = new LogManager();

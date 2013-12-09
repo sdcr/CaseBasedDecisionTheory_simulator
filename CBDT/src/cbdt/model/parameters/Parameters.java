@@ -34,11 +34,11 @@ public class Parameters extends Observable {
 	private double aspirationLevelIncrement;
 
 	/**
-	 * Denotes whether the aspiration level increment should be used at sparse
-	 * points in time instead of weighting the with the previous aspiration
-	 * level.
+	 * Denotes whether the aspiration level should be incremented at sparse
+	 * simulation steps instead of calculating it by weighting between the
+	 * previous aspiration level and the new maximal average utility.
 	 */
-	private boolean usingAspirationLevelIncrement;
+	private boolean incrementAspLevelSparsely;
 
 	/**
 	 * A list of ActorActions from which the actor can choose.
@@ -155,13 +155,13 @@ public class Parameters extends Observable {
 		return true;
 	}
 
-	public boolean isUsingAspirationLevelIncrement() {
-		return usingAspirationLevelIncrement;
+	public boolean isIcrementingAspirationLevelSparsely() {
+		return incrementAspLevelSparsely;
 	}
 
-	public void setUsingAspirationLevelIncrement(
-			boolean usingAspirationLevelIncrement) {
-		this.usingAspirationLevelIncrement = usingAspirationLevelIncrement;
+	public void setIncrementAspirationLevelSparsely(
+			boolean incrementAspirationLevelSparsely) {
+		this.incrementAspLevelSparsely = incrementAspirationLevelSparsely;
 		setChanged();
 		notifyObservers();
 	}

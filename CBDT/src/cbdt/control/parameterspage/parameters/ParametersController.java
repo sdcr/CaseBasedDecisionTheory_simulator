@@ -10,11 +10,12 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
+import cbdt.view.parameterspage.parameters.ParametersConfigPageComposite;
 
 /**
  * The ParametersController handles all requests which demand changes in the
- * Parameters model object. It also handles requests to store and load parameter
- * from files.
+ * {@link Parameters} model object. It also handles requests to store and load
+ * parameter from files.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -22,21 +23,29 @@ import cbdt.model.parameters.ParametersFactory;
 public class ParametersController {
 
 	/**
-	 * The parameters model as currently displayed in the view.
+	 * The {@link Parameters} model as currently displayed in the view.
 	 */
 	private Parameters parameters;
 
 	/**
-	 * The persistence manager to store parameters.
+	 * The {@link IParametersPersistenceManager} to store parameters.
 	 */
 	private IParametersPersistenceManager parametersPersistenceManager;
 
 	/**
-	 * The parametersConfigPageController for which it handles the outsourced
-	 * change model requests.
+	 * The {@link ParametersConfigPageController} for which it handles the
+	 * outsourced change model requests. That is, the object referenced here is
+	 * one hierarchy level higher in the plugin's controller hierarchy.
 	 */
 	private ParametersConfigPageController parametersConfigPageController;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param parametersConfigPageController
+	 *            The {@link ParametersConfigPageController} which uses this
+	 *            class to outsource request handling.
+	 */
 	public ParametersController(
 			ParametersConfigPageController parametersConfigPageController) {
 		this.parametersConfigPageController = parametersConfigPageController;
@@ -49,18 +58,27 @@ public class ParametersController {
 		parameters = parametersFactory.getDefaultParameters();
 	}
 
+	/**
+	 * @return The {@link Parameters} object for which this controller is
+	 *         responsible.
+	 */
 	public Parameters getParametersModel() {
 		return parameters;
 	}
 
+	/**
+	 * @return The {@link ParametersConfigPageController} which is one
+	 *         controller hierarchy level higher than this controller.
+	 */
 	public ParametersConfigPageController getParametersConfigPageController() {
 		return parametersConfigPageController;
 	}
 
 	/**
-	 * Uses the ParametersFactory to create a default ActorAction.
+	 * Uses the {@link ParametersFactory} to create a default
+	 * {@link ActorAction}.
 	 * 
-	 * @return The created ActorAction object.
+	 * @return The created {@link ActorAction} object.
 	 */
 	public ActorAction addDefaultActorActionToModel() {
 		ParametersFactory factory = new ParametersFactory();
@@ -69,17 +87,23 @@ public class ParametersController {
 		return defaultActorAction;
 	}
 
+	/**
+	 * @param actorAction
+	 *            The {@link ActorAction} which is to be removed from the
+	 *            {@link Parameters} model.
+	 */
 	public void removeActorActionFromModel(ActorAction actorAction) {
 		parameters.removeActorAction(actorAction);
 	}
 
 	/**
-	 * Uses the ParametersFactory to create a default ActorActionOutcome object
-	 * and adds it to the passed ActorAction. Also calls setFocus() in the
-	 * parameters page composite.
+	 * Uses the {@link ParametersFactory} to create a default
+	 * {@link ActorActionOutcome} object and adds it to the passed
+	 * {@link ActorAction}. Also calls setFocus() in the
+	 * {@link ParametersConfigPageComposite}.
 	 * 
 	 * @param actorAction
-	 * @return The created ActorActionOutcome object.
+	 * @return The created {@link ActorActionOutcome} object.
 	 */
 	public ActorActionOutcome addDefaultActorActionOutcomeToModel(
 			ActorAction actorAction) {
@@ -95,8 +119,8 @@ public class ParametersController {
 	}
 
 	/**
-	 * Removes the passed outcome object from the ActorAction it is associated
-	 * with.
+	 * Removes the passed {@link ActorActionOutcome} from the
+	 * {@link ActorAction} it is associated with.
 	 * 
 	 * @param outcome
 	 */
@@ -107,9 +131,9 @@ public class ParametersController {
 
 	/**
 	 * @param actorAction
-	 *            The ActorAction object whose name should be set.
+	 *            The {@link ActorAction} object whose name should be set.
 	 * @param newName
-	 *            The name the ActorAction should be given.
+	 *            The name the {@link ActorAction} should be given.
 	 */
 	public void setActorActionName(ActorAction actorAction, String newName) {
 		actorAction.setActionName(newName);
@@ -142,23 +166,27 @@ public class ParametersController {
 	}
 
 	/**
-	 * Set whether during the simulation the aspiration level should be
-	 * incremented at sparse simulation steps. TODO: more details about when the
-	 * level is increased.
+	 * Set whether the aspiration level should be incremented at sparse
+	 * simulation steps.
+	 * 
+	 * TODO: more details about when the level is increased.
 	 * 
 	 * @param selection
 	 */
-	public void setUsingAspirationLevelIncrement(boolean selection) {
-		parameters.setUsingAspirationLevelIncrement(selection);
+	public void setIncrementAspirationLevelSparsely(boolean selection) {
+		parameters.setIncrementAspirationLevelSparsely(selection);
 	}
 
 	/**
-	 * Uses the persistence manager to read parameters from a file and sets the
-	 * parameters model accordingly. Puts the parameters config page in
-	 * foreground. Sets the page with the new parameters model.
+	 * Uses the {@link ParametersPersistenceManager} to read parameters from a
+	 * file and sets the {@link Parameters} model accordingly. Puts the
+	 * parameters page in foreground. Sets the page with the new parameters
+	 * model.
 	 * 
-	 * @param filepath The filepath under which to find the file with the parameters model.
-	 * TODO: more details about whether an absolute path is necessary, or if a relative path is enough.
+	 * @param filepath
+	 *            The filepath under which to find the file with the parameters
+	 *            model. TODO: more details about whether an absolute path is
+	 *            necessary, or if a relative path is enough.
 	 */
 	public void loadParametersFromFile(String filepath) {
 		try {
@@ -179,9 +207,13 @@ public class ParametersController {
 	}
 
 	/**
-	 * Stores the parameters model with the persistence manager.
-	 * @param filepath The filepath under which to store the parameters model.
-	 * TODO: more details about whether an absolute path is necessary, or if a relative path is enough.
+	 * Stores the {@link Parameters} model with the
+	 * {@link ParametersPersistenceManager}.
+	 * 
+	 * @param filepath
+	 *            The filepath under which to store the parameters model. TODO:
+	 *            more details about whether an absolute path is necessary, or
+	 *            if a relative path is enough.
 	 */
 	public void saveParametersToFile(String filepath) {
 		parametersConfigPageController.goToForeground();

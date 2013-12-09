@@ -3,7 +3,7 @@ package cbdt.control.parameterspage.config.common;
 import cbdt.model.config.common.CommonConfig;
 
 /**
- * The controller which handles all requests to change the CommonConfig
+ * The controller which handles all requests to change the {@link CommonConfig}
  * model object.
  * 
  * @author Stephan da Costa Ribeiro
@@ -11,7 +11,7 @@ import cbdt.model.config.common.CommonConfig;
 public class CommonConfigController {
 
 	/**
-	 * The managed common config model.
+	 * The managed {@link CommonConfig} model.
 	 */
 	private CommonConfig commonConfig;
 

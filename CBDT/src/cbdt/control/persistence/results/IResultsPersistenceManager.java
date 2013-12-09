@@ -8,8 +8,8 @@ import cbdt.model.result.Result;
 
 //GREEN
 /**
- * An interface for a manager which is able to store results and configs to a
- * file. It does not require he ability to load results or configs.
+ * An interface for a manager which is able to store {@link Result}s and configs
+ * to a file. It does not require he ability to load results or configs.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -17,7 +17,8 @@ import cbdt.model.result.Result;
 public interface IResultsPersistenceManager {
 
 	/**
-	 * Saves results to a file.
+	 * Saves results and config objects to a file.
+	 * 
 	 * @param filepath
 	 * @param result
 	 * @param commonConfig
