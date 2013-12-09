@@ -2,32 +2,34 @@ package cbdt.model.parameters;
 
 //GREEN
 /**
- * This factory class is able to produce default objects for the Parameters
- * model.
+ * This factory class is able to produce default objects of the
+ * {@link Parameters}, {@link ActorAction} and {@link ActorActionOutcome} model
+ * classes.
  * 
  * @author Stephan da Costa Ribeiro
- * 
  */
 public class ParametersFactory {
 
 	/**
-	 * @return A Parameters object with one default ActorAction object and:<br>
-	 *         aspiration level increment: 10<br>
-	 *         initial aspiration level: 100<br>
-	 *         weighting factor alpha: 0.5
+	 * @return A {@link Parameters} object with the following default settings:<br>
+	 *         Aspiration level increment: 10<br>
+	 *         Initial aspiration level: 100<br>
+	 *         Aspiration level decrement factor: 0.5<br>
+	 * <br>
+	 *         In addition, one default {@link ActorAction} is added.
 	 */
 	public Parameters getDefaultParameters() {
 		Parameters defaultParams = new Parameters();
 		defaultParams.setAspirationLevelIncrement(10);
 		defaultParams.setInitialAspirationLevel(100);
-		defaultParams.setWeightingFactorAlpha(0.5);
+		defaultParams.setAspirationLevelDecrementFactor(0.5);
 		defaultParams.addActorAction(getDefaultActorAction());
 		return defaultParams;
 	}
 
 	/**
-	 * @return An ActorAction object with an ActorActionOutcome which has
-	 *         probability 1 and utility 0.
+	 * @return An {@link ActorAction} object with one {@link ActorActionOutcome}
+	 *         with probability 1 and utility 0.
 	 */
 	public ActorAction getDefaultActorAction() {
 		ActorAction defaultAction = new ActorAction("");
@@ -37,7 +39,8 @@ public class ParametersFactory {
 	}
 
 	/**
-	 * @return An ActorActionOutcome object with probability 0 and utility 0.
+	 * @return An {@link ActorActionOutcome} object with probability 0 and
+	 *         utility 0.
 	 */
 	public ActorActionOutcome getDefaultActorActionOutcome() {
 		ActorActionOutcome defaultOutcome = new ActorActionOutcome(0, 0);

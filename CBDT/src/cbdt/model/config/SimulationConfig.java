@@ -9,28 +9,28 @@ import cbdt.model.config.common.CommonConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
 
 /**
- * This class models the configuration for a simulation. It encompasses a
- * CommonConfig, the available AbstractEngineConfigs, and a reference to the
- * currently chosen engine configuration.
+ * This class models the complete configuration for a simulation. It encompasses
+ * a {@link CommonConfig}, the available {@link AbstractEngineConfig}s, and a
+ * reference to the currently chosen {@link AbstractEngineConfig}.
  * 
  * @author Stephan da Costa Ribeiro
  */
 public class SimulationConfig extends Observable {
 
 	/**
-	 * The common config data which is set for the simulation. It is independent
-	 * from the engine used.
+	 * The {@link CommonConfig} which is set for the simulation. It is
+	 * independent from the engine used.
 	 */
 	private CommonConfig commonConfig;
 
 	/**
-	 * The engine configurations available.
+	 * The {@link AbstractEngineConfig}s available.
 	 */
 	private List<AbstractEngineConfig> availableEngineConfigs;
 
 	/**
-	 * The engine configuration currently chosen by the user. It must be one of
-	 * the available engine configurations.
+	 * The {@link AbstractEngineConfig} currently chosen by the user. It must be
+	 * one of the available engine configurations.
 	 */
 	private AbstractEngineConfig choosenEngineConfig;
 
@@ -41,18 +41,33 @@ public class SimulationConfig extends Observable {
 		availableEngineConfigs = new ArrayList<AbstractEngineConfig>();
 	}
 
+	/**
+	 * @return The current {@link CommonConfig} object.
+	 */
 	public CommonConfig getCommonConfig() {
 		return commonConfig;
 	}
 
+	/**
+	 * @param commonConfig
+	 */
 	public void setCommonConfig(CommonConfig commonConfig) {
 		this.commonConfig = commonConfig;
 	}
 
+	/**
+	 * @return A list of {@link AbstractEngineConfig}s which are available to
+	 *         choose from.
+	 */
 	public List<AbstractEngineConfig> getAvailableEngineConfigs() {
 		return availableEngineConfigs;
 	}
 
+	/**
+	 * @param additionalConfigs
+	 *            The elements of the passed list are added to the list of
+	 *            {@link AbstractEngineConfig}s.
+	 */
 	public void addAvailableEngineConfigs(
 			List<AbstractEngineConfig> additionalConfigs) {
 		availableEngineConfigs.addAll(additionalConfigs);
@@ -60,6 +75,10 @@ public class SimulationConfig extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * @return Returns the {@link AbstractEngineConfig} which is currently
+	 *         chosen by the user.
+	 */
 	public AbstractEngineConfig getCurrentlyChosenEngineConfig() {
 		return choosenEngineConfig;
 	}
@@ -68,7 +87,8 @@ public class SimulationConfig extends Observable {
 	 * Sets the currently chosen engine configuration.
 	 * 
 	 * @param config
-	 *            Should be one of the available engine config objects.
+	 *            Should be one of the objects in the list of available
+	 *            {@link AbstractEngineConfig}s.
 	 */
 	public void setCurrentlyChosenEngineConfig(AbstractEngineConfig config) {
 		choosenEngineConfig = config;

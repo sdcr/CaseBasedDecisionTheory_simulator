@@ -57,7 +57,7 @@ public class AspirationLevelIncrementComposite extends
 	public void update(Observable o, Object arg) {
 		if (o instanceof Parameters) {
 			Parameters params = (Parameters) o;
-			boolean usingAspirationLevelIncrement = params.isIcrementingAspirationLevelSparsely();
+			boolean usingAspirationLevelIncrement = params.isIncrementingAspirationLevelSparsely();
 			useAspirationLevelIncrementButton.setSelection(usingAspirationLevelIncrement);
 			text.setEnabled(usingAspirationLevelIncrement);
 			text.setText(String.valueOf(params.getAspirationLevelIncrement()));

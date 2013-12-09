@@ -23,8 +23,8 @@ public class BigDecimalVirtualNodeContentVisitor extends VirtualNodeContentVisit
 		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters, commonConfig);
 		outcomeMatrix = factory.getOutcomeMatrix();
 		childContentGenerator = new BigDecimalChildNodeContentGenerator(outcomeMatrix,
-				new BigDecimal(parameters.getWeightingFactorAlpha()), 
-				parameters.isIcrementingAspirationLevelSparsely(), 
+				new BigDecimal(parameters.getAspirationLevelDecrementFactor()), 
+				parameters.isIncrementingAspirationLevelSparsely(), 
 				new BigDecimal(parameters.getAspirationLevelIncrement()));
 		int numberOfActions = parameters.getActorActions().size();
 		actionSelector = new BigDecimalActionSelector(numberOfActions);

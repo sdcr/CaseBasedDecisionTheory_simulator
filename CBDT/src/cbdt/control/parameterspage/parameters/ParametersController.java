@@ -162,7 +162,7 @@ public class ParametersController {
 	 */
 	public void setAspirationDiscountFactor(
 			Double newAspirationLevelDiscountFactor) {
-		parameters.setWeightingFactorAlpha(newAspirationLevelDiscountFactor);
+		parameters.setAspirationLevelDecrementFactor(newAspirationLevelDiscountFactor);
 	}
 
 	/**

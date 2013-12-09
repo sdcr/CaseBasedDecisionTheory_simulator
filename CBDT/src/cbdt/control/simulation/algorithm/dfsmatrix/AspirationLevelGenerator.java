@@ -16,12 +16,12 @@ public class AspirationLevelGenerator {
 	public AspirationLevelGenerator(Parameters parameters) {
 		this.parameters = parameters;
 		this.numberOfActorActions = parameters.getActorActions().size();
-		aspirationLevelDiscountFactor = parameters.getWeightingFactorAlpha();
+		aspirationLevelDiscountFactor = parameters.getAspirationLevelDecrementFactor();
 		increaseAspirationLevelProvider = new IndexOfAspirationLevelIncrementStageProvider();
 	}
 	
 	public double calculateChildsAspirationLevel(NodeContent parentContent, NodeContent childContent, int indexOfChildrensStage) {
-		if(parameters.isIcrementingAspirationLevelSparsely() && increaseAspirationLevelProvider.isStageToIncreaseAspirationLevel(indexOfChildrensStage))
+		if(parameters.isIncrementingAspirationLevelSparsely() && increaseAspirationLevelProvider.isStageToIncreaseAspirationLevel(indexOfChildrensStage))
 			return computeChildsMaxAverageUtility(childContent) + parameters.getAspirationLevelIncrement();
 		else
 			return computeDiscountedAspirationLevel(parentContent.getAspirationLevel(), childContent);

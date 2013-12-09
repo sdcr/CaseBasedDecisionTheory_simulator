@@ -11,9 +11,10 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 //GREEN
 /**
- * A converter which converts Parameter objects to and from XML.
+ * A converter which converts parameter objects to and from XML.
+ * 
  * @author Stephan da Costa Ribeiro
- *
+ * 
  */
 public class ParametersConverter implements Converter {
 
@@ -26,23 +27,23 @@ public class ParametersConverter implements Converter {
 	@Override
 	public void marshal(Object arg0, HierarchicalStreamWriter writer,
 			MarshallingContext context) {
-		Parameters params = (Parameters)arg0;
+		Parameters params = (Parameters) arg0;
 		writer.startNode("initialAspirationLevel");
 		context.convertAnother(params.getInitialAspirationLevel());
 		writer.endNode();
-		
+
 		writer.startNode("aspirationLevelDiscountFactor");
-		context.convertAnother(params.getWeightingFactorAlpha());
+		context.convertAnother(params.getAspirationLevelDecrementFactor());
 		writer.endNode();
 
 		writer.startNode("isUsingAspirationLevelIncrement");
-		context.convertAnother(params.isIcrementingAspirationLevelSparsely());
+		context.convertAnother(params.isIncrementingAspirationLevelSparsely());
 		writer.endNode();
-		
+
 		writer.startNode("aspirationLevelIncrement");
 		context.convertAnother(params.getAspirationLevelIncrement());
 		writer.endNode();
-		
+
 		writer.startNode("actions");
 		context.convertAnother(params.getActorActions());
 		writer.endNode();
@@ -51,36 +52,42 @@ public class ParametersConverter implements Converter {
 	@Override
 	public Object unmarshal(HierarchicalStreamReader reader,
 			UnmarshallingContext context) {
-		
-        Parameters parameters = new Parameters();
-        reader.moveDown();
-        parameters.setInitialAspirationLevel(Double.parseDouble(reader.getValue()));
-        reader.moveUp();
-        
-        reader.moveDown();
-        parameters.setWeightingFactorAlpha(Double.parseDouble(reader.getValue()));
-        reader.moveUp();
 
-        reader.moveDown();
-        parameters.setIncrementAspirationLevelSparsely(Boolean.parseBoolean(reader.getValue()));
-        reader.moveUp();
+		Parameters parameters = new Parameters();
+		reader.moveDown();
+		parameters.setInitialAspirationLevel(Double.parseDouble(reader
+				.getValue()));
+		reader.moveUp();
 
-        reader.moveDown();
-        parameters.setAspirationLevelIncrement(Double.parseDouble(reader.getValue()));
-        reader.moveUp();
-        
-        reader.moveDown();
-        while (reader.hasMoreChildren()) {
-            reader.moveDown();
-            if (ParametersPersistenceManager.ACTOR_ACTION_NODE_NAME.equals(reader.getNodeName())) {
-                    ActorAction actorAction = (ActorAction)context.convertAnother(parameters, ActorAction.class);
-                    parameters.addActorAction(actorAction);
-            }
-            reader.moveUp();
-        }
-        reader.moveUp();
-        
-        return parameters;
+		reader.moveDown();
+		parameters
+				.setAspirationLevelDecrementFactor(Double.parseDouble(reader.getValue()));
+		reader.moveUp();
+
+		reader.moveDown();
+		parameters.setIncrementAspirationLevelSparsely(Boolean
+				.parseBoolean(reader.getValue()));
+		reader.moveUp();
+
+		reader.moveDown();
+		parameters.setAspirationLevelIncrement(Double.parseDouble(reader
+				.getValue()));
+		reader.moveUp();
+
+		reader.moveDown();
+		while (reader.hasMoreChildren()) {
+			reader.moveDown();
+			if (ParametersPersistenceManager.ACTOR_ACTION_NODE_NAME
+					.equals(reader.getNodeName())) {
+				ActorAction actorAction = (ActorAction) context.convertAnother(
+						parameters, ActorAction.class);
+				parameters.addActorAction(actorAction);
+			}
+			reader.moveUp();
+		}
+		reader.moveUp();
+
+		return parameters;
 	}
 
 }

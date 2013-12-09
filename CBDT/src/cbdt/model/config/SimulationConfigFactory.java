@@ -11,7 +11,8 @@ import cbdt.model.config.engine.DFSmatrixEngineConfig;
 import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 
 /**
- * A factory class which is able to produce a dfault SimulationConfig object.
+ * A factory class which is able to produce a default {@link SimulationConfig}
+ * object.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -19,11 +20,12 @@ import cbdt.model.config.engine.DFSmatrixHighPrecEngineConfig;
 public class SimulationConfigFactory {
 
 	/**
-	 * Just instantiates a SimulationConfig object, as well as the three
-	 * available engine configs and a common config object. The SimulatonConfig
-	 * object is associated with these objects.
+	 * Instantiates a default {@link SimulationConfig} object, as well as the
+	 * three implemented subclasses of {@link AbstractEngineConfig}s and a
+	 * default {@link CommonConfig} object.
 	 * 
-	 * @return A default Simulation config object.
+	 * @return The instantiated {@link SimulationConfig} object.
+	 * 
 	 */
 	public SimulationConfig getDefaultSimulationConfig() {
 		SimulationConfig defaultSimConfig = new SimulationConfig();

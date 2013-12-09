@@ -28,7 +28,7 @@ public class AspirationLevelDiscountComposite extends
 	public void update(Observable o, Object arg) {
 		if (o instanceof Parameters) {
 			Parameters params = (Parameters) o;
-			getText().setText(String.valueOf(params.getWeightingFactorAlpha()));
+			getText().setText(String.valueOf(params.getAspirationLevelDecrementFactor()));
 		}
 	}
 
