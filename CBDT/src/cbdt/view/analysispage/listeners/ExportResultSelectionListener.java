@@ -1,4 +1,4 @@
-package cbdt.view.analysispage;
+package cbdt.view.analysispage.listeners;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;

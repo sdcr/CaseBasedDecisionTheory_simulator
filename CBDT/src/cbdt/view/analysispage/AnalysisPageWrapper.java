@@ -7,11 +7,29 @@ import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageW
 import cbdt.control.analysispage.AnalysisPageController;
 import cbdt.view.CBDTHeaderComposite;
 
-public class AnalysisPageWrapper extends AbstractPluginPageWrapper{
+/**
+ * This class wraps the analysis page.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
+public class AnalysisPageWrapper extends AbstractPluginPageWrapper {
 
+	/**
+	 * The wrapped {@link AnalysisPageComposite}.
+	 */
 	private AnalysisPageComposite analysisPage;
+
+	/**
+	 * The {@link AnalysisPageController}, which handles the requests for the
+	 * analysis page.
+	 */
 	private AnalysisPageController controller;
-	
+
+	/**
+	 * The constructor.
+	 * @param controller
+	 */
 	public AnalysisPageWrapper(AnalysisPageController controller) {
 		this.controller = controller;
 	}
@@ -20,19 +38,21 @@ public class AnalysisPageWrapper extends AbstractPluginPageWrapper{
 	public String getName() {
 		return "Result analysis";
 	}
-	
+
 	@Override
 	public Composite getPageComposite(Composite parent) {
 		Composite wrapperComposite = new CBDTHeaderComposite(parent, SWT.NONE);
-		analysisPage = new AnalysisPageComposite(wrapperComposite, SWT.NONE, controller);
+		analysisPage = new AnalysisPageComposite(wrapperComposite, SWT.NONE,
+				controller);
 		wrapperComposite.pack();
 		return wrapperComposite;
 	}
 
+	/**
+	 * @return Returns the {@link AnalysisPageComposite} this object wraps.
+	 */
 	public AnalysisPageComposite getAnalysisPage() {
 		return analysisPage;
 	}
-
-
 
 }

@@ -74,7 +74,7 @@ public class AnalysisPageController extends AbstractPageController {
 	public void setSimulationResult(Result simulationResult,
 			SimulationConfig simulationConfig) {
 		this.simulationResult = simulationResult;
-		analysisPageWrapper.getAnalysisPage().setResultModel(simulationConfig,
+		analysisPageWrapper.getAnalysisPage().setResult(simulationConfig,
 				simulationResult);
 		usedEngineConfig = simulationConfig.getCurrentlyChosenEngineConfig();
 		usedCommonConfig = simulationConfig.getCommonConfig();
