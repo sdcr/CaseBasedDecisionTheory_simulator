@@ -6,9 +6,23 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+/**
+ * This factory class is able to create {@link Label} objects with consistent
+ * font and size properties.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class LabelFactory {
 
-	public Label createTitleLabel(Composite parent, String title){
+	/**
+	 * Create and return a {@link Label} object for titles.
+	 * 
+	 * @param parent
+	 * @param title
+	 * @return
+	 */
+	public Label createTitleLabel(Composite parent, String title) {
 		Label titleLabel = new Label(parent, SWT.NONE);
 		titleLabel.setText(title);
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);

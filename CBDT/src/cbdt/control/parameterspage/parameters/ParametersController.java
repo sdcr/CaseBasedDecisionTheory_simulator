@@ -10,7 +10,7 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
-import cbdt.view.parameterspage.parameters.ParametersConfigPageComposite;
+import cbdt.view.parameterspage.ParametersConfigPageComposite;
 
 /**
  * The ParametersController handles all requests which demand changes in the

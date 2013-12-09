@@ -12,7 +12,7 @@ import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.LabelFactory;
 
-public class AnalysisPage extends Composite {
+public class AnalysisPageComposite extends Composite {
 
 	private AbstractEngineConfig config;
 	private Result simulationResult;
@@ -21,7 +21,7 @@ public class AnalysisPage extends Composite {
 	private Button exportResultButton;
 	private ShowTreeSelectionListener showTreeSelectionListener;
 
-	public AnalysisPage(Composite parent, int style, AnalysisPageController controller) {
+	public AnalysisPageComposite(Composite parent, int style, AnalysisPageController controller) {
 		super(parent, style);
 
 		RowLayout rowLayout = new RowLayout();

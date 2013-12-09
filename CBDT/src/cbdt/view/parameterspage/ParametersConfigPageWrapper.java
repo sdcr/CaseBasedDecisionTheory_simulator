@@ -1,4 +1,4 @@
-package cbdt.view.parameterspage.parameters;
+package cbdt.view.parameterspage;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;

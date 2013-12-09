@@ -8,16 +8,24 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * A label which is supposed to indicate to the user that there is a problem
- * with an entered parameter. This class is an opaque wrapper, in the sense that
- * the wrapped object is not accessible.
+ * This class wraps a {@link Label} object. It is supposed to indicate to the
+ * user that there is a problem with an entered parameter. This class is an
+ * opaque wrapper, in the sense that the wrapped object is not accessible.
  * 
  * @author S-lenovo
  */
 public class HintLabelWrapper {
 
+	/**
+	 * The wrapped {@link Label} object.
+	 */
 	protected Label hintLabel;
 
+	/**
+	 * The constructor. Sets the wrapped {@link Label} to a red asterisk.
+	 * 
+	 * @param parent
+	 */
 	public HintLabelWrapper(Composite parent) {
 		hintLabel = new Label(parent, SWT.NONE);
 
@@ -32,7 +40,7 @@ public class HintLabelWrapper {
 	}
 
 	/**
-	 * See Label's documentation for
+	 * See {@link Label}'s documentation for
 	 * {@link #org.eclipse.swt.widgets.Label.setVisible(boolean) setVisible()}.
 	 */
 	public void setVisible(boolean visible) {
@@ -40,7 +48,7 @@ public class HintLabelWrapper {
 	}
 
 	/**
-	 * See Label's documentation for
+	 * See {@link Label}'s documentation for
 	 * {@link #org.eclipse.swt.widgets.Label.setToolTipText(boolean)
 	 * setToolTipText()}.
 	 * 

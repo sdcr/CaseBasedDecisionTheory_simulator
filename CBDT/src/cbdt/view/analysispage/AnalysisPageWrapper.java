@@ -9,7 +9,7 @@ import cbdt.view.CBDTHeaderComposite;
 
 public class AnalysisPageWrapper extends AbstractPluginPageWrapper{
 
-	private AnalysisPage analysisPage;
+	private AnalysisPageComposite analysisPage;
 	private AnalysisPageController controller;
 	
 	public AnalysisPageWrapper(AnalysisPageController controller) {
@@ -24,12 +24,12 @@ public class AnalysisPageWrapper extends AbstractPluginPageWrapper{
 	@Override
 	public Composite getPageComposite(Composite parent) {
 		Composite wrapperComposite = new CBDTHeaderComposite(parent, SWT.NONE);
-		analysisPage = new AnalysisPage(wrapperComposite, SWT.NONE, controller);
+		analysisPage = new AnalysisPageComposite(wrapperComposite, SWT.NONE, controller);
 		wrapperComposite.pack();
 		return wrapperComposite;
 	}
 
-	public AnalysisPage getAnalysisPage() {
+	public AnalysisPageComposite getAnalysisPage() {
 		return analysisPage;
 	}
 

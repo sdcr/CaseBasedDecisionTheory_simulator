@@ -11,7 +11,7 @@ import cbdt.model.config.SimulationConfigFactory;
 import cbdt.model.config.common.CommonConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.view.parameterspage.parameters.ParametersConfigPageWrapper;
+import cbdt.view.parameterspage.ParametersConfigPageWrapper;
 
 //YELLOW
 //maybe create a dedicated simulationController.
