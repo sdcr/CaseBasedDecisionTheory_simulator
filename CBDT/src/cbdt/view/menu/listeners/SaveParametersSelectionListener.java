@@ -6,11 +6,24 @@ import org.eclipse.swt.widgets.Shell;
 
 import cbdt.control.parameterspage.parameters.ParametersController;
 
+/**
+ * This class extends {@link OpenFileDialogSelectionListener} and is used to be
+ * called when the parameters are to be stored a file.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class SaveParametersSelectionListener extends
 		OpenFileDialogSelectionListener {
 
 	private ParametersController parametersController;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param shell
+	 * @param controller
+	 */
 	public SaveParametersSelectionListener(Shell shell,
 			ParametersController controller) {
 		super(shell);
@@ -35,7 +48,8 @@ public class SaveParametersSelectionListener extends
 					.getMainController()
 					.getMessageBoxManager()
 					.showInfoMessage(
-							"At least one aspiration level parameter has an invalid value.");
+							"At least one aspiration level parameter has "
+									+ "an invalid value.");
 		}
 	}
 

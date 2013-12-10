@@ -14,84 +14,118 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * This class defines a dialog to display information about the CBDT plugin to
+ * the user. For that, it extends the {@link TitleAreaDialog} class.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class PluginInfoDialog extends TitleAreaDialog {
 
-  public PluginInfoDialog(Shell shell) {
-    super(shell);
-  }
+	/**
+	 * The constructor.
+	 * 
+	 * @param shell
+	 */
+	public PluginInfoDialog(Shell shell) {
+		super(shell);
+	}
 
-  /**
-   * @see org.eclipse.jface.window.Window#create() We complete the dialog with
-   *      a title and a message
-   */
-  public void create() {
-    super.create();
-    setTitle("Case-Based Decision Theory");
-    setMessage("A plugin to simulate decision processes according to Case-Based Decision Theory.");
-  }
+	/**
+	 * @see org.eclipse.jface.window.Window#create()
+	 * 
+	 *      Set the title and message of the dialog.
+	 */
+	public void create() {
+		super.create();
+		setTitle("Case-Based Decision Theory");
+		setMessage("A plugin to simulate decision processes according to Case-Based Decision Theory.");
+	}
 
-  /**
-   * @see org.eclipse.jface.dialogs.Dialog#
-   *      createDialogArea(org.eclipse.swt.widgets.Composite) Here we fill the
-   *      center area of the dialog
-   */
-  protected Control createDialogArea(Composite parent) {
-    final Composite area = new Composite(parent, SWT.NONE);
-    GridData gridData = new GridData();
-    gridData.grabExcessHorizontalSpace = true;
-    area.setLayoutData(gridData);
+	/**
+	 * @see org.eclipse.jface.dialogs.Dialog#
+	 *      createDialogArea(org.eclipse.swt.widgets.Composite)
+	 * 
+	 *      Fill the center area of the dialog with information about the
+	 *      plugin.
+	 */
+	protected Control createDialogArea(Composite parent) {
+		final Composite dialogArea = new Composite(parent, SWT.NONE);
+		setGridLayout(dialogArea);
 
-    final GridLayout gridLayout = new GridLayout(2,false);
-    gridLayout.marginWidth = 30;
-    gridLayout.marginTop = 20;
-    gridLayout.horizontalSpacing = 50;    
-    area.setLayout(gridLayout);
-    
-    Label textLabel = new Label(area, SWT.NONE);
-    textLabel.setText("This software was developed as part of an interdisciplinary project" +
-    		"\nat the Chair of Economics at TU München.\n");
-    
-    GridData textGridData = new GridData();
-    textGridData.horizontalSpan = 2;
-    textGridData.grabExcessVerticalSpace = true;
-    textGridData.minimumHeight = 45;
-    textLabel.setLayoutData(textGridData);
-    
-    Label developer = new Label(area, SWT.NONE);
-    developer.setText("Developer:");
-    
-    Label developerName = new Label(area, SWT.NONE);
-    developerName.setText("Stephan da Costa Ribeiro");
-    
-    Label versionLabel = new Label(area, SWT.NONE);
-    versionLabel.setText("Version:");
-    
-    Label versionNumberLabel = new Label(area, SWT.NONE);
-    versionNumberLabel.setText("1.0.1");
-    
-    return area;
-  }
-  
-  	@Override
+		Label infoTextLabel = new Label(dialogArea, SWT.NONE);
+		infoTextLabel.setText("This software was developed as part of an "
+				+ "interdisciplinary project"
+				+ "\nat the Chair of Economics at TU München.\n");
+		setInfoTextGridData(infoTextLabel);
+
+		Label developer = new Label(dialogArea, SWT.NONE);
+		developer.setText("Developer:");
+
+		Label developerName = new Label(dialogArea, SWT.NONE);
+		developerName.setText("Stephan da Costa Ribeiro");
+
+		Label versionLabel = new Label(dialogArea, SWT.NONE);
+		versionLabel.setText("Version:");
+
+		Label versionNumberLabel = new Label(dialogArea, SWT.NONE);
+		versionNumberLabel.setText("1.0.1");
+
+		return dialogArea;
+	}
+
+	/**
+	 * Sets {@link GridData} to the info text {@link Label}.
+	 * 
+	 * @param infoTextLabel
+	 */
+	private void setInfoTextGridData(Label infoTextLabel) {
+		GridData infoTextGridData = new GridData();
+		infoTextGridData.horizontalSpan = 2;
+		infoTextGridData.grabExcessVerticalSpace = true;
+		infoTextGridData.minimumHeight = 45;
+		infoTextLabel.setLayoutData(infoTextGridData);
+	}
+
+	/**
+	 * Sets the {@link GridData} and {@link GridLayout} of the dialog area.
+	 * 
+	 * @param dialogArea
+	 */
+	private void setGridLayout(final Composite dialogArea) {
+		GridData gridData = new GridData();
+		gridData.grabExcessHorizontalSpace = true;
+		dialogArea.setLayoutData(gridData);
+
+		final GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginWidth = 30;
+		gridLayout.marginTop = 20;
+		gridLayout.horizontalSpacing = 50;
+		dialogArea.setLayout(gridLayout);
+	}
+
+	@Override
 	protected Point getInitialSize() {
 		Point initialSize = super.getInitialSize();
 		initialSize.y = 270;
 		return initialSize;
 	}
-  
-  /**
-   * @see org.eclipse.jface.dialogs.Dialog#
-   *      createButtonsForButtonBar(org.eclipse.swt.widgets.Composite). 
-   *      The OK and Cancel buttons are replaced by just an OK button.
-   *      createButton() (from Dialog) is used to create the button.
-   */
-  protected void createButtonsForButtonBar(Composite parent) {
-    Button okButton = createButton(parent, IDialogConstants.OK_ID, "Ok", true);
-    okButton.addSelectionListener(new SelectionAdapter() {
-      public void widgetSelected(SelectionEvent e) {
-        close();
-      }
-    });
-  }
+
+	/**
+	 * @see org.eclipse.jface.dialogs.Dialog#
+	 *      createButtonsForButtonBar(org.eclipse.swt.widgets.Composite).
+	 * 
+	 *      The OK and Cancel buttons are replaced by just an OK button.
+	 */
+	protected void createButtonsForButtonBar(Composite parent) {
+		Button okButton = createButton(parent, IDialogConstants.OK_ID, "Ok",
+				true);
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				close();
+			}
+		});
+	}
 
 }
