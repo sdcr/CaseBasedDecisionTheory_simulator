@@ -8,6 +8,14 @@ import cbdt.control.parameterspage.config.common.CommonConfigController;
 import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
 
+/**
+ * This class is an implementation of the {@link ModifyListener} and is used to
+ * set the number of expected utility values should be be computed during the
+ * simulation.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class RequestedExpectedUtilityValuesModifyListener implements
 		ModifyListener {
 
@@ -15,6 +23,13 @@ public class RequestedExpectedUtilityValuesModifyListener implements
 	private NumberFormatChecker numberFormatChecker;
 	private CommonConfigController commonConfigController;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param commonConfigController
+	 * @param hintLabel
+	 * @param formatChecker
+	 */
 	public RequestedExpectedUtilityValuesModifyListener(
 			CommonConfigController commonConfigController,
 			HintLabelWrapper hintLabel, NumberFormatChecker formatChecker) {
@@ -28,8 +43,9 @@ public class RequestedExpectedUtilityValuesModifyListener implements
 		Text text = (Text) e.widget;
 		String textValue = text.getText();
 		if (numberFormatChecker.isValidValue(textValue)) {
-			commonConfigController.setRequestedNumberOfExpectedUtilities(Integer
-					.parseInt(textValue));
+			commonConfigController
+					.setRequestedNumberOfExpectedUtilities(Integer
+							.parseInt(textValue));
 			hintLabel.setVisible(false);
 		} else {
 			hintLabel.setVisible(true);

@@ -20,17 +20,25 @@ import cbdt.view.parameterspage.parameters.AbstractParametersControllerAccessCom
 import cbdt.view.parameterspage.parameters.actoraction.listeners.AddActorActionMouseListener;
 
 /**
- * This composite contains all view elements that deal with the display of actor
- * actions. In particular, it allows the creation and removal of actor actions.
+ * This composite contains all view elements that deal with the display of
+ * {@link ActorAction}s. In particular, it allows the creation and removal of
+ * {@link ActorAction}s.
  * 
  * @author S-lenovo
  */
-public class ActorActionsComposite extends AbstractParametersControllerAccessComposite
-		implements Observer {
+public class ActorActionsComposite extends
+		AbstractParametersControllerAccessComposite implements Observer {
 
 	private Composite actorActionsWrapper;
 	private Map<ActorAction, ActorActionComposite> shownCompositesMap;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 * @param style
+	 * @param controller
+	 */
 	public ActorActionsComposite(Composite parent, int style,
 			ParametersController controller) {
 		super(parent, style, controller);
@@ -49,7 +57,8 @@ public class ActorActionsComposite extends AbstractParametersControllerAccessCom
 	}
 
 	/**
-	 * Set a button that allows the adding of another actor action.
+	 * Set a {@link Button} that allows the adding of another
+	 * {@link ActorAction}.
 	 */
 	private void createAddActorActionButton() {
 		Button addActorActionItemButton = new Button(this, SWT.NONE);
@@ -60,10 +69,10 @@ public class ActorActionsComposite extends AbstractParametersControllerAccessCom
 
 	/**
 	 * Initializes the actor action view elements with an existing list of
-	 * ActorAction objects.
+	 * {@link ActorAction} objects.
 	 * 
 	 * @param actorActions
-	 *            The ActorAction parameters from which to initialize.
+	 *            The {@link ActorAction} parameters from which to initialize.
 	 */
 	public void setParametersModel(Parameters params) {
 		params.addObserver(this);

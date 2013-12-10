@@ -22,12 +22,15 @@ import cbdt.view.parameterspage.parameters.actoraction.listeners.RemoveActorActi
 import cbdt.view.parameterspage.parameters.actoraction.outcomes.ActorActionOutcomesTableViewer;
 
 /**
- * This composite contains all view elements that represent one ActorAction.
- * In specific, it contains a table with which the user can modify a set of ActorActionOutcomes.
+ * This composite contains all view elements that represent one
+ * {@link ActorAction}. In specific, it contains a table with which the user can
+ * modify a set of {@link ActorActionOutcome}s.
+ * 
  * @author S-lenovo
  */
-public class ActorActionComposite extends AbstractParametersControllerAccessComposite implements Observer{
-	
+public class ActorActionComposite extends
+		AbstractParametersControllerAccessComposite implements Observer {
+
 	private static final int actionNameTextWidth = 190;
 	private static final String CLOSE_ICON_LARGE_18_LOCATION = "/resources/close-icon-large-18.png";
 	private static final String CLOSE_ICON_MEDIUM_18_LOCATION = "/resources/close-icon-medium-18.png";
@@ -38,8 +41,16 @@ public class ActorActionComposite extends AbstractParametersControllerAccessComp
 	private ProbabilitySumHintLabelWrapper probabilityHintLabel;
 	private ParameterValidator validator;
 
-	public ActorActionComposite(final Composite parent, ActorAction representedActorAction, ParametersController controller) {
-		super(parent, SWT.BORDER , controller);
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 * @param representedActorAction
+	 * @param controller
+	 */
+	public ActorActionComposite(final Composite parent,
+			ActorAction representedActorAction, ParametersController controller) {
+		super(parent, SWT.BORDER, controller);
 		this.representedActorAction = representedActorAction;
 		representedActorAction.addObserver(this);
 
@@ -52,14 +63,15 @@ public class ActorActionComposite extends AbstractParametersControllerAccessComp
 		createActorActionOutcomesWidgets();
 
 		probabilityHintLabel = new ProbabilitySumHintLabelWrapper(this);
-	
+
 		update(representedActorAction, null);
 		this.getParent().getParent().getParent().pack();
 	}
 
 	/**
-	 * Creates the widgets that allow the user to set the list of ActorActionOutcomes which 
-	 * belong to the represented ActorAction.
+	 * Creates the widgets that allow the user to set the list of
+	 * {@link ActorActionOutcome}s which belong to the represented
+	 * {@link ActorAction}.
 	 */
 	private void createActorActionOutcomesWidgets() {
 		Label actionOutcomesLabel = new Label(this, SWT.NONE);
@@ -67,43 +79,49 @@ public class ActorActionComposite extends AbstractParametersControllerAccessComp
 		GridData outcomesLabelGridData = new GridData();
 		outcomesLabelGridData.verticalAlignment = SWT.BEGINNING;
 		actionOutcomesLabel.setLayoutData(outcomesLabelGridData);
-		
-		actorActionOutcomesTableViewer = new ActorActionOutcomesTableViewer(this, SWT.BORDER);
+
+		actorActionOutcomesTableViewer = new ActorActionOutcomesTableViewer(
+				this, SWT.BORDER);
 	}
 
 	/**
-	 * Creates the widgets that allow the removal of the represented ActorAction.
+	 * Creates the widgets that allow the removal of the represented
+	 * {@link ActorAction}.
 	 */
 	private void createActorActionRemoveWidget() {
 		HoverLabelWrapper closeLabel = new HoverLabelWrapper(this, SWT.NONE,
 				CLOSE_ICON_LARGE_18_LOCATION, CLOSE_ICON_MEDIUM_18_LOCATION);
-		closeLabel.getLabel().addMouseListener(new RemoveActorActionMouseListener(this));
+		closeLabel.getLabel().addMouseListener(
+				new RemoveActorActionMouseListener(this));
 	}
 
 	/**
-	 * Creates the widgets that allow the setting of the name of the represented ActorAction.
+	 * Creates the widgets that allow the setting of the name of the represented
+	 * {@link ActorAction}.
 	 */
 	private void createActorActionNameWidgets() {
 		Label actionNameLabel = new Label(this, SWT.NONE);
 		actionNameLabel.setText("Action name:");
 		actionNameText = new Text(this, SWT.SINGLE | SWT.BORDER);
 		actionNameText.addModifyListener(new ModifyListener() {
-			
+
 			@Override
 			public void modifyText(ModifyEvent e) {
-				Text text =  (Text)e.widget;
+				Text text = (Text) e.widget;
 				String newActorActionName = text.getText();
-				getController().setActorActionName(representedActorAction, newActorActionName);
+				getController().setActorActionName(representedActorAction,
+						newActorActionName);
 			}
 		});
-		
+
 		GridData gridData = new GridData();
 		gridData.widthHint = actionNameTextWidth;
 		actionNameText.setLayoutData(gridData);
 	}
 
 	/**
-	 * @return The ActorAction which is represented by this ActorActionComposite.
+	 * @return The {@link ActorAction} which is represented by this
+	 *         {@link ActorActionComposite}.
 	 */
 	public ActorAction getActorAction() {
 		return representedActorAction;
@@ -111,25 +129,28 @@ public class ActorActionComposite extends AbstractParametersControllerAccessComp
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(arg0 instanceof ActorAction && ((ActorAction)arg0).equals(representedActorAction)){
+		if (arg0 instanceof ActorAction
+				&& ((ActorAction) arg0).equals(representedActorAction)) {
 			actionNameText.setText(representedActorAction.getActionName());
-			List<ActorActionOutcome> actionOutcomes = representedActorAction.getActionOutcomes();
-			for(ActorActionOutcome outcome : actionOutcomes){
+			List<ActorActionOutcome> actionOutcomes = representedActorAction
+					.getActionOutcomes();
+			for (ActorActionOutcome outcome : actionOutcomes) {
 				outcome.addObserver(this);
 			}
-			actorActionOutcomesTableViewer.setActorActionOutcomesInput(actionOutcomes);
+			actorActionOutcomesTableViewer
+					.setActorActionOutcomesInput(actionOutcomes);
 			updateProbabilityHintVisibility();
 		}
-		if(arg0 instanceof ActorActionOutcome)
+		if (arg0 instanceof ActorActionOutcome)
 			updateProbabilityHintVisibility();
 	}
 
 	private void updateProbabilityHintVisibility() {
 		validator = new ParameterValidator();
-		if(validator.hasValidProbabilityDistribution(representedActorAction))
+		if (validator.hasValidProbabilityDistribution(representedActorAction))
 			probabilityHintLabel.setVisible(false);
 		else
 			probabilityHintLabel.setVisible(true);
 	}
-	
+
 }

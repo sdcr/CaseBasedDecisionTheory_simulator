@@ -8,6 +8,13 @@ import org.eclipse.swt.widgets.Text;
 import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
 
+/**
+ * A subclass of {@link Composite} which encompasses a {@link Text}, a
+ * {@link HintLabelWrapper} and a {@link NumberFormatChecker}.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class SimpleParameterComposite extends Composite {
 
 	private Text text;
@@ -15,6 +22,11 @@ public class SimpleParameterComposite extends Composite {
 
 	private NumberFormatChecker numberFormatChecker;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 */
 	public SimpleParameterComposite(Composite parent) {
 		super(parent, SWT.NONE);
 

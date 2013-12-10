@@ -5,14 +5,22 @@ import org.eclipse.swt.events.SelectionListener;
 
 import cbdt.control.parameterspage.ParametersConfigPageController;
 
+/**
+ * An implementation of the {@link SelectionListener}, which is supposed to
+ * start the computation.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class StartComputationSelectionListener implements SelectionListener {
 
 	private ParametersConfigPageController controller;
-	
-	public StartComputationSelectionListener(ParametersConfigPageController controller) {
+
+	public StartComputationSelectionListener(
+			ParametersConfigPageController controller) {
 		this.controller = controller;
 	}
-	
+
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		controller.startComputation();

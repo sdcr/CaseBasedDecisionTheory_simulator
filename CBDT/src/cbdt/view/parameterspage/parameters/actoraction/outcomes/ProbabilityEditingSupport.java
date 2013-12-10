@@ -7,10 +7,22 @@ import org.eclipse.jface.viewers.TextCellEditor;
 
 import cbdt.model.parameters.ActorActionOutcome;
 
+/**
+ * This class extends {@link EditingSupport} and is used for editing the
+ * probability of an {@link ActorActionOutcome}.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class ProbabilityEditingSupport extends EditingSupport {
 
 	private TableViewer tableViewer;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param viewer
+	 */
 	public ProbabilityEditingSupport(TableViewer viewer) {
 		super(viewer);
 		tableViewer = viewer;
@@ -28,15 +40,15 @@ public class ProbabilityEditingSupport extends EditingSupport {
 
 	@Override
 	protected Object getValue(Object element) {
-		return String.valueOf(((ActorActionOutcome)element).getProbability());
+		return String.valueOf(((ActorActionOutcome) element).getProbability());
 	}
 
 	@Override
 	protected void setValue(Object element, Object value) {
 		double parsedDouble;
 		try {
-			parsedDouble = Double.parseDouble((String)value);
-			((ActorActionOutcome)element).setProbability(parsedDouble);
+			parsedDouble = Double.parseDouble((String) value);
+			((ActorActionOutcome) element).setProbability(parsedDouble);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}

@@ -16,12 +16,25 @@ import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidget
 import cbdt.view.parameterspage.parameters.SimpleParameterComposite;
 import cbdt.view.parameterspage.parameters.aspirationlevel.SimpleParameterHintLabelWrapper;
 
-public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractEngineConfigWidgetsWrapper {
+/**
+ * The {@link AbstractEngineConfigWidgetsWrapper} subclass for the
+ * DFSmatrixHighPrecision algorithm.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
+public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends
+		AbstractEngineConfigWidgetsWrapper {
 
 	private Label reqDecimalPlacesLabel;
 	private SimpleParameterComposite requiredDecimalPlacesComposite;
 	private IntegerFormatChecker integerFormatChecker;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 */
 	public DFSmatrixHighPrecisionConfigWidgetsWrapper(Composite parent) {
 		reqDecimalPlacesLabel = new Label(parent, SWT.NONE);
 		GridData labelLayoutData = new GridData();
@@ -29,10 +42,10 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractEngineCo
 		reqDecimalPlacesLabel.setLayoutData(labelLayoutData);
 		reqDecimalPlacesLabel.setText("Precision in decimal places:");
 
-		requiredDecimalPlacesComposite = new SimpleParameterComposite(
-				parent);
-		requiredDecimalPlacesComposite.setHintLabel(new SimpleParameterHintLabelWrapper(
-				requiredDecimalPlacesComposite));
+		requiredDecimalPlacesComposite = new SimpleParameterComposite(parent);
+		requiredDecimalPlacesComposite
+				.setHintLabel(new SimpleParameterHintLabelWrapper(
+						requiredDecimalPlacesComposite));
 		requiredDecimalPlacesComposite
 				.setToolTipText("The value must be a natural number");
 
@@ -58,11 +71,9 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends AbstractEngineCo
 
 	@Override
 	public void setConfigController(IEngineConfigController configController) {
-		DFSmatrixHighPrecisionConfigController customController = 
-				(DFSmatrixHighPrecisionConfigController)configController;
+		DFSmatrixHighPrecisionConfigController customController = (DFSmatrixHighPrecisionConfigController) configController;
 		requiredDecimalPlacesComposite.getText().addModifyListener(
-				new RequiredDecimalPlacesModifyListener(
-						customController,
+				new RequiredDecimalPlacesModifyListener(customController,
 						requiredDecimalPlacesComposite.getHintLabel(),
 						integerFormatChecker));
 	}

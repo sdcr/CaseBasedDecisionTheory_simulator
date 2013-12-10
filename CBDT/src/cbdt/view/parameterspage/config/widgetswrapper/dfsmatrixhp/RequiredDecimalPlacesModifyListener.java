@@ -8,19 +8,34 @@ import cbdt.control.parameterspage.config.engine.DFSmatrixHighPrecisionConfigCon
 import cbdt.control.validators.IntegerFormatChecker;
 import cbdt.view.HintLabelWrapper;
 
+/**
+ * This class is an implementation of the {@link ModifyListener} interface. It
+ * is used to set the model with the number of required decimal places of
+ * precision.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class RequiredDecimalPlacesModifyListener implements ModifyListener {
 
 	private DFSmatrixHighPrecisionConfigController configController;
 	private HintLabelWrapper hintLabel;
 	private IntegerFormatChecker integerFormatChecker;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param configController
+	 * @param hintLabel
+	 * @param integerFormatChecker
+	 */
 	public RequiredDecimalPlacesModifyListener(
 			DFSmatrixHighPrecisionConfigController configController,
 			HintLabelWrapper hintLabel,
 			IntegerFormatChecker integerFormatChecker) {
-				this.configController = configController;
-				this.hintLabel = hintLabel;
-				this.integerFormatChecker = integerFormatChecker;
+		this.configController = configController;
+		this.hintLabel = hintLabel;
+		this.integerFormatChecker = integerFormatChecker;
 	}
 
 	@Override

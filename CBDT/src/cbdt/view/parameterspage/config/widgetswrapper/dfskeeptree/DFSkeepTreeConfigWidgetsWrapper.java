@@ -14,15 +14,28 @@ import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.view.parameterspage.config.ConfigBlockTitleLabelWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
-public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgetsWrapper {
+/**
+ * The {@link AbstractEngineConfigWidgetsWrapper} subclass for the DFSkeepTree
+ * algorithm.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
+public class DFSkeepTreeConfigWidgetsWrapper extends
+		AbstractEngineConfigWidgetsWrapper {
 
 	private static final int INNER_CHECKBOX_MARGIN_LEFT = 20;
-	
+
 	private Label saveTreeStructureLabel;
 	private Button saveActionNamesButton;
 	private Button saveAspirationLevelsButton;
 	private Button saveTreeButton;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 */
 	public DFSkeepTreeConfigWidgetsWrapper(Composite parent) {
 		saveTreeStructureLabel = new Label(parent, SWT.NONE);
 		saveTreeStructureLabel.setText("Save tree structure:");
@@ -31,10 +44,10 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgets
 		labelGridData.verticalAlignment = SWT.BEGINNING;
 		labelGridData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
 		saveTreeStructureLabel.setLayoutData(labelGridData);
-		
+
 		saveTreeButton = new Button(parent, SWT.CHECK);
 		saveTreeButton.setText("keep tree");
-		
+
 		saveActionNamesButton = new Button(parent, SWT.CHECK);
 		saveActionNamesButton.setText("action names");
 		GridData saveActionNamesGridData = new GridData();
@@ -50,7 +63,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgets
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-//		super.update(arg0, arg1);
+		// super.update(arg0, arg1);
 		if (arg0 instanceof DFSkeepTreeEngineConfig) {
 			DFSkeepTreeEngineConfig config = (DFSkeepTreeEngineConfig) arg0;
 			saveTreeButton.setSelection(config.isSaveTreeStructure());
@@ -58,13 +71,14 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgets
 			saveAspirationLevelsButton.setEnabled(config.isSaveTreeStructure());
 
 			saveActionNamesButton.setSelection(config.isSaveActionNames());
-			saveAspirationLevelsButton.setSelection(config.isSaveAspirationLevels());
+			saveAspirationLevelsButton.setSelection(config
+					.isSaveAspirationLevels());
 		}
 	}
 
 	@Override
 	public void setParent(Composite parent) {
-//		super.setParent(parent);
+		// super.setParent(parent);
 		saveTreeStructureLabel.setParent(parent);
 		saveTreeButton.setParent(parent);
 		saveActionNamesButton.setParent(parent);
@@ -72,13 +86,17 @@ public class DFSkeepTreeConfigWidgetsWrapper extends AbstractEngineConfigWidgets
 	}
 
 	@Override
-	public void setConfigController(
-			IEngineConfigController configController) {
-//		super.setControllers(pageController, configController);
-		DFSkeepTreeConfigController customConfigController = (DFSkeepTreeConfigController) configController; 
-		saveTreeButton.addSelectionListener(new SaveTreeSelectionListener(customConfigController, saveTreeButton));
-		saveActionNamesButton.addSelectionListener(new SaveActionNamesSelectionListener(customConfigController, saveActionNamesButton));
-		saveAspirationLevelsButton.addSelectionListener(new SaveAspirationLevelsSelectionListener(customConfigController, saveAspirationLevelsButton));
+	public void setConfigController(IEngineConfigController configController) {
+		// super.setControllers(pageController, configController);
+		DFSkeepTreeConfigController customConfigController = (DFSkeepTreeConfigController) configController;
+		saveTreeButton.addSelectionListener(new SaveTreeSelectionListener(
+				customConfigController, saveTreeButton));
+		saveActionNamesButton
+				.addSelectionListener(new SaveActionNamesSelectionListener(
+						customConfigController, saveActionNamesButton));
+		saveAspirationLevelsButton
+				.addSelectionListener(new SaveAspirationLevelsSelectionListener(
+						customConfigController, saveAspirationLevelsButton));
 	}
 
 }

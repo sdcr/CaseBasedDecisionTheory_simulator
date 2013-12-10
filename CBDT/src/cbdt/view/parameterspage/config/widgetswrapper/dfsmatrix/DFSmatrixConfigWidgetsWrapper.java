@@ -7,7 +7,15 @@ import org.eclipse.swt.widgets.Composite;
 import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
-public class DFSmatrixConfigWidgetsWrapper extends AbstractEngineConfigWidgetsWrapper {
+/**
+ * The {@link AbstractEngineConfigWidgetsWrapper} subclass for the DFSmatrix
+ * algorithm. There are no configurations to set for this algorithm.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
+public class DFSmatrixConfigWidgetsWrapper extends
+		AbstractEngineConfigWidgetsWrapper {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
