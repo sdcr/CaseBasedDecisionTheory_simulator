@@ -18,8 +18,16 @@ import cbdt.view.parameterspage.config.widgetswrapper.CommonConfigWidgetsWrapper
 import cbdt.view.parameterspage.config.widgetswrapper.EngineConfigWidgetsWrapperFactory;
 import cbdt.view.parameterspage.config.widgetswrapper.NoWidgetWrapperException;
 
+/**
+ * This class manages the instantiation of classes which wrap config widgets.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class ConfigWidgetsWrapperManager implements Observer {
-	
+
+	// TODO: consider refactoring and redesign of this implementation
+
 	private Combo availableConfigsCombo;
 	private Composite parametersPage;
 	private ParametersConfigPageController controller;
@@ -27,7 +35,13 @@ public class ConfigWidgetsWrapperManager implements Observer {
 	private EngineConfigWidgetsWrapperFactory engineConfigWidgestWrapperFactory;
 	private CommonConfigWidgetsWrapper commonConfigWidgetsWrapper;
 	private ConfigBlockTitleLabelWrapper algoSpecificTitleWrapper;
-	
+
+	/**
+	 * The constructor.
+	 * 
+	 * @param parametersPage
+	 * @param controller
+	 */
 	public ConfigWidgetsWrapperManager(Composite parametersPage,
 			ParametersConfigPageController controller) {
 		this.parametersPage = parametersPage;
@@ -36,37 +50,54 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		Label parameterLabel = new Label(parametersPage, SWT.NONE);
 		parameterLabel.setText("Algorithm:");
 		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
-		commonConfigWidgetsWrapper = new CommonConfigWidgetsWrapper(parametersPage);
-		commonConfigWidgetsWrapper.setCommonConfigController(controller.getCommonConfigController());
-		algoSpecificTitleWrapper = new ConfigBlockTitleLabelWrapper(parametersPage);
-		getAlgoSpecificTitleWrapper().getLabel().setText("Algorithm-specific configurations:");
 
-		foregroundManager = new ConfigForegroundManager(parametersPage, algoSpecificTitleWrapper.getLabel());
+		commonConfigWidgetsWrapper = new CommonConfigWidgetsWrapper(
+				parametersPage);
+		commonConfigWidgetsWrapper.setCommonConfigController(controller
+				.getCommonConfigController());
+
+		algoSpecificTitleWrapper = new ConfigBlockTitleLabelWrapper(
+				parametersPage);
+		algoSpecificTitleWrapper.getLabel().setText(
+				"Algorithm-specific configurations:");
+
+		foregroundManager = new ConfigForegroundManager(parametersPage,
+				algoSpecificTitleWrapper.getLabel());
 	}
 
+	/**
+	 * Set the shown widgets according to the passed {@link SimulationConfig}.
+	 * 
+	 * @param simConfig
+	 */
 	public void setSimulationConfigModel(SimulationConfig simConfig) {
 		engineConfigWidgestWrapperFactory = new EngineConfigWidgetsWrapperFactory();
 
 		EngineConfigSelectionListener comboSelectionListener = new EngineConfigSelectionListener(
 				controller);
 
-		commonConfigWidgetsWrapper.setCommonConfigModel(simConfig.getCommonConfig());
-		
+		commonConfigWidgetsWrapper.setCommonConfigModel(simConfig
+				.getCommonConfig());
+
 		for (AbstractEngineConfig engineConfig : simConfig
 				.getAvailableEngineConfigs()) {
 			try {
 				IEngineConfigController configController = controller
-						.getConfigControllerFactory().getConfigController(engineConfig);
+						.getConfigControllerFactory().getConfigController(
+								engineConfig);
 				configController.setEngineConfigModel(engineConfig);
 				AbstractEngineConfigWidgetsWrapper engineConfigWidgetsWrapper = engineConfigWidgestWrapperFactory
-						.getEngineConfigWidgetWrapper(engineConfig, parametersPage);
-				engineConfigWidgetsWrapper.setConfigController(configController);
+						.getEngineConfigWidgetWrapper(engineConfig,
+								parametersPage);
+				engineConfigWidgetsWrapper
+						.setConfigController(configController);
 				engineConfigWidgetsWrapper.setEngineConfigModel(engineConfig);
-				
+
 				availableConfigsCombo.add(engineConfig.getName());
 				comboSelectionListener.addEngineConfig(engineConfig);
 				foregroundManager.setToBackground(engineConfigWidgetsWrapper);
-			} catch (NoWidgetWrapperException | NoEngineConfigControllerException e) {
+			} catch (NoWidgetWrapperException
+					| NoEngineConfigControllerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -77,11 +108,13 @@ public class ConfigWidgetsWrapperManager implements Observer {
 				.getCurrentlyChosenEngineConfig();
 		if (currentlyChoosenConfig != null) {
 			try {
-				foregroundManager.setToForeground(engineConfigWidgestWrapperFactory.getEngineConfigWidgetWrapper(
-								currentlyChoosenConfig, parametersPage));
+				foregroundManager
+						.setToForeground(engineConfigWidgestWrapperFactory
+								.getEngineConfigWidgetWrapper(
+										currentlyChoosenConfig, parametersPage));
 				int indexOfCurrentlyChoosenConfig = simConfig
-						.getAvailableEngineConfigs()
-						.indexOf(currentlyChoosenConfig);
+						.getAvailableEngineConfigs().indexOf(
+								currentlyChoosenConfig);
 				availableConfigsCombo.select(indexOfCurrentlyChoosenConfig);
 			} catch (NoWidgetWrapperException e) {
 				e.printStackTrace();
@@ -96,17 +129,14 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		if (o instanceof SimulationConfig) {
 			SimulationConfig choice = (SimulationConfig) o;
 			try {
-				foregroundManager.setToForeground(engineConfigWidgestWrapperFactory
-						.getEngineConfigWidgetWrapper(choice.getCurrentlyChosenEngineConfig(),
+				foregroundManager
+						.setToForeground(engineConfigWidgestWrapperFactory.getEngineConfigWidgetWrapper(
+								choice.getCurrentlyChosenEngineConfig(),
 								parametersPage));
 			} catch (NoWidgetWrapperException e) {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public ConfigBlockTitleLabelWrapper getAlgoSpecificTitleWrapper() {
-		return algoSpecificTitleWrapper;
 	}
 
 }

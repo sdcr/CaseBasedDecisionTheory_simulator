@@ -20,6 +20,13 @@ import cbdt.view.parameterspage.config.widgetswrapper.listeners.RelativeActionOc
 import cbdt.view.parameterspage.config.widgetswrapper.listeners.RequestedExpectedUtilityValuesModifyListener;
 import cbdt.view.parameterspage.parameters.SimpleParameterComposite;
 
+/**
+ * This class is a wrapper class for the widgets for the {@link CommonConfig}
+ * model class.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class CommonConfigWidgetsWrapper implements Observer {
 
 	private Label reqValuesLabel;
@@ -32,11 +39,17 @@ public class CommonConfigWidgetsWrapper implements Observer {
 	private Label aspirationLevelsLabel;
 	private Button lowestAspirationLevelsButton;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param parent
+	 */
 	public CommonConfigWidgetsWrapper(Composite parent) {
-		ConfigBlockTitleLabelWrapper algoIndependentTitleWrapper = 
-				new ConfigBlockTitleLabelWrapper(parent);
-		algoIndependentTitleWrapper.getLabel().setText("Algorithm-independent configurations:");
-		
+		ConfigBlockTitleLabelWrapper algoIndependentTitleWrapper = new ConfigBlockTitleLabelWrapper(
+				parent);
+		algoIndependentTitleWrapper.getLabel().setText(
+				"Algorithm-independent configurations:");
+
 		createRequestedExpectedUtilitiesWidgets(parent);
 		createSaveActionOccurancesCheckBoxes(parent);
 		createCalcLowestAspirationLevelsCheckBox(parent);
@@ -49,9 +62,9 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		GridData labelGridData = new GridData();
 		labelGridData.horizontalIndent = ConfigBlockTitleLabelWrapper.CONFIG_BLOCK_H_INDENT;
 		aspirationLevelsLabel.setLayoutData(labelGridData);
-		
+
 		lowestAspirationLevelsButton = new Button(parent, SWT.CHECK);
-		lowestAspirationLevelsButton .setText("lowest aspiration levels");
+		lowestAspirationLevelsButton.setText("lowest aspiration levels");
 	}
 
 	private void createSaveActionOccurancesCheckBoxes(Composite parent) {
@@ -89,6 +102,11 @@ public class CommonConfigWidgetsWrapper implements Observer {
 				.setNumberFormatChecker(integerFormatChecker);
 	}
 
+	/**
+	 * Set the {@link CommonConfig} model object to be displayed.
+	 * 
+	 * @param config
+	 */
 	public void setCommonConfigModel(CommonConfig config) {
 		config.addObserver(this);
 		update(config, null);
@@ -110,11 +128,19 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		}
 	}
 
-	public void setCommonConfigController(CommonConfigController commonConfigController) {
+	/**
+	 * Set the {@link CommonConfigController}. Creates listeners for the common
+	 * config widgets which pass events to the {@link CommonConfigController}.
+	 * 
+	 * @param commonConfigController
+	 */
+	public void setCommonConfigController(
+			CommonConfigController commonConfigController) {
 		requiredExpectedUtilitiesComposite.getText().addModifyListener(
 				new RequestedExpectedUtilityValuesModifyListener(
-						commonConfigController, requiredExpectedUtilitiesComposite
-								.getHintLabel(), integerFormatChecker));
+						commonConfigController,
+						requiredExpectedUtilitiesComposite.getHintLabel(),
+						integerFormatChecker));
 		absActionOcurrancesButton
 				.addSelectionListener(new AbsoluteActionOccurancesSelectionListener(
 						commonConfigController, absActionOcurrancesButton));
@@ -124,7 +150,7 @@ public class CommonConfigWidgetsWrapper implements Observer {
 		lowestAspirationLevelsButton
 				.addSelectionListener(new LowestAspirationLevelsSelectionListener(
 						commonConfigController, lowestAspirationLevelsButton));
-		
+
 	}
 
 }

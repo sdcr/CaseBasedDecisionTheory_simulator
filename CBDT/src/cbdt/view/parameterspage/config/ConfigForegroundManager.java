@@ -5,8 +5,16 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
+import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
+/**
+ * A manager for which of the {@link AbstractEngineConfig}s widgets are to be
+ * displayed.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class ConfigForegroundManager {
 
 	private Composite currentlyInBackgroundsParent;
@@ -14,26 +22,47 @@ public class ConfigForegroundManager {
 	private AbstractEngineConfigWidgetsWrapper currentlyInForegroundPage;
 	private Label algoSpecificTitleLabel;
 
-	public ConfigForegroundManager(Composite foregroundParent, Label algoSpecificTitleLabel) {
+	/**
+	 * Constructor.
+	 * 
+	 * @param foregroundParent
+	 * @param algoSpecificTitleLabel
+	 */
+	public ConfigForegroundManager(Composite foregroundParent,
+			Label algoSpecificTitleLabel) {
 		parametersPage = foregroundParent;
 		this.algoSpecificTitleLabel = algoSpecificTitleLabel;
 		currentlyInBackgroundsParent = new Composite(new Shell(), SWT.NONE);
 	}
 
+	/**
+	 * Sets the widgets of a specific {@link AbstractEngineConfigWidgetsWrapper}
+	 * to the foreground.
+	 * 
+	 * @param configWidgetsWrapper
+	 */
 	public void setToForeground(
 			AbstractEngineConfigWidgetsWrapper configWidgetsWrapper) {
-		if (currentlyInForegroundPage != null){
+		if (currentlyInForegroundPage != null) {
 			currentlyInForegroundPage.setParent(currentlyInBackgroundsParent);
 		}
 		configWidgetsWrapper.setParent(parametersPage);
 		currentlyInForegroundPage = configWidgetsWrapper;
-		
-		algoSpecificTitleLabel.setEnabled(configWidgetsWrapper.hasContentToShow());
+
+		algoSpecificTitleLabel.setEnabled(configWidgetsWrapper
+				.hasContentToShow());
 
 		parametersPage.getParent().getParent().getParent().pack();
 	}
 
-	public void setToBackground(AbstractEngineConfigWidgetsWrapper configComposite) {
+	/**
+	 * Sets the widgets of a {@link AbstractEngineConfigWidgetsWrapper} to the
+	 * background.
+	 * 
+	 * @param configComposite
+	 */
+	public void setToBackground(
+			AbstractEngineConfigWidgetsWrapper configComposite) {
 		configComposite.setParent(currentlyInBackgroundsParent);
 	}
 

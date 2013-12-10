@@ -10,6 +10,13 @@ import cbdt.view.parameterspage.config.widgetswrapper.dfskeeptree.DFSkeepTreeCon
 import cbdt.view.parameterspage.config.widgetswrapper.dfsmatrix.DFSmatrixConfigWidgetsWrapper;
 import cbdt.view.parameterspage.config.widgetswrapper.dfsmatrixhp.DFSmatrixHighPrecisionConfigWidgetsWrapper;
 
+/**
+ * This class creates wrapper classes for the widgets of the different
+ * {@link AbstractEngineConfig}s.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class EngineConfigWidgetsWrapperFactory {
 
 	private DFSkeepTreeConfigWidgetsWrapper naiveConfigWidgetsWrapper;
@@ -20,31 +27,33 @@ public class EngineConfigWidgetsWrapperFactory {
 	 * 
 	 * @param config
 	 * @return The configComposite belonging to the config.
-	 * @throws NoWidgetWrapperException 
+	 * @throws NoWidgetWrapperException
 	 */
 	public AbstractEngineConfigWidgetsWrapper getEngineConfigWidgetWrapper(
-			AbstractEngineConfig config, Composite parent) throws NoWidgetWrapperException {
+			AbstractEngineConfig config, Composite parent)
+			throws NoWidgetWrapperException {
 		if (config instanceof DFSkeepTreeEngineConfig) {
 			if (naiveConfigWidgetsWrapper == null)
 				naiveConfigWidgetsWrapper = new DFSkeepTreeConfigWidgetsWrapper(
 						parent);
-//			naiveConfigWidgetsWrapper.setParent(parent);
+			// naiveConfigWidgetsWrapper.setParent(parent);
 			return naiveConfigWidgetsWrapper;
 		}
 		if (config instanceof DFSmatrixEngineConfig) {
 			if (matrixConfigWidgetsWrapper == null) {
 				matrixConfigWidgetsWrapper = new DFSmatrixConfigWidgetsWrapper();
 			}
-//			matrixConfigWidgetsWrapper.setParent(parent);
+			// matrixConfigWidgetsWrapper.setParent(parent);
 			return matrixConfigWidgetsWrapper;
 		}
 		if (config instanceof DFSmatrixHighPrecEngineConfig) {
 			if (matrixHighPrecConfigWidgetsWrapper == null)
 				matrixHighPrecConfigWidgetsWrapper = new DFSmatrixHighPrecisionConfigWidgetsWrapper(
 						parent);
-//			matrixHighPrecConfigWidgetsWrapper.setParent(parent);
+			// matrixHighPrecConfigWidgetsWrapper.setParent(parent);
 			return matrixHighPrecConfigWidgetsWrapper;
 		}
-		throw new NoWidgetWrapperException("There are no widgets defined for this engine configuration in the widget factory.");
+		throw new NoWidgetWrapperException(
+				"There are no widgets defined for this engine configuration in the widget factory.");
 	}
 }
