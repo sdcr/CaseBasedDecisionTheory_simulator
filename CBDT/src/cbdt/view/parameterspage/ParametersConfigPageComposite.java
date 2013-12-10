@@ -21,81 +21,126 @@ import cbdt.view.parameterspage.parameters.aspirationlevel.AspirationLevelIncrem
 import cbdt.view.parameterspage.parameters.aspirationlevel.InitialAspirationLevelComposite;
 
 /**
- * This composite contains all view elements that deal with the user's parameter
+ * This composite contains the view elements that deal with the user's parameter
  * input.
  * 
  * @author S-lenovo
  */
-public class ParametersConfigPageComposite extends Composite { //extends AbstractControllerAccessComposite {
+public class ParametersConfigPageComposite extends Composite {
 
 	private ActorActionsComposite actorActionsComposite;
-	
+
 	private AbstractAspirationLevelParameterComposite initialAspirationLevelComposite;
 	private AspirationLevelIncrementComposite aspirationLevelIncrementComposite;
 	private AbstractAspirationLevelParameterComposite aspirationLevelDiscountComposite;
-	
+
 	private ConfigWidgetsWrapperManager configsCompositeWrapperManager;
-	
-	private Composite parametersWrapper;
 
 	public ParametersConfigPageComposite(Composite parent, int style,
 			ParametersConfigPageController pageController) {
 		super(parent, style);
-		
+		setRowLayout();
+
+		// create a parent composite for the parameter view elements
+		Composite parametersParent = createParametersParent();
+		addParametersTitleLabel(parametersParent);
+
+		// add the view elements for parameters to the parent
+		addActorActionsView(pageController, parametersParent);
+		addInitAspLevelView(pageController, parametersParent);
+		addAspLevelDiscountView(pageController, parametersParent);
+		addAspLevelIncrementView(pageController, parametersParent);
+
+		addSpacerComposite(parametersParent);
+
+		createEngineConfigTitleLabel(parametersParent);
+		configsCompositeWrapperManager = new ConfigWidgetsWrapperManager(
+				parametersParent, pageController);
+
+		addStartComputationButton(pageController);
+	}
+
+	private void addStartComputationButton(
+			ParametersConfigPageController pageController) {
+		Button startComputationButton = new Button(this, SWT.PUSH | SWT.END);
+		startComputationButton.setText("Start computation");
+		startComputationButton
+				.addSelectionListener(new StartComputationSelectionListener(
+						pageController));
+	}
+
+	private void addSpacerComposite(Composite parametersParent) {
+		Composite spacerComposite = new Composite(parametersParent, SWT.NONE);
+		GridData spacerGridData = new GridData();
+		spacerGridData.heightHint = 25;
+		spacerGridData.horizontalSpan = 2;
+		spacerComposite.setLayoutData(spacerGridData);
+	}
+
+	private void addAspLevelIncrementView(
+			ParametersConfigPageController pageController,
+			Composite parametersParent) {
+		Label aspirationLevelIncrementLabel = setParametersLabel(
+				parametersParent, "Aspiration level increment:");
+		aspirationLevelIncrementLabel
+				.setToolTipText(AspirationLevelIncrementComposite.TOOL_TIP_TEXT);
+		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(
+				parametersParent, pageController.getParametersController());
+	}
+
+	private void addAspLevelDiscountView(
+			ParametersConfigPageController pageController,
+			Composite parametersParent) {
+		Label aspirationLevelDiscountLabel = setParametersLabel(
+				parametersParent, "Prev. aspiration weight factor:");
+		aspirationLevelDiscountLabel
+				.setToolTipText(AspirationLevelDiscountComposite.TOOL_TIP_TEXT);
+		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(
+				parametersParent, pageController.getParametersController());
+	}
+
+	private void addInitAspLevelView(
+			ParametersConfigPageController pageController,
+			Composite parametersParent) {
+		Label initialAspirationLevelLabel = setParametersLabel(
+				parametersParent, "Initial aspiration level:");
+		initialAspirationLevelLabel
+				.setToolTipText(InitialAspirationLevelComposite.TOOL_TIP_TEXT);
+		initialAspirationLevelComposite = new InitialAspirationLevelComposite(
+				parametersParent, pageController.getParametersController());
+	}
+
+	private void addActorActionsView(
+			ParametersConfigPageController pageController,
+			Composite parametersParent) {
+		setParametersLabel(parametersParent, "Actor actions:");
+		actorActionsComposite = new ActorActionsComposite(parametersParent,
+				SWT.NONE, pageController.getParametersController());
+	}
+
+	private Composite createParametersParent() {
+		Composite parametersWrapper = new Composite(this, SWT.NONE);
+		GridLayout gridLayout = new GridLayout(2, false);
+		parametersWrapper.setLayout(gridLayout);
+		return parametersWrapper;
+	}
+
+	private void setRowLayout() {
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
 		rowLayout.spacing = 20;
 		rowLayout.marginBottom = 50;
 		this.setLayout(rowLayout);
-
-		parametersWrapper = new Composite(this, SWT.NONE);
-
-		GridLayout gridLayout = new GridLayout(2, false);
-		parametersWrapper.setLayout(gridLayout);
-
-		createParametersTitleLabel();
-
-		createParameterLabel("Actor actions:");
-		actorActionsComposite = new ActorActionsComposite(parametersWrapper,
-				SWT.NONE, pageController.getParametersController());
-
-		Label initialAspirationLabel = createParameterLabel("Initial aspiration level:");
-		initialAspirationLabel.setToolTipText(InitialAspirationLevelComposite.TOOL_TIP_TEXT);
-		initialAspirationLevelComposite = new InitialAspirationLevelComposite(
-				parametersWrapper, pageController.getParametersController());
-		
-		Label aspirationDiscuntLabel = createParameterLabel("Prev. aspiration weight factor:");
-		aspirationDiscuntLabel.setToolTipText(AspirationLevelDiscountComposite.TOOL_TIP_TEXT);
-		aspirationLevelDiscountComposite = new AspirationLevelDiscountComposite(
-				parametersWrapper, pageController.getParametersController()); 
-		
-		Label aspirationLevelIncrementLabel = createParameterLabel("Aspiration level increment:");
-		aspirationLevelIncrementLabel.setToolTipText(AspirationLevelIncrementComposite.TOOL_TIP_TEXT);
-		aspirationLevelIncrementComposite = new AspirationLevelIncrementComposite(
-				parametersWrapper, pageController.getParametersController());
-
-		Composite spacerComposite = new Composite(parametersWrapper, SWT.NONE);
-		GridData spacerGridData = new GridData();
-		spacerGridData.heightHint = 25;
-		spacerGridData.horizontalSpan = 2;
-		spacerComposite.setLayoutData(spacerGridData);
-
-		createEngineConfigTitleLabel();
-
-		configsCompositeWrapperManager = new ConfigWidgetsWrapperManager(parametersWrapper, pageController);
-
-		Button startComputationButton = new Button(this, SWT.PUSH | SWT.END);
-		startComputationButton.setText("Start computation");
-		startComputationButton.addSelectionListener(new StartComputationSelectionListener(pageController));
 	}
 
 	public ConfigWidgetsWrapperManager getConfigsCompositeWrapperManager() {
 		return configsCompositeWrapperManager;
 	}
 
-	private void createEngineConfigTitleLabel() {
+	private void createEngineConfigTitleLabel(Composite parametersWrapper) {
 		LabelFactory factory = new LabelFactory();
-		Label configLabel = factory.createTitleLabel(parametersWrapper, "Engine configuration:");
+		Label configLabel = factory.createTitleLabel(parametersWrapper,
+				"Engine configuration:");
 
 		GridData parameterLabelGridData = new GridData();
 		parameterLabelGridData.horizontalSpan = 2;
@@ -118,7 +163,8 @@ public class ParametersConfigPageComposite extends Composite { //extends Abstrac
 	 * Create a label that is used to denote a parameter which can be entered by
 	 * the user.
 	 */
-	private Label createParameterLabel(String labelText) {
+	private Label setParametersLabel(Composite parametersWrapper,
+			String labelText) {
 		Label label = new Label(parametersWrapper, SWT.NONE);
 		label.setText(labelText);
 
@@ -132,9 +178,10 @@ public class ParametersConfigPageComposite extends Composite { //extends Abstrac
 	/**
 	 * Creates the title label for this composite.
 	 */
-	private void createParametersTitleLabel() {
+	private void addParametersTitleLabel(Composite parametersWrapper) {
 		LabelFactory factory = new LabelFactory();
-		Label parameterLabel = factory.createTitleLabel(parametersWrapper, "Parameter values:");
+		Label parameterLabel = factory.createTitleLabel(parametersWrapper,
+				"Parameter values:");
 
 		GridData parameterLabelGridData = new GridData();
 		parameterLabelGridData.horizontalSpan = 2;

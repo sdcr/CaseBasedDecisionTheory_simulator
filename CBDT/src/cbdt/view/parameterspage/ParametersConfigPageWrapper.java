@@ -8,17 +8,29 @@ import cbdt.control.parameterspage.ParametersConfigPageController;
 import cbdt.view.CBDTHeaderComposite;
 
 /**
- * This class allows the connection between the simulation frame and the
- * parameters view of the CBDT simulation plugin. It manages the creation of the
- * view content for the parameter input.
+ * This class wraps the {@link ParametersConfigPageComposite}.
  * 
  * @author S-lenovo
  */
 public class ParametersConfigPageWrapper extends AbstractPluginPageWrapper {
 
+	/**
+	 * The wrapped {@link ParametersConfigPageComposite}.
+	 */
 	private ParametersConfigPageComposite parametersConfigPageComposite;
+
+	/**
+	 * The controller for the wrapped {@link ParametersConfigPageComposite}.
+	 */
 	private ParametersConfigPageController parametersConfigPageController;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param controller
+	 *            The controller for the wrapped
+	 *            {@link ParametersConfigPageComposite}.
+	 */
 	public ParametersConfigPageWrapper(ParametersConfigPageController controller) {
 		this.parametersConfigPageController = controller;
 	}
@@ -30,20 +42,26 @@ public class ParametersConfigPageWrapper extends AbstractPluginPageWrapper {
 
 	@Override
 	protected Composite getPageComposite(Composite parent) {
-		Composite cbdtHeaderComposite = new CBDTHeaderComposite(parent, SWT.NONE);
-		parametersConfigPageComposite = new ParametersConfigPageComposite(cbdtHeaderComposite, SWT.NONE,
-				parametersConfigPageController);
-		
-		//initialize with current model
-		parametersConfigPageComposite.setParametersModel(parametersConfigPageController.
-				getParametersController().getParametersModel());
-		parametersConfigPageComposite.setSimulationConfigModel(parametersConfigPageController
-				.getSimulationConfig());
+		Composite cbdtHeaderComposite = new CBDTHeaderComposite(parent,
+				SWT.NONE);
+		parametersConfigPageComposite = new ParametersConfigPageComposite(
+				cbdtHeaderComposite, SWT.NONE, parametersConfigPageController);
+
+		// initialize with current model
+		parametersConfigPageComposite
+				.setParametersModel(parametersConfigPageController
+						.getParametersController().getParametersModel());
+		parametersConfigPageComposite
+				.setSimulationConfigModel(parametersConfigPageController
+						.getSimulationConfig());
 
 		cbdtHeaderComposite.layout();
 		return cbdtHeaderComposite;
 	}
 
+	/**
+	 * @return Returns the wrapped {@link ParametersConfigPageComposite}.
+	 */
 	public ParametersConfigPageComposite getParametersPage() {
 		return parametersConfigPageComposite;
 	}
