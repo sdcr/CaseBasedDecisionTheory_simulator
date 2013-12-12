@@ -26,7 +26,7 @@ public class DFSmatrixConfigWidgetsWrapper extends
 	}
 
 	@Override
-	public void setConfigController(IEngineConfigController configController) {
+	public void setEngineConfigController(IEngineConfigController configController) {
 	}
 
 	@Override

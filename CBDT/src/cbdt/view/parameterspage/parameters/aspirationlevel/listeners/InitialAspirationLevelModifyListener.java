@@ -7,9 +7,23 @@ import cbdt.control.parameterspage.parameters.ParametersController;
 import cbdt.control.validators.NumberFormatChecker;
 import cbdt.view.HintLabelWrapper;
 
+/**
+ * This class extends {@link AbstractParameterModifyListener} and is used to
+ * change the value of the initial aspiration level value.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class InitialAspirationLevelModifyListener extends
 		AbstractParameterModifyListener {
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param controller
+	 * @param hintLabel
+	 * @param numberFormatChecker
+	 */
 	public InitialAspirationLevelModifyListener(
 			ParametersController controller, HintLabelWrapper hintLabel,
 			NumberFormatChecker numberFormatChecker) {

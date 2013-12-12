@@ -86,7 +86,7 @@ public class DFSkeepTreeConfigWidgetsWrapper extends
 	}
 
 	@Override
-	public void setConfigController(IEngineConfigController configController) {
+	public void setEngineConfigController(IEngineConfigController configController) {
 		// super.setControllers(pageController, configController);
 		DFSkeepTreeConfigController customConfigController = (DFSkeepTreeConfigController) configController;
 		saveTreeButton.addSelectionListener(new SaveTreeSelectionListener(
@@ -97,6 +97,11 @@ public class DFSkeepTreeConfigWidgetsWrapper extends
 		saveAspirationLevelsButton
 				.addSelectionListener(new SaveAspirationLevelsSelectionListener(
 						customConfigController, saveAspirationLevelsButton));
+	}
+
+	@Override
+	public boolean hasContentToShow() {
+		return true;
 	}
 
 }

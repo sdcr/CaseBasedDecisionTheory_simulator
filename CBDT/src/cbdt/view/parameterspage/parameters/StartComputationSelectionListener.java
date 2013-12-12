@@ -16,6 +16,11 @@ public class StartComputationSelectionListener implements SelectionListener {
 
 	private ParametersConfigPageController controller;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param controller
+	 */
 	public StartComputationSelectionListener(
 			ParametersConfigPageController controller) {
 		this.controller = controller;

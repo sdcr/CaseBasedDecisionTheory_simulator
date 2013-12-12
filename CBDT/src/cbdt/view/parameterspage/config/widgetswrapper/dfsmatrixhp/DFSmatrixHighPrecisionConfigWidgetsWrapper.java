@@ -70,12 +70,17 @@ public class DFSmatrixHighPrecisionConfigWidgetsWrapper extends
 	}
 
 	@Override
-	public void setConfigController(IEngineConfigController configController) {
+	public void setEngineConfigController(IEngineConfigController configController) {
 		DFSmatrixHighPrecisionConfigController customController = (DFSmatrixHighPrecisionConfigController) configController;
 		requiredDecimalPlacesComposite.getText().addModifyListener(
 				new RequiredDecimalPlacesModifyListener(customController,
 						requiredDecimalPlacesComposite.getHintLabel(),
 						integerFormatChecker));
+	}
+
+	@Override
+	public boolean hasContentToShow() {
+		return true;
 	}
 
 }

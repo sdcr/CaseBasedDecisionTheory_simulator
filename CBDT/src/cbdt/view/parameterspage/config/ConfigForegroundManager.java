@@ -9,8 +9,8 @@ import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
 
 /**
- * A manager for which of the {@link AbstractEngineConfig}s widgets are to be
- * displayed.
+ * A manager which is used to selectively show only one of the
+ * {@link AbstractEngineConfig}s widgets at a time.
  * 
  * @author Stephan da Costa Ribeiro
  * 

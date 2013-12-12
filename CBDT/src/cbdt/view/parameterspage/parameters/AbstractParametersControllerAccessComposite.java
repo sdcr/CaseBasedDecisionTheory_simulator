@@ -16,12 +16,22 @@ public abstract class AbstractParametersControllerAccessComposite extends
 
 	private ParametersController controller;
 
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 * @param style
+	 * @param controller
+	 */
 	public AbstractParametersControllerAccessComposite(Composite parent,
 			int style, ParametersController controller) {
 		super(parent, style);
 		this.controller = controller;
 	}
 
+	/**
+	 * @return Returns the {@link ParametersController}.
+	 */
 	public ParametersController getController() {
 		return controller;
 	}

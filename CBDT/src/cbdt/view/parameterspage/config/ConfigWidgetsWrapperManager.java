@@ -90,7 +90,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 						.getEngineConfigWidgetWrapper(engineConfig,
 								parametersPage);
 				engineConfigWidgetsWrapper
-						.setConfigController(configController);
+						.setEngineConfigController(configController);
 				engineConfigWidgetsWrapper.setEngineConfigModel(engineConfig);
 
 				availableConfigsCombo.add(engineConfig.getName());

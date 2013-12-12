@@ -9,11 +9,25 @@ import cbdt.control.validators.DoubleFormatChecker;
 import cbdt.model.parameters.Parameters;
 import cbdt.view.parameterspage.parameters.aspirationlevel.listeners.InitialAspirationLevelModifyListener;
 
+/**
+ * This class is used to display the widgets necessary to allow the input of the
+ * initial aspiration level. It extends
+ * {@link AbstractAspirationLevelParameterComposite}.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class InitialAspirationLevelComposite extends
 		AbstractAspirationLevelParameterComposite {
 
 	public static final String TOOL_TIP_TEXT = "Aspiration level before\nany action is taken.";
-	
+
+	/**
+	 * The constructor.
+	 * 
+	 * @param parent
+	 * @param controller
+	 */
 	public InitialAspirationLevelComposite(Composite parent,
 			ParametersController controller) {
 		super(parent);
