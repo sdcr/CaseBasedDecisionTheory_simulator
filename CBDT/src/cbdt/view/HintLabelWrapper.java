@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Label;
  * user that there is a problem with an entered parameter. This class is an
  * opaque wrapper, in the sense that the wrapped object is not accessible.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public class HintLabelWrapper {
 

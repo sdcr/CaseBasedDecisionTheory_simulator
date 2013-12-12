@@ -9,11 +9,12 @@ import org.eclipse.swt.widgets.Shell;
 import simulation.core.control.Controller;
 
 /**
- * Shows a file dialog to select a filepath to a bundle, which in turn defines 
+ * Shows a file dialog to select a filepath to a bundle, which in turn defines
  * an ISimulationPlugin which should be added.
- * @author S-lenovo
+ * 
+ * @author Stephan da Costa Ribeiro
  */
-public class AddPluginMenuItemSelectionListener implements SelectionListener{
+public class AddPluginMenuItemSelectionListener implements SelectionListener {
 
 	private Shell shell;
 	private Controller controller;
@@ -22,19 +23,19 @@ public class AddPluginMenuItemSelectionListener implements SelectionListener{
 		this.shell = shell;
 		this.controller = controller;
 	}
-	
+
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-        FileDialog fileDialog = new FileDialog(shell, SWT.OPEN);
-        fileDialog.setText("Add a plugin");
-        fileDialog.setFilterPath("C:/");
-        String[] filterExt = { "*.jar", "*.*" };
-        fileDialog.setFilterExtensions(filterExt);
-        String filepath = fileDialog.open();
-        
-        if(filepath!=null){
-        	controller.addISimulationPlugin(filepath);
-        }
+		FileDialog fileDialog = new FileDialog(shell, SWT.OPEN);
+		fileDialog.setText("Add a plugin");
+		fileDialog.setFilterPath("C:/");
+		String[] filterExt = { "*.jar", "*.*" };
+		fileDialog.setFilterExtensions(filterExt);
+		String filepath = fileDialog.open();
+
+		if (filepath != null) {
+			controller.addISimulationPlugin(filepath);
+		}
 	}
 
 	@Override

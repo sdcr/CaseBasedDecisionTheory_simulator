@@ -14,9 +14,10 @@ import simulation.core.view.ForegroundManager;
 import simulation.extensionpoint.simulationplugin.definition.ISimulationPlugin;
 
 /**
- * This class is a Composite which shows the available ISimulationPlugins and their showable
- * page contents in a tree viewer.
- * @author S-lenovo
+ * This class is a Composite which shows the available ISimulationPlugins and
+ * their showable page contents in a tree viewer.
+ * 
+ * @author Stephan da Costa Ribeiro
  */
 public class PluginsBar extends Composite {
 
@@ -26,7 +27,7 @@ public class PluginsBar extends Composite {
 
 	public PluginsBar(Composite parent, int style) {
 		super(parent, style | SWT.BORDER);
-		
+
 		GridData pluginsBarGridData = new GridData();
 		pluginsBarGridData.verticalAlignment = GridData.FILL;
 		pluginsBarGridData.grabExcessVerticalSpace = true;
@@ -35,7 +36,7 @@ public class PluginsBar extends Composite {
 
 		GridLayout gridLayout = new GridLayout(1, false);
 		this.setLayout(gridLayout);
-		
+
 		Label pluginsBarTitle = new Label(this, SWT.NONE);
 		pluginsBarTitle.setText("Simulation module explorer");
 		createTreeViewer();
@@ -49,36 +50,40 @@ public class PluginsBar extends Composite {
 		gridData.widthHint = 190;
 		viewerComposite.setLayoutData(gridData);
 		viewerComposite.setLayout(new FillLayout());
-		
+
 		viewer = new TreeViewer(viewerComposite, SWT.BORDER_SOLID);
 		viewer.setContentProvider(new PluginsBarTreeContentProvider());
 		viewer.setLabelProvider(new PluginsBarTreeLabelProvider());
 	}
-	
+
 	/**
-	 * Set the ForegroundManager which should be used when a plugin page should be put 
-	 * in foreground.
+	 * Set the ForegroundManager which should be used when a plugin page should
+	 * be put in foreground.
+	 * 
 	 * @param foregroundManager
 	 */
-	public void setForegroundManager(ForegroundManager foregroundManager){
+	public void setForegroundManager(ForegroundManager foregroundManager) {
 		this.foregroundManager = foregroundManager;
-		if(pluginsBarSelectionChangeListener!=null)
+		if (pluginsBarSelectionChangeListener != null)
 			viewer.removeSelectionChangedListener(pluginsBarSelectionChangeListener);
-		pluginsBarSelectionChangeListener = new PluginsBarSelectionChangeListener(foregroundManager);
+		pluginsBarSelectionChangeListener = new PluginsBarSelectionChangeListener(
+				foregroundManager);
 		viewer.addSelectionChangedListener(pluginsBarSelectionChangeListener);
 		foregroundManager.setTreeViewer(viewer);
 	}
-	
+
 	/**
 	 * Update the treeviewer with the available ISimulationPlugins.
+	 * 
 	 * @param pluginManager
 	 */
 	public void update(List<ISimulationPlugin> plugins) {
 		viewer.setInput(plugins);
 		viewer.expandAll();
-		try{
-			foregroundManager.setToForeground(plugins.get(0).getPageWrappers().get(0));
-		}catch(Exception e){
+		try {
+			foregroundManager.setToForeground(plugins.get(0).getPageWrappers()
+					.get(0));
+		} catch (Exception e) {
 		}
 	}
 

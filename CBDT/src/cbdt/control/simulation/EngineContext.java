@@ -22,9 +22,10 @@ import cbdt.model.parameters.Parameters;
 import cbdt.model.result.Result;
 
 /**
- * This class constitutes the context class of the strategy pattern.
- * It chooses the simulation algorithm based on the engine config choice model.
- * @author S-lenovo
+ * This class constitutes the context class of the strategy pattern. It chooses
+ * the simulation algorithm based on the engine config choice model.
+ * 
+ * @author Stephan da Costa Ribeiro
  */
 public class EngineContext {
 

@@ -24,7 +24,7 @@ import cbdt.view.parameterspage.parameters.aspirationlevel.InitialAspirationLeve
  * This composite contains the view elements that deal with the user's parameter
  * input.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public class ParametersConfigPageComposite extends Composite {
 

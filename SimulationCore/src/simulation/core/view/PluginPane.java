@@ -6,9 +6,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * This class fills the part of the main shell where the view 
- * content of the ISimulationPlugins will be displayed.
- * @author S-lenovo
+ * This class fills the part of the main shell where the view content of the
+ * ISimulationPlugins will be displayed.
+ * 
+ * @author Stephan da Costa Ribeiro
  */
 public class PluginPane extends Composite {
 
@@ -24,7 +25,7 @@ public class PluginPane extends Composite {
 		mainPaneGridData.horizontalAlignment = GridData.FILL;
 		mainPaneGridData.grabExcessHorizontalSpace = true;
 		this.setLayoutData(mainPaneGridData);
-		
+
 		this.setLayout(new FillLayout());
 	}
 

@@ -10,7 +10,7 @@ import cbdt.view.CBDTHeaderComposite;
 /**
  * This class wraps the {@link ParametersConfigPageComposite}.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public class ParametersConfigPageWrapper extends AbstractPluginPageWrapper {
 

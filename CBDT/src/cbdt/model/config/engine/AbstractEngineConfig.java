@@ -8,7 +8,7 @@ import java.util.Observable;
  * to the implementing class the algorithm for simulation computation is to be
  * selected.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public abstract class AbstractEngineConfig extends Observable {
 

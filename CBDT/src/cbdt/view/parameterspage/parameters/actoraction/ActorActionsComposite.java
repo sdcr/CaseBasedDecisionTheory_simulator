@@ -24,7 +24,7 @@ import cbdt.view.parameterspage.parameters.actoraction.listeners.AddActorActionM
  * {@link ActorAction}s. In particular, it allows the creation and removal of
  * {@link ActorAction}s.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public class ActorActionsComposite extends
 		AbstractParametersControllerAccessComposite implements Observer {

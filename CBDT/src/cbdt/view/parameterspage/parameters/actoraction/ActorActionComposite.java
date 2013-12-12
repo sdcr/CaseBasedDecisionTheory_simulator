@@ -26,7 +26,7 @@ import cbdt.view.parameterspage.parameters.actoraction.outcomes.ActorActionOutco
  * {@link ActorAction}. In specific, it contains a table with which the user can
  * modify a set of {@link ActorActionOutcome}s.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public class ActorActionComposite extends
 		AbstractParametersControllerAccessComposite implements Observer {

@@ -16,7 +16,7 @@ import cbdt.view.parameterspage.parameters.actoraction.outcomes.listeners.AddOut
  * This class extends {@link TableViewer} and allows the displaying and
  * modification of {@link ActorActionOutcome}s.
  * 
- * @author S-lenovo
+ * @author Stephan da Costa Ribeiro
  */
 public class ActorActionOutcomesTableViewer extends TableViewer {
 
