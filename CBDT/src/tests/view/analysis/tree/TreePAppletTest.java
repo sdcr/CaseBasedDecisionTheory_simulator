@@ -3,7 +3,7 @@ package tests.view.analysis.tree;
 import org.junit.Before;
 import org.junit.Test;
 
-import cbdt.control.simulation.algorithm.dfskeeptree.NodeShell;
+import cbdt.model.result.tree.NodeShell;
 
 public class TreePAppletTest {
 	

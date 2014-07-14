@@ -1,6 +1,5 @@
 package cbdt.model.parameters;
 
-//GREEN
 /**
  * This factory class is able to produce default objects of the
  * {@link Parameters}, {@link ActorAction} and {@link ActorActionOutcome} model

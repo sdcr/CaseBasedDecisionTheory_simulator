@@ -1,6 +1,5 @@
 package cbdt.control.parameterspage.config.engine;
 
-//GREEN
 import cbdt.model.config.engine.AbstractEngineConfig;
 
 /**

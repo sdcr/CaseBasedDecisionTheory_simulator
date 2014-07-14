@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-//YELLOW
 /**
  * The class modeling the parameters with which a simulation should be
  * performed. This model class is to be distinguished from classes modeling

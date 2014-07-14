@@ -24,8 +24,6 @@ public class CommonConfigController {
 	}
 
 	/**
-	 * TODO more details
-	 * 
 	 * @param selection
 	 *            The value whether absolute action occurrences shall be
 	 *            calculated.
@@ -35,8 +33,6 @@ public class CommonConfigController {
 	}
 
 	/**
-	 * TODO more details
-	 * 
 	 * @param selection
 	 *            The value whether relative action occurrences shall be
 	 *            calculated.
@@ -55,8 +51,6 @@ public class CommonConfigController {
 	}
 
 	/**
-	 * TODO more details
-	 * 
 	 * @param selection
 	 *            The value whether at each simulation step the lowest
 	 *            aspiration level should be calculated.

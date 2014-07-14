@@ -1,6 +1,5 @@
 package cbdt.model.config.engine;
 
-//GREEN
 /**
  * This class models the engine configuration for the DFSmatrix algorithm. There
  * are currently no settings which can be set for an execution with this

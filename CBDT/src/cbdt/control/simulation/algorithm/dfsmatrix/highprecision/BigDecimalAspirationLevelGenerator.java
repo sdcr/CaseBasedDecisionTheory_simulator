@@ -5,6 +5,12 @@ import java.math.BigDecimal;
 import cbdt.control.simulation.algorithm.IndexOfAspirationLevelIncrementStageProvider;
 import cbdt.control.simulation.algorithm.NodeVisitor;
 
+/**
+ * This class encapsulates the computation of aspiration levels suited for {@link BigDecimal}.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class BigDecimalAspirationLevelGenerator {
 
 	int numberOfActorActions;
@@ -17,6 +23,14 @@ public class BigDecimalAspirationLevelGenerator {
 
 	private BigDecimal aspirationLevelIncrement;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param numberOfActorActions
+	 * @param aspirationLevelDiscountFactor
+	 * @param isUsingAspirationLevelIncrement
+	 * @param aspirationLevelIncrement
+	 */
 	public BigDecimalAspirationLevelGenerator(int numberOfActorActions, BigDecimal aspirationLevelDiscountFactor, boolean isUsingAspirationLevelIncrement, BigDecimal aspirationLevelIncrement) {
 		this.numberOfActorActions = numberOfActorActions;
 		this.aspirationLevelDiscountFactor = aspirationLevelDiscountFactor;
@@ -25,22 +39,30 @@ public class BigDecimalAspirationLevelGenerator {
 		increaseIndexProvider = new IndexOfAspirationLevelIncrementStageProvider();
 	}
 	
-	public BigDecimal calculateChildsAspirationLevel(BigDecimalNodeContent parentContent,
-			BigDecimalNodeContent childContent, int indexOfChildrensStage) {
+	/**
+	 * Computes the aspiration level of the child node using {@link BigDecimal}.
+	 * 
+	 * @param parentContent
+	 * @param childContent
+	 * @param indexOfChildrensStage
+	 * @return
+	 */
+	public BigDecimal calculateChildsAspirationLevel(BigDecimalMatrixNodeContent parentContent,
+			BigDecimalMatrixNodeContent childContent, int indexOfChildrensStage) {
 		if(isUsingAspirationLevelIncrement && increaseIndexProvider.isStageToIncreaseAspirationLevel(indexOfChildrensStage))
 			return computeChildsMaxAverageUtility(childContent).add(aspirationLevelIncrement, NodeVisitor.mathContext);
 		else
 			return computeDiscountAspirationLevel(parentContent, childContent);
 	}
 
-	private BigDecimal computeDiscountAspirationLevel(BigDecimalNodeContent parentContent,
-			BigDecimalNodeContent childContent) {
+	private BigDecimal computeDiscountAspirationLevel(BigDecimalMatrixNodeContent parentContent,
+			BigDecimalMatrixNodeContent childContent) {
 		return parentContent.aspirationLevel.multiply(aspirationLevelDiscountFactor, NodeVisitor.mathContext).add(
 				computeChildsMaxAverageUtility(childContent).multiply(NodeVisitor.big_one.subtract(aspirationLevelDiscountFactor,
 						NodeVisitor.mathContext), NodeVisitor.mathContext), NodeVisitor.mathContext);
 	}
 
-	private BigDecimal computeChildsMaxAverageUtility(BigDecimalNodeContent childContent) {
+	private BigDecimal computeChildsMaxAverageUtility(BigDecimalMatrixNodeContent childContent) {
 		BigDecimal maxAverageUtility = new BigDecimal(Integer.MIN_VALUE);
 		for(int existingActionIndex=0; existingActionIndex<numberOfActorActions; existingActionIndex++){
 			BigDecimal actionOccurances = childContent.numberOfOccurances[existingActionIndex];
@@ -52,6 +74,5 @@ public class BigDecimalAspirationLevelGenerator {
 		}
 		return maxAverageUtility;
 	}
-
 	
 }

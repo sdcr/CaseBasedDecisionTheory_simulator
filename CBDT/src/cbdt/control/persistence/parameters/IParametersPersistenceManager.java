@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import cbdt.model.parameters.Parameters;
 
-//GREEN
 /**
  * An interface for a manager which is able to store and load {@link Parameters}
  * objects to a file. It is not required to be able to store or load configs.

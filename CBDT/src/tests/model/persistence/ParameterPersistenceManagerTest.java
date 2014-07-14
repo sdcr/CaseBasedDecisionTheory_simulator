@@ -61,7 +61,6 @@ public class ParameterPersistenceManagerTest {
 		try {
 			fromFile = persistenceManager.getParametersFromFile(params_filepath);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertTrue(params.equals(fromFile));

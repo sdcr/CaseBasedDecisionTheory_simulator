@@ -11,10 +11,8 @@ import cbdt.model.config.SimulationConfigFactory;
 import cbdt.model.config.common.CommonConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.model.parameters.Parameters;
-import cbdt.view.parameterspage.ParametersConfigPageWrapper;
+import cbdt.view.parameterspage.ParametersAndConfigPageWrapper;
 
-//YELLOW
-//maybe create a dedicated simulationController.
 /**
  * The controller of the parameters-config page. All handling of requests to
  * change the {@link Parameters}, the {@link CommonConfig}, or the
@@ -31,7 +29,7 @@ public class ParametersConfigPageController extends AbstractPageController {
 	/**
 	 * The wrapper of the associated parameters-config page.
 	 */
-	private ParametersConfigPageWrapper parametersConfigPageWrapper;
+	private ParametersAndConfigPageWrapper parametersConfigPageWrapper;
 
 	/* controllers to which request handling is outsourced */
 	/**
@@ -54,13 +52,13 @@ public class ParametersConfigPageController extends AbstractPageController {
 	private SimulationConfig simulationConfig;
 
 	/**
-	 * Constructor. Instantiates the {@link ParametersConfigPageWrapper}, the
+	 * Constructor. Instantiates the {@link ParametersAndConfigPageWrapper}, the
 	 * controllers to which request handling is outsourced and sets the
 	 * {@link SimulationConfig} to default.
 	 */
 	public ParametersConfigPageController() {
 		// create parameters page wrapper (view)
-		parametersConfigPageWrapper = new ParametersConfigPageWrapper(this);
+		parametersConfigPageWrapper = new ParametersAndConfigPageWrapper(this);
 
 		// create parameters controller
 		parametersController = new ParametersController(this);
@@ -79,7 +77,7 @@ public class ParametersConfigPageController extends AbstractPageController {
 	}
 
 	@Override
-	public ParametersConfigPageWrapper getPageWrapper() {
+	public ParametersAndConfigPageWrapper getPageWrapper() {
 		return parametersConfigPageWrapper;
 	}
 

@@ -36,7 +36,6 @@ public abstract class OpenFileDialogSelectionListener implements
 	 * @param filterExt
 	 *            The file extension the {@link FileDialog} should filter for.
 	 * @return Returns the {@link String} of the file path the user selected.
-	 *         TODO what happens if the user cancels the file selection.
 	 */
 	protected String getFilepathFromDialog(int style, String title,
 			String[] filterExt) {

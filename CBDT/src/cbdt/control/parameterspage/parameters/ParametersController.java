@@ -1,6 +1,5 @@
 package cbdt.control.parameterspage.parameters;
 
-//YELLOW
 import java.io.FileNotFoundException;
 
 import cbdt.control.parameterspage.ParametersConfigPageController;
@@ -10,7 +9,7 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 import cbdt.model.parameters.ParametersFactory;
-import cbdt.view.parameterspage.ParametersConfigPageComposite;
+import cbdt.view.parameterspage.ParametersAndConfigPageComposite;
 
 /**
  * The ParametersController handles all requests which demand changes in the
@@ -100,7 +99,7 @@ public class ParametersController {
 	 * Uses the {@link ParametersFactory} to create a default
 	 * {@link ActorActionOutcome} object and adds it to the passed
 	 * {@link ActorAction}. Also calls setFocus() in the
-	 * {@link ParametersConfigPageComposite}.
+	 * {@link ParametersAndConfigPageComposite}.
 	 * 
 	 * @param actorAction
 	 * @return The created {@link ActorActionOutcome} object.
@@ -169,8 +168,6 @@ public class ParametersController {
 	 * Set whether the aspiration level should be incremented at sparse
 	 * simulation steps.
 	 * 
-	 * TODO: more details about when the level is increased.
-	 * 
 	 * @param selection
 	 */
 	public void setIncrementAspirationLevelSparsely(boolean selection) {
@@ -185,8 +182,7 @@ public class ParametersController {
 	 * 
 	 * @param filepath
 	 *            The filepath under which to find the file with the parameters
-	 *            model. TODO: more details about whether an absolute path is
-	 *            necessary, or if a relative path is enough.
+	 *            model. 
 	 */
 	public void loadParametersFromFile(String filepath) {
 		try {
@@ -211,9 +207,7 @@ public class ParametersController {
 	 * {@link ParametersPersistenceManager}.
 	 * 
 	 * @param filepath
-	 *            The filepath under which to store the parameters model. TODO:
-	 *            more details about whether an absolute path is necessary, or
-	 *            if a relative path is enough.
+	 *            The filepath under which to store the parameters model. 
 	 */
 	public void saveParametersToFile(String filepath) {
 		parametersConfigPageController.goToForeground();

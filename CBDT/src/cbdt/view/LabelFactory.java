@@ -16,17 +16,29 @@ import org.eclipse.swt.widgets.Label;
 public class LabelFactory {
 
 	/**
-	 * Create and return a {@link Label} object for titles.
+	 * Create and return a {@link Label} object with a specific title.
 	 * 
 	 * @param parent
 	 * @param title
 	 * @return
 	 */
 	public Label createTitleLabel(Composite parent, String title) {
-		Label titleLabel = new Label(parent, SWT.NONE);
+		Label titleLabel = createTitleLabel(parent);
 		titleLabel.setText(title);
+		return titleLabel;
+	}
+
+	/**
+	 * Create and return a {@link Label} object with no title specified.
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	public Label createTitleLabel(Composite parent) {
+		Label titleLabel = new Label(parent, SWT.NONE);
 		FontData labelFontData = new FontData("Arial", 11, SWT.BOLD);
 		titleLabel.setFont(new Font(parent.getDisplay(), labelFontData));
 		return titleLabel;
 	}
+
 }

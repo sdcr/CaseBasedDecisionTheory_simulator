@@ -4,7 +4,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 
 import cbdt.model.parameters.ActorAction;
-import cbdt.view.parameterspage.parameters.actoraction.ActorActionsComposite;
+import cbdt.view.parameterspage.parameters.actoraction.ActorActionWrapComposite;
 
 /**
  * This class implements the {@link MouseListener} and is used to cause the
@@ -15,7 +15,7 @@ import cbdt.view.parameterspage.parameters.actoraction.ActorActionsComposite;
  */
 public class AddActorActionMouseListener implements MouseListener {
 
-	private ActorActionsComposite actorActionsComposite;
+	private ActorActionWrapComposite actorActionsComposite;
 
 	/**
 	 * The constructor.
@@ -23,7 +23,7 @@ public class AddActorActionMouseListener implements MouseListener {
 	 * @param actorActionCompositeParent
 	 */
 	public AddActorActionMouseListener(
-			ActorActionsComposite actorActionCompositeParent) {
+			ActorActionWrapComposite actorActionCompositeParent) {
 		this.actorActionsComposite = actorActionCompositeParent;
 	}
 

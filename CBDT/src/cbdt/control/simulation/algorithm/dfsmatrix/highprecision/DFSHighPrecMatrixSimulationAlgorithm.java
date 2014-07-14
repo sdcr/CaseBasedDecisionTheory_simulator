@@ -9,46 +9,59 @@ import cbdt.model.parameters.ActorAction;
 import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 
-public class DFSHighPrecMatrixSimulationAlgorithm extends DFSMatrixSimulationAlgorithm {
+/**
+ * This algorithm class is able to compute the simulation {@link Result} without
+ * instantiating an actual tree. It furthermore uses BigDecimal objects to allow
+ * an arbitrarily high precision.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
+public class DFSHighPrecMatrixSimulationAlgorithm extends
+		DFSMatrixSimulationAlgorithm {
 
 	private BigDecimalSimulationState simState;
 
 	@Override
 	public void computeResult(Result initResult) throws InterruptedException {
-		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters, commonConfig);
+		BigDecimalInitFactory factory = new BigDecimalInitFactory(parameters,
+				commonConfig);
 		simState = factory.getInitBigDecimalSimulationState();
-		
-		BigDecimalVirtualNodeContentVisitor visitor = new BigDecimalVirtualNodeContentVisitor(parameters, 
-				commonConfig, monitor, simState);
+
+		BigDecimalVirtualNodeContentVisitor visitor = new BigDecimalVirtualNodeContentVisitor(
+				parameters, commonConfig, monitor, simState);
 
 		computeWithVisitor(initResult, visitor);
-		
-		for(int stage=0; stage<initResult.getStageResults().size(); stage++){
-			BigDecimalStageResult stageResult = (BigDecimalStageResult)initResult.getStageResults().get(stage);
+
+		for (int stage = 0; stage < initResult.getStageResults().size(); stage++) {
+			BigDecimalStageResult stageResult = (BigDecimalStageResult) initResult
+					.getStageResults().get(stage);
 			stageResult.setStage(stage);
-			stageResult.setExpectedBigDecimalUtility(simState.expectedUtilities[stage]);
-			stageResult.setLowestBigDecimalAspirationLevel(simState.lowestAspirationLevels[stage]);
-			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = makeToBigDecimalMap(stage, simState.absoluteActionOccurances);
-			stageResult.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
-			Map<ActorAction, BigDecimal> relativeActionOccurancesMap = makeToBigDecimalMap(stage, simState.relativeActionOccurances);
-			stageResult.setRelativeBigDecimalActionOccurances(relativeActionOccurancesMap);
+			stageResult
+					.setExpectedBigDecimalUtility(simState.expectedUtilities[stage]);
+			stageResult
+					.setLowestBigDecimalAspirationLevel(simState.lowestAspirationLevels[stage]);
+			Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = makeToBigDecimalMap(
+					stage, simState.absoluteActionOccurances);
+			stageResult
+					.setAbsoluteActionOccurances(absoluteActionOccurancesMap);
+			Map<ActorAction, BigDecimal> relativeActionOccurancesMap = makeToBigDecimalMap(
+					stage, simState.relativeActionOccurances);
+			stageResult
+					.setRelativeBigDecimalActionOccurances(relativeActionOccurancesMap);
 		}
 	}
 
-	private Map<ActorAction, BigDecimal> makeToBigDecimalMap(int stage, BigDecimal[][] actionOccurances) {
+	private Map<ActorAction, BigDecimal> makeToBigDecimalMap(int stage,
+			BigDecimal[][] actionOccurances) {
 		Map<ActorAction, BigDecimal> absoluteActionOccurancesMap = new HashMap<ActorAction, BigDecimal>();
-		for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
-			absoluteActionOccurancesMap.put(parameters.getActorActions().get(actionIndex), actionOccurances[stage][actionIndex]);
+		for (int actionIndex = 0; actionIndex < parameters.getActorActions()
+				.size(); actionIndex++) {
+			absoluteActionOccurancesMap.put(
+					parameters.getActorActions().get(actionIndex),
+					actionOccurances[stage][actionIndex]);
 		}
 		return absoluteActionOccurancesMap;
 	}
-//
-//	private Map<ActorAction, Double> makeToDoubleMap(int stage, BigDecimal[][] actionOccurances) {
-//		Map<ActorAction, Double> actionOccurancesMap = new HashMap<ActorAction, Double>();
-//		for(int actionIndex=0; actionIndex<parameters.getActorActions().size(); actionIndex++){
-//			actionOccurancesMap.put(parameters.getActorActions().get(actionIndex), actionOccurances[stage][actionIndex].doubleValue());
-//		}
-//		return actionOccurancesMap;
-//	}
 
 }

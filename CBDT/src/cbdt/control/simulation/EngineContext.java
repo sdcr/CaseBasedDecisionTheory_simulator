@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import cbdt.control.simulation.algorithm.SimulationAlgorithm;
+import cbdt.control.simulation.algorithm.AbstractSimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfskeeptree.DFSKeepTreeSimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfsmatrix.DFSMatrixSimulationAlgorithm;
 import cbdt.control.simulation.algorithm.dfsmatrix.highprecision.DFSHighPrecMatrixSimulationAlgorithm;
@@ -23,7 +23,7 @@ import cbdt.model.result.Result;
 
 /**
  * This class constitutes the context class of the strategy pattern. It chooses
- * the simulation algorithm based on the engine config choice model.
+ * the simulation algorithm based on the chosen {@link AbstractEngineConfig}.
  * 
  * @author Stephan da Costa Ribeiro
  */
@@ -31,55 +31,91 @@ public class EngineContext {
 
 	private Shell shell;
 
-	private AbstractEngineConfig engineConfig;
-	
+	private AbstractEngineConfig chosenEngineConfig;
+
 	private CommonConfig commonConfig;
-	
+
+	/**
+	 * The constructor.
+	 * 
+	 * @param shell
+	 */
 	public EngineContext(Shell shell) {
 		this.shell = shell;
 	}
 
-	public void setEngineConfig(AbstractEngineConfig engineConfig, CommonConfig commonConfig){
-		this.engineConfig = engineConfig;
+	/**
+	 * Sets the chosen {@link AbstractEngineConfig} and the {@link CommonConfig}
+	 * .
+	 * 
+	 * @param chosenEngineConfig
+	 * @param commonConfig
+	 */
+	public void setEngineConfig(AbstractEngineConfig chosenEngineConfig,
+			CommonConfig commonConfig) {
+		this.chosenEngineConfig = chosenEngineConfig;
 		this.commonConfig = commonConfig;
 	}
-	
-	public Result performSimulation(Parameters parameters) throws InterruptedException, InvocationTargetException, InvalidActorActionException{
+
+	/**
+	 * Determines the correct algorithm, based on the set
+	 * {@link AbstractEngineConfig} object and starts the simulation computation
+	 * in a separate thread.
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws InterruptedException
+	 * @throws InvocationTargetException
+	 * @throws InvalidActorActionException
+	 */
+	public Result performSimulation(Parameters parameters)
+			throws InterruptedException, InvocationTargetException,
+			InvalidActorActionException {
 		ParameterValidator parameterValidator = new ParameterValidator();
 		parameterValidator.checkValidity(parameters);
 
 		EmptyResultFactory resultFactory = new EmptyResultFactory();
-		Result result = resultFactory.getEmptyResult(engineConfig, commonConfig, parameters);
-		
-		SimulationAlgorithm algorithm = determineAlgorithm();
+		Result result = resultFactory.getEmptyResult(chosenEngineConfig,
+				commonConfig, parameters);
+
+		AbstractSimulationAlgorithm algorithm = determineAlgorithm();
 		algorithm.setParameters(parameters);
-		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(result, algorithm);
+		ComputationRunnableWithProgress runnable = new ComputationRunnableWithProgress(
+				result, algorithm);
 		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(shell);
 		progressDialog.run(true, true, runnable);
 
 		return result;
 	}
 
-	private SimulationAlgorithm determineAlgorithm() {
-		SimulationAlgorithm algorithm = null;
-		if(engineConfig instanceof DFSkeepTreeEngineConfig){
+	/**
+	 * Determines the {@link AbstractSimulationAlgorithm} according to the set
+	 * {@link AbstractEngineConfig}.
+	 * 
+	 * @return
+	 */
+	private AbstractSimulationAlgorithm determineAlgorithm() {
+		AbstractSimulationAlgorithm algorithm = null;
+		if (chosenEngineConfig instanceof DFSkeepTreeEngineConfig) {
 			DFSKeepTreeSimulationAlgorithm keepTreeAlgorithm = new DFSKeepTreeSimulationAlgorithm();
-			keepTreeAlgorithm.setConfig((DFSkeepTreeEngineConfig) engineConfig);
+			keepTreeAlgorithm
+					.setConfig((DFSkeepTreeEngineConfig) chosenEngineConfig);
 			algorithm = keepTreeAlgorithm;
 		}
-		if(engineConfig instanceof DFSmatrixEngineConfig){
+		if (chosenEngineConfig instanceof DFSmatrixEngineConfig) {
 			DFSMatrixSimulationAlgorithm matrixAlgorithm = new DFSMatrixSimulationAlgorithm();
-			matrixAlgorithm.setMatrixConfig((DFSmatrixEngineConfig) engineConfig);
+			matrixAlgorithm
+					.setMatrixConfig((DFSmatrixEngineConfig) chosenEngineConfig);
 			algorithm = matrixAlgorithm;
 		}
-		if(engineConfig instanceof DFSmatrixHighPrecEngineConfig){
+		if (chosenEngineConfig instanceof DFSmatrixHighPrecEngineConfig) {
 			DFSHighPrecMatrixSimulationAlgorithm matrixHighPrecAlgorithm = new DFSHighPrecMatrixSimulationAlgorithm();
-			matrixHighPrecAlgorithm.setMatrixConfig((DFSmatrixHighPrecEngineConfig) engineConfig);
+			matrixHighPrecAlgorithm
+					.setMatrixConfig((DFSmatrixHighPrecEngineConfig) chosenEngineConfig);
 			algorithm = matrixHighPrecAlgorithm;
 		}
-		if(algorithm != null)
+		if (algorithm != null)
 			algorithm.setCommonConfig(commonConfig);
 		return algorithm;
 	}
 }
-

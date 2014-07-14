@@ -23,8 +23,8 @@ import cbdt.view.parameterspage.parameters.actoraction.outcomes.ActorActionOutco
 
 /**
  * This composite contains all view elements that represent one
- * {@link ActorAction}. In specific, it contains a table with which the user can
- * modify a set of {@link ActorActionOutcome}s.
+ * {@link ActorAction}. In particular, it contains a table with which the user
+ * can modify a set of {@link ActorActionOutcome}s.
  * 
  * @author Stephan da Costa Ribeiro
  */
@@ -145,6 +145,11 @@ public class ActorActionComposite extends
 			updateProbabilityHintVisibility();
 	}
 
+	/**
+	 * If the probability distribution of the represented {@link ActorAction} is
+	 * not valid, the visibility of a {@link ProbabilitySumHintLabelWrapper} is
+	 * set to true. Otherwise it is set to false.
+	 */
 	private void updateProbabilityHintVisibility() {
 		validator = new ParameterValidator();
 		if (validator.hasValidProbabilityDistribution(representedActorAction))

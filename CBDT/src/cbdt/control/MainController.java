@@ -12,7 +12,6 @@ import cbdt.model.parameters.Parameters;
 import cbdt.model.result.Result;
 import cbdt.view.MessageBoxManager;
 
-//YELLOW
 /**
  * The main controller of the CBDT plugin, within the MVC architecture of the
  * plugin. <br>
@@ -72,7 +71,14 @@ public class MainController {
 		simulationEngine = new EngineContext(foregroundManager.getShell());
 	}
 
-	// TODO write javadoc
+	/**
+	 * Starts the computation of the simulation. Takes care of aborts, and
+	 * different {@link Exception}s which can occur during the computation.
+	 * Shows message boxes if appropriate.
+	 * 
+	 * @param parameters
+	 * @param configChoice
+	 */
 	public void computeCDBTSimulation(Parameters parameters,
 			SimulationConfig configChoice) {
 		simulationEngine.setEngineConfig(

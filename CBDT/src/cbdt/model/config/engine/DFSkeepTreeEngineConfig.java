@@ -2,7 +2,6 @@ package cbdt.model.config.engine;
 
 import cbdt.model.parameters.ActorAction;
 
-//GREEN
 /**
  * This class models the configuration for the DFSkeepTree algorithm.
  * 

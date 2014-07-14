@@ -16,6 +16,12 @@ import cbdt.view.LabelFactory;
 import cbdt.view.analysispage.listeners.ExportResultSelectionListener;
 import cbdt.view.analysispage.listeners.ShowTreeSelectionListener;
 
+/**
+ * This class extends {@link Composite} to define the analysis page.
+ * 
+ * @author Stephan da Costa Ribeiro
+ *
+ */
 public class AnalysisPageComposite extends Composite {
 
 	/**

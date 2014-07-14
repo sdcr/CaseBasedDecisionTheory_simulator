@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-//GREEN
 /**
  * ActorAction models one action alternative, the actor has under the CBDT
  * model. It consists of several {@link ActorActionOutcome}s.

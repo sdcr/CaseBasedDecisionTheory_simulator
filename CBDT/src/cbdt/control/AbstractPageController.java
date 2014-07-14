@@ -2,7 +2,6 @@ package cbdt.control;
 
 import simulation.extensionpoint.simulationplugin.definition.AbstractPluginPageWrapper;
 
-//GREEN
 /**
  * A subclass of the {@link AbstractPageController} is the controller for a
  * specific plugin page. It is the receiver of all requests from the user via

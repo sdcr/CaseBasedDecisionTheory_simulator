@@ -41,6 +41,5 @@ public class IncrementAspirationLevelSparselySelectionListener implements
 
 	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
-		// TODO Auto-generated method stub
 	}
 }

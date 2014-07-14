@@ -11,7 +11,6 @@ import cbdt.model.parameters.Parameters;
 
 import com.thoughtworks.xstream.XStream;
 
-//GREEN
 /**
  * A {@link IParametersPersistenceManager} which uses XML to store
  * {@link Parameters} objects.
@@ -28,6 +27,9 @@ public class ParametersPersistenceManager implements
 
 	private XStream xStream;
 
+	/**
+	 * Constructor.
+	 */
 	public ParametersPersistenceManager() {
 		xStream = new XStream();
 		xStream.setClassLoader(getClass().getClassLoader());

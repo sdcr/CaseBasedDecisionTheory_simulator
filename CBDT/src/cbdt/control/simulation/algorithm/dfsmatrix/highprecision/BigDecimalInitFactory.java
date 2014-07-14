@@ -3,12 +3,20 @@ package cbdt.control.simulation.algorithm.dfsmatrix.highprecision;
 import java.math.BigDecimal;
 import java.util.List;
 
-import cbdt.control.simulation.algorithm.INodeContent;
 import cbdt.control.simulation.algorithm.dfsmatrix.AbstractInitFactory;
+import cbdt.control.simulation.algorithm.dfsmatrix.IAlgoNodeContent;
+import cbdt.control.simulation.algorithm.dfsmatrix.SimulationState;
 import cbdt.model.config.common.CommonConfig;
 import cbdt.model.parameters.ActorActionOutcome;
 import cbdt.model.parameters.Parameters;
 
+/**
+ * This class produces initial objects for the {@link SimulationState}, suited
+ * for {@link BigDecimal} computation.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class BigDecimalInitFactory extends AbstractInitFactory {
 
 	public BigDecimalInitFactory(Parameters parameters,
@@ -17,20 +25,20 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 	}
 
 	@Override
-	public INodeContent[][] getInitialContentsMatrix() {
+	public IAlgoNodeContent[][] getInitialContentsMatrix() {
 		int numberOfOutcomes = getNumberOfOutcomes();
-		BigDecimalNodeContent[][] contentsMatrix = new BigDecimalNodeContent[commonConfig
+		BigDecimalMatrixNodeContent[][] contentsMatrix = new BigDecimalMatrixNodeContent[commonConfig
 				.getNumberOfRequestedExpectedUtilityValues() + 1][numberOfOutcomes];
 		for (int i = 0; i < contentsMatrix.length; i++) {
 			for (int j = 0; j < contentsMatrix[i].length; j++) {
-				contentsMatrix[i][j] = new BigDecimalNodeContent();
+				contentsMatrix[i][j] = new BigDecimalMatrixNodeContent();
 				contentsMatrix[i][j].numberOfOccurances = getInitContentsNumberOfOccurences();
 				contentsMatrix[i][j].sumOfUtilities = getInitContentsSumOfUtilities();
 			}
 		}
 
 		// root element in contentsMatrix
-		BigDecimalNodeContent rootContent = contentsMatrix[0][0];
+		BigDecimalMatrixNodeContent rootContent = contentsMatrix[0][0];
 		rootContent.aspirationLevel = new BigDecimal(
 				parameters.getInitialAspirationLevel());
 		rootContent.probabilityProduct = new BigDecimal(1.0);
@@ -58,7 +66,7 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 	@Override
 	public Object[] getInitExpectedUtilities() {
 		BigDecimal[] expectedUtilities = new BigDecimal[commonConfig
-				.getNumberOfRequestedExpectedUtilityValues()+1];
+				.getNumberOfRequestedExpectedUtilityValues() + 1];
 		for (int i = 0; i < expectedUtilities.length; i++)
 			expectedUtilities[i] = new BigDecimal(0);
 		return expectedUtilities;
@@ -67,13 +75,14 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 	@Override
 	public BigDecimal[] getInitLowestAspirationLevels() {
 		BigDecimal[] lowestAspirationLevels = new BigDecimal[commonConfig
-		                                                .getNumberOfRequestedExpectedUtilityValues()+1];
-		lowestAspirationLevels[0] = new BigDecimal(parameters.getInitialAspirationLevel());
+				.getNumberOfRequestedExpectedUtilityValues() + 1];
+		lowestAspirationLevels[0] = new BigDecimal(
+				parameters.getInitialAspirationLevel());
 		for (int i = 1; i < lowestAspirationLevels.length; i++)
 			lowestAspirationLevels[i] = new BigDecimal(Integer.MAX_VALUE);
 		return lowestAspirationLevels;
 	}
-	
+
 	@Override
 	public ActorActionOutcome[][] getOutcomeMatrix() {
 		BigDecimalActorActionOutcome[][] outcomeMatrix = new BigDecimalActorActionOutcome[parameters
@@ -93,26 +102,20 @@ public class BigDecimalInitFactory extends AbstractInitFactory {
 		return outcomeMatrix;
 	}
 
-	public BigDecimalSimulationState getInitBigDecimalSimulationState(){
+	/**
+	 * @return an initial {@link SimulationState} object for {@link BigDecimal}
+	 *         computation.
+	 */
+	public BigDecimalSimulationState getInitBigDecimalSimulationState() {
 		BigDecimalSimulationState simState = new BigDecimalSimulationState();
-		simState.absoluteActionOccurances = this.getInitialActionOccurances();
-		simState.relativeActionOccurances = this.getInitialActionOccurances();
-		simState.expectedUtilities = (BigDecimal[]) this.getInitExpectedUtilities();
+		simState.absoluteActionOccurances = this.getInitialActionOccurrences();
+		simState.relativeActionOccurances = this.getInitialActionOccurrences();
+		simState.expectedUtilities = (BigDecimal[]) this
+				.getInitExpectedUtilities();
 		simState.lowestAspirationLevels = this.getInitLowestAspirationLevels();
-		simState.contentsMatrix = (BigDecimalNodeContent[][]) this.getInitialContentsMatrix();
+		simState.contentsMatrix = (BigDecimalMatrixNodeContent[][]) this
+				.getInitialContentsMatrix();
 		return simState;
 	}
-	
-//	@Override
-//	public BigDecimal[][] getInitialRelativeActionOccurances() {
-//		int numberOfActorActions = parameters.getActorActions().size();
-//		BigDecimal[][] relativeActionOccurances = new BigDecimal[commonConfig.getNumberOfRequestedExpectedUtilityValues()][numberOfActorActions];
-//		for(int i=0; i<commonConfig.getNumberOfRequestedExpectedUtilityValues(); i++){
-//			for (int j=0; j<numberOfActorActions; j++) {
-//				relativeActionOccurances[i][j] = new BigDecimal(0);
-//			}
-//		}
-//		return relativeActionOccurances;
-//	}
 
 }

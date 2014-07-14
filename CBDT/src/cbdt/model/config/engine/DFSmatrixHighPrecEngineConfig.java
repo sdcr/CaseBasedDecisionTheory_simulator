@@ -1,6 +1,5 @@
 package cbdt.model.config.engine;
 
-//GREEN
 /**
  * This class models the engine configuration for an execution with the
  * DFSmatrixHighPrecision algorithm.

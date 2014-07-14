@@ -17,7 +17,7 @@ import cbdt.model.parameters.ActorActionOutcome;
  */
 public class AddOutcomeSelectionListener implements SelectionListener {
 
-	private TableItem emptyTableItem;
+	private TableItem addOutcomeTableItem;
 	private ParametersController controller;
 	private ActorAction actorAction;
 
@@ -33,21 +33,30 @@ public class AddOutcomeSelectionListener implements SelectionListener {
 		super();
 		this.controller = controller;
 		this.actorAction = actorAction;
-		this.emptyTableItem = emptyTableItem;
+		this.addOutcomeTableItem = emptyTableItem;
 	}
 
-	public TableItem getEmptyTableItem() {
-		return emptyTableItem;
+	/**
+	 * @return The table item which is to be used as a button, to add an
+	 *         {@link ActorActionOutcome} to an {@link ActorAction}.
+	 */
+	public TableItem getAddOutcomeTableItem() {
+		return addOutcomeTableItem;
 	}
 
-	public void setEmptyTableItem(TableItem emptyTableItem) {
-		this.emptyTableItem = emptyTableItem;
+	/**
+	 * @param emptyTableItem
+	 *            The table item which is to be used as a button, to add an
+	 *            {@link ActorActionOutcome} to an {@link ActorAction}.
+	 */
+	public void setAddOutcomeTableItem(TableItem emptyTableItem) {
+		this.addOutcomeTableItem = emptyTableItem;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		TableItem selectedItem = (TableItem) e.item;
-		if (selectedItem.equals(emptyTableItem)) {
+		if (selectedItem.equals(addOutcomeTableItem)) {
 			controller.addDefaultActorActionOutcomeToModel(actorAction);
 		}
 	}

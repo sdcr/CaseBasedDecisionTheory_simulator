@@ -28,6 +28,10 @@ public abstract class AbstractAspirationLevelParameterComposite extends
 		this.setHintLabel(new SimpleParameterHintLabelWrapper(this));
 	}
 
+	/**
+	 * @param parametersModel
+	 *            The {@link Parameters} model to be displayed.
+	 */
 	public void setParametersModel(Parameters parametersModel) {
 		parametersModel.addObserver(this);
 		this.update(parametersModel, null);

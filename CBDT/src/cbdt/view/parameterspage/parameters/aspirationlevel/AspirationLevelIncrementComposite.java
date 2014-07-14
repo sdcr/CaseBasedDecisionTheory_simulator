@@ -81,7 +81,7 @@ public class AspirationLevelIncrementComposite extends Composite implements
 	}
 
 	/**
-	 * Shecks if the current value is valid.
+	 * Checks if the current value is valid.
 	 * 
 	 * @return
 	 */

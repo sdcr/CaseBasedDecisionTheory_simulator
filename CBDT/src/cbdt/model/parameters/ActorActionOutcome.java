@@ -2,7 +2,6 @@ package cbdt.model.parameters;
 
 import java.util.Observable;
 
-//GREEN
 /**
  * This class models one outcome that is possible, when the actor chooses the
  * respective action. One {@link ActorActionOutcome} belongs to one an

@@ -1,6 +1,13 @@
 package cbdt.control.validators;
 
+import cbdt.model.parameters.ActorAction;
 
+/**
+ * An exception reporting that an {@link ActorAction} is not valid.
+ * 
+ * @author Stephan da Costa Ribeiro
+ *
+ */
 public class InvalidActorActionException extends Exception{
 	
 	/**

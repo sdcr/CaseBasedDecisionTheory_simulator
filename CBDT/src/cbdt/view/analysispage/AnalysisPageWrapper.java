@@ -8,7 +8,9 @@ import cbdt.control.analysispage.AnalysisPageController;
 import cbdt.view.CBDTHeaderComposite;
 
 /**
- * This class wraps the analysis page.
+ * This class wraps the {@link AnalysisPageComposite}. It does so, to allow the
+ * analysis page to be accessible via the simulation module explorer of the
+ * Simulation Container.
  * 
  * @author Stephan da Costa Ribeiro
  * 
@@ -28,6 +30,7 @@ public class AnalysisPageWrapper extends AbstractPluginPageWrapper {
 
 	/**
 	 * The constructor.
+	 * 
 	 * @param controller
 	 */
 	public AnalysisPageWrapper(AnalysisPageController controller) {

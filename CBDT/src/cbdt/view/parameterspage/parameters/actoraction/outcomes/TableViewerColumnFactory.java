@@ -67,6 +67,9 @@ public class TableViewerColumnFactory {
 		return viewerColumn;
 	}
 
+	/**
+	 * @return The {@link RemoveColumnLabelProvider} to remove labels.
+	 */
 	public RemoveColumnLabelProvider getRemoveColumnLabelProvider() {
 		return removeColumnLabelProvider;
 	}

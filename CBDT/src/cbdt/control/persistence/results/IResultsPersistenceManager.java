@@ -6,7 +6,6 @@ import cbdt.model.config.common.CommonConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.model.result.Result;
 
-//GREEN
 /**
  * An interface for a manager which is able to store {@link Result}s and configs
  * to a file. It does not require he ability to load results or configs.

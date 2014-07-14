@@ -1,7 +1,12 @@
 package cbdt.control.validators;
 
-
-
+/**
+ * A subclass of {@link NumberFormatChecker}, which checks whether a String
+ * value can be parsed as a {@link Integer}.
+ * 
+ * @author Stephan da Costa Ribeiro
+ * 
+ */
 public class IntegerFormatChecker implements NumberFormatChecker {
 
 	@Override

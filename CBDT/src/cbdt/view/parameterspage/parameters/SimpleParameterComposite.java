@@ -18,6 +18,7 @@ import cbdt.view.HintLabelWrapper;
 public class SimpleParameterComposite extends Composite {
 
 	private Text text;
+	
 	private HintLabelWrapper hintLabel;
 
 	private NumberFormatChecker numberFormatChecker;
@@ -41,26 +42,52 @@ public class SimpleParameterComposite extends Composite {
 		text.setLayoutData(gridDataFactory.getTextGridData());
 	}
 
+	/**
+	 * @return The {@link Text} object contained in this composite.
+	 */
 	public Text getText() {
 		return text;
 	}
 
+	/**
+	 * @return A {@link HintLabelWrapper} that can display a hint about the
+	 *         parameter represented by this composite.
+	 */
 	public HintLabelWrapper getHintLabel() {
 		return hintLabel;
 	}
 
+	/**
+	 * @param hintLabel
+	 *            A {@link HintLabelWrapper} that can display a hint about the
+	 *            parameter represented by this composite.
+	 */
 	public void setHintLabel(HintLabelWrapper hintLabel) {
 		this.hintLabel = hintLabel;
 	}
 
+	/**
+	 * @return Returns whether the {@link Text} field of this
+	 *         {@link SimpleParameterComposite} is valid, according to the
+	 *         associated {@link NumberFormatChecker}.<br>
+	 * <br>
+	 *         The {@link NumberFormatChecker} of this object must be set before
+	 *         calling this method.
+	 */
 	public boolean hasValidValue() {
 		return numberFormatChecker.isValidValue(text.getText());
 	}
 
+	/**
+	 * @return The {@link NumberFormatChecker} of this object.
+	 */
 	public NumberFormatChecker getNumberFormatChecker() {
 		return numberFormatChecker;
 	}
 
+	/**
+	 * @param numberFormatChecker The {@link NumberFormatChecker} of this object.
+	 */
 	public void setNumberFormatChecker(NumberFormatChecker numberFormatChecker) {
 		this.numberFormatChecker = numberFormatChecker;
 	}

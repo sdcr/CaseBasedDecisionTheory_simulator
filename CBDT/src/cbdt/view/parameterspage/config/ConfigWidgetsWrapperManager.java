@@ -13,10 +13,12 @@ import cbdt.control.parameterspage.config.engine.IEngineConfigController;
 import cbdt.control.parameterspage.config.engine.NoEngineConfigControllerException;
 import cbdt.model.config.SimulationConfig;
 import cbdt.model.config.engine.AbstractEngineConfig;
-import cbdt.view.parameterspage.config.widgetswrapper.AbstractEngineConfigWidgetsWrapper;
-import cbdt.view.parameterspage.config.widgetswrapper.CommonConfigWidgetsWrapper;
-import cbdt.view.parameterspage.config.widgetswrapper.EngineConfigWidgetsWrapperFactory;
-import cbdt.view.parameterspage.config.widgetswrapper.NoWidgetWrapperException;
+import cbdt.view.parameterspage.config.common.CommonConfigWidgetsWrapper;
+import cbdt.view.parameterspage.config.engine.AbstractEngineConfigWidgetsWrapper;
+import cbdt.view.parameterspage.config.engine.EngineConfigForegroundManager;
+import cbdt.view.parameterspage.config.engine.EngineConfigWidgetsWrapperFactory;
+import cbdt.view.parameterspage.config.engine.NoWidgetWrapperFoundException;
+import cbdt.view.parameterspage.config.engine.listeners.EngineConfigSelectionListener;
 
 /**
  * This class manages the instantiation of classes which wrap config widgets.
@@ -26,18 +28,15 @@ import cbdt.view.parameterspage.config.widgetswrapper.NoWidgetWrapperException;
  */
 public class ConfigWidgetsWrapperManager implements Observer {
 
-	// TODO: consider refactoring and redesign of this implementation
-
 	private Combo availableConfigsCombo;
 	private Composite parametersPage;
 	private ParametersConfigPageController controller;
-	private ConfigForegroundManager foregroundManager;
+	private EngineConfigForegroundManager foregroundManager;
 	private EngineConfigWidgetsWrapperFactory engineConfigWidgestWrapperFactory;
 	private CommonConfigWidgetsWrapper commonConfigWidgetsWrapper;
-	private ConfigBlockTitleLabelWrapper algoSpecificTitleWrapper;
 
 	/**
-	 * The constructor.
+	 * The constructor. Creates all configuration widgets.
 	 * 
 	 * @param parametersPage
 	 * @param controller
@@ -47,22 +46,47 @@ public class ConfigWidgetsWrapperManager implements Observer {
 		this.parametersPage = parametersPage;
 		this.controller = controller;
 
-		Label parameterLabel = new Label(parametersPage, SWT.NONE);
-		parameterLabel.setText("Algorithm:");
+		Label algorithmLabel = new Label(parametersPage, SWT.NONE);
+		algorithmLabel.setText("Algorithm:");
 		availableConfigsCombo = new Combo(parametersPage, SWT.READ_ONLY);
 
+		addCommonConfigWidgets(parametersPage, controller);
+		addEngineSpecWidgets(parametersPage);
+	}
+
+	/**
+	 * Adds the widgets for algorithm specific configurations.
+	 * 
+	 * @param parametersPage
+	 */
+	private void addEngineSpecWidgets(Composite parametersPage) {
+		ConfigBlockTitleLabelFactory blockTitleLabelFactory = new ConfigBlockTitleLabelFactory();
+		Label algoSpecConfigTitleLabel = blockTitleLabelFactory
+				.addConfigBlockTitleLabel(parametersPage);
+		algoSpecConfigTitleLabel.setText("Algorithm-specific configurations:");
+
+		foregroundManager = new EngineConfigForegroundManager(parametersPage,
+				algoSpecConfigTitleLabel);
+	}
+
+	/**
+	 * Add the widgets for algorithm independent configurations.
+	 * 
+	 * @param parametersPage
+	 * @param controller
+	 */
+	private void addCommonConfigWidgets(Composite parametersPage,
+			ParametersConfigPageController controller) {
+		ConfigBlockTitleLabelFactory blockTitleLabelFactory = new ConfigBlockTitleLabelFactory();
+
+		Label algoIndependentConfigTitleLabel = blockTitleLabelFactory
+				.addConfigBlockTitleLabel(parametersPage);
+		algoIndependentConfigTitleLabel
+				.setText("Algorithm-independent configurations:");
 		commonConfigWidgetsWrapper = new CommonConfigWidgetsWrapper(
 				parametersPage);
 		commonConfigWidgetsWrapper.setCommonConfigController(controller
 				.getCommonConfigController());
-
-		algoSpecificTitleWrapper = new ConfigBlockTitleLabelWrapper(
-				parametersPage);
-		algoSpecificTitleWrapper.getLabel().setText(
-				"Algorithm-specific configurations:");
-
-		foregroundManager = new ConfigForegroundManager(parametersPage,
-				algoSpecificTitleWrapper.getLabel());
 	}
 
 	/**
@@ -96,7 +120,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 				availableConfigsCombo.add(engineConfig.getName());
 				comboSelectionListener.addEngineConfig(engineConfig);
 				foregroundManager.setToBackground(engineConfigWidgetsWrapper);
-			} catch (NoWidgetWrapperException
+			} catch (NoWidgetWrapperFoundException
 					| NoEngineConfigControllerException e) {
 				e.printStackTrace();
 			}
@@ -116,7 +140,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 						.getAvailableEngineConfigs().indexOf(
 								currentlyChoosenConfig);
 				availableConfigsCombo.select(indexOfCurrentlyChoosenConfig);
-			} catch (NoWidgetWrapperException e) {
+			} catch (NoWidgetWrapperFoundException e) {
 				e.printStackTrace();
 			}
 		}
@@ -133,7 +157,7 @@ public class ConfigWidgetsWrapperManager implements Observer {
 						.setToForeground(engineConfigWidgestWrapperFactory.getEngineConfigWidgetWrapper(
 								choice.getCurrentlyChosenEngineConfig(),
 								parametersPage));
-			} catch (NoWidgetWrapperException e) {
+			} catch (NoWidgetWrapperFoundException e) {
 				e.printStackTrace();
 			}
 		}

@@ -12,7 +12,6 @@ import cbdt.model.config.engine.AbstractEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysispage.AnalysisPageWrapper;
 
-//YELLOW
 /**
  * The controller for the analysis page. It handles all the requests, which are
  * fired by user interaction with the GUI elements in this page.

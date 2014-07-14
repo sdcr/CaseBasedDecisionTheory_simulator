@@ -13,7 +13,6 @@ import cbdt.control.LogManager;
 import cbdt.control.MainController;
 import cbdt.view.menu.MenuFactory;
 
-//YELLOW
 /**
  * The main class defining the CBDT simulation plugin. It forms the connection
  * point between the simulation frame, and instantiates the

@@ -18,7 +18,6 @@ import cbdt.model.result.BigDecimalStageResult;
 import cbdt.model.result.Result;
 import cbdt.model.result.StageResult;
 
-//YELLOW
 /**
  * A manager which is able to store {@link Result}s and config objects to file
  * as CSV.

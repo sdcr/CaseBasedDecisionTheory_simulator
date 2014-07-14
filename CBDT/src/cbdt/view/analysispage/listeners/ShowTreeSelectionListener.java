@@ -16,7 +16,6 @@ import cbdt.model.config.engine.DFSkeepTreeEngineConfig;
 import cbdt.model.result.Result;
 import cbdt.view.analysispage.tree.TreePApplet;
 
-//TODO commenting, maybe clean up
 /**
  * This class inherits from {@link SelectionListener} and is used to listen for
  * the {@link SelectionEvent} to display the tree structure from the computed
@@ -54,6 +53,10 @@ public class ShowTreeSelectionListener implements SelectionListener {
 	public void widgetDefaultSelected(SelectionEvent e) {
 	}
 
+	/**
+	 * Creates a new {@link Shell} and {@link Composite} to hold an animated
+	 * tree which represents the {@link Result}.
+	 */
 	private void showTreeAnimation() {
 		Display display = parent.getDisplay();
 		Shell shell = new Shell(display);

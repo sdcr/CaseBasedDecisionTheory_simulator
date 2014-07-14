@@ -9,7 +9,6 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-//GREEN
 /**
  * A converter which converts parameter objects to and from XML.
  * 
