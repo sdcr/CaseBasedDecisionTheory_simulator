@@ -7,7 +7,7 @@ import java.util.Observable;
  * respective action. One {@link ActorActionOutcome} belongs to one an
  * {@link ActorAction}.
  * 
- * @author S
+ * @author Stephan da Costa Ribeiro
  */
 public class ActorActionOutcome extends Observable {
 

@@ -8,7 +8,7 @@ import java.util.Observable;
  * ActorAction models one action alternative, the actor has under the CBDT
  * model. It consists of several {@link ActorActionOutcome}s.
  * 
- * @author S
+ * @author Stephan da Costa Ribeiro
  */
 public class ActorAction extends Observable {
 
